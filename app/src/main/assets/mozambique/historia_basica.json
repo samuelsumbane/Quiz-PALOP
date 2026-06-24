@@ -1,0 +1,303 @@
+[
+  {
+    "id": "mz_01",
+    "question": "Em que ano Moçambique tornou-se independente?",
+    "options": ["1975", "1960", "1980", "1992"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_02",
+    "question": "Qual país colonizou Moçambique?",
+    "options": ["Portugal", "Espanha", "França", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_03",
+    "question": "Em que dia se celebra a independência de Moçambique?",
+    "options": ["25 de Junho", "4 de Outubro", "7 de Setembro", "1 de Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_04",
+    "question": "Qual foi o primeiro presidente de Moçambique?",
+    "options": ["Samora Machel", "Joaquim Chissano", "Armando Guebuza", "Filipe Nyusi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_05",
+    "question": "Qual movimento liderou a luta de libertação?",
+    "options": ["FRELIMO", "RENAMO", "MONAMO", "UNITA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_06",
+    "question": "Em que ano começou a luta armada de libertação?",
+    "options": ["1964", "1950", "1975", "1982"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_07",
+    "question": "Quem foi o líder mais conhecido da luta de libertação antes da independência?",
+    "options": ["Eduardo Mondlane", "Joaquim Chissano", "Armando Guebuza", "Filipe Nyusi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_08",
+    "question": "Qual cidade era a capital colonial de Moçambique?",
+    "options": ["Lourenço Marques", "Beira", "Nampula", "Quelimane"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_09",
+    "question": "Como se chamava Maputo antes da independência?",
+    "options": ["Lourenço Marques", "Nova Lisboa", "Porto Amélia", "Vila Cabral"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_10",
+    "question": "Quem sucedeu a Samora Machel na presidência?",
+    "options": ["Joaquim Chissano", "Eduardo Mondlane", "Filipe Nyusi", "Armando Guebuza"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_11",
+    "question": "Em que continente fica Moçambique?",
+    "options": ["África", "Europa", "Ásia", "América"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_12",
+    "question": "Qual líder da FRELIMO morreu antes da independência?",
+    "options": ["Eduardo Mondlane", "Samora Machel", "Joaquim Chissano", "Armando Guebuza"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_13",
+    "question": "Em que país Eduardo Mondlane foi assassinado?",
+    "options": ["Tanzânia", "Moçambique", "Portugal", "África do Sul"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_14",
+    "question": "Qual é o nome do herói nacional homenageado em 3 de Fevereiro?",
+    "options": ["Eduardo Mondlane", "Samora Machel", "Joaquim Chissano", "Ngungunhane"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_15",
+    "question": "Qual era a principal potência colonial em Moçambique antes da independência?",
+    "options": ["Portugal", "França", "Bélgica", "Alemanha"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_16",
+    "question": "Qual é o nome do acordo que ajudou a trazer a paz em 1992?",
+    "options": ["Acordo Geral de Paz", "Tratado de Maputo", "Acordo de Lusaka", "Pacto da Beira"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_17",
+    "question": "Em que cidade foi assinado o Acordo Geral de Paz?",
+    "options": ["Roma", "Maputo", "Lisboa", "Beira"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_18",
+    "question": "Em que ano foi assinado o Acordo Geral de Paz?",
+    "options": ["1992", "1975", "1986", "2000"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_19",
+    "question": "Qual presidente morreu em um acidente aéreo em 1986?",
+    "options": ["Samora Machel", "Joaquim Chissano", "Eduardo Mondlane", "Armando Guebuza"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_20",
+    "question": "Qual era o objetivo principal da luta de libertação?",
+    "options": ["Conseguir a independência", "Criar uma nova moeda", "Construir estradas", "Mudar a capital"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_21",
+    "question": "Em que década Moçambique conquistou a independência?",
+    "options": ["Década de 1970", "Década de 1950", "Década de 1980", "Década de 1990"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_22",
+    "question": "Qual organização política governou Moçambique logo após a independência?",
+    "options": ["FRELIMO", "RENAMO", "MONAMO", "PIMO"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_23",
+    "question": "Qual herói resistiu à ocupação portuguesa no sul de Moçambique?",
+    "options": ["Ngungunhane", "Eduardo Mondlane", "Samora Machel", "Joaquim Chissano"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_24",
+    "question": "O Dia dos Heróis Moçambicanos é celebrado em:",
+    "options": ["3 de Fevereiro", "25 de Junho", "7 de Abril", "1 de Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_25",
+    "question": "Qual país africano apoiou a FRELIMO durante a luta de libertação?",
+    "options": ["Tanzânia", "Egito", "Marrocos", "Tunísia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_26",
+    "question": "Qual era o nome do império liderado por Ngungunhane?",
+    "options": ["Império de Gaza", "Império do Congo", "Império Songhai", "Império Mali"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_27",
+    "question": "Em que século chegaram os portugueses à costa moçambicana?",
+    "options": ["Século XV", "Século XII", "Século XVIII", "Século XX"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_28",
+    "question": "Qual navegador português chegou à região de Moçambique?",
+    "options": ["Vasco da Gama", "Pedro Álvares Cabral", "Fernão de Magalhães", "Bartolomeu Dias"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_29",
+    "question": "Qual foi a primeira capital de Moçambique independente?",
+    "options": ["Maputo", "Beira", "Ilha de Moçambique", "Nampula"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_30",
+    "question": "Qual acontecimento marcou o fim do domínio colonial português em Moçambique?",
+    "options": ["A independência em 1975", "O Acordo Geral de Paz", "A guerra civil", "A criação do metical"],
+    "correctIndex": 0
+  },
+
+  {
+    "id": "mz_31",
+    "question": "Qual é a capital de Moçambique?",
+    "options": ["Maputo", "Beira", "Nampula", "Xai-Xai"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_32",
+    "question": "Em que continente fica Moçambique?",
+    "options": ["África", "Europa", "Ásia", "América do Sul"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_33",
+    "question": "Qual oceano banha a costa de Moçambique?",
+    "options": ["Oceano Índico", "Oceano Atlântico", "Oceano Pacífico", "Oceano Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_34",
+    "question": "Qual é a moeda de Moçambique?",
+    "options": ["Metical", "Rand", "Dólar", "Euro"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_35",
+    "question": "Qual destas cidades fica no norte de Moçambique?",
+    "options": ["Pemba", "Xai-Xai", "Matola", "Chókwè"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_36",
+    "question": "Qual destas cidades fica no centro de Moçambique?",
+    "options": ["Beira", "Pemba", "Maputo", "Namaacha"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_37",
+    "question": "Qual destas cidades fica no sul de Moçambique?",
+    "options": ["Xai-Xai", "Nampula", "Pemba", "Cuamba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_38",
+    "question": "Qual é a província mais ao sul de Moçambique?",
+    "options": ["Maputo", "Gaza", "Inhambane", "Sofala"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_39",
+    "question": "Qual destas é uma província de Moçambique?",
+    "options": ["Zambézia", "Lusaka", "Huambo", "Limpopo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_40",
+    "question": "Qual é a maior cidade de Moçambique?",
+    "options": ["Maputo", "Beira", "Nampula", "Quelimane"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_41",
+    "question": "Qual destes países faz fronteira com Moçambique?",
+    "options": ["Zimbabwe", "Nigéria", "Gana", "Senegal"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_42",
+    "question": "Qual destes países não faz fronteira com Moçambique?",
+    "options": ["Angola", "Malawi", "Tanzânia", "Zimbabwe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_43",
+    "question": "Qual destas cidades é conhecida como a \"porta de entrada\" do centro do país?",
+    "options": ["Beira", "Pemba", "Chimoio", "Lichinga"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_44",
+    "question": "Qual rio é um dos mais importantes de Moçambique?",
+    "options": ["Zambeze", "Nilo", "Congo", "Níger"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_45",
+    "question": "A Ilha de Moçambique pertence a qual província?",
+    "options": ["Nampula", "Cabo Delgado", "Zambézia", "Sofala"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_46",
+    "question": "Qual destas províncias faz fronteira com a Tanzânia?",
+    "options": ["Cabo Delgado", "Gaza", "Inhambane", "Maputo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_47",
+    "question": "Qual destas cidades é capital da província de Sofala?",
+    "options": ["Beira", "Chimoio", "Quelimane", "Tete"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_48",
+    "question": "Qual destas cidades é capital da província da Zambézia?",
+    "options": ["Quelimane", "Nacala", "Lichinga", "Xai-Xai"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_49",
+    "question": "Qual destas cidades é capital da província de Cabo Delgado?",
+    "options": ["Pemba", "Nampula", "Lichinga", "Cuamba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_50",
+    "question": "Qual destas cidades é capital da província de Gaza?",
+    "options": ["Xai-Xai", "Maxixe", "Vilankulo", "Chókwè"],
+    "correctIndex": 0
+  }
+]
