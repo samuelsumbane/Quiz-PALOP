@@ -1,4 +1,4 @@
-package com.samuelsumbane.quizpalop.presentation.maingamepage.composables
+package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
@@ -20,7 +20,7 @@ fun QuestionText(text: String, modifierFontSize: Boolean) {
         textAlign = TextAlign.Center,
         color = Color.White,
         lineHeight = 34.sp,
-        modifier = Modifier.padding(5.dp)
+        modifier = Modifier.padding(9.dp)
     )
 }
 

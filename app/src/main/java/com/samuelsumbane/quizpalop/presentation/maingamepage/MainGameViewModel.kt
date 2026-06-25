@@ -19,7 +19,13 @@ class MainGameViewModel(private val repo: QuizRepository, ) : ViewModel() {
         loadQuestions()
     }
 
-    private fun updateState(block: (MainGameUiState) -> MainGameUiState) = _state.update(block)
+    fun updateState(block: (MainGameUiState) -> MainGameUiState) = _state.update(block)
+
+    fun onEvent(event: MainGameUiEvents) {
+        when (event) {
+            is MainGameUiEvents.OnCheckResponse -> checkResponse(event.clickedOptionName)
+        }
+    }
 
     fun loadPacks() {
         val packs = repo.getPacks()
@@ -32,13 +38,23 @@ class MainGameViewModel(private val repo: QuizRepository, ) : ViewModel() {
             updateState {
                 it.copy(
                     questions = questions,
-                    actualQuestion = questions.random(),
                     pageState = MainPageState.DisplayContent
                 )
             }
         }
+        loadNextQuestion()
     }
 
+    fun loadNextQuestion() {
+        val randomedQuestion = mainGameUiState.value.questions.random()
+        val readyQuestion = randomedQuestion.copy(options = randomedQuestion.options.shuffled())
+        updateState { it.copy(actualQuestion = readyQuestion, actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex]) }
+        resetOptionsColors()
 
+    }
+
+    fun resetOptionsColors() {
+        updateState { it.copy(optionsColors = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),) }
+    }
 
 }

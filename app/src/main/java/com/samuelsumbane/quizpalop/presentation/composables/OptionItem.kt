@@ -2,6 +2,7 @@ package com.samuelsumbane.quizpalop.presentation.maingamepage.composables
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -25,7 +26,7 @@ fun OptionItem(
     Button(
         onClick = onClick,
         modifier = modifier
-//            .padding(15.dp)
+            .padding(8.dp)
             .fillMaxWidth()
             .heightIn(min = 45.dp),
         colors = ButtonDefaults.buttonColors(containerColor = background),
