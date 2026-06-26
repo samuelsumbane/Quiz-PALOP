@@ -12,12 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
+import com.google.android.gms.ads.MobileAds
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        MobileAds.initialize(this)
+
         enableEdgeToEdge()
         setContent {
             QuizPALOPTheme {

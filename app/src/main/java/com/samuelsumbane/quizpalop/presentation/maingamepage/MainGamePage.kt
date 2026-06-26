@@ -1,5 +1,6 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
+import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -18,12 +19,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
 import com.samuelsumbane.quizpalop.presentation.composables.IconData
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
@@ -32,7 +37,11 @@ import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.TextQuestionColumn
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
+import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
+import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
+import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 
 
 class MainPageScreen : Screen {
@@ -46,6 +55,60 @@ class MainPageScreen : Screen {
 fun MainPage() {
     val mainPageViewModel = koinViewModel<MainGameViewModel>()
     val mainPageUiState by mainPageViewModel.mainGameUiState.collectAsStateWithLifecycle()
+    val navigator = LocalNavigator.currentOrThrow
+    val context = LocalContext.current
+//    val soundManager = remember { SoundManager(context) }
+    val manager = remember { RewardedAdManager(context) }
+
+    val activity = context as Activity
+
+    @Composable
+    fun SelectedDataAlreadyAnswered() {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color(0xFF073552))
+        ) {
+            Column(
+                modifier = Modifier
+                    .background(color = Color.Transparent)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val navigator = LocalNavigator.currentOrThrow
+                MessageContainer {
+                    when (val message = mainPageUiState.gameTextMessage) {
+                        is GameTextMessage.AllQuestionsAnswered -> {
+//                            LoadAnimatedIcons(allGameFinishedIcon)
+                            MessageTexts(title = message.title, text = message.message)
+//                            AppButton("Ver progresso") { navigator.push(GameProgressScreen()) }
+                        }
+
+                        is GameTextMessage.SelectedQuestionsAnswered -> {
+//                            LoadAnimatedIcons(finishedLevelIcon)
+//                            MessageTexts(title = "", message.message)
+//                            TwoButtonsRow(gameQuizViewModel
+//                                text = message.confirmationText,
+//                                outlinedText = "Prox. Categ/Nível",
+//                                outlinedClicked = {
+////                                    gameQuizViewModel.tryToLoadNextCategoryInThisCategory()
+//                                },
+//                                filledButtonText = "Sel. Questões",
+//                                onClick = {
+//                                    gameQuizViewModel.onSelectNewQuestionsGroup()
+//                                    navigator.push(QuestionsConfigScreen(PagesName.MainPage))
+//                                }
+//                            )
+                        }
+
+                        else -> {}
+                    }
+                }
+
+            }
+        }
+    }
 
     @Composable
     fun pageContent() {
@@ -79,21 +142,8 @@ fun MainPage() {
                                     buttonText = "50 50",
                                     requiredCoins = 15,
                                 ) {
+                                    mainPageViewModel.helpWithFiftFift()
 //                                gameQuizViewModel.onEvent(MainPageUiEvents.OnHelp(HelpOption.FiftFift, questionData.id))
-                                }
-
-                                GameBottomButton(
-                                    icon = IconData(R.drawable.extra_time, "Ask more time"),
-                                    buttonText = "+ Tempo",
-//                                    requiredCoins = questionData.level.requiredCoinsForAditionalTime,
-                                    requiredCoins = 15,
-                                ) {
-//                                    gameQuizViewModel.onEvent(
-//                                        MainPageUiEvents.OnHelp(
-//                                            HelpOption.MoreTime,
-//                                            questionData.id
-//                                        )
-//                                    )
                                 }
 
                                 Row(
@@ -120,32 +170,48 @@ fun MainPage() {
                         .padding(10.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
-                    GameTopStatusBar(mainPageUiState)
+                    AnimatedVisibility(mainPageUiState.lives < 1) {
+                        NoMoreLivesUI(
+                            navigator,
+                            mainPageViewModel,
+                            mainPageUiState,
+                            manager,
+                            activity,
+                        )
+                    }
 
-                    Column(
-                        modifier = Modifier
-                            .weight(1f),
-                        verticalArrangement = Arrangement.SpaceEvenly
-                    ) {
+                    AnimatedVisibility(mainPageUiState.lives >= 1) {
 
-                        TextQuestionColumn(
-                            modifier = Modifier.padding(10.dp)
+                        GameTopStatusBar(mainPageUiState)
+
+                        Column(
+                            modifier = Modifier.weight(1f),
+                            verticalArrangement = Arrangement.SpaceEvenly
                         ) {
-                            mainPageUiState.actualQuestion?.let { question ->
-                                QuestionText(question.question, modifierFontSize = false)
-                            }
-                        }
 
-                        mainPageUiState.actualQuestion?.let { question ->
-                            LazyColumn(
+                            TextQuestionColumn(
+                                modifier = Modifier.padding(10.dp)
                             ) {
-                                items(1) {
-                                    question.options.forEachIndexed { index, option ->
-                                        OptionItem(
-                                            text = option,
-                                            background = mainPageUiState.optionsColors[index]
-                                        ) {
-                                            mainPageViewModel.onEvent(MainGameUiEvents.OnCheckResponse(option))
+                                mainPageUiState.actualQuestion?.let { question ->
+                                    QuestionText(question.question, modifierFontSize = false)
+                                }
+                            }
+
+                            mainPageUiState.actualQuestion?.let { question ->
+                                LazyColumn(
+                                ) {
+                                    items(1) {
+                                        question.options.forEachIndexed { index, option ->
+                                            OptionItem(
+                                                text = option,
+                                                background = mainPageUiState.optionsColors[index]
+                                            ) {
+                                                mainPageViewModel.onEvent(
+                                                    MainGameUiEvents.OnCheckResponse(
+                                                        option
+                                                    )
+                                                )
+                                            }
                                         }
                                     }
                                 }

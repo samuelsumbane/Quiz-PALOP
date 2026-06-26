@@ -79,7 +79,7 @@ fun HeartIcon(modifier: Modifier = Modifier) {
 fun IconText(text: String, color: Color = Color.White) {
     Text(
         text = text,
-        style = MaterialTheme.typography.titleSmall,
+        style = MaterialTheme.typography.titleMedium,
         modifier = Modifier.padding(end = 10.dp),
         color = color
     )
