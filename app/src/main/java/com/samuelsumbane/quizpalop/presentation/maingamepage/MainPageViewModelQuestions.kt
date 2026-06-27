@@ -171,3 +171,11 @@ fun MainGameViewModel.giveCoinsToUser() {
         }
     }
 }
+
+fun MainGameViewModel.showCurrectOptionAfterViewAd() {
+    mainGameUiState.value.actualQuestion?.let {
+        setGameTextMessage(
+            GameTextMessage.ShowRightAnswer("A pesposta correcta é:\n\n  ${mainGameUiState.value.actualQuestionRightAnswer}")
+        )
+    }
+}

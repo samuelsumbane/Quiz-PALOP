@@ -11,4 +11,5 @@ sealed class GameTextMessage() {
     data class SelectedQuestionsAnswered(val title: String, val message: String, val confirmationText: String) : GameTextMessage()
     data class CannotGetHelp(val reasonTitle: String, val reasonMessage: String, val helpOption: HelpOption) : GameTextMessage()
     data class NewLifeEarned(val message: String) : GameTextMessage()
+    data class ShowRightAnswer(val message: String) : GameTextMessage()
 }

@@ -19,3 +19,11 @@ fun MainGameViewModel.setGameTextMessage(gameMessage: GameTextMessage) {
         )
     }
 }
+
+fun MainGameViewModel.onCloseMessageModal() {
+    if (mainGameUiState.value.gameTextMessage is GameTextMessage.QuestionNotAnswered) {
+        loadNextQuestion()
+    }
+    changeTimerState(QuestionTimerState.Running)
+    clearGameTextMessage()
+}

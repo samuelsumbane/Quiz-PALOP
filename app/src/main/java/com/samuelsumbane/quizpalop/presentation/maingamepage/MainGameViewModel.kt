@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.AdState
+import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
@@ -39,6 +40,13 @@ class MainGameViewModel(
     fun onEvent(event: MainGameUiEvents) {
         when (event) {
             is MainGameUiEvents.OnCheckResponse -> checkResponse(event.clickedOptionName)
+            is MainGameUiEvents.OnExit -> exitGame()
+            is MainGameUiEvents.OnHelp -> {
+                when (event.helpOption) {
+                    HelpOption.FiftFift -> helpWithFiftFift()
+                    HelpOption.RightOption -> helpWithRightOption()
+                }
+            }
         }
     }
 
@@ -62,6 +70,8 @@ class MainGameViewModel(
         }
         loadNextQuestion()
     }
+
+
 
     fun loadNextQuestion() {
         viewModelScope.launch {
@@ -136,4 +146,9 @@ class MainGameViewModel(
 //            updateState { it.copy(lastRightOptionButtonDateTime = lastRightOptionButtonDateTime) }
 //        }
 //    }
+
+    private fun MainGameViewModel.exitGame() {
+        setGameTextMessage(GameTextMessage.ExitGame("Tem certeza que deseja sair?"))
+    }
+
 }

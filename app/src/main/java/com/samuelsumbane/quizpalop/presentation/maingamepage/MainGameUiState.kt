@@ -13,7 +13,7 @@ data class MainGameUiState(
     val actualQuestionRightAnswer: String = "",
     val optionsColors: List<Color> = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),
     val gameTextMessage: GameTextMessage = GameTextMessage.Empty,
-    val lives: Int = 0,
+    val lives: Int = 10,
     val userCoins: Int = 0,
     val pageState: MainPageState = MainPageState.Loading,
 
@@ -22,6 +22,8 @@ data class MainGameUiState(
     val userGotHelp: Boolean = false,
     val questionsIdList: List<String> = emptyList(),
     val answeredQuestionsWithoutMistake: Int = 0,
+    val lastRightOptionButtonDateTime: Long = 0L,
+
     //
     val questionsTimer: Int = 0,
     val timerState: QuestionTimerState = QuestionTimerState.Stop,
@@ -30,5 +32,4 @@ data class MainGameUiState(
     val lastDateTimeLostLives: Long = 0L,
     val currentQuestion: Question? = null,
     val adState: AdState = AdState.Loading
-
 )

@@ -16,11 +16,10 @@ class RewardedAdManager(private val context: Context) {
     ) {
         RewardedAd.load(
             context,
-            "ca-app-pub",
+            "ca-app-pub-3940256099942544/5224354917",
             AdRequest.Builder().build(),
 
             object : RewardedAdLoadCallback() {
-
                 override fun onAdLoaded(ad: RewardedAd) {
                     rewardedAd = ad
                     onLoaded?.invoke()
