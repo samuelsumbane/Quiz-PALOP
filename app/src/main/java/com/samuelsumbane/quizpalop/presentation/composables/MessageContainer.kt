@@ -123,7 +123,7 @@ fun MessageUi(
                 is GameTextMessage.AddedCoins -> {
                     LoadAnimatedIcons(coinsIcon, Modifier.size(220.dp))
                     MessageTexts(title = "", message.message, )
-//                    AppButton(text = "Tudo bem") { gameQuizViewModel.loadNextQuestion() }
+                    AppButton(text = "Tudo bem") { mainGameViewModel.startLoadingNextQuestion() }
                 }
 
                 is GameTextMessage.ShowRightAnswer -> {
@@ -179,7 +179,7 @@ fun MessageUi(
 //                    HeartIcon(modifier = Modifier.size(80.dp, 100.dp))
                     LoadAnimatedIcons(heartIcon)
                     MessageTexts(title = "", message.message)
-                    AppButton(text = "Continuar com o jogo") { mainGameViewModel.loadNextQuestion() }
+                    AppButton(text = "Continuar com o jogo") { mainGameViewModel.startLoadingNextQuestion() }
                 }
 
 

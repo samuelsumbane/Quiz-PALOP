@@ -1,11 +1,16 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -19,6 +24,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 
 @Composable
 fun HorizontalDividerWithText(text: String) {
@@ -73,5 +79,49 @@ fun TwoButtonsRow(
                 dangerMode = dangerMode
             ) { onClick() }
         }
+    }
+}
+
+@Composable
+fun HomePageOptionColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(
+        modifier = modifier
+            .padding(top = 30.dp)
+            .padding(0.dp, 5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) { content() }
+}
+
+@Composable
+fun HomeOption(text: String, onClick: () -> Unit) {
+    Item(
+        text = text,
+        modifier = Modifier
+            .padding(15.dp, 12.dp)
+            .background(Color.Transparent, RoundedCornerShape(16.dp))
+            .border(1.dp, HomeOptionColor, RoundedCornerShape(16.dp))
+            .padding(10.dp),
+        onClick = onClick
+    )
+}
+
+@Composable
+fun Item(
+    text: String,
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit
+) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth(0.9f)
+            .height(28.dp)
+            .clickable { onClick() },
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Text(text, color = Color.White, fontWeight = FontWeight.SemiBold)
     }
 }

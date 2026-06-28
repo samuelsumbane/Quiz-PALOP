@@ -1,6 +1,5 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.AdState
@@ -10,10 +9,12 @@ import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
+import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -31,6 +32,7 @@ class MainGameViewModel(
     init {
         loadPacks()
         loadQuestions()
+        loadLivesAndCoinsInFlow()
     }
 
     fun updateState(block: (MainGameUiState) -> MainGameUiState) = _state.update(block)
@@ -40,13 +42,14 @@ class MainGameViewModel(
     fun onEvent(event: MainGameUiEvents) {
         when (event) {
             is MainGameUiEvents.OnCheckResponse -> checkResponse(event.clickedOptionName)
-            is MainGameUiEvents.OnExit -> exitGame()
+            MainGameUiEvents.OnExit -> exitGame()
             is MainGameUiEvents.OnHelp -> {
                 when (event.helpOption) {
                     HelpOption.FiftFift -> helpWithFiftFift()
                     HelpOption.RightOption -> helpWithRightOption()
                 }
             }
+            MainGameUiEvents.OnToggleShowConfig -> toogleShowConfigs()
         }
     }
 
@@ -63,27 +66,51 @@ class MainGameViewModel(
             val questions = repo.getQuestions()
             updateState {
                 it.copy(
-                    questions = questions,
+                    allQuestions = questions,
+                    selectedQuestionsList = questions,
                     pageState = MainPageState.DisplayContent
                 )
             }
+            startLoadingNextQuestion()
         }
-        loadNextQuestion()
     }
 
 
+    fun startLoadingNextQuestion() {
+        viewModelScope.launch {
+            if (mainGameUiState.value.lives > 0 || mainGameUiState.value.gameTextMessage == GameTextMessage.Empty) {
+                delay(1700L)
+                loadNextQuestion()
+            }
+        }
+    }
+
 
     fun loadNextQuestion() {
-        viewModelScope.launch {
-            val randomedQuestion = mainGameUiState.value.questions.random()
+        if (mainGameUiState.value.questionsIdList.isEmpty()) {
+            updateState { it.copy(pageUiState = PageUiState.QuestionsAnswered) }
+
+            val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
+            if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {
+                setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!", "Respondeu todas as questões do jogo."))
+            } else {
+//                setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas da categoria "${quizGameUiState.value.questionsCategory.value}" e nível "${mainGameUiState.value.questionsLevel.value}".""", "Deseja limpar e responder mesmas questões ou selecionar outras?"))
+            }
+        } else {
+            setGameTextMessage(GameTextMessage.Empty)
+
+            val randomedQuestion = mainGameUiState.value.allQuestions.random()
             val readyQuestion = randomedQuestion.copy(options = randomedQuestion.options.shuffled())
-            delay(1700)
             updateState {
                 it.copy(
                     actualQuestion = readyQuestion,
-                    actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex]
+                    actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex],
+                    questionsTimer = 30,
+                    pageUiState = PageUiState.DisplayContent
+
                 )
             }
+            changeTimerState(QuestionTimerState.Running)
             resetOptionsColors()
         }
     }
@@ -151,4 +178,51 @@ class MainGameViewModel(
         setGameTextMessage(GameTextMessage.ExitGame("Tem certeza que deseja sair?"))
     }
 
+    fun toogleSoundState(playSound: Boolean) {
+        viewModelScope.launch {
+            settingsManager.saveBooleanValues(settingsManager.playSound, playSound)
+            if (mainGameUiState.value.soundState == SoundState.Playing) {
+                _soundEvent.send(SoundEvent.Click)
+            }
+            updateState { it.copy(soundState = if (playSound) SoundState.Playing else SoundState.Mute) }
+        }
+    }
+
+    fun toogleShowConfigs() {
+        updateState { it.copy(showGameConfings = !mainGameUiState.value.showGameConfings) }
+    }
+
+    fun changeTimerTo(timer: Int) = updateState { it.copy(questionsTimer = timer,) }
+
+
+    suspend fun timerCounterExec() {
+        if (mainGameUiState.value.timerState == QuestionTimerState.Running && mainGameUiState.value.lives > 0) {
+//            viewModelScope.launch {
+            val ft = mainGameUiState.value.questionsTimer
+            for (i in ft downTo 0) {
+                changeTimerTo(i)
+                delay(1000)
+            }
+            if (mainGameUiState.value.questionsTimer <= 1) {
+                setQuestionWrong()
+                changeTimerState(QuestionTimerState.Stop)
+            }
+//            }
+        }
+    }
+
+//    fun fillSavedQuestions(questionsCategory: QuestionCategory, questionsLevel: QuestionLevel) {
+//        viewModelScope.launch {
+//            val preQuestionsIdList = getCategoryAndLevelIds(questionsCategory, questionsLevel)
+//            val savedQuestions = settingsManager.readSavedQuestionsList().first()
+//            println("ouvindo: pre ${preQuestionsIdList.sorted()}")
+//            println("ouvindo: saved ${savedQuestions.sorted()}")
+//            updateState { it.copy(
+//                questionsIdList = preQuestionsIdList - savedQuestions,
+//                answeredQuestionsList = savedQuestions,
+//                loadSavedQuestionsFineshed = true)
+//            }
+//            println("ouvindo: after question load, sav ${mainGameUiState.value.questionsIdList} $preQuestionsIdList w s: ${savedQuestions}")
+//        }
+//    }
 }

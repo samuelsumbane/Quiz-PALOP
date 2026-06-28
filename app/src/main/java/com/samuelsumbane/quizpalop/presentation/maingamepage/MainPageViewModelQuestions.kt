@@ -104,7 +104,7 @@ fun MainGameViewModel.checkResponse(
                 settingsManager.saveQuestionsList(mainGameUiState.value.answeredQuestionsList)
 
                 sendSound(SoundEvent.Correct)
-                loadNextQuestion()
+                startLoadingNextQuestion()
             }
         } else {
             viewModelScope.launch {
@@ -113,11 +113,11 @@ fun MainGameViewModel.checkResponse(
                 setLastDateTimeUserLostLives()
                 if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
                 sendSound(SoundEvent.Wrong)
-                loadNextQuestion()
+                startLoadingNextQuestion()
             }
         }
 
-//        changeUserHelpState(false)
+        changeUserHelpState(false)
         }
     }
 }
@@ -175,7 +175,22 @@ fun MainGameViewModel.giveCoinsToUser() {
 fun MainGameViewModel.showCurrectOptionAfterViewAd() {
     mainGameUiState.value.actualQuestion?.let {
         setGameTextMessage(
-            GameTextMessage.ShowRightAnswer("A pesposta correcta é:\n\n  ${mainGameUiState.value.actualQuestionRightAnswer}")
+            GameTextMessage.ShowRightAnswer("""A resposta correcta é:\n\n  "${mainGameUiState.value.actualQuestionRightAnswer}" """)
         )
+    }
+}
+
+fun MainGameViewModel.setQuestionWrong() {
+    if (mainGameUiState.value.timerState == QuestionTimerState.Stop) return
+    viewModelScope.launch {
+        updateState {
+            it.copy(gameTextMessage = GameTextMessage.QuestionNotAnswered("Tempo estogado", "O cronômetro venceu você dessa vez e levou uma vida\n Seja mais rápido na próxima!"))
+        }
+        settingsManager.saveIntValues(settingsManager.lives, mainGameUiState.value.lives - 1)
+
+        if (mainGameUiState.value.lives == 0) {
+            setLastDateTimeUserLostLives()
+            setGameTextMessage(GameTextMessage.Empty)
+        }
     }
 }

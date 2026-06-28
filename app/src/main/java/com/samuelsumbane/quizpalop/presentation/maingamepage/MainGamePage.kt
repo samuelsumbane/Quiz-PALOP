@@ -18,7 +18,10 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -39,11 +42,14 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.TextQue
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
+import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
+import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
 import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
 import com.samuelsumbane.quizpalop.presentation.composables.MessageUi
+import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 
 
@@ -60,10 +66,36 @@ fun MainPage() {
     val mainPageUiState by mainPageViewModel.mainGameUiState.collectAsStateWithLifecycle()
     val navigator = LocalNavigator.currentOrThrow
     val context = LocalContext.current
-//    val soundManager = remember { SoundManager(context) }
+    val soundManager = remember { SoundManager(context) }
     val manager = remember { RewardedAdManager(context) }
 
     val activity = context as Activity
+
+    DisposableEffect(Unit) {
+        onDispose {
+            soundManager.release()
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        mainPageViewModel.soundEvent.collect { event ->
+            if (mainPageUiState.soundState == SoundState.Playing) {
+                when (event) {
+                    SoundEvent.Correct -> soundManager.playCorrect()
+                    SoundEvent.Wrong -> soundManager.playWrong()
+                    SoundEvent.Click -> soundManager.playClick()
+                    SoundEvent.CoinEarned -> soundManager.playCoinsEarned()
+                }
+            }
+        }
+    }
+
+    LaunchedEffect(mainPageUiState.timerState) {
+        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+            mainPageViewModel.timerCounterExec()
+        }
+    }
+
 
     @Composable
     fun SelectedDataAlreadyAnswered() {
@@ -176,15 +208,13 @@ fun MainPage() {
             ) { padding ->
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
                         .padding(padding)
+                        .fillMaxSize()
+                        .appBackground()
                         .padding(10.dp),
                 ) {
                     AnimatedVisibility(mainPageUiState.lives < 1) {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
+                        MaxSizeBox {
                             NoMoreLivesUI(
                                 navigator,
                                 mainPageViewModel,
@@ -197,16 +227,18 @@ fun MainPage() {
 
                     AnimatedVisibility(mainPageUiState.lives >= 1) {
                         Box(modifier = Modifier) {
-                            MessageUi(
-                                navigator,
-                                mainPageViewModel,
-                                mainPageUiState,
-                                activity,
-                                manager,
-                            )
+                            MaxSizeBox {
+                                MessageUi(
+                                    navigator,
+                                    mainPageViewModel,
+                                    mainPageUiState,
+                                    activity,
+                                    manager,
+                                )
+                            }
 
                             if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-                                GameTopStatusBar(mainPageUiState)
+                                GameTopStatusBar(mainPageViewModel, mainPageUiState)
 
                                 Column(
                                     modifier = Modifier.fillMaxSize(),
@@ -234,14 +266,13 @@ fun MainPage() {
                                                         background = mainPageUiState.optionsColors[index]
                                                     ) {
                                                         mainPageViewModel.onEvent(
-                                                            MainGameUiEvents.OnCheckResponse(
-                                                                option
-                                                            )
+                                                            MainGameUiEvents.OnCheckResponse(option)
                                                         )
                                                     }
                                                 }
                                             }
                                         }
+                                        Text(text = mainPageUiState.actualQuestionRightAnswer)
                                     }
                                 }
                             }
@@ -259,4 +290,12 @@ fun MainPage() {
         MainPageState.DisplayContent -> pageContent()
     }
 
+}
+
+@Composable
+fun MaxSizeBox(content: @Composable () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) { content() }
 }

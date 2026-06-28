@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
 import com.google.android.gms.ads.MobileAds
+import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
 
@@ -25,7 +26,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizPALOPTheme {
-                Navigator(MainPageScreen())
+//                Navigator(MainPageScreen())
+                Navigator(HomePageScreen())
             }
         }
     }

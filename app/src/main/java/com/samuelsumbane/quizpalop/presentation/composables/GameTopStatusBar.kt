@@ -1,15 +1,21 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
 import android.graphics.drawable.Icon
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,21 +24,73 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiEvents
+import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
+import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 
 
 @Composable
-fun GameTopStatusBar(mainGameUiState: MainGameUiState) {
-    Row(
+fun GameTopStatusBar(
+    mainGameViewModel: MainGameViewModel,
+    mainGameUiState: MainGameUiState
+) {
+    Box(
         modifier = Modifier
-            .padding(10.dp)
+//            .padding(10.dp)
+//            .background(Color.Red)
             .fillMaxWidth(),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
+//        verticalAlignment = Alignment.CenterVertically,
+//        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        RowHeartAndLives(text = "${mainGameUiState.lives}")
-        RowCoinAndText(text = "${mainGameUiState.userCoins}",)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(0.85f)
+                .background(MaterialTheme.colorScheme.primary.copy(0.2f), RoundedCornerShape(12.dp))
+                .align(Alignment.TopStart)
+            ,
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            RowHeartAndLives(text = "${mainGameUiState.lives}")
+            RowQuestionTimer("${mainGameUiState.questionsTimer}")
+            RowCoinAndText(text = "${mainGameUiState.userCoins}",)
+        }
+
+        IconButton(
+            onClick = { mainGameViewModel.onEvent(MainGameUiEvents.OnToggleShowConfig) },
+            modifier = Modifier.align(Alignment.TopEnd)
+        ) {
+            Icon(painterResource(R.drawable.outline_check_24), "")
+        }
+
+        if (mainGameUiState.showGameConfings) {
+            Column(
+                modifier = Modifier
+                    .padding(top = 45.dp)
+                    .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(10.dp))
+                    .align(Alignment.TopEnd)
+                    .zIndex(2f)
+            ) {
+                val iconColor = MaterialTheme.colorScheme.onPrimary
+                IconButton(
+                    onClick = { mainGameViewModel.toogleSoundState(mainGameUiState.soundState != SoundState.Playing) }
+                ) {
+                    if (mainGameUiState.soundState == SoundState.Playing) {
+                        HomeIcon(painterResource(R.drawable.volume_up_fill), "Volume up", iconColor)
+                    } else {
+                        HomeIcon(
+                            painterResource(R.drawable.volume_mute_fill),
+                            "Mute volume",
+                            iconColor
+                        )
+                    }
+                }
+            }
+        }
+
     }
 }
 
@@ -61,6 +119,16 @@ fun RowHeartAndLives(text: String) {
         icon = { Icon(painter = painterResource(R.drawable.life), "", tint = Color(0xFFC6080A)) },
         text = {
             IconText(text, color = Color.White)
+        }
+    )
+}
+@Composable
+fun RowQuestionTimer(text: String) {
+    val onBackground = MaterialTheme.colorScheme.onBackground
+    RowIconAndText(
+        icon = { Icon(painter = painterResource(R.drawable.clock), "", tint = onBackground) },
+        text = {
+            IconText(text, color = onBackground)
         }
     )
 }

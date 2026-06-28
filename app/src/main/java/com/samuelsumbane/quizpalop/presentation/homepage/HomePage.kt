@@ -1,0 +1,85 @@
+package com.samuelsumbane.quizpalop.presentation.homepage
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
+import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
+import com.samuelsumbane.quizpalop.presentation.composables.appBackground
+import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
+
+class HomePageScreen : Screen {
+    @Composable
+    override fun Content() {
+        HomePage()
+    }
+}
+
+@Composable
+fun HomePage() {
+    Scaffold {
+        Box(
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize()
+                .appBackground()
+        ) {
+            Column(
+                modifier = Modifier
+                    .padding(5.dp, 10.dp)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "Quiz PALOP",
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .padding(top = 30.dp)
+                )
+            }
+
+            HomePageOptionColumn(Modifier.align(Alignment.Center)) {
+                HomeOption("Jogar") {
+//                    navigator.push(PreQuestionsConfigScreen())
+                }
+
+                HomeOption("Progresso") {
+
+                }
+
+            }
+
+            Text(
+                text = "Versão: 1.0.0",
+                color = Color.Gray,
+                fontSize = 10.sp,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .background(Color.Black.copy(0.1f), RoundedCornerShape(7.dp))
+                    .padding(5.dp)
+                    .align(Alignment.BottomEnd)
+                )
+        }
+    }
+}
