@@ -3,8 +3,10 @@ package com.samuelsumbane.quizpalop.presentation.homepage
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -21,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
 import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
@@ -42,12 +45,17 @@ fun HomePage() {
                 .fillMaxSize()
                 .appBackground()
         ) {
+
             Column(
                 modifier = Modifier
-                    .padding(5.dp, 10.dp)
+                    .padding(5.dp, 60.dp)
+                    .align(Alignment.Center)
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                FlagsComponents()
+
                 Text(
                     text = "Quiz PALOP",
                     fontSize = 35.sp,
@@ -57,18 +65,21 @@ fun HomePage() {
                     modifier = Modifier
                         .padding(top = 30.dp)
                 )
-            }
 
-            HomePageOptionColumn(Modifier.align(Alignment.Center)) {
-                HomeOption("Jogar") {
+                Spacer(Modifier.height(140.dp))
+
+                HomePageOptionColumn() {
+                    HomeOption("Jogar") {
 //                    navigator.push(PreQuestionsConfigScreen())
-                }
+                    }
 
-                HomeOption("Progresso") {
+                    HomeOption("Progresso") {
+                    }
 
                 }
 
             }
+
 
             Text(
                 text = "Versão: 1.0.0",
