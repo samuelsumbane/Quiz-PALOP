@@ -1,0 +1,43 @@
+package com.samuelsumbane.quizpalop.presentation.configquestions
+
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
+import com.samuelsumbane.quizpalop.domain.model.Country
+import com.samuelsumbane.quizpalop.domain.model.Question
+
+
+data class QuestionsConfigUiState(
+    val questionsCategory: Category = Category.History,
+    val questionsCountry: Countries = Countries.Angola,
+    val savedQuestions: Set<String> = emptySet(),
+    val questions: List<Question> = emptyList(),
+
+    val questionConfig: QuestionConfig = QuestionConfig.SelectCategory,
+    val soundState: SoundState = SoundState.Playing,
+    val lastCategoryWasSaved: Boolean = false,
+    val easyAnsweredQuestionsList: Set<Int> = emptySet(),
+    val easyAnsweredQuestionsPercent: Float = 0.0f, // Float is used in Element Width
+    val mediumAnsweredQuestionsList: Set<Int> = emptySet(),
+    val mediumAnsweredQuestionsPercent: Float = 0.0f,
+    val hardAnsweredQuestionsList: Set<Int> = emptySet(),
+    val hardAnsweredQuestionsPercent: Float = 0.0f,
+    //
+    val lockLevelList: List<String> = emptyList(),
+
+)
+
+enum class QuestionConfig(
+    val pageTitle: String,
+    val configOptionsList: List<String>,
+) {
+    SelectCountry(
+        pageTitle = "Selecione o país",
+        configOptionsList = Countries.entries.map { it.countryName }
+    ),
+    SelectCategory(
+        pageTitle = "Selecione a catogoria",
+        configOptionsList = Category.entries.map { it.categoryName }
+    )
+}
+
+enum class SoundState { Mute, Playing }

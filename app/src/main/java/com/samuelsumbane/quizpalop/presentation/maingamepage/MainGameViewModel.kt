@@ -31,7 +31,7 @@ class MainGameViewModel(
 
     init {
         loadPacks()
-        loadQuestions()
+//        loadQuestions()
         loadLivesAndCoinsInFlow()
     }
 
@@ -61,12 +61,14 @@ class MainGameViewModel(
     fun changeTimerState(newTimerState: QuestionTimerState) = _state.update { it.copy(timerState = newTimerState) }
 
 
-    fun loadQuestions() {
+    fun loadQuestions(countryId: String, level: String) {
         viewModelScope.launch {
             val questions = repo.getQuestions()
+                .filter { it.id == countryId && it.questionLevel == level }
+
             updateState {
                 it.copy(
-                    allQuestions = questions,
+//                    allQuestions = questions,
                     selectedQuestionsList = questions,
                     pageState = MainPageState.DisplayContent
                 )
