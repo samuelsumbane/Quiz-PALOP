@@ -8,6 +8,7 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Country
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
+import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -20,19 +21,49 @@ class QuestionsConfigViewModel(
     val settingsManager: SettingsManager
 ) : ViewModel() {
     private val _state = MutableStateFlow(QuestionsConfigUiState())
+    private val _questionsPercentage = MutableStateFlow(UserQuestionsPercentageUiState())
+
+
     val questionsConfigUiState = _state.asStateFlow()
+    val questionsPercentage = _questionsPercentage.asStateFlow()
 
     fun updateState(block: (QuestionsConfigUiState) -> QuestionsConfigUiState) = _state.update(block)
 
-    fun setCountry(country: Countries) {
-        updateState { it.copy(questionsCountry = country) }
+    fun setQuestionConfig(questionsConfig: QuestionConfig) {
+        updateState { it.copy(questionConfig = questionsConfig) }
     }
 
-    fun setCategory(category: Category) {
-        updateState { it.copy(questionsCategory = category) }
+    fun readSavedCategory() {
+        viewModelScope.launch {
+            settingsManager.readStringValues(settingsManager.lastSelectedCategory)
+                .collect { lastCategory ->
+                    if (lastCategory.isBlank()) {
+                        settingsManager.saveIntValues(settingsManager.lives, intValue = 10)
+                    }
+
+//                    updateState { it.copy(lastCategoryWasSaved = lastCategory.isNotBlank()) }
+                    Countries.entries.firstOrNull { it.countryName == lastCategory }
+                        ?.let { questionsCategory ->
+                            updateState { it.copy(questionsCountry = questionsCategory) }
+                        }
+                }
+        }
     }
 
-    fun loadQuestions() {
+    fun readSavedLevel() {
+        viewModelScope.launch {
+            settingsManager.readStringValues(settingsManager.lastSelectedCountry)
+                .collect { lastCategory ->
+                    Category.entries.firstOrNull { it.categoryName == lastCategory }
+                        ?.let { lastCategory ->
+                            updateState { it.copy(questionsCategory = lastCategory) }
+                        }
+                }
+        }
+    }
+
+
+    fun loadSavedQuestions() {
         viewModelScope.launch {
             val questions = repo.getQuestions()
             val savedQuestions = settingsManager.readSavedQuestionsList().first()
@@ -40,47 +71,13 @@ class QuestionsConfigViewModel(
         }
     }
 
-    fun calcLevelPercentage() {
-        viewModelScope.launch {
-            val savedQuestions = settingsManager.readSavedQuestionsList().first()
-            val questionslist = questionsConfigUiState.value.questions
-
-            val allEasyQuestions = questionslist.filter { it.questionLevel == "Easy" }.map { it.id }
-            val allMediumQuestions = questionslist.filter { it.questionLevel == "Medium" }.map { it.id }
-            val allHardQuestions = questionslist.filter { it.questionLevel == "Hard" }.map { it.id }
-            //
-            val easySavedQuestions = allEasyQuestions intersect savedQuestions
-            val mediumSavedQuestions = allMediumQuestions intersect savedQuestions
-            val hardSavedQuestions = allHardQuestions intersect savedQuestions
-
-            val easyQuestionsPercentage = easySavedQuestions.size.toFloat() / allEasyQuestions.size
-            val mediumQuestionsPercentage = mediumSavedQuestions.size.toFloat() / allMediumQuestions.size
-            val hardQuestionsPercentage = hardSavedQuestions.size.toFloat() / allHardQuestions.size
-
-            updateState {
-                it.copy(
-//                    easyAnsweredQuestionsList = easySavedQuestions,
-                    easyAnsweredQuestionsPercent = easyQuestionsPercentage,
-//                    mediumAnsweredQuestionsList = mediumSavedQuestions,
-                    mediumAnsweredQuestionsPercent = mediumQuestionsPercentage,
-//                    hardAnsweredQuestionsList = hardSavedQuestions,
-                    hardAnsweredQuestionsPercent = hardQuestionsPercentage
-                )
-            }
-        }
-    }
-
     fun levelForLocked() {
 //        println("ouvindo: for lock ${progressUiState.value.easyAnsweredQuestionsPercent}")
         val lockLevelList = when {
-            questionsConfigUiState.value.easyAnsweredQuestionsPercent < 1.0f -> {
-                listOf("Medium", "Hard")
-            }
+            questionsPercentage.value.easyAnsweredQuestionsPercent < 1.0f -> listOf("Medium", "Hard")
 
-            questionsConfigUiState.value.easyAnsweredQuestionsPercent >= 1.0f && questionsConfigUiState.value.mediumAnsweredQuestionsPercent <
-                    1.0f -> {
-                listOf("Hard")
-            }
+            questionsPercentage.value.easyAnsweredQuestionsPercent >= 1.0f && questionsPercentage.value.mediumAnsweredQuestionsPercent <
+                    1.0f -> listOf("Hard")
 
             else -> emptyList()
         }

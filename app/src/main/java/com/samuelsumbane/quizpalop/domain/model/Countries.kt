@@ -6,5 +6,6 @@ enum class Countries(val countryName: String) {
     Gw("Guiné-Bissau"),
     Stp("São Tomé e Príncipe"),
     Ge("Guiné Equatorial"),
-    Mz("Moçambique")
+    Mz("Moçambique"),
+    None("None")
 }

@@ -22,7 +22,7 @@ class SettingsManager(val context: Context) {
 
     val savedQuestionsList = stringPreferencesKey("savedQuestions_list")
     val lastSelectedCategory = stringPreferencesKey("lastCategorySelected")
-    val lastLevelSelected = stringPreferencesKey("lastLevelSelected")
+    val lastSelectedCountry = stringPreferencesKey("lastCountrySelected")
 
     val lastRightOptionButtonDateTime = longPreferencesKey("last_datetime_rightOption_clicked")
     val lastDateTimeLostLives = longPreferencesKey("last_datetime_lost_lives")

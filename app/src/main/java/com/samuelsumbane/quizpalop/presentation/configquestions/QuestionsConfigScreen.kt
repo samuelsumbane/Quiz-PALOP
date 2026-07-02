@@ -30,6 +30,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
@@ -37,6 +38,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.composables.RadioButtonGroup
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
+import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import kotlin.collections.emptyList
@@ -56,12 +58,15 @@ class QuestionsConfigScreen(val destination: PagesName) : Screen {
 fun QuestionsConfigPage(destination: PagesName) {
     val navigator = LocalNavigator.currentOrThrow
     val questionsConfigViewModel = koinViewModel<QuestionsConfigViewModel>()
-    val startQuizGameUiState by questionsConfigViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
+    val questionsConfigUiState by questionsConfigViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
+
+    val userQuestionsPercentage = koinViewModel<UserQuestionsPercentageViewModel>()
+    val userQuestionsPercentageUiState = userQuestionsPercentage.uiState.collectAsStateWithLifecycle()
     //
     val context = LocalContext.current
     val coroutine = rememberCoroutineScope()
     val soundManager = remember { SoundManager(context) }
-    val contentIndicator = if (startQuizGameUiState.questionConfig == QuestionConfig.SelectCountry) 1 else 2
+    val contentIndicator = if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) 1 else 2
     val progress by animateFloatAsState(
         targetValue = contentIndicator / 2.toFloat()
     )
@@ -73,15 +78,15 @@ fun QuestionsConfigPage(destination: PagesName) {
     }
 
     LaunchedEffect(Unit) {
-        startQuizGameViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+        questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
 //        progressViewModel.levelForLocked()
-        startQuizGameViewModel.readSavedCategory()
-        startQuizGameViewModel.readSavedLevel()
-        progressViewModel.loadSavedQuestions(true)
+        questionsConfigViewModel.readSavedCategory()
+        questionsConfigViewModel.readSavedLevel()
+        questionsConfigViewModel.loadSavedQuestions()
 
-        startQuizGameViewModel.soundEvent.collect { event ->
-            if (event == SoundEvent.Click && startQuizGameUiState.soundState == SoundState.Playing) soundManager.playClick()
-        }
+//        startQuizGameViewModel.soundEvent.collect { event ->
+//            if (event == SoundEvent.Click && startQuizGameUiState.soundState == SoundState.Playing) soundManager.playClick()
+//        }
     }
 
     Scaffold { paddingValues ->
@@ -98,7 +103,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                     Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    PageTitleText(startQuizGameUiState.questionConfig.pageTitle)
+                    PageTitleText(questionsConfigUiState.questionConfig.pageTitle)
                 }
 
                 Column(
@@ -123,20 +128,20 @@ fun QuestionsConfigPage(destination: PagesName) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         RadioButtonGroup(
-                            optionsList = startQuizGameUiState.questionConfig.configOptionsList,
+                            optionsList = questionsConfigUiState.questionConfig.configOptionsList,
                             lockedOptions = if (destination == PagesName.MainPage) {
-                                when (startQuizGameUiState.questionConfig) {
-                                    QuestionConfig.SelectCategory -> emptyList()
-                                    QuestionConfig.SelectLevel -> progressUiState.lockLevelList
+                                when (questionsConfigUiState.questionConfig) {
+                                    QuestionConfig.SelectCountry -> emptyList()
+                                    QuestionConfig.SelectCategory-> questionsConfigUiState.lockLevelList
                                 }
                             } else { emptyList() },
-                            questionCategory = startQuizGameUiState.questionsCategory,
+                            questionCategory = questionsConfigUiState.questionsCategory,
                             savedQuestionsId = if (destination == PagesName.MainPage) {
                                 Triple(progressUiState.easyAnsweredQuestionsList, progressUiState.mediumAnsweredQuestionsList, progressUiState.hardAnsweredQuestionsList)
                             } else Triple(emptySet<Int>(), emptySet<Int>(), emptySet<Int>()),
                             selectedOption =
-                                when (startQuizGameUiState.questionConfig) {
-                                    QuestionConfig.SelectCategory -> QuestionCategory.entries.first { it == startQuizGameUiState.questionsCategory }.value
+                                when (questionsConfigUiState.questionConfig) {
+                                    QuestionConfig.SelectCategory -> Category.entries.first { it == startQuizGameUiState.questionsCategory }.value
                                     QuestionConfig.SelectLevel -> QuestionLevel.entries.first { it == startQuizGameUiState.questionsLevel }.value
                                 }
                         ) { newValue ->
