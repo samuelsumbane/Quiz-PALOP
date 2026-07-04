@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -135,4 +137,19 @@ fun PageTitleText(text: String) {
         fontWeight = FontWeight.ExtraBold,
         color = MaterialTheme.colorScheme.onPrimary
     )
+}
+
+@Composable
+fun ConfigsNavigationIcon(
+    icon: @Composable () -> Unit,
+    onClick: () -> Unit
+) {
+    IconButton(
+        onClick = onClick,
+        colors = IconButtonDefaults.iconButtonColors(
+            containerColor = Color.LightGray,
+            contentColor = Color.Black
+        ),
+        modifier = Modifier.size(45.dp)
+    ) { icon() }
 }

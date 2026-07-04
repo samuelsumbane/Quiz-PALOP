@@ -50,18 +50,17 @@ import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
 import com.samuelsumbane.quizpalop.presentation.composables.MessageUi
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 
 
-class MainPageScreen(val countryId: String, val questionLevel: String) : Screen {
+class MainPageScreen(val countryId: String, val questionCategory: String) : Screen {
     @Composable
     override fun Content() {
-        MainPage(countryId, questionLevel)
+        MainPage(countryId, questionCategory)
     }
 }
 
 @Composable
-fun MainPage(countryId: String, questionLevel: String) {
+fun MainPage(countryId: String, questionsCategory: String) {
     val mainPageViewModel = koinViewModel<MainGameViewModel>()
     val mainPageUiState by mainPageViewModel.mainGameUiState.collectAsStateWithLifecycle()
     val navigator = LocalNavigator.currentOrThrow
@@ -79,7 +78,7 @@ fun MainPage(countryId: String, questionLevel: String) {
 
     LaunchedEffect(Unit) {
 
-        mainPageViewModel.loadQuestions(countryId, questionLevel)
+        mainPageViewModel.loadQuestions(countryId, questionsCategory)
 
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {

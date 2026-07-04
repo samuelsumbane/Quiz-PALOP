@@ -23,10 +23,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
 import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
+import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionPage
+import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
 
 class HomePageScreen : Screen {
@@ -38,6 +42,8 @@ class HomePageScreen : Screen {
 
 @Composable
 fun HomePage() {
+    val navigator = LocalNavigator.currentOrThrow
+
     Scaffold {
         Box(
             modifier = Modifier
@@ -70,10 +76,11 @@ fun HomePage() {
 
                 HomePageOptionColumn() {
                     HomeOption("Jogar") {
-//                    navigator.push(PreQuestionsConfigScreen())
+                        navigator.push(GameSessionScreen())
                     }
 
                     HomeOption("Progresso") {
+                        navigator.push(Progress)
                     }
 
                 }

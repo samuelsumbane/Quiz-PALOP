@@ -31,12 +31,16 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
+import com.samuelsumbane.quizpalop.presentation.composables.BottomNavigation
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.composables.RadioButtonGroup
+import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
+import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import kotlinx.coroutines.launch
@@ -61,7 +65,7 @@ fun QuestionsConfigPage(destination: PagesName) {
     val questionsConfigUiState by questionsConfigViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
     val userQuestionsPercentage = koinViewModel<UserQuestionsPercentageViewModel>()
-    val userQuestionsPercentageUiState = userQuestionsPercentage.uiState.collectAsStateWithLifecycle()
+    val userQuestionsPercentageUiState by userQuestionsPercentage.uiState.collectAsStateWithLifecycle()
     //
     val context = LocalContext.current
     val coroutine = rememberCoroutineScope()
@@ -128,6 +132,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         RadioButtonGroup(
+                            allQuestions = questionsConfigUiState.questions,
                             optionsList = questionsConfigUiState.questionConfig.configOptionsList,
                             lockedOptions = if (destination == PagesName.MainPage) {
                                 when (questionsConfigUiState.questionConfig) {
@@ -137,52 +142,49 @@ fun QuestionsConfigPage(destination: PagesName) {
                             } else { emptyList() },
                             questionCategory = questionsConfigUiState.questionsCategory,
                             savedQuestionsId = if (destination == PagesName.MainPage) {
-                                Triple(progressUiState.easyAnsweredQuestionsList, progressUiState.mediumAnsweredQuestionsList, progressUiState.hardAnsweredQuestionsList)
-                            } else Triple(emptySet<Int>(), emptySet<Int>(), emptySet<Int>()),
+                                Triple(userQuestionsPercentageUiState.easyAnsweredQuestionsList, userQuestionsPercentageUiState.mediumAnsweredQuestionsList, userQuestionsPercentageUiState.hardAnsweredQuestionsList)
+                            } else Triple(emptySet<String>(), emptySet<String>(), emptySet<String>()),
                             selectedOption =
                                 when (questionsConfigUiState.questionConfig) {
-                                    QuestionConfig.SelectCategory -> Category.entries.first { it == startQuizGameUiState.questionsCategory }.value
-                                    QuestionConfig.SelectLevel -> QuestionLevel.entries.first { it == startQuizGameUiState.questionsLevel }.value
+                                    QuestionConfig.SelectCategory -> Category.entries.first { it == questionsConfigUiState.questionsCategory }.categoryName
+                                    QuestionConfig.SelectCountry -> Countries.entries.first { it == questionsConfigUiState.questionsCountry}.countryName
                                 }
                         ) { newValue ->
-                            when (startQuizGameUiState.questionConfig) {
-                                QuestionConfig.SelectCategory -> {
-                                    startQuizGameViewModel.setGameCategory(QuestionCategory.entries.first { it.value == newValue })
-                                }
+                            when (questionsConfigUiState.questionConfig) {
+                                QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCategory(newValue)
 
-                                QuestionConfig.SelectLevel -> startQuizGameViewModel.setGameLevel(
-                                    QuestionLevel.entries.first { it.value == newValue }
-                                )
+                                QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(newValue)
                             }
                         }
                     }
                 }
 
                 BottomNavigation(
-                    backButtonEnabled = startQuizGameUiState.questionConfig == QuestionConfig.SelectLevel,
+                    backButtonEnabled = questionsConfigUiState.questionConfig == QuestionConfig.SelectCategory,
                     onBackButtonClicked = {
-                        if (startQuizGameUiState.questionConfig == QuestionConfig.SelectCategory) {
+                        if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
                             navigator.push(
-                                if (destination == PagesName.MainPage) PreQuestionsConfigScreen() else HomeGameScreen()
+                                if (destination == PagesName.MainPage) GameSessionScreen() else HomePageScreen()
                             )
                         } else {
-                            startQuizGameViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
                         }
                     },
                     onForwardButtonClicked = {
-                        if (startQuizGameUiState.questionConfig == QuestionConfig.SelectCategory) {
-                            startQuizGameViewModel.setQuestionConfig(QuestionConfig.SelectLevel)
+                        if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
+                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
                             coroutine.launch {
-                                startQuizGameViewModel.saveSelectedCategory(startQuizGameUiState.questionsCategory.value)
+                                questionsConfigViewModel.saveSelectedCategory(questionsConfigUiState.questionsCountry.countryName)
                             }
                         } else {
                             navigator.push(
                                 if (destination == PagesName.MainPage) {
                                     MainPageScreen(
-                                        startQuizGameUiState.questionsCategory,
-                                        startQuizGameUiState.questionsLevel
+                                        questionsConfigUiState.questionsCountry.countryName,
+                                        questionsConfigUiState.questionsCategory.categoryName
                                     )
                                 } else {
+                                    HomePageScreen()
 //                                    DuelScreen(startQuizGameUiState.questionsCategory, startQuizGameUiState.questionsLevel)
                                 }
                             )

@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
@@ -17,22 +18,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Question
 
 @Composable
 fun RadioButtonGroup(
+    allQuestions: List<Question>,
     optionsList: List<String>,
     lockedOptions: List<String>,
-    questionCategory: QuestionCategory,
-    savedQuestionsId: Triple<Set<Int>, Set<Int>, Set<Int>>,
+    questionCategory: Category,
+    savedQuestionsId: Triple<Set<String>, Set<String>, Set<String>>,
     selectedOption: String,
     onSelect: (String) -> Unit
 ) {
     val backgroundColor = MaterialTheme.colorScheme.background
-    val l1 = savedQuestionsId.first.containsAll(getCategoryAndLevelIds(questionCategory, "Easy"))
-    val l2 = savedQuestionsId.second.containsAll(getCategoryAndLevelIds(questionCategory, "Medium))
-    val l3 = savedQuestionsId.third.containsAll(getCategoryAndLevelIds(questionCategory, "Hard"))
+    val l1 = savedQuestionsId.first.containsAll(allQuestions.filter { it.questionLevel == "Easy" }.map { it.id })
+    val l2 = savedQuestionsId.second.containsAll(allQuestions.filter { it.questionLevel == "Medium" }.map { it.id })
+    val l3 = savedQuestionsId.third.containsAll(allQuestions.filter { it.questionLevel == "Hard" }.map { it.id })
     val categoryAndLevelValues = listOf(l1, l2, l3, false)
 
     Column(
@@ -56,7 +62,7 @@ fun RadioButtonGroup(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (lockedOptions.isNotEmpty()) {
                         if (option in lockedOptions) {
-                            LockedIcon()
+                            LockIcon()
                         } else {
                             Text("     ")
                         }
@@ -76,7 +82,7 @@ fun RadioButtonGroup(
                 }
                 Text(option, color = Color.Black, fontWeight = FontWeight.SemiBold)
                 // Check if all category and level questions are answered
-                if (QuestionCategory.Bible.value !in optionsList) {
+                if (Category.History.categoryName !in optionsList) {
                     if (categoryAndLevelValues[index]) CheckIcon() else Text("    ")
                 } else Text("")
             }
@@ -86,4 +92,4 @@ fun RadioButtonGroup(
 
 
 @Composable
-fun CheckIcon() = Icon(Icons.Default.Check, "Check", tint = Color(0xFF09740E))
+fun CheckIcon() = Icon(painterResource(R.drawable.door_open_fill), "", tint = Color(0xFF09740E))

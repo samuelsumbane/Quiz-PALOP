@@ -39,11 +39,11 @@ class UserQuestionsPercentageViewModel(val settingsManager: SettingsManager) : V
 
             updateState {
                 it.copy(
-//                  easyAnsweredQuestionsList = easySavedQuestions,
+                  easyAnsweredQuestionsList = easySavedQuestions,
                     easyAnsweredQuestionsPercent = easyQuestionsPercentage,
-//                  mediumAnsweredQuestionsList = mediumSavedQuestions,
+                  mediumAnsweredQuestionsList = mediumSavedQuestions,
                     mediumAnsweredQuestionsPercent = mediumQuestionsPercentage,
-//                  hardAnsweredQuestionsList = hardSavedQuestions,
+                  hardAnsweredQuestionsList = hardSavedQuestions,
                     hardAnsweredQuestionsPercent = hardQuestionsPercentage
                 )
             }

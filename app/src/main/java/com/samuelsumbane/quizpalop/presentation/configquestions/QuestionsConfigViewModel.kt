@@ -29,6 +29,20 @@ class QuestionsConfigViewModel(
 
     fun updateState(block: (QuestionsConfigUiState) -> QuestionsConfigUiState) = _state.update(block)
 
+    fun setGameCategory(category: String) {
+        viewModelScope.launch {
+            updateState { it.copy(questionsCategory = Category.entries.first { c -> c.categoryName == category }) }
+            settingsManager.saveStringValues(settingsManager.lastSelectedCategory, category)
+        }
+    }
+
+    fun setGameCountry(country: String) {
+        viewModelScope.launch {
+            updateState { it.copy(questionsCountry = Countries.entries.first { c -> c.countryName == country} ) }
+            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
+        }
+    }
+
     fun setQuestionConfig(questionsConfig: QuestionConfig) {
         updateState { it.copy(questionConfig = questionsConfig) }
     }
@@ -50,6 +64,13 @@ class QuestionsConfigViewModel(
         }
     }
 
+    fun saveSelectedCategory(category: String) {
+        viewModelScope.launch {
+            settingsManager.saveStringValues(settingsManager.lastSelectedCategory, category)
+        }
+    }
+
+
     fun readSavedLevel() {
         viewModelScope.launch {
             settingsManager.readStringValues(settingsManager.lastSelectedCountry)
@@ -69,19 +90,6 @@ class QuestionsConfigViewModel(
             val savedQuestions = settingsManager.readSavedQuestionsList().first()
             updateState { it.copy(questions = questions, savedQuestions = savedQuestions) }
         }
-    }
-
-    fun levelForLocked() {
-//        println("ouvindo: for lock ${progressUiState.value.easyAnsweredQuestionsPercent}")
-        val lockLevelList = when {
-            questionsPercentage.value.easyAnsweredQuestionsPercent < 1.0f -> listOf("Medium", "Hard")
-
-            questionsPercentage.value.easyAnsweredQuestionsPercent >= 1.0f && questionsPercentage.value.mediumAnsweredQuestionsPercent <
-                    1.0f -> listOf("Hard")
-
-            else -> emptyList()
-        }
-        _state.update { it.copy(lockLevelList = lockLevelList) }
     }
 
 }

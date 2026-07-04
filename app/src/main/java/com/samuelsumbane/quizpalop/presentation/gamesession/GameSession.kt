@@ -10,7 +10,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 
-class GameSession : Screen {
+class GameSessionScreen : Screen {
     @Composable
     override fun Content() {
         GameSessionPage()
