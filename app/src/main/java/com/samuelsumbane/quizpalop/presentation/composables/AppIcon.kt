@@ -2,6 +2,7 @@ package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,11 +26,20 @@ fun CoinIcon(
 @Composable
 fun BackIcon() {
     Icon(
-        painter = painterResource(R.drawable.outline_check_24),
+        painter = painterResource(R.drawable.back),
         contentDescription = "Navigate up",
+        modifier = Modifier.size(24.dp)
     )
 }
 
+@Composable
+fun ForwardIcon() {
+    Icon(
+        painter = painterResource(R.drawable.forward),
+        contentDescription = "Forward",
+        modifier = Modifier.size(24.dp)
+    )
+}
 @Composable
 fun LockIcon() = Icon(painterResource(R.drawable.volume_up_fill), "locked")
 

@@ -26,6 +26,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.domain.model.AdState
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
+import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.GameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
@@ -170,7 +171,7 @@ fun MessageUi(
                         onClick = {
                             mainGameViewModel.clearAnsweredQuestionsWithoutMistake()
                             mainGameViewModel.setGameTextMessage(GameTextMessage.Empty)
-//                            navigator.push(HomeGameScreen())
+                            navigator.push(HomePageScreen())
                         }
                     )
                 }

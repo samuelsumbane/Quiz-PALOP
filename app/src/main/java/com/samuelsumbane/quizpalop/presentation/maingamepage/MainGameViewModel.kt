@@ -61,11 +61,11 @@ class MainGameViewModel(
     fun changeTimerState(newTimerState: QuestionTimerState) = _state.update { it.copy(timerState = newTimerState) }
 
 
-    fun loadQuestions(countryId: String, category: String) {
+    fun loadQuestions(countryCode: String, categoryMeaning: String) {
         viewModelScope.launch {
             val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
             val questions = repo.getQuestions()
-//                .filter { it.id == countryId && it.questionLevel == category }
+                .filter { it.id.startsWith(countryCode) && it.questionLevel == categoryMeaning }
             val idList = questions.map { it.id }.toSet() - savedQuestionsId
             println("estado: eles sao : $idList")
             updateState {
@@ -103,7 +103,6 @@ class MainGameViewModel(
             }
         } else {
             setGameTextMessage(GameTextMessage.Empty)
-
             val randomedQuestion = mainGameUiState.value.selectedQuestionsList.random()
             val readyQuestion = randomedQuestion.copy(options = randomedQuestion.options.shuffled())
             updateState {
@@ -128,7 +127,7 @@ class MainGameViewModel(
         viewModelScope.launch {
             settingsManager.readIntValues(settingsManager.lives).collect { lives ->
                 updateState {
-                    it.copy(lives = lives)
+                    it.copy(lives = if (lives == 0) 40 else lives)
                 }
             }
         }

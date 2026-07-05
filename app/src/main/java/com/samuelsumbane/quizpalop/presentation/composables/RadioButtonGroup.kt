@@ -48,7 +48,6 @@ fun RadioButtonGroup(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         optionsList.forEachIndexed { index, option ->
-            println("pais: o index é $index")
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -60,7 +61,7 @@ class MainPageScreen(val countryId: String, val questionCategory: String) : Scre
 }
 
 @Composable
-fun MainPage(countryId: String, questionsCategory: String) {
+fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
     val mainPageViewModel = koinViewModel<MainGameViewModel>()
     val mainPageUiState by mainPageViewModel.mainGameUiState.collectAsStateWithLifecycle()
     val navigator = LocalNavigator.currentOrThrow
@@ -78,7 +79,7 @@ fun MainPage(countryId: String, questionsCategory: String) {
 
     LaunchedEffect(Unit) {
 
-        mainPageViewModel.loadQuestions(countryId, questionsCategory)
+        mainPageViewModel.loadQuestions(countryCode, questionsCategoryMeaning)
 
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {
@@ -92,11 +93,11 @@ fun MainPage(countryId: String, questionsCategory: String) {
         }
     }
 
-    LaunchedEffect(mainPageUiState.timerState) {
-        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-            mainPageViewModel.timerCounterExec()
-        }
-    }
+//    LaunchedEffect(mainPageUiState.timerState) {
+//        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+//            mainPageViewModel.timerCounterExec()
+//        }
+//    }
 
 
     @Composable
@@ -168,7 +169,6 @@ fun MainPage(countryId: String, questionsCategory: String) {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-//                        .background(Color.DarkGray.copy(0.5f))
                         ) {
                             Row(
                                 modifier = Modifier
@@ -203,13 +203,13 @@ fun MainPage(countryId: String, questionsCategory: String) {
                                         requiredCoins = 0,
                                         buttonText = "Sair",
                                     ) {
-//                                        gameQuizViewModel.onEvent(MainPageUiEvents.OnExit)
+                                        mainPageViewModel.onEvent(MainGameUiEvents.OnExit)
                                     }
                                 }
                             }
                         }
                     }
-                }
+                },
             ) { padding ->
                 Column(
                     modifier = Modifier

@@ -8,7 +8,8 @@ import com.samuelsumbane.quizpalop.domain.model.Question
 
 data class QuestionsConfigUiState(
     val questionsCategory: Category = Category.History,
-    val questionsCountry: Countries = Countries.Angola,
+    val questionsCountry: Countries = Countries.Mz,
+
     val savedQuestions: Set<String> = emptySet(),
     val questions: List<Question> = emptyList(),
 
@@ -17,7 +18,6 @@ data class QuestionsConfigUiState(
 
     //
     val lockLevelList: List<String> = emptyList(),
-
 )
 
 enum class QuestionConfig(

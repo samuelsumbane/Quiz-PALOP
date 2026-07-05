@@ -151,7 +151,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                                 }
                         ) { newValue ->
                             when (questionsConfigUiState.questionConfig) {
-                                QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCategory(newValue)
+                                QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCountry(newValue)
 
                                 QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(newValue)
                             }
@@ -180,8 +180,8 @@ fun QuestionsConfigPage(destination: PagesName) {
                             navigator.push(
                                 if (destination == PagesName.MainPage) {
                                     MainPageScreen(
-                                        questionsConfigUiState.questionsCountry.countryName,
-                                        questionsConfigUiState.questionsCategory.categoryName
+                                        questionsConfigUiState.questionsCountry.code,
+                                        questionsConfigUiState.questionsCategory.categoryMeaning
                                     )
                                 } else {
                                     HomePageScreen()

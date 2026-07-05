@@ -46,7 +46,7 @@ fun BottomNavigation(
                 Text("Começar")
             }
         } else {
-            ConfigsNavigationIcon(icon = { BackIcon() }) { onForwardButtonClicked() }
+            ConfigsNavigationIcon(icon = { ForwardIcon() }) { onForwardButtonClicked() }
         }
     }
 }

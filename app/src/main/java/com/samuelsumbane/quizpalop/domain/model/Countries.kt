@@ -1,11 +1,14 @@
 package com.samuelsumbane.quizpalop.domain.model
 
-enum class Countries(val countryName: String) {
-    Angola("Angola"),
-    Cv("Cabo Verde"),
-    Gw("Guiné-Bissau"),
-    Stp("São Tomé e Príncipe"),
-    Ge("Guiné Equatorial"),
-    Mz("Moçambique"),
-    None("None")
+enum class Countries(
+    val code: String,
+    val countryName: String
+) {
+    Angola("ao","Angola"),
+    Cv("cv", "Cabo Verde"),
+    Gw("gw", "Guiné-Bissau"),
+    Stp("stp", "São Tomé e Príncipe"),
+    Ge("get", "Guiné Equatorial"),
+    Mz("mz", "Moçambique"),
+    None("nn", "None")
 }
