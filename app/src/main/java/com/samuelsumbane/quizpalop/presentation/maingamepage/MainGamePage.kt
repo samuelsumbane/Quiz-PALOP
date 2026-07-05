@@ -149,7 +149,10 @@ fun MainPage(countryId: String, questionsCategory: String) {
 
     @Composable
     fun pageContent() {
+        println("estado: entrei no pageContent")
         mainPageUiState.actualQuestion?.let { questionData ->
+
+            println("estado: a question é $questionData")
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(

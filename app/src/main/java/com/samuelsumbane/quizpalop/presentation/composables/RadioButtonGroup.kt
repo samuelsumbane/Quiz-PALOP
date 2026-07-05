@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Question
 
 @Composable
@@ -30,28 +31,24 @@ fun RadioButtonGroup(
     allQuestions: List<Question>,
     optionsList: List<String>,
     lockedOptions: List<String>,
-    questionCategory: Category,
+    questionsCountry: Countries,
     savedQuestionsId: Triple<Set<String>, Set<String>, Set<String>>,
     selectedOption: String,
     onSelect: (String) -> Unit
 ) {
-    val backgroundColor = MaterialTheme.colorScheme.background
-    val l1 = savedQuestionsId.first.containsAll(allQuestions.filter { it.questionLevel == "Easy" }.map { it.id })
-    val l2 = savedQuestionsId.second.containsAll(allQuestions.filter { it.questionLevel == "Medium" }.map { it.id })
-    val l3 = savedQuestionsId.third.containsAll(allQuestions.filter { it.questionLevel == "Hard" }.map { it.id })
-    val categoryAndLevelValues = listOf(l1, l2, l3, false)
 
     Column(
         modifier = Modifier
             .fillMaxWidth(0.8f)
             .padding(20.dp)
-            .background(Color(0xBC9C9C9B), RoundedCornerShape(12.dp))
+            .background(Color(0xCB9C9C9B), RoundedCornerShape(12.dp))
 //            .blur(5.dp)
             .padding(10.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         optionsList.forEachIndexed { index, option ->
+            println("pais: o index é $index")
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -82,9 +79,16 @@ fun RadioButtonGroup(
                 }
                 Text(option, color = Color.Black, fontWeight = FontWeight.SemiBold)
                 // Check if all category and level questions are answered
-                if (Category.History.categoryName !in optionsList) {
-                    if (categoryAndLevelValues[index]) CheckIcon() else Text("    ")
-                } else Text("")
+                if (optionsList.size == 3) {
+                    val l1 = savedQuestionsId.first.containsAll(allQuestions.filter { it.questionLevel == "Easy" }.map { it.id })
+                    val l2 = savedQuestionsId.second.containsAll(allQuestions.filter { it.questionLevel == "Medium" }.map { it.id })
+                    val l3 = savedQuestionsId.third.containsAll(allQuestions.filter { it.questionLevel == "Hard" }.map { it.id })
+                    val categoryAndLevelValues = listOf(l1, l2, l3, false)
+
+                    if (Category.History.categoryName !in optionsList) {
+                        if (categoryAndLevelValues[index]) CheckIcon() else Text("    ")
+                    } else Text("")
+                }
             }
         }
     }

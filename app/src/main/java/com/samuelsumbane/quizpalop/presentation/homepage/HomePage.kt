@@ -32,6 +32,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionPage
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
+import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 
 class HomePageScreen : Screen {
     @Composable
@@ -80,7 +81,7 @@ fun HomePage() {
                     }
 
                     HomeOption("Progresso") {
-                        navigator.push(Progress)
+                        navigator.push(ProgressPageScreen())
                     }
 
                 }

@@ -82,7 +82,7 @@ fun QuestionsConfigPage(destination: PagesName) {
     }
 
     LaunchedEffect(Unit) {
-        questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+        questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
 //        progressViewModel.levelForLocked()
         questionsConfigViewModel.readSavedCategory()
         questionsConfigViewModel.readSavedLevel()
@@ -140,7 +140,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                                     QuestionConfig.SelectCategory-> questionsConfigUiState.lockLevelList
                                 }
                             } else { emptyList() },
-                            questionCategory = questionsConfigUiState.questionsCategory,
+                            questionsCountry = questionsConfigUiState.questionsCountry,
                             savedQuestionsId = if (destination == PagesName.MainPage) {
                                 Triple(userQuestionsPercentageUiState.easyAnsweredQuestionsList, userQuestionsPercentageUiState.mediumAnsweredQuestionsList, userQuestionsPercentageUiState.hardAnsweredQuestionsList)
                             } else Triple(emptySet<String>(), emptySet<String>(), emptySet<String>()),
@@ -167,14 +167,14 @@ fun QuestionsConfigPage(destination: PagesName) {
                                 if (destination == PagesName.MainPage) GameSessionScreen() else HomePageScreen()
                             )
                         } else {
-                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
                         }
                     },
                     onForwardButtonClicked = {
                         if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
-                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
+                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
                             coroutine.launch {
-                                questionsConfigViewModel.saveSelectedCategory(questionsConfigUiState.questionsCountry.countryName)
+                                questionsConfigViewModel.saveSelectedCountry(questionsConfigUiState.questionsCountry.countryName)
                             }
                         } else {
                             navigator.push(

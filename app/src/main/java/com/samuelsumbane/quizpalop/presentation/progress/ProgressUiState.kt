@@ -3,7 +3,6 @@ package com.samuelsumbane.quizpalop.presentation.progress
 import androidx.datastore.preferences.protobuf.LazyStringArrayList.emptyList
 import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
 import com.samuelsumbane.quizpalop.domain.model.Question
-import com.samuelsumbane.quizpalop.domain.model.SimpleQuestion
 
 
 data class ProgressUiState(

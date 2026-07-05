@@ -12,7 +12,7 @@ data class QuestionsConfigUiState(
     val savedQuestions: Set<String> = emptySet(),
     val questions: List<Question> = emptyList(),
 
-    val questionConfig: QuestionConfig = QuestionConfig.SelectCategory,
+    val questionConfig: QuestionConfig = QuestionConfig.SelectCountry,
     val soundState: SoundState = SoundState.Playing,
 
     //
@@ -26,7 +26,7 @@ enum class QuestionConfig(
 ) {
     SelectCountry(
         pageTitle = "Selecione o país",
-        configOptionsList = Countries.entries.map { it.countryName }
+        configOptionsList = Countries.entries.filter { it != Countries.None }.map { it.countryName }
     ),
     SelectCategory(
         pageTitle = "Selecione a catogoria",

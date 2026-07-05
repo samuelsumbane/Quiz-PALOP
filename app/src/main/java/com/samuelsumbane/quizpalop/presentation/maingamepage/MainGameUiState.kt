@@ -22,7 +22,7 @@ data class MainGameUiState(
     val answeredQuestionsList: Set<String> = emptySet(),
     val loadSavedQuestionsFineshed: Boolean = false,
     val userGotHelp: Boolean = false,
-    val questionsIdList: List<String> = emptyList(),
+    val questionsIdList: Set<String> = emptySet(),
     val answeredQuestionsWithoutMistake: Int = 0,
     val lastRightOptionButtonDateTime: Long = 0L,
 

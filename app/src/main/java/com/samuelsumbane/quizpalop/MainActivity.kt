@@ -13,6 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
 import com.google.android.gms.ads.MobileAds
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
+import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
@@ -26,8 +29,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizPALOPTheme {
-//                Navigator(MainPageScreen())
-                Navigator(HomePageScreen())
+                Navigator(MainPageScreen(countryId = Countries.Mz.countryName, Category.History.categoryName))
+//                Navigator(GameSessionScreen())
             }
         }
     }

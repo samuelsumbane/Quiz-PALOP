@@ -61,14 +61,17 @@ class MainGameViewModel(
     fun changeTimerState(newTimerState: QuestionTimerState) = _state.update { it.copy(timerState = newTimerState) }
 
 
-    fun loadQuestions(countryId: String, level: String) {
+    fun loadQuestions(countryId: String, category: String) {
         viewModelScope.launch {
+            val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
             val questions = repo.getQuestions()
-                .filter { it.id == countryId && it.questionLevel == level }
-
+//                .filter { it.id == countryId && it.questionLevel == category }
+            val idList = questions.map { it.id }.toSet() - savedQuestionsId
+            println("estado: eles sao : $idList")
             updateState {
                 it.copy(
 //                    allQuestions = questions,
+                    questionsIdList = idList,
                     selectedQuestionsList = questions,
                     pageState = MainPageState.DisplayContent
                 )
@@ -90,7 +93,7 @@ class MainGameViewModel(
 
     fun loadNextQuestion() {
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
-            updateState { it.copy(pageUiState = PageUiState.QuestionsAnswered) }
+            updateState { it.copy(pageUiState = PageUiState.DisplayContent) }
 
             val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
             if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {
@@ -101,7 +104,7 @@ class MainGameViewModel(
         } else {
             setGameTextMessage(GameTextMessage.Empty)
 
-            val randomedQuestion = mainGameUiState.value.allQuestions.random()
+            val randomedQuestion = mainGameUiState.value.selectedQuestionsList.random()
             val readyQuestion = randomedQuestion.copy(options = randomedQuestion.options.shuffled())
             updateState {
                 it.copy(

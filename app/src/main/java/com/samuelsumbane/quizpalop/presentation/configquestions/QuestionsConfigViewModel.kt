@@ -70,6 +70,12 @@ class QuestionsConfigViewModel(
         }
     }
 
+    fun saveSelectedCountry(country: String) {
+        viewModelScope.launch {
+            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
+        }
+    }
+
 
     fun readSavedLevel() {
         viewModelScope.launch {
