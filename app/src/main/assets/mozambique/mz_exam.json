@@ -1,0 +1,212 @@
+[
+  {
+    "id": "mz_exam_01",
+    "question": "Quantas províncias tem Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["10", "11", "12", "13"],
+    "correctIndex": 1
+  },
+  {
+    "id": "mz_exam_02",
+    "question": "Qual destas províncias não faz fronteira com outro país?",
+    "questionLevel": "Hard",
+    "options": ["Sofala", "Niassa", "Maputo", "Tete"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_03",
+    "question": "Qual é a maior província de Moçambique em área?",
+    "questionLevel": "Hard",
+    "options": ["Niassa", "Tete", "Cabo Delgado", "Zambézia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_04",
+    "question": "Qual é a província mais populosa de Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Nampula", "Maputo", "Zambézia", "Sofala"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_05",
+    "question": "Qual destes países não faz fronteira com Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Angola", "Malawi", "Eswatini", "Zâmbia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_06",
+    "question": "Qual é o maior rio que atravessa Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Zambeze", "Limpopo", "Save", "Rovuma"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_07",
+    "question": "O rio Rovuma faz fronteira entre Moçambique e:",
+    "questionLevel": "Hard",
+    "options": ["Tanzânia", "Malawi", "Zimbabwe", "África do Sul"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_08",
+    "question": "Qual destes parques nacionais é Património Mundial da UNESCO?",
+    "questionLevel": "Hard",
+    "options": ["Nenhum", "Gorongosa", "Banhine", "Limpopo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_09",
+    "question": "Qual destes recursos naturais tem grande importância para a economia de Cabo Delgado?",
+    "questionLevel": "Hard",
+    "options": ["Gás natural", "Diamante", "Ouro", "Urânio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_10",
+    "question": "Qual é a moeda oficial utilizada em Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Metical", "Rand", "Kwacha", "Escudo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_11",
+    "question": "Qual é o órgão responsável pela elaboração das leis em Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Assembleia da República", "Tribunal Supremo", "Conselho Constitucional", "Conselho de Ministros"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_12",
+    "question": "Qual é a capital da província de Niassa?",
+    "questionLevel": "Hard",
+    "options": ["Lichinga", "Cuamba", "Mandimba", "Marrupa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_13",
+    "question": "Qual destas cidades possui um dos maiores portos do país?",
+    "questionLevel": "Hard",
+    "options": ["Beira", "Chimoio", "Lichinga", "Gurué"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_14",
+    "question": "Qual destas cidades é conhecida pelo porto de águas profundas?",
+    "questionLevel": "Hard",
+    "options": ["Nacala", "Chókwè", "Cuamba", "Maxixe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_15",
+    "question": "Em que província se encontra o Porto de Nacala?",
+    "questionLevel": "Hard",
+    "options": ["Nampula", "Cabo Delgado", "Zambézia", "Niassa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_16",
+    "question": "Qual destes minerais é explorado principalmente em Tete?",
+    "questionLevel": "Hard",
+    "options": ["Carvão", "Diamante", "Cobre", "Prata"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_17",
+    "question": "Qual destas cidades é capital da província de Manica?",
+    "questionLevel": "Hard",
+    "options": ["Chimoio", "Manica", "Gondola", "Sussundenga"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_18",
+    "question": "Qual destas cidades é capital da província de Inhambane?",
+    "questionLevel": "Hard",
+    "options": ["Inhambane", "Maxixe", "Vilankulo", "Massinga"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_19",
+    "question": "Qual destas províncias possui a maior reserva especial de elefantes no sul do país?",
+    "questionLevel": "Hard",
+    "options": ["Maputo", "Gaza", "Inhambane", "Sofala"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_20",
+    "question": "Qual destes países faz fronteira apenas com o norte de Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Tanzânia", "Eswatini", "Zimbabwe", "África do Sul"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_21",
+    "question": "Qual destas províncias faz fronteira com o Malawi e a Zâmbia?",
+    "questionLevel": "Hard",
+    "options": ["Niassa", "Gaza", "Maputo", "Inhambane"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_22",
+    "question": "Qual destes rios desagua no Oceano Índico em Sofala?",
+    "questionLevel": "Hard",
+    "options": ["Zambeze", "Rovuma", "Limpopo", "Lúrio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_23",
+    "question": "Qual destas cidades é conhecida como a capital do carvão em Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Moatize", "Tete", "Chimoio", "Cuamba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_24",
+    "question": "Qual destes lagos é partilhado por Moçambique, Malawi e Tanzânia?",
+    "questionLevel": "Hard",
+    "options": ["Lago Niassa", "Lago Cahora Bassa", "Lago Urema", "Lago Chicamba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_25",
+    "question": "Qual destas barragens é a maior de Moçambique?",
+    "questionLevel": "Hard",
+    "options": ["Cahora Bassa", "Corumana", "Chicamba", "Massingir"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_26",
+    "question": "A barragem de Cahora Bassa localiza-se em que província?",
+    "questionLevel": "Hard",
+    "options": ["Tete", "Sofala", "Manica", "Niassa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_27",
+    "question": "Qual destas cidades é capital da província de Tete?",
+    "questionLevel": "Hard",
+    "options": ["Tete", "Moatize", "Angónia", "Mutarara"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_28",
+    "question": "Qual destas províncias possui o Arquipélago das Quirimbas?",
+    "questionLevel": "Hard",
+    "options": ["Cabo Delgado", "Nampula", "Zambézia", "Sofala"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_29",
+    "question": "Qual destes parques nacionais localiza-se na província de Gaza?",
+    "questionLevel": "Hard",
+    "options": ["Limpopo", "Gorongosa", "Quirimbas", "Banhine"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_exam_30",
+    "question": "Qual destes distritos é conhecido pela Barragem de Cahora Bassa?",
+    "questionLevel": "Hard",
+    "options": ["Songo", "Marracuene", "Boane", "Mecúfi"],
+    "correctIndex": 0
+  }
+]

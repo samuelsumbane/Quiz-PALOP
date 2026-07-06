@@ -1,0 +1,212 @@
+[
+  {
+    "id": "ao_cultura_01",
+    "question": "Qual é a língua oficial de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Português", "Inglês", "Francês", "Espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_02",
+    "question": "Qual destas é uma língua nacional de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Umbundu", "Suaíli", "Changana", "Makhuwa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_03",
+    "question": "Qual destes estilos musicais é muito popular em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Kizomba", "Samba", "Fado", "Tango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_04",
+    "question": "Qual destes géneros musicais é originário de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Semba", "Reggae", "Jazz", "Rock"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_05",
+    "question": "A Kizomba teve origem em que país?",
+    "questionLevel": "Medium",
+    "options": ["Angola", "Brasil", "Portugal", "Cabo Verde"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_06",
+    "question": "Qual destes pratos é típico de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Muamba de galinha", "Feijoada brasileira", "Paella", "Sushi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_07",
+    "question": "A Muamba de galinha é tradicionalmente feita com base em:",
+    "questionLevel": "Medium",
+    "options": ["Óleo de palma", "Azeite de oliva", "Manteiga", "Óleo de coco"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_08",
+    "question": "Qual destes ingredientes é muito usado na culinária angolana?",
+    "questionLevel": "Medium",
+    "options": ["Fuba de milho", "Arroz integral", "Quinoa", "Aveia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_09",
+    "question": "Qual destes escritores é angolano?",
+    "questionLevel": "Medium",
+    "options": ["Pepetela", "Mia Couto", "José Saramago", "Chinua Achebe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_10",
+    "question": "Pepetela é conhecido principalmente por ser:",
+    "questionLevel": "Medium",
+    "options": ["Escritor", "Cantor", "Futebolista", "Político"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_11",
+    "question": "Qual destes desportos é o mais popular em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Futebol", "Basquetebol americano", "Críquete", "Rugby"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_12",
+    "question": "Qual destes países influenciou fortemente a cultura musical angolana?",
+    "questionLevel": "Medium",
+    "options": ["Brasil", "Japão", "Alemanha", "Canadá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_13",
+    "question": "Qual destes instrumentos é comum na música tradicional angolana?",
+    "questionLevel": "Medium",
+    "options": ["Ngoma", "Piano", "Violino", "Guitarra elétrica"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_14",
+    "question": "Qual destas bebidas é tradicional em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Cuca", "Cerveja Guinness", "Vodka", "Saké"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_15",
+    "question": "Qual destas cidades é conhecida pela produção de café em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Uíge", "Luanda", "Benguela", "Namibe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_16",
+    "question": "Qual destes produtos agrícolas é importante em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Café", "Uva", "Trigo", "Maçã"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_17",
+    "question": "Qual destes animais pode ser encontrado no Parque Nacional da Quiçama?",
+    "questionLevel": "Medium",
+    "options": ["Elefante", "Urso polar", "Canguru", "Tigre"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_18",
+    "question": "O Parque Nacional da Quiçama localiza-se em que província?",
+    "questionLevel": "Medium",
+    "options": ["Luanda", "Huambo", "Benguela", "Uíge"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_19",
+    "question": "Qual destas praias é muito conhecida em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Ilha do Mussulo", "Copacabana", "Tofo", "Bondi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_20",
+    "question": "A Ilha do Mussulo fica perto de qual cidade?",
+    "questionLevel": "Medium",
+    "options": ["Luanda", "Huambo", "Benguela", "Lubango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_21",
+    "question": "Qual destes minerais é importante na economia de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Petróleo", "Carvão vegetal", "Prata", "Ferro apenas"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_22",
+    "question": "Qual destes países é o maior parceiro comercial de Angola?",
+    "questionLevel": "Medium",
+    "options": ["China", "Brasil", "Portugal", "Índia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_23",
+    "question": "Qual destas festas é celebrada em Angola a nível nacional?",
+    "questionLevel": "Medium",
+    "options": ["Dia da Independência", "Oktoberfest", "Thanksgiving", "Carnaval de Veneza"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_24",
+    "question": "Qual destas cidades é conhecida pelo Carnaval em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Luanda", "Huambo", "Lubango", "Malanje"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_25",
+    "question": "Qual destes clubes é famoso no futebol angolano?",
+    "questionLevel": "Medium",
+    "options": ["Petro de Luanda", "Barcelona", "Real Madrid", "Chelsea"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_26",
+    "question": "Qual destes atletas é conhecido no basquetebol angolano?",
+    "questionLevel": "Medium",
+    "options": ["Carlos Morais", "Usain Bolt", "Lionel Messi", "Novak Djokovic"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_27",
+    "question": "Qual destas províncias é famosa pela produção de sal?",
+    "questionLevel": "Medium",
+    "options": ["Namibe", "Huambo", "Uíge", "Lunda Sul"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_28",
+    "question": "Qual destas culturas agrícolas é muito importante em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Milho", "Oliva", "Uva", "Cevada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_29",
+    "question": "Qual destas regiões é conhecida pela pesca em Angola?",
+    "questionLevel": "Medium",
+    "options": ["Benguela", "Huambo", "Malanje", "Lunda Norte"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_cultura_30",
+    "question": "Qual destas ilhas pertence ao litoral de Angola?",
+    "questionLevel": "Medium",
+    "options": ["Ilha do Cabo", "Ilha de Moçambique", "Bazaruto", "Sal"],
+    "correctIndex": 0
+  }
+]

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "mz_culture_01",
+    "question": "Qual é a língua oficial de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Português", "Inglês", "Suaíli", "Changana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_02",
+    "question": "Qual destas é uma língua moçambicana?",
+    "questionLevel": "Medium",
+    "options": ["Makhuwa", "Francês", "Italiano", "Árabe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_03",
+    "question": "Qual destes pratos é típico de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Matapa", "Lasanha", "Paella", "Sushi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_04",
+    "question": "A Matapa é tradicionalmente preparada com folhas de:",
+    "questionLevel": "Medium",
+    "options": ["Mandioca", "Batata-doce", "Milho", "Espinafre"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_05",
+    "question": "Qual destes mariscos é muito consumido em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Camarão", "Lagosta", "Ostra", "Mexilhão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_06",
+    "question": "Qual destas danças é tradicional de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Tufo", "Tango", "Samba", "Flamenco"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_07",
+    "question": "O Tufo é mais tradicional em que região do país?",
+    "questionLevel": "Medium",
+    "options": ["Norte", "Sul", "Centro", "Todas igualmente"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_08",
+    "question": "Qual destes instrumentos musicais é tradicional em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Mbira", "Violoncelo", "Harpa", "Gaita de foles"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_09",
+    "question": "Qual destes animais pode ser encontrado no Parque Nacional da Gorongosa?",
+    "questionLevel": "Medium",
+    "options": ["Elefante", "Urso Polar", "Canguru", "Lhama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_10",
+    "question": "O Parque Nacional da Gorongosa localiza-se em que província?",
+    "questionLevel": "Medium",
+    "options": ["Sofala", "Maputo", "Gaza", "Niassa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_11",
+    "question": "Qual destas praias é uma das mais conhecidas de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Tofo", "Copacabana", "Bondi", "Waikiki"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_12",
+    "question": "A praia do Tofo localiza-se em que província?",
+    "questionLevel": "Medium",
+    "options": ["Inhambane", "Maputo", "Nampula", "Tete"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_13",
+    "question": "Qual destas ilhas é Património Mundial da UNESCO?",
+    "questionLevel": "Medium",
+    "options": ["Ilha de Moçambique", "Inhaca", "Bazaruto", "Xefina"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_14",
+    "question": "Qual destes escritores é moçambicano?",
+    "questionLevel": "Medium",
+    "options": ["Mia Couto", "José Saramago", "Pepetela", "Fernando Pessoa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_15",
+    "question": "Mia Couto é conhecido principalmente por ser:",
+    "questionLevel": "Medium",
+    "options": ["Escritor", "Cantor", "Futebolista", "Pintor"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_16",
+    "question": "Qual destes produtos é uma importante exportação de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Castanha de caju", "Café colombiano", "Banana do Equador", "Vinho"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_17",
+    "question": "Qual destes minerais é explorado em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Carvão", "Diamante", "Prata", "Urânio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_18",
+    "question": "Qual destas bebidas é bastante popular em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Maheu", "Kombucha", "Saquê", "Cidra"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_19",
+    "question": "Qual destas cidades é conhecida pela produção de camarão?",
+    "questionLevel": "Medium",
+    "options": ["Beira", "Lichinga", "Cuamba", "Chimoio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_20",
+    "question": "Qual destes arquipélagos pertence a Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Bazaruto", "Canárias", "Açores", "Madeira"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_21",
+    "question": "Qual destas actividades económicas é importante nas zonas costeiras?",
+    "questionLevel": "Medium",
+    "options": ["Pesca", "Extração de neve", "Cultivo de trigo", "Criação de renas"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_22",
+    "question": "Qual destes frutos é muito cultivado em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Manga", "Cereja", "Maçã", "Kiwi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_23",
+    "question": "Qual destas árvores é comum em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Baobá", "Sequoia", "Pinheiro-do-canadá", "Bétula"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_24",
+    "question": "Qual destes animais é símbolo da fauna moçambicana?",
+    "questionLevel": "Medium",
+    "options": ["Elefante", "Panda", "Bisonte", "Urso"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_25",
+    "question": "Qual destes desportos é o mais popular em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Futebol", "Hóquei no gelo", "Basebol", "Críquete"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_26",
+    "question": "Qual destes atletas é um dos maiores nomes do atletismo moçambicano?",
+    "questionLevel": "Medium",
+    "options": ["Maria de Lurdes Mutola", "Usain Bolt", "Caster Semenya", "Mo Farah"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_27",
+    "question": "Qual destas cidades acolhe a maior feira internacional de Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Maputo", "Tete", "Pemba", "Lichinga"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_28",
+    "question": "Qual destas reservas é uma das maiores áreas protegidas do país?",
+    "questionLevel": "Medium",
+    "options": ["Niassa", "Kruger", "Serengeti", "Etosha"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_29",
+    "question": "Qual destas culturas agrícolas é muito importante em Moçambique?",
+    "questionLevel": "Medium",
+    "options": ["Milho", "Oliva", "Uva", "Aveia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "mz_culture_30",
+    "question": "Qual destas ilhas pertence ao Arquipélago de Bazaruto?",
+    "questionLevel": "Medium",
+    "options": ["Benguerra", "São Vicente", "Sal", "Boa Vista"],
+    "correctIndex": 0
+  }
+]

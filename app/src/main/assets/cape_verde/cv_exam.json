@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cv_exam_01",
+    "question": "Quantas ilhas habitadas tem Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["9", "10", "8", "12"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_02",
+    "question": "Qual é a ilha mais populosa de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Santiago", "São Vicente", "Sal", "Fogo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_03",
+    "question": "Qual é a capital de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Praia", "Mindelo", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_04",
+    "question": "Qual cidade é sede do Governo de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Praia", "Mindelo", "Santa Maria", "Sal Rei"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_05",
+    "question": "Qual é a moeda oficial de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Escudo cabo-verdiano", "Euro", "Metical", "Rand"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_06",
+    "question": "Qual oceano banha Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_07",
+    "question": "Cabo Verde é composto por quantas ilhas principais?",
+    "questionLevel": "Hard",
+    "options": ["10", "12", "8", "14"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_08",
+    "question": "Qual destas ilhas pertence ao grupo de Barlavento?",
+    "questionLevel": "Hard",
+    "options": ["São Vicente", "Santiago", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_09",
+    "question": "Qual destas ilhas pertence ao grupo de Sotavento?",
+    "questionLevel": "Hard",
+    "options": ["Santiago", "São Vicente", "Sal", "São Nicolau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_10",
+    "question": "Qual destas ilhas tem vulcão ativo?",
+    "questionLevel": "Hard",
+    "options": ["Fogo", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_11",
+    "question": "Qual destas ilhas é conhecida pela produção de vinho?",
+    "questionLevel": "Hard",
+    "options": ["Fogo", "Sal", "Santiago", "São Vicente"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_12",
+    "question": "Qual é o principal aeroporto internacional de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Amílcar Cabral", "Nelson Mandela", "Agostinho Neto", "Cesária Évora"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_13",
+    "question": "Em que ilha se localiza a cidade da Praia?",
+    "questionLevel": "Hard",
+    "options": ["Santiago", "São Vicente", "Sal", "Fogo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_14",
+    "question": "Qual destas cidades é capital da ilha de São Vicente?",
+    "questionLevel": "Hard",
+    "options": ["Mindelo", "Praia", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_15",
+    "question": "Qual ilha é conhecida pelo turismo e praias internacionais?",
+    "questionLevel": "Hard",
+    "options": ["Sal", "Fogo", "Santo Antão", "São Nicolau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_16",
+    "question": "Qual ilha é a mais montanhosa de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Santo Antão", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_17",
+    "question": "Qual destas ilhas é considerada a mais seca?",
+    "questionLevel": "Hard",
+    "options": ["Sal", "Santiago", "Fogo", "Santo Antão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_18",
+    "question": "Qual destas ilhas é a mais extensa de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Santiago", "São Vicente", "Sal", "Fogo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_19",
+    "question": "Qual país colonizou Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Portugal", "Espanha", "França", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_20",
+    "question": "Em que ano Cabo Verde tornou-se independente?",
+    "questionLevel": "Hard",
+    "options": ["1975", "1960", "1980", "1990"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_21",
+    "question": "Qual é o principal grupo étnico de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Crioulos cabo-verdianos", "Bantos puros", "Árabes", "Europeus"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_22",
+    "question": "Qual destas atividades económicas é mais importante em Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Turismo", "Mineração de ouro", "Indústria pesada", "Agricultura intensiva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_23",
+    "question": "Qual país africano fica mais próximo de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Senegal", "Angola", "Moçambique", "Nigéria"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_24",
+    "question": "Qual destes escritores é cabo-verdiano?",
+    "questionLevel": "Hard",
+    "options": ["Germano Almeida", "Pepetela", "Mia Couto", "José Saramago"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_25",
+    "question": "Qual destes estilos musicais é típico de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Morna", "Semba", "Samba", "Fado"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_26",
+    "question": "Quem é uma das maiores vozes da música cabo-verdiana?",
+    "questionLevel": "Hard",
+    "options": ["Cesária Évora", "Youssou N'Dour", "Bob Marley", "Shakira"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_27",
+    "question": "Qual destas ilhas pertence ao grupo de Barlavento?",
+    "questionLevel": "Hard",
+    "options": ["São Vicente", "Santiago", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_28",
+    "question": "Qual destas ilhas pertence ao grupo de Sotavento?",
+    "questionLevel": "Hard",
+    "options": ["Santiago", "Sal", "São Vicente", "São Nicolau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_29",
+    "question": "Qual destas cidades é considerada centro cultural de Cabo Verde?",
+    "questionLevel": "Hard",
+    "options": ["Mindelo", "Praia", "Espargos", "Santa Maria"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_exam_30",
+    "question": "Qual destes elementos é mais importante na identidade cabo-verdiana?",
+    "questionLevel": "Hard",
+    "options": ["Diáspora e emigração", "Isolamento total", "Indústria pesada", "Desertos gelados"],
+    "correctIndex": 0
+  }
+]

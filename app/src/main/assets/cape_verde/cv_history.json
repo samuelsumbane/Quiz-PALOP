@@ -1,0 +1,352 @@
+[
+  {
+    "id": "cv_history_01",
+    "question": "Em que ano Cabo Verde tornou-se independente?",
+    "questionLevel": "Easy",
+    "options": ["1975", "1960", "1980", "1990"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_02",
+    "question": "Qual país colonizou Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "Espanha", "França", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_03",
+    "question": "Qual é a capital de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Praia", "Mindelo", "Assomada", "Sal Rei"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_04",
+    "question": "Em que oceano fica Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_05",
+    "question": "Cabo Verde é composto por quantas ilhas principais?",
+    "questionLevel": "Easy",
+    "options": ["10", "5", "15", "20"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_06",
+    "question": "Qual destas ilhas pertence a Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Santiago", "Madeira", "Canárias", "Azores"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_07",
+    "question": "Qual destas cidades é a capital da ilha de São Vicente?",
+    "questionLevel": "Easy",
+    "options": ["Mindelo", "Praia", "Sal Rei", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_08",
+    "question": "Qual é a moeda de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Escudo cabo-verdiano", "Metical", "Euro", "Rand"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_09",
+    "question": "Qual destas ilhas é conhecida pelo turismo em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Sal", "Santiago", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_10",
+    "question": "Qual destas ilhas tem um vulcão ativo?",
+    "questionLevel": "Easy",
+    "options": ["Fogo", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_11",
+    "question": "Qual destas cidades é a maior de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Praia", "Mindelo", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_12",
+    "question": "Qual destes países faz parte da CPLP com Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Angola", "Nigéria", "Egito", "Marrocos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_13",
+    "question": "Qual é a língua oficial de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Português", "Crioulo apenas", "Francês", "Inglês"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_14",
+    "question": "Qual destas línguas é muito falada em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Crioulo cabo-verdiano", "Suaíli", "Umbundu", "Changana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_15",
+    "question": "Qual destes estilos musicais é típico de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Morna", "Semba", "Kizomba", "Samba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_16",
+    "question": "Quem é uma das artistas mais conhecidas de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Cesária Évora", "Maria Mutola", "Mia Couto", "Pepetela"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_17",
+    "question": "Qual destes géneros musicais é tradicional em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Coladeira", "Fado", "Reggae", "Jazz"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_18",
+    "question": "Qual destas ilhas é a mais populosa de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Santiago", "Sal", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_19",
+    "question": "Qual destas cidades fica na ilha de Santiago?",
+    "questionLevel": "Easy",
+    "options": ["Praia", "Mindelo", "Espargos", "Sal Rei"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_20",
+    "question": "Qual destes arquipélagos é próximo de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Canárias", "Bazaruto", "Zanzibar", "Madagáscar"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_21",
+    "question": "Qual destas ilhas é conhecida pelo aeroporto internacional?",
+    "questionLevel": "Easy",
+    "options": ["Sal", "Fogo", "Santiago", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_22",
+    "question": "Qual destas atividades é importante na economia de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Turismo", "Mineração de ouro", "Indústria pesada", "Petróleo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_23",
+    "question": "Qual destes mares rodeia Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Atlântico", "Índico", "Mediterrâneo", "Caribe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_24",
+    "question": "Qual destas ilhas é conhecida pela pesca?",
+    "questionLevel": "Easy",
+    "options": ["São Vicente", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_25",
+    "question": "Qual destas cidades é um importante centro cultural de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Mindelo", "Praia", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_26",
+    "question": "Qual destes países influenciou fortemente a cultura cabo-verdiana?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "Brasil", "França", "Espanha"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_27",
+    "question": "Qual destes pratos é típico de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Cachupa", "Feijoada", "Paella", "Sushi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_28",
+    "question": "Qual destas ilhas é conhecida pelo deserto e praias?",
+    "questionLevel": "Easy",
+    "options": ["Boa Vista", "Santiago", "Fogo", "São Vicente"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_29",
+    "question": "Qual destas cidades é a capital da ilha do Sal?",
+    "questionLevel": "Easy",
+    "options": ["Espargos", "Mindelo", "Praia", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_30",
+    "question": "Qual destas ilhas pertence ao grupo de Sotavento em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Santiago", "Sal", "São Vicente", "São Nicolau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_31",
+    "question": "Qual destas ilhas pertence ao grupo de Barlavento em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["São Vicente", "Santiago", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_32",
+    "question": "Qual destas cidades é capital da ilha de Fogo?",
+    "questionLevel": "Easy",
+    "options": ["São Filipe", "Mindelo", "Praia", "Espargos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_33",
+    "question": "Qual destas ilhas é conhecida pelo vulcão ativo?",
+    "questionLevel": "Easy",
+    "options": ["Fogo", "Sal", "Maio", "Boa Vista"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_34",
+    "question": "Qual destas ilhas é mais desértica em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Boa Vista", "Santiago", "Fogo", "São Vicente"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_35",
+    "question": "Qual destas ilhas é conhecida pela produção de vinho?",
+    "questionLevel": "Easy",
+    "options": ["Fogo", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_36",
+    "question": "Qual destas cidades é capital da ilha de Brava?",
+    "questionLevel": "Easy",
+    "options": ["Vila Nova Sintra", "Praia", "Mindelo", "Espargos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_37",
+    "question": "Qual destas ilhas é a menor em população?",
+    "questionLevel": "Easy",
+    "options": ["Brava", "Santiago", "Sal", "São Vicente"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_38",
+    "question": "Qual destas ilhas é conhecida pelo turismo de praia?",
+    "questionLevel": "Easy",
+    "options": ["Sal", "Fogo", "Santiago", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_39",
+    "question": "Qual destas cidades é importante para o turismo em Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Santa Maria", "Praia", "Mindelo", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_40",
+    "question": "Qual destas ilhas tem o aeroporto internacional mais movimentado?",
+    "questionLevel": "Easy",
+    "options": ["Sal", "Fogo", "Santiago", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_41",
+    "question": "Qual destes países colonizou Cabo Verde até 1975?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "França", "Espanha", "Itália"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_42",
+    "question": "Qual destes países está mais próximo de Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Senegal", "Angola", "Moçambique", "Brasil"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_43",
+    "question": "Qual destas ilhas é conhecida pela agricultura limitada?",
+    "questionLevel": "Easy",
+    "options": ["São Nicolau", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_44",
+    "question": "Qual destas ilhas tem relevo mais montanhoso?",
+    "questionLevel": "Easy",
+    "options": ["Santiago", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_45",
+    "question": "Qual destas cidades é capital da ilha de São Nicolau?",
+    "questionLevel": "Easy",
+    "options": ["Ribeira Brava", "Mindelo", "Praia", "Espargos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_46",
+    "question": "Qual destas ilhas faz parte do grupo de Sotavento?",
+    "questionLevel": "Easy",
+    "options": ["Santiago", "São Vicente", "Sal", "São Nicolau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_47",
+    "question": "Qual destas ilhas faz parte do grupo de Barlavento?",
+    "questionLevel": "Easy",
+    "options": ["São Vicente", "Santiago", "Fogo", "Brava"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_48",
+    "question": "Qual destas cidades é importante na ilha de Santiago?",
+    "questionLevel": "Easy",
+    "options": ["Assomada", "Mindelo", "Espargos", "São Filipe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_49",
+    "question": "Qual destas atividades é muito importante para Cabo Verde?",
+    "questionLevel": "Easy",
+    "options": ["Turismo", "Mineração de petróleo", "Indústria automóvel", "Agricultura intensiva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_history_50",
+    "question": "Qual destas ilhas é conhecida pelas festas culturais e música ao vivo?",
+    "questionLevel": "Easy",
+    "options": ["São Vicente", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  }
+]

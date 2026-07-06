@@ -1,0 +1,353 @@
+[
+  {
+    "id": "ao_01",
+    "question": "Em que ano Angola tornou-se independente?",
+    "questionLevel": "Easy",
+    "options": ["1975", "1960", "1980", "1992"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_02",
+    "question": "Qual país colonizou Angola?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "Espanha", "França", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_03",
+    "question": "Em que dia se celebra a independência de Angola?",
+    "questionLevel": "Easy",
+    "options": ["11 de Novembro", "25 de Junho", "4 de Abril", "1 de Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_04",
+    "question": "Qual foi o primeiro presidente de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Agostinho Neto", "Jonas Savimbi", "José Eduardo dos Santos", "João Lourenço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_05",
+    "question": "Qual movimento liderou a luta de libertação de Angola?",
+    "questionLevel": "Easy",
+    "options": ["MPLA", "RENAMO", "FRELIMO", "PAIGC"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_06",
+    "question": "Em que ano Angola tornou-se independente de Portugal?",
+    "questionLevel": "Easy",
+    "options": ["1975", "1961", "1985", "1990"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_07",
+    "question": "Quem foi um dos principais líderes do MPLA?",
+    "questionLevel": "Easy",
+    "options": ["Agostinho Neto", "Jonas Savimbi", "Eduardo Mondlane", "Samora Machel"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_08",
+    "question": "Qual cidade foi proclamada capital de Angola após a independência?",
+    "questionLevel": "Easy",
+    "options": ["Luanda", "Huambo", "Benguela", "Lubango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_09",
+    "question": "Como se chama o principal partido opositor histórico ao MPLA?",
+    "questionLevel": "Easy",
+    "options": ["UNITA", "FRELIMO", "PAIGC", "MLSTP"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_10",
+    "question": "Quem foi o líder histórico da UNITA?",
+    "questionLevel": "Easy",
+    "options": ["Jonas Savimbi", "Agostinho Neto", "José Eduardo dos Santos", "António Agostinho"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_11",
+    "question": "Em que continente fica Angola?",
+    "questionLevel": "Easy",
+    "options": ["África", "Europa", "América", "Ásia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_12",
+    "question": "Qual guerra marcou Angola após a independência?",
+    "questionLevel": "Easy",
+    "options": ["Guerra Civil", "Guerra Mundial", "Guerra Fria direta", "Guerra do Golfo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_13",
+    "question": "Em que ano terminou a guerra civil em Angola?",
+    "questionLevel": "Easy",
+    "options": ["2002", "1992", "1985", "2010"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_14",
+    "question": "Qual presidente governou Angola por muitos anos após Agostinho Neto?",
+    "questionLevel": "Easy",
+    "options": ["José Eduardo dos Santos", "João Lourenço", "Jonas Savimbi", "Pedro de Castro"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_15",
+    "question": "Qual país apoiou fortemente o MPLA durante a luta de libertação?",
+    "questionLevel": "Easy",
+    "options": ["Cuba", "Brasil", "Portugal", "Espanha"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_16",
+    "question": "Qual país apoiou a UNITA durante a guerra civil?",
+    "questionLevel": "Easy",
+    "options": ["África do Sul", "Tanzânia", "Moçambique", "Guiné-Bissau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_17",
+    "question": "Qual foi o primeiro presidente de Angola independente?",
+    "questionLevel": "Easy",
+    "options": ["Agostinho Neto", "José Eduardo dos Santos", "Jonas Savimbi", "João Lourenço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_18",
+    "question": "Qual era o principal objetivo da luta de libertação de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Independência", "Unificação com Portugal", "Expansão territorial", "Mudança de moeda"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_19",
+    "question": "Qual país europeu colonizou Angola durante séculos?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "França", "Inglaterra", "Holanda"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_20",
+    "question": "Qual cidade foi a capital colonial de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Luanda", "Benguela", "Huambo", "Lubango"],
+    "correctIndex": 0
+  },
+
+  {
+    "id": "ao_21",
+    "question": "Qual é a capital de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Luanda", "Huambo", "Benguela", "Lubango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_22",
+    "question": "Qual oceano banha a costa de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Oceano Atlântico", "Oceano Índico", "Oceano Pacífico", "Oceano Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_23",
+    "question": "Qual é a moeda oficial de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Kwanza", "Metical", "Rand", "Dólar"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_24",
+    "question": "Quantas províncias tem Angola?",
+    "questionLevel": "Easy",
+    "options": ["18", "10", "15", "12"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_25",
+    "question": "Qual destes países faz fronteira com Angola?",
+    "questionLevel": "Easy",
+    "options": ["Namíbia", "Nigéria", "Gana", "Senegal"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_26",
+    "question": "Qual destes países também faz fronteira com Angola?",
+    "questionLevel": "Easy",
+    "options": ["República Democrática do Congo", "Quénia", "Egito", "Marrocos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_27",
+    "question": "Qual é uma das maiores cidades de Angola depois de Luanda?",
+    "questionLevel": "Easy",
+    "options": ["Huambo", "Lusaka", "Maputo", "Nampula"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_28",
+    "question": "Qual rio é um dos mais importantes de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Kwanza", "Nilo", "Zambeze", "Limpopo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_29",
+    "question": "Qual deserto está presente no sul de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Deserto do Namibe", "Saara", "Kalahari (apenas parcialmente)", "Gobi"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_30",
+    "question": "Qual destas cidades é um importante porto de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Benguela", "Huambo", "Malanje", "Uíge"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_31",
+    "question": "Qual destas cidades é a capital da província do Huambo?",
+    "questionLevel": "Easy",
+    "options": ["Huambo", "Benguela", "Lubango", "Malanje"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_32",
+    "question": "Qual destas cidades é capital da província de Benguela?",
+    "questionLevel": "Easy",
+    "options": ["Benguela", "Huambo", "Uíge", "Cabinda"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_33",
+    "question": "Qual destas províncias fica no norte de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Cabinda", "Huíla", "Namibe", "Cunene"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_34",
+    "question": "Qual destas cidades é capital da província de Huíla?",
+    "questionLevel": "Easy",
+    "options": ["Lubango", "Benguela", "Huambo", "Malanje"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_35",
+    "question": "Qual destas cidades é capital da província de Malanje?",
+    "questionLevel": "Easy",
+    "options": ["Malanje", "Luanda", "Huambo", "Benguela"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_36",
+    "question": "Qual destas províncias faz fronteira com a República Democrática do Congo?",
+    "questionLevel": "Easy",
+    "options": ["Uíge", "Namibe", "Cunene", "Benguela"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_37",
+    "question": "Qual destas províncias faz fronteira com a Namíbia?",
+    "questionLevel": "Easy",
+    "options": ["Cunene", "Uíge", "Malanje", "Zaire"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_38",
+    "question": "Qual destas cidades é capital da província do Uíge?",
+    "questionLevel": "Easy",
+    "options": ["Uíge", "Cabinda", "Benguela", "Lubango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_39",
+    "question": "Qual destas cidades é capital da província do Zaire?",
+    "questionLevel": "Easy",
+    "options": ["Mbanza Congo", "Luanda", "Huambo", "Malanje"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_40",
+    "question": "Qual destas províncias é um enclave separado do resto do país?",
+    "questionLevel": "Easy",
+    "options": ["Cabinda", "Huíla", "Benguela", "Namibe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_41",
+    "question": "Qual destas cidades é capital da província de Cabinda?",
+    "questionLevel": "Easy",
+    "options": ["Cabinda", "Benguela", "Luanda", "Huambo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_42",
+    "question": "Qual destas cidades é capital da província do Namibe?",
+    "questionLevel": "Easy",
+    "options": ["Moçâmedes", "Lubango", "Benguela", "Malanje"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_43",
+    "question": "Qual destas províncias fica no sul de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Namibe", "Cabinda", "Uíge", "Zaire"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_44",
+    "question": "Qual destas cidades é conhecida como grande centro industrial de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Luanda", "Huambo", "Malanje", "Uíge"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_45",
+    "question": "Qual destas cidades é um importante centro agrícola em Angola?",
+    "questionLevel": "Easy",
+    "options": ["Huambo", "Luanda", "Cabinda", "Namibe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_46",
+    "question": "Qual destas províncias tem forte produção de petróleo?",
+    "questionLevel": "Easy",
+    "options": ["Cabinda", "Huambo", "Malanje", "Huíla"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_47",
+    "question": "Qual destas cidades é um dos principais portos marítimos de Angola?",
+    "questionLevel": "Easy",
+    "options": ["Luanda", "Huambo", "Malanje", "Mbanza Congo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_48",
+    "question": "Qual destas províncias está localizada no litoral?",
+    "questionLevel": "Easy",
+    "options": ["Benguela", "Uíge", "Malanje", "Lunda Norte"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_49",
+    "question": "Qual destas cidades é conhecida pela produção de diamantes?",
+    "questionLevel": "Easy",
+    "options": ["Saurimo", "Luanda", "Benguela", "Lubango"],
+    "correctIndex": 0
+  },
+  {
+    "id": "ao_50",
+    "question": "Qual destas províncias é rica em diamantes?",
+    "questionLevel": "Easy",
+    "options": ["Lunda Norte", "Namibe", "Huambo", "Benguela"],
+    "correctIndex": 0
+  }
+]

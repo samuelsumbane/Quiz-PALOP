@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cv_culture_01",
+    "question": "Qual é a língua oficial de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Português", "Crioulo apenas", "Francês", "Inglês"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_02",
+    "question": "Qual destas línguas é mais falada no dia a dia em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Crioulo cabo-verdiano", "Suaíli", "Umbundu", "Changana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_03",
+    "question": "Qual destes estilos musicais é tradicional em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Morna", "Semba", "Kizomba", "Fado"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_04",
+    "question": "Quem é uma das maiores referências musicais de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Cesária Évora", "Maria Mutola", "Mia Couto", "Pepetela"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_05",
+    "question": "Qual destes géneros musicais também é típico de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Coladeira", "Samba", "Jazz", "Reggae"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_06",
+    "question": "Qual destes pratos é típico de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Cachupa", "Muamba de galinha", "Feijoada brasileira", "Paella"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_07",
+    "question": "A Cachupa é tradicionalmente feita com base em:",
+    "questionLevel": "Medium",
+    "options": ["Milho e feijão", "Arroz e peixe cru", "Trigo e carne de vaca apenas", "Batata e frango frito"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_08",
+    "question": "Qual destas atividades é muito importante na cultura cabo-verdiana?",
+    "questionLevel": "Medium",
+    "options": ["Música e dança", "Caça de grandes animais", "Esqui", "Corrida de camelos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_09",
+    "question": "Qual destes países influenciou fortemente a cultura de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Portugal", "Japão", "Alemanha", "Canadá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_10",
+    "question": "Qual destas ilhas é conhecida pela forte tradição musical?",
+    "questionLevel": "Medium",
+    "options": ["São Vicente", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_11",
+    "question": "Qual destes festivais é muito importante em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Carnaval do Mindelo", "Oktoberfest", "Carnaval do Rio", "Festa de San Fermín"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_12",
+    "question": "Qual destas cidades é famosa pelo Carnaval em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Mindelo", "Praia", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_13",
+    "question": "Qual destes instrumentos é comum na música cabo-verdiana?",
+    "questionLevel": "Medium",
+    "options": ["Violão", "Saxofone apenas", "Tambor japonês", "Gaita de foles"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_14",
+    "question": "Qual destes estilos é muito ligado à dança em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Coladeira", "Ballet clássico", "Tango argentino", "Flamenco espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_15",
+    "question": "Qual destes escritores é cabo-verdiano?",
+    "questionLevel": "Medium",
+    "options": ["Germano Almeida", "Mia Couto", "Pepetela", "José Saramago"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_16",
+    "question": "Germano Almeida é conhecido principalmente como:",
+    "questionLevel": "Medium",
+    "options": ["Escritor", "Cantor", "Futebolista", "Político"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_17",
+    "question": "Qual destas atividades económicas é muito importante em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Turismo", "Mineração de petróleo", "Indústria pesada", "Exportação de carvão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_18",
+    "question": "Qual destes elementos é típico da cultura cabo-verdiana?",
+    "questionLevel": "Medium",
+    "options": ["Morna", "Samba-reggae brasileiro apenas", "Fado português apenas", "Jazz americano apenas"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_19",
+    "question": "Qual destas cidades é um importante centro cultural de Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Mindelo", "Espargos", "Santa Maria", "Sal Rei"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_20",
+    "question": "Qual destas ilhas é conhecida pela forte identidade cultural?",
+    "questionLevel": "Medium",
+    "options": ["Santiago", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_21",
+    "question": "Qual destas bebidas é tradicional em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Grogue", "Cuca", "Maheu", "Vinho do Porto"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_22",
+    "question": "O Grogue é produzido a partir de:",
+    "questionLevel": "Medium",
+    "options": ["Cana-de-açúcar", "Milho", "Uva", "Arroz"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_23",
+    "question": "Qual destas ilhas é conhecida pela produção de grogue?",
+    "questionLevel": "Medium",
+    "options": ["Santo Antão", "Sal", "Boa Vista", "Maio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_24",
+    "question": "Qual destes países faz parte da CPLP com Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Angola", "Nigéria", "Egito", "Quénia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_25",
+    "question": "Qual destes desportos é mais popular em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["Futebol", "Críquete", "Basebol", "Hóquei no gelo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_26",
+    "question": "Qual destes clubes é conhecido em Cabo Verde?",
+    "questionLevel": "Medium",
+    "options": ["CS Mindelense", "Real Madrid", "Barcelona", "Manchester United"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_27",
+    "question": "Qual destas ilhas é conhecida pelo turismo de praia?",
+    "questionLevel": "Medium",
+    "options": ["Sal", "Santiago", "Fogo", "Santo Antão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_28",
+    "question": "Qual destes elementos é típico da cultura crioula?",
+    "questionLevel": "Medium",
+    "options": ["Mistura cultural africana e europeia", "Cultura apenas asiática", "Cultura apenas árabe", "Cultura apenas americana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_29",
+    "question": "Qual destas cidades é conhecida pela música ao vivo?",
+    "questionLevel": "Medium",
+    "options": ["Mindelo", "Praia", "Espargos", "Assomada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "cv_culture_30",
+    "question": "Qual destes elementos é importante na identidade cabo-verdiana?",
+    "questionLevel": "Medium",
+    "options": ["Emigração e diáspora", "Isolamento total", "Desertos gelados", "Montanhas nevadas"],
+    "correctIndex": 0
+  }
+]

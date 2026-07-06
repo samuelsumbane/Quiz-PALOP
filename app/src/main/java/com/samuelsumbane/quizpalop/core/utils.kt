@@ -6,10 +6,13 @@ import kotlinx.serialization.json.Json
 import okio.IOException
 
 
-fun loadQuestionsFromAssets(context: Context): List<Question> {
+fun loadQuestionsFromAssets(
+    fileName: String,
+     context: Context
+): List<Question> {
     return try {
         val jsonString = context.assets
-            .open("mozambique/historia_basica.json")
+            .open(fileName)
             .bufferedReader()
             .use { it.readText() }
         Json.decodeFromString<List<Question>>(jsonString)
