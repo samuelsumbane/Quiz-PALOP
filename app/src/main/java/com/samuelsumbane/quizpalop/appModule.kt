@@ -16,7 +16,7 @@ val appModule = module {
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
     viewModel { MainGameViewModel(get(), get()) }
-    viewModel { UserQuestionsPercentageViewModel(get()) }
+    viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { ProgressViewModel(get(), get()) }
 }

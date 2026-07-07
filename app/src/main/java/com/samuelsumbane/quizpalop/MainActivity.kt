@@ -18,6 +18,7 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
+import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
 
 class MainActivity : ComponentActivity() {
@@ -29,8 +30,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizPALOPTheme {
-                Navigator(MainPageScreen(countryId = Countries.Mz.code, Category.History.categoryMeaning))
+//                Navigator(MainPageScreen(countryId = Countries.Mz.code, Category.History.categoryMeaning))
 //                Navigator(GameSessionScreen())
+                Navigator(ProgressPageScreen())
             }
         }
     }

@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +29,8 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
+import com.samuelsumbane.quizpalop.domain.model.Question
+import com.samuelsumbane.quizpalop.domain.model.QuestionLevel
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.NavigateUpButton
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
@@ -57,136 +60,137 @@ fun ProgressPage() {
     LaunchedEffect(Unit) {
         userQuestionsProgressViewModel.loadSavedQuestions()
     }
-
-    PageLayout {
-        when (val messageData = progressUiState.progressContentState) {
-            ProgressContentState.ShowContent -> {
-                Column(
-                    modifier = Modifier
-                        .background(Color.Black.copy(alpha = 0.35f))
-                        .fillMaxSize(),
-                ) {
-                    Row(
-                        modifier = Modifier.padding(top = 25.dp, bottom = 10.dp)
-                    ) {
-                        NavigateUpButton { navigator.pop() }
-                    }
-
-                    Row(
-                        modifier = Modifier
-                            .padding(0.dp , 15.dp)
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        PageTitleText("Progresso")
-                    }
-
+    Scaffold {
+        PageLayout(modifier = Modifier.padding(it)) {
+            when (val messageData = userQuestionsProgressUiState.progressContentState) {
+                ProgressContentState.ShowContent -> {
                     Column(
                         modifier = Modifier
-                            .padding(top = 10.dp)
-                            .weight(1f),
-                        verticalArrangement = Arrangement.Center
+//                        .background(Color.Black.copy(alpha = 0.35f))
+                            .fillMaxSize(),
                     ) {
+                        Row(
+                            modifier = Modifier.padding(top = 25.dp, bottom = 10.dp)
+                        ) {
+                            NavigateUpButton { navigator.pop() }
+                        }
 
-                        LazyColumn {
-                            items(1) {
-                                Column(
-                                    modifier = Modifier,
-                                    verticalArrangement = Arrangement.SpaceEvenly
-                                ) {
-                                    val allProgressPercentage =
-                                        (userQuestionsProgressUiState.easyAnsweredQuestionsList + userQuestionsProgressUiState.mediumAnsweredQuestionsList + userQuestionsProgressUiState.hardAnsweredQuestionsList).size.toFloat() / userQuestionsProgressUiState.questions.size
+                        Row(
+                            modifier = Modifier
+                                .padding(0.dp, 15.dp)
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            PageTitleText("Progresso")
+                        }
 
-                                    ProgressBar(
-                                        actualPercentage = allProgressPercentage,
-                                        level = "Todo"
-                                    )
-
+                        Column(
+                            modifier = Modifier
+                                .padding(top = 10.dp)
+                                .weight(1f),
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            LazyColumn {
+                                items(1) {
                                     Column(
-                                        modifier = Modifier.padding(top = 30.dp)
+                                        modifier = Modifier,
+                                        verticalArrangement = Arrangement.SpaceEvenly
                                     ) {
-                                        ProgressBar(
-                                            actualPercentage = userQuestionsProgressUiState.easyAnsweredQuestionsPercent,
-                                            level = "Simples"
-                                        )
-                                        ProgressBar(
-                                            actualPercentage = userQuestionsProgressUiState.mediumAnsweredQuestionsPercent,
-                                            level = "Médio"
-                                        )
-                                        ProgressBar(
-                                            actualPercentage = userQuestionsProgressUiState.hardAnsweredQuestionsPercent,
-                                            level = "Difícil"
-                                        )
-                                    }
-                                }
+                                        val allProgressPercentage =
+                                            (userQuestionsProgressUiState.easyAnsweredQuestionsList + userQuestionsProgressUiState.mediumAnsweredQuestionsList + userQuestionsProgressUiState.hardAnsweredQuestionsList).size.toFloat() / userQuestionsProgressUiState.questions.size
 
-                                Row(
-                                    modifier = Modifier
-                                        .padding(top = 55.dp, bottom = 25.dp)
-                                        .fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.Center
-                                ) {
-                                    Button(
-                                        onClick = {
+                                        ProgressBar(actualPercentage = allProgressPercentage)
+
+                                        Column(
+                                            modifier = Modifier.padding(top = 30.dp)
+                                        ) {
+                                            ProgressBar(
+                                                actualPercentage = userQuestionsProgressUiState.easyAnsweredQuestionsPercent,
+                                                level = QuestionLevel.Easy
+                                            )
+                                            ProgressBar(
+                                                actualPercentage = userQuestionsProgressUiState.mediumAnsweredQuestionsPercent,
+                                                level = QuestionLevel.Medium
+                                            )
+                                            ProgressBar(
+                                                actualPercentage = userQuestionsProgressUiState.hardAnsweredQuestionsPercent,
+                                                level = QuestionLevel.Hard
+                                            )
+                                        }
+                                    }
+
+                                    Row(
+                                        modifier = Modifier
+                                            .padding(top = 55.dp, bottom = 25.dp)
+                                            .fillMaxWidth(),
+                                        horizontalArrangement = Arrangement.Center
+                                    ) {
+                                        Button(
+                                            onClick = {
 //                                            progressViewModel.changeProgressContentStateTo(
 //                                                ProgressContentState.ConfirmExit(
 //                                                    title = "Reiniciar progresso?",
 //                                                    message = "Todo o progresso, pontuação e desbloqueios serão apagados."
 //                                                )
 //                                            )
-                                        },
-                                        colors = ButtonDefaults
-                                            .buttonColors(
-                                                containerColor = Color(0xFFE23C3C),
-                                                contentColor = Color.White
-                                            )
-                                    ) {
-                                        Text("Reiniciar o progresso")
+                                            },
+                                            colors = ButtonDefaults
+                                                .buttonColors(
+                                                    containerColor = Color(0xFFE23C3C),
+                                                    contentColor = Color.White
+                                                )
+                                        ) {
+                                            Text("Reiniciar o progresso")
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
-            }
 
-            is ProgressContentState.ConfirmExit -> {
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize(),
-                    verticalArrangement = Arrangement.Center
-                ) {
+                is ProgressContentState.ConfirmExit -> {
                     Column(
                         modifier = Modifier
-                            .padding(15.dp)
-                            .background(Color(0xBC9C9C9B), RoundedCornerShape(12.dp))
-                            .padding(12.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                            .fillMaxSize(),
                         verticalArrangement = Arrangement.Center
                     ) {
-                        Text(
-                            text = messageData.title,
-                            fontWeight = FontWeight.SemiBold,
-                            fontSize = 20.sp,
-                            color = Color.Black,
-                            modifier = Modifier.padding(top = 18.dp)
-                        )
+                        Column(
+                            modifier = Modifier
+                                .padding(15.dp)
+//                            .background(Color(0xBC9C9C9B), RoundedCornerShape(12.dp))
+                                .padding(12.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.Center
+                        ) {
+                            Text(
+                                text = messageData.title,
+                                fontWeight = FontWeight.SemiBold,
+                                fontSize = 20.sp,
+                                color = Color.Black,
+                                modifier = Modifier.padding(top = 18.dp)
+                            )
 
-                        TwoButtonsRow(
-                            text = messageData.message,
-                            outlinedText = "Cancelar",
-                            outlinedClicked = {
-                                progressViewModel.changeProgressContentStateTo(ProgressContentState.ShowContent)
-                            },
-                            filledButtonText = "Reininciar",
-                            dangerMode = true,
-                            onClick = { progressViewModel.resetProgress() }
-                        )
+                            TwoButtonsRow(
+                                text = messageData.message,
+                                outlinedText = "Cancelar",
+                                outlinedClicked = {
+                                    progressViewModel.changeProgressContentStateTo(
+                                        ProgressContentState.ShowContent
+                                    )
+                                },
+                                filledButtonText = "Reininciar",
+                                dangerMode = true,
+                                onClick = { progressViewModel.resetProgress() }
+                            )
+                        }
                     }
                 }
+
+                ProgressContentState.Loading -> LoadingScreen()
             }
 
-            ProgressContentState.Loading -> LoadingScreen()
         }
     }
+
 }

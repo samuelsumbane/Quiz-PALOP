@@ -1,5 +1,6 @@
 package com.samuelsumbane.quizpalop.presentation.userquestionspercentage
 
+import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
 import com.samuelsumbane.quizpalop.domain.model.Question
 
 data class UserQuestionsPercentageUiState(
@@ -12,4 +13,5 @@ data class UserQuestionsPercentageUiState(
     val mediumAnsweredQuestionsPercent: Float = 0.0f,
     val hardAnsweredQuestionsList: Set<String> = emptySet(),
     val hardAnsweredQuestionsPercent: Float = 0.0f,
+    val progressContentState: ProgressContentState = ProgressContentState.Loading
 )

@@ -3,6 +3,8 @@ package com.samuelsumbane.quizpalop.presentation.userquestionspercentage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
+import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,7 +12,10 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class UserQuestionsPercentageViewModel(val settingsManager: SettingsManager) : ViewModel() {
+class UserQuestionsPercentageViewModel(
+    val settingsManager: SettingsManager,
+    val quizRepository: QuizRepository
+) : ViewModel() {
     private val _state = MutableStateFlow(UserQuestionsPercentageUiState())
     val uiState = _state.asStateFlow()
 
@@ -21,13 +26,13 @@ class UserQuestionsPercentageViewModel(val settingsManager: SettingsManager) : V
     fun calcLevelPercentage() {
         viewModelScope.launch {
             val savedQuestions = settingsManager.readSavedQuestionsList().first()
-            val questionslist = uiState.value.questions
+            val questionslist = quizRepository.getQuestions()
 
             val allEasyQuestions = questionslist.filter { it.questionLevel == "Easy" }.map { it.id }
             val allMediumQuestions =
                 questionslist.filter { it.questionLevel == "Medium" }.map { it.id }
             val allHardQuestions = questionslist.filter { it.questionLevel == "Hard" }.map { it.id }
-            //
+
             val easySavedQuestions = allEasyQuestions intersect savedQuestions
             val mediumSavedQuestions = allMediumQuestions intersect savedQuestions
             val hardSavedQuestions = allHardQuestions intersect savedQuestions
@@ -39,6 +44,7 @@ class UserQuestionsPercentageViewModel(val settingsManager: SettingsManager) : V
 
             updateState {
                 it.copy(
+                    questions = questionslist,
                   easyAnsweredQuestionsList = easySavedQuestions,
                     easyAnsweredQuestionsPercent = easyQuestionsPercentage,
                   mediumAnsweredQuestionsList = mediumSavedQuestions,
@@ -53,7 +59,12 @@ class UserQuestionsPercentageViewModel(val settingsManager: SettingsManager) : V
     fun loadSavedQuestions() {
         viewModelScope.launch {
             val savedQuestions = settingsManager.readSavedQuestionsList().first()
-            updateState { it.copy(savedQuestions = savedQuestions) }
+            calcLevelPercentage()
+            updateState { it.copy(
+                savedQuestions = savedQuestions,
+                progressContentState = ProgressContentState.ShowContent
+            ) }
+
         }
     }
 }

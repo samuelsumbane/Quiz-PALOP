@@ -23,7 +23,9 @@ class ProgressViewModel(
     init {
         viewModelScope.launch {
             val questions = repo.getQuestions()
-            updateState { it.copy(allQuestionsList = questions) }
+            updateState { it.copy(
+                allQuestionsList = questions,
+            ) }
         }
     }
 
@@ -40,12 +42,12 @@ class ProgressViewModel(
             settingsManager.saveStringValues(settingsManager.lastSelectedCountry, Countries.None.countryName)
             updateState {
                 it.copy(
-                    easyAnsweredQuestionsList = emptySet(),
-                    mediumAnsweredQuestionsList = emptySet(),
-                    hardAnsweredQuestionsList = emptySet(),
-                    easyAnsweredQuestionsPercent = 0.0f,
-                    mediumAnsweredQuestionsPercent = 0.0f,
-                    hardAnsweredQuestionsPercent = 0.0f
+//                    easyAnsweredQuestionsList = emptySet(),
+//                    mediumAnsweredQuestionsList = emptySet(),
+//                    hardAnsweredQuestionsList = emptySet(),
+//                    easyAnsweredQuestionsPercent = 0.0f,
+//                    mediumAnsweredQuestionsPercent = 0.0f,
+//                    hardAnsweredQuestionsPercent = 0.0f
                 )
             }
             changeProgressContentStateTo(ProgressContentState.ShowContent)
@@ -53,6 +55,6 @@ class ProgressViewModel(
     }
 
     fun changeProgressContentStateTo(newState: ProgressContentState) {
-        updateState { it.copy(progressContentState = newState) }
+//        updateState { it.copy(progressContentState = newState) }
     }
 }

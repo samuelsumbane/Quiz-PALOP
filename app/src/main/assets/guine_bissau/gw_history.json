@@ -1,0 +1,352 @@
+[
+  {
+    "id": "gw_01",
+    "question": "Qual é a capital da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Bafatá", "Gabú", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_02",
+    "question": "Em que ano a Guiné-Bissau declarou a sua independência?",
+    "questionLevel": "Easy",
+    "options": ["1973", "1960", "1975", "1980"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_03",
+    "question": "Qual país colonizou a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "França", "Espanha", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_04",
+    "question": "Qual é a língua oficial da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Português", "Francês", "Inglês", "Espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_05",
+    "question": "Qual destas línguas é muito falada no dia a dia na Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Crioulo guineense", "Umbundu", "Changana", "Kimbundu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_06",
+    "question": "Em que continente fica a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["África", "Europa", "Ásia", "América"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_07",
+    "question": "Qual oceano banha a costa da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_08",
+    "question": "Qual é a moeda utilizada na Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Franco CFA da África Ocidental", "Metical", "Escudo cabo-verdiano", "Kwanza"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_09",
+    "question": "Qual destes países faz fronteira com a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Senegal", "Angola", "Moçambique", "Namíbia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_10",
+    "question": "Qual outro país faz fronteira com a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Guiné", "Mali", "Níger", "Gana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_11",
+    "question": "Qual movimento liderou a luta pela independência da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["PAIGC", "MPLA", "FRELIMO", "UNITA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_12",
+    "question": "Quem foi um dos principais líderes da independência da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Amílcar Cabral", "Agostinho Neto", "Samora Machel", "Eduardo Mondlane"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_13",
+    "question": "Qual cidade foi declarada capital após a independência?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Gabú", "Bafatá", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_14",
+    "question": "Qual destes países pertence aos PALOP juntamente com a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Moçambique", "Quénia", "Nigéria", "Marrocos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_15",
+    "question": "Qual destes países pertence à CPLP juntamente com a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Angola", "Senegal", "Costa do Marfim", "Gana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_16",
+    "question": "Qual destas cidades é a segunda maior da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bafatá", "Bissau", "Cacheu", "Bolama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_17",
+    "question": "Qual destas regiões é conhecida pelas suas ilhas?",
+    "questionLevel": "Easy",
+    "options": ["Arquipélago dos Bijagós", "Ilhas Canárias", "Madeira", "São Tomé"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_18",
+    "question": "Qual destes arquipélagos pertence à Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bijagós", "Cabo Verde", "Comores", "Seychelles"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_19",
+    "question": "Qual destas atividades económicas é importante na Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Agricultura", "Extração de petróleo", "Indústria automóvel", "Produção de aço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_20",
+    "question": "Qual é um dos principais produtos de exportação da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Castanha de caju", "Diamantes", "Café", "Petróleo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_21",
+    "question": "Qual destes rios atravessa a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Rio Geba", "Rio Nilo", "Rio Zambeze", "Rio Limpopo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_22",
+    "question": "Qual destas cidades localiza-se no leste da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Gabú", "Bissau", "Cacheu", "Bolama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_23",
+    "question": "Qual destas cidades foi a primeira capital colonial da Guiné Portuguesa?",
+    "questionLevel": "Easy",
+    "options": ["Bolama", "Bissau", "Bafatá", "Gabú"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_24",
+    "question": "Qual destes animais é comum no Arquipélago dos Bijagós?",
+    "questionLevel": "Easy",
+    "options": ["Hipopótamo", "Canguru", "Urso polar", "Panda"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_25",
+    "question": "Qual destas cidades fica junto ao Oceano Atlântico?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Gabú", "Bafatá", "Pitche"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_26",
+    "question": "Qual destas regiões faz fronteira com o Senegal?",
+    "questionLevel": "Easy",
+    "options": ["Cacheu", "Bolama", "Quinara", "Tombali"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_27",
+    "question": "Qual destas atividades é muito importante para as comunidades costeiras da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Pesca", "Esqui", "Mineração", "Indústria aeronáutica"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_28",
+    "question": "Qual destes países fica a sul da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Guiné", "Senegal", "Mali", "Mauritânia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_29",
+    "question": "Qual destes produtos agrícolas é muito cultivado na Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Arroz", "Trigo", "Uva", "Azeitona"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_30",
+    "question": "Qual destas cidades é a capital administrativa da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Bolama", "Gabú", "Bafatá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_31",
+    "question": "Quantas regiões administrativas tem a Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["8", "10", "12", "6"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_32",
+    "question": "Qual destas regiões inclui o Arquipélago dos Bijagós?",
+    "questionLevel": "Easy",
+    "options": ["Bolama", "Gabú", "Bafatá", "Oio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_33",
+    "question": "Qual destas cidades é capital da região de Gabú?",
+    "questionLevel": "Easy",
+    "options": ["Gabú", "Bafatá", "Cacheu", "Bolama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_34",
+    "question": "Qual destas cidades é capital da região de Cacheu?",
+    "questionLevel": "Easy",
+    "options": ["Cacheu", "Bissau", "Gabú", "Bafatá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_35",
+    "question": "Qual destas regiões faz fronteira com a Guiné?",
+    "questionLevel": "Easy",
+    "options": ["Gabú", "Cacheu", "Bolama", "Oio"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_36",
+    "question": "Qual destas cidades foi a primeira capital da Guiné Portuguesa?",
+    "questionLevel": "Easy",
+    "options": ["Bolama", "Bissau", "Gabú", "Bafatá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_37",
+    "question": "Qual destas regiões é conhecida pela produção de arroz?",
+    "questionLevel": "Easy",
+    "options": ["Oio", "Bolama", "Gabú", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_38",
+    "question": "Qual destas regiões situa-se no sul da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Tombali", "Cacheu", "Oio", "Bafatá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_39",
+    "question": "Qual destas cidades fica próxima do Arquipélago dos Bijagós?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Gabú", "Bafatá", "Pitche"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_40",
+    "question": "Qual destas regiões é banhada pelo Oceano Atlântico?",
+    "questionLevel": "Easy",
+    "options": ["Cacheu", "Gabú", "Bafatá", "Gabu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_41",
+    "question": "Qual destas cidades é um importante porto da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bissau", "Gabú", "Bafatá", "Bambadinca"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_42",
+    "question": "Qual destas cidades localiza-se no interior do país?",
+    "questionLevel": "Easy",
+    "options": ["Bafatá", "Bissau", "Bolama", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_43",
+    "question": "Qual destas regiões faz fronteira com o Senegal?",
+    "questionLevel": "Easy",
+    "options": ["Cacheu", "Tombali", "Quinara", "Bolama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_44",
+    "question": "Qual destas cidades é conhecida por ter sido o local de nascimento de Amílcar Cabral?",
+    "questionLevel": "Easy",
+    "options": ["Bafatá", "Bissau", "Gabú", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_45",
+    "question": "Qual destes rios é um dos mais importantes da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Corubal", "Nilo", "Limpopo", "Zambeze"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_46",
+    "question": "Qual destas atividades é uma importante fonte de rendimento na Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Pesca", "Extração de carvão", "Indústria automóvel", "Produção de petróleo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_47",
+    "question": "Qual é um dos principais produtos agrícolas de exportação da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Castanha de caju", "Café", "Algodão", "Cacau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_48",
+    "question": "Qual destas cidades pertence à região de Oio?",
+    "questionLevel": "Easy",
+    "options": ["Farim", "Gabú", "Bafatá", "Bolama"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_49",
+    "question": "Qual destas regiões fica no centro-leste da Guiné-Bissau?",
+    "questionLevel": "Easy",
+    "options": ["Bafatá", "Bolama", "Cacheu", "Tombali"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_50",
+    "question": "Qual destas regiões é conhecida pela presença de mangais e rios navegáveis?",
+    "questionLevel": "Easy",
+    "options": ["Cacheu", "Gabú", "Bafatá", "Gabu"],
+    "correctIndex": 0
+  }
+]

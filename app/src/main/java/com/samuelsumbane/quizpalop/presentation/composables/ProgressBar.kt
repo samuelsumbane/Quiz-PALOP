@@ -13,20 +13,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.samuelsumbane.quizpalop.domain.model.QuestionLevel
 
 @Composable
 fun ProgressBar(
 //    text: String,
     actualPercentage: Float,
-    level: String
+    level: QuestionLevel? = null
 ) {
     val progressbarColor = when (level) {
-        "Easy" -> Color(0xFF4CAF50)
-        "Medium" -> Color(0xFFFFC107)
-        "Hard" -> Color(0xFFF8493C)
+        QuestionLevel.Easy -> Color(0xFF4CAF50)
+        QuestionLevel.Medium -> Color(0xFFFFC107)
+        QuestionLevel.Hard -> Color(0xFFF8493C)
         else -> Color(0xFF2196F3)
     }
-
     val formattedPercentage = (actualPercentage * 100).toString().take(4).toFloat()
 
     Column(
@@ -43,7 +43,7 @@ fun ProgressBar(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = level, color = Color.White, fontWeight = FontWeight.SemiBold)
+                Text(text = level?.levelName ?: "Todo", color = Color.White, fontWeight = FontWeight.SemiBold)
 
                 CircularProgressIndicator(
                     progress = { actualPercentage },
