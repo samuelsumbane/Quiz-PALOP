@@ -16,7 +16,7 @@ class QuizRepositoryImpl(private val context: Context) : QuizRepository {
             "mozambique/mz_history.json", "mozambique/mz_culture.json", "mozambique/mz_exam.json",
             "angola/ao_history.json", "angola/ao_culture.json", "angola/ao_exam.json",
             "cape_verde/cv_history.json", "cape_verde/cv_culture.json", "cape_verde/exam.json",
-//            "guine_bissau/gw_history.json", "guine_bissau/gw_culture.json", "guine_bissau/gw_exam.json",
+            "guine_bissau/gw_history.json", "guine_bissau/gw_culture.json", "guine_bissau/gw_exam.json",
             "sao_tome_and_principe/stp_history.json", "sao_tome_and_principe/stp_culture.json", "sao_tome_and_principe/stp_exam.json"
         )) {
             val questions = loadQuestionsFromAssets(question, context)

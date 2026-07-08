@@ -1,0 +1,212 @@
+[
+  {
+    "id": "gw_culture_01",
+    "question": "Qual é a língua oficial da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Português", "Francês", "Inglês", "Espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_02",
+    "question": "Qual língua é mais utilizada no dia a dia pela maioria da população da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Crioulo guineense", "Português", "Francês", "Árabe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_03",
+    "question": "Qual destes produtos é o principal produto de exportação da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Castanha de caju", "Petróleo", "Diamantes", "Café"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_04",
+    "question": "Qual destas atividades económicas é muito importante na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Agricultura", "Indústria automóvel", "Extração de carvão", "Produção de aço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_05",
+    "question": "Qual destes pratos é tradicional na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Caldo de mancarra", "Cachupa", "Muamba", "Matapa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_06",
+    "question": "A mancarra corresponde a qual alimento?",
+    "questionLevel": "Medium",
+    "options": ["Amendoim", "Milho", "Mandioca", "Arroz"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_07",
+    "question": "Qual destes ritmos musicais é tradicional da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Gumbé", "Semba", "Morna", "Marrabenta"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_08",
+    "question": "Qual destes instrumentos é muito utilizado na música tradicional guineense?",
+    "questionLevel": "Medium",
+    "options": ["Balafon", "Gaita de foles", "Harpa", "Violoncelo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_09",
+    "question": "Qual destes animais pode ser encontrado no Arquipélago dos Bijagós?",
+    "questionLevel": "Medium",
+    "options": ["Hipopótamo", "Canguru", "Urso polar", "Pinguim"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_10",
+    "question": "O Arquipélago dos Bijagós é conhecido principalmente por:",
+    "questionLevel": "Medium",
+    "options": ["A sua rica biodiversidade", "Grandes minas de ouro", "Arranha-céus", "Grandes desertos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_11",
+    "question": "Qual destes desportos é o mais popular na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Futebol", "Críquete", "Hóquei no gelo", "Basebol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_12",
+    "question": "Qual destes jogadores nasceu na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Bruma", "Cristiano Ronaldo", "Samuel Eto'o", "Didier Drogba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_13",
+    "question": "Qual destas religiões é praticada por grande parte da população da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Islamismo", "Hinduísmo", "Budismo", "Xintoísmo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_14",
+    "question": "Qual destas religiões também é amplamente praticada na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Cristianismo", "Siquismo", "Jainismo", "Taoismo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_15",
+    "question": "Qual destas culturas agrícolas é muito importante na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Arroz", "Trigo", "Azeitona", "Uva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_16",
+    "question": "Qual destes rios é importante para a economia da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Geba", "Nilo", "Danúbio", "Limpopo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_17",
+    "question": "Qual destas atividades é importante para as comunidades costeiras da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Pesca", "Esqui", "Extração de petróleo", "Indústria automóvel"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_18",
+    "question": "Qual destes povos é um dos principais grupos étnicos da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Balanta", "Maasai", "Zulu", "Berbere"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_19",
+    "question": "Qual destes povos também faz parte da diversidade étnica da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Fula", "Tuareg", "Amhara", "Khoisan"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_20",
+    "question": "Qual destes povos também vive na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Mandinga", "Inuíte", "Maori", "Aborígene"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_21",
+    "question": "Qual destas bebidas é tradicionalmente produzida em algumas comunidades da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Vinho de palma", "Saké", "Cidra", "Tequila"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_22",
+    "question": "Qual destas árvores tem grande importância económica na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Cajueiro", "Pinheiro", "Oliveira", "Bordo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_23",
+    "question": "Qual destas celebrações é comemorada em todo o país?",
+    "questionLevel": "Medium",
+    "options": ["Dia da Independência", "Thanksgiving", "Oktoberfest", "Ano Novo Chinês"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_24",
+    "question": "Qual destes países pertence à CPLP juntamente com a Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Moçambique", "Senegal", "Gana", "Mali"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_25",
+    "question": "Qual destas atividades atrai visitantes ao Arquipélago dos Bijagós?",
+    "questionLevel": "Medium",
+    "options": ["Ecoturismo", "Esqui", "Safari no deserto", "Montanhismo em neve"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_26",
+    "question": "Qual destes alimentos é muito consumido na Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Arroz", "Batata", "Macarrão", "Cevada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_27",
+    "question": "Qual destes frutos tem grande importância económica para a Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Caju", "Maçã", "Pêssego", "Cereja"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_28",
+    "question": "Qual destas cidades é considerada o principal centro económico da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Bissau", "Gabú", "Bafatá", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_29",
+    "question": "Qual destes símbolos representa a diversidade cultural da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Os vários grupos étnicos", "Os Alpes", "As pirâmides", "A Muralha da China"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_culture_30",
+    "question": "Qual destes aspetos caracteriza a cultura da Guiné-Bissau?",
+    "questionLevel": "Medium",
+    "options": ["Grande diversidade étnica e cultural", "Predomínio de uma única etnia", "Ausência de tradições locais", "População maioritariamente europeia"],
+    "correctIndex": 0
+  }
+]

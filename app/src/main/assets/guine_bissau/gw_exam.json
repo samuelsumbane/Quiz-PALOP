@@ -1,0 +1,222 @@
+[
+  {
+    "id": "gw_dificil_01",
+    "question": "Quem é considerado o principal líder da luta de independência da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Amílcar Cabral", "Luís Cabral", "João Bernardo Vieira", "Kumba Ialá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_02",
+    "question": "Em que ano foi proclamada a independência da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["1973", "1975", "1961", "1980"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_03",
+    "question": "Em que ano Portugal reconheceu oficialmente a independência da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["1974", "1973", "1975", "1976"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_04",
+    "question": "Qual movimento liderou a luta pela independência da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["PAIGC", "MPLA", "FRELIMO", "UNITA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_05",
+    "question": "Qual é a moeda utilizada na Guiné-Bissau?",
+    "options": ["Franco CFA da África Ocidental", "Metical", "Escudo cabo-verdiano", "Kwanza"],
+    "questionLevel": "Hard",
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_06",
+    "question": "A Guiné-Bissau pertence a qual organização monetária da África Ocidental?",
+    "questionLevel": "Hard",
+    "options": ["UEMOA", "SADC", "CEEAC", "COMESA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_07",
+    "question": "Qual destes países faz fronteira a norte com a Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Senegal", "Guiné", "Mali", "Gâmbia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_08",
+    "question": "Qual destes países faz fronteira a sul e leste com a Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Guiné", "Senegal", "Mali", "Gâmbia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_09",
+    "question": "Qual é a capital da região de Gabú?",
+    "questionLevel": "Hard",
+    "options": ["Gabú", "Bafatá", "Farim", "Bissau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_10",
+    "question": "Qual destas cidades foi a primeira capital da Guiné Portuguesa?",
+    "questionLevel": "Hard",
+    "options": ["Bolama", "Bissau", "Gabú", "Cacheu"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_11",
+    "question": "Qual arquipélago da Guiné-Bissau é reconhecido como Reserva da Biosfera pela UNESCO?",
+    "questionLevel": "Hard",
+    "options": ["Bijagós", "Cabo Verde", "Canárias", "Madeira"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_12",
+    "question": "Qual é o principal produto de exportação da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Castanha de caju", "Diamantes", "Petróleo", "Café"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_13",
+    "question": "Qual destes rios é um dos mais importantes da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Corubal", "Limpopo", "Nilo", "Zambeze"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_14",
+    "question": "Qual destes rios atravessa a cidade de Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Rio Geba", "Rio Corubal", "Rio Cacheu", "Rio Mansoa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_15",
+    "question": "Qual destes grupos étnicos é um dos maiores da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Balanta", "Zulu", "Maasai", "Tuareg"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_16",
+    "question": "Qual destas línguas é mais utilizada no quotidiano da população?",
+    "questionLevel": "Hard",
+    "options": ["Crioulo guineense", "Português", "Francês", "Inglês"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_17",
+    "question": "Qual destes setores emprega grande parte da população da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Agricultura", "Indústria automóvel", "Tecnologia", "Mineração"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_18",
+    "question": "Qual destas cidades localiza-se no extremo leste da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Gabú", "Bolama", "Cacheu", "Bissau"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_19",
+    "question": "Qual destas organizações integra os países de língua portuguesa?",
+    "questionLevel": "Hard",
+    "options": ["CPLP", "União Africana", "CEDEAO", "SADC"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_20",
+    "question": "A Guiné-Bissau pertence à CEDEAO. O que significa esta sigla?",
+    "questionLevel": "Hard",
+    "options": [
+      "Comunidade Económica dos Estados da África Ocidental",
+      "Comunidade Económica dos Estados da África Oriental",
+      "Conferência Económica da África Ocidental",
+      "Comunidade dos Estados Africanos"
+    ],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_21",
+    "question": "Qual destes parques é uma importante área protegida da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Parque Nacional de Orango", "Parque Kruger", "Serengeti", "Gorongosa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_22",
+    "question": "Qual destas atividades é essencial para a economia do Arquipélago dos Bijagós?",
+    "questionLevel": "Hard",
+    "options": ["Pesca", "Extração de petróleo", "Mineração", "Indústria têxtil"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_23",
+    "question": "Qual destas cidades é um importante centro histórico da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Cacheu", "Gabú", "Bafatá", "Farim"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_24",
+    "question": "Qual destas culturas agrícolas é uma das mais produzidas na Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Arroz", "Trigo", "Uva", "Oliva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_25",
+    "question": "Qual destes oceanos banha a Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_26",
+    "question": "Qual destas regiões inclui a cidade de Bafatá?",
+    "questionLevel": "Hard",
+    "options": ["Bafatá", "Oio", "Cacheu", "Gabú"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_27",
+    "question": "Qual destes recursos naturais é abundante nos mangais da Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["Peixe e marisco", "Carvão", "Diamantes", "Petróleo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_28",
+    "question": "Qual destas cidades está localizada no Arquipélago dos Bijagós?",
+    "questionLevel": "Hard",
+    "options": ["Bubaque", "Gabú", "Farim", "Bafatá"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_29",
+    "question": "Qual destes países pertence aos PALOP juntamente com a Guiné-Bissau?",
+    "questionLevel": "Hard",
+    "options": ["São Tomé e Príncipe", "Senegal", "Costa do Marfim", "Mali"],
+    "correctIndex": 0
+  },
+  {
+    "id": "gw_dificil_30",
+    "question": "Qual destes fatores torna a Guiné-Bissau conhecida internacionalmente?",
+    "questionLevel": "Hard",
+    "options": [
+      "A biodiversidade do Arquipélago dos Bijagós",
+      "As maiores reservas de petróleo de África",
+      "As maiores montanhas da África Ocidental",
+      "A produção de diamantes"
+    ],
+    "correctIndex": 0
+  }
+]
