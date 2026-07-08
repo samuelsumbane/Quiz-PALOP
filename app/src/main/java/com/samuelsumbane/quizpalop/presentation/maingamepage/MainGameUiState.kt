@@ -31,7 +31,7 @@ data class MainGameUiState(
     val timerState: QuestionTimerState = QuestionTimerState.Stop,
 //    val sessionQuestionsLevel: QuestionLevel = QuestionLevel.Easy,
     //
-    val pageUiState: PageUiState = PageUiState.Loading,
+//    val pageUiState: PageUiState = PageUiState.Loading,
     val lastDateTimeLostLives: Long = 0L,
     val currentQuestion: Question? = null,
     val adState: AdState = AdState.Loading,

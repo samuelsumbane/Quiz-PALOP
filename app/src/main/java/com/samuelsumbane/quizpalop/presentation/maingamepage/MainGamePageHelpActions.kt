@@ -10,6 +10,10 @@ import kotlin.time.Duration.Companion.milliseconds
 
 fun MainGameViewModel.helpWithFiftFift() {
     mainGameUiState.value.actualQuestion?.let { question ->
+        if (mainGameUiState.value.userCoins < 15) {
+            setGameTextMessage(GameTextMessage.CannotGetHelp("Não tem muedas suficientes", "Precisa de 15 moedas para remover as duas alternativas incorrectas.", HelpOption.FiftFift))
+            return@let
+        }
         val actualQuestion = question.options
         val rightAnswer = mainGameUiState.value.actualQuestionRightAnswer
         val allWrongAnswers = actualQuestion - rightAnswer

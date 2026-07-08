@@ -15,7 +15,7 @@ data class QuestionsConfigUiState(
 
     val questionConfig: QuestionConfig = QuestionConfig.SelectCountry,
     val soundState: SoundState = SoundState.Playing,
-
+    val lastCategoryWasSaved: Boolean = false,
     //
     val lockLevelList: List<String> = emptyList(),
 )

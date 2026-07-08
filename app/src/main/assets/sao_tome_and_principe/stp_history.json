@@ -1,0 +1,352 @@
+[
+  {
+    "id": "stp_01",
+    "question": "Qual é a capital de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["São Tomé", "Santo António", "Neves", "Trindade"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_02",
+    "question": "Em que ano São Tomé e Príncipe tornou-se independente?",
+    "questionLevel": "Easy",
+    "options": ["1975", "1973", "1965", "1980"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_03",
+    "question": "Qual país colonizou São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Portugal", "França", "Espanha", "Reino Unido"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_04",
+    "question": "Qual é a língua oficial de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Português", "Francês", "Inglês", "Espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_05",
+    "question": "São Tomé e Príncipe está localizado em qual oceano?",
+    "questionLevel": "Easy",
+    "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_06",
+    "question": "São Tomé e Príncipe é formado principalmente por quantas ilhas?",
+    "questionLevel": "Easy",
+    "options": ["2", "5", "8", "10"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_07",
+    "question": "Qual é a segunda maior ilha do país?",
+    "questionLevel": "Easy",
+    "options": ["Príncipe", "Rolas", "Cabras", "Santana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_08",
+    "question": "Qual é a moeda oficial de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Dobra", "Metical", "Kwanza", "Franco CFA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_09",
+    "question": "Qual destas ilhas pertence a São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Ilha do Príncipe", "Ilha da Madeira", "Ilha do Sal", "Ilha de Zanzibar"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_10",
+    "question": "Qual destas cidades é a capital da Região Autónoma do Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Santo António", "São Tomé", "Neves", "Guadalupe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_11",
+    "question": "Qual destes países faz parte dos PALOP juntamente com São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Moçambique", "Senegal", "Gana", "Quénia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_12",
+    "question": "Qual destes países faz parte da CPLP juntamente com São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Angola", "Costa do Marfim", "Nigéria", "Camarões"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_13",
+    "question": "Qual destes produtos agrícolas tornou São Tomé e Príncipe famoso no passado?",
+    "questionLevel": "Easy",
+    "options": ["Cacau", "Algodão", "Trigo", "Café"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_14",
+    "question": "Qual destes produtos continua a ser importante na economia do país?",
+    "questionLevel": "Easy",
+    "options": ["Cacau", "Petróleo", "Diamantes", "Carvão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_15",
+    "question": "Qual destes setores tem crescido em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Turismo", "Indústria automóvel", "Mineração", "Produção de aço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_16",
+    "question": "Qual destas cidades fica na ilha de São Tomé?",
+    "questionLevel": "Easy",
+    "options": ["Neves", "Santo António", "Porto Real", "Nova Sintra"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_17",
+    "question": "Qual destas cidades é um importante porto de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["São Tomé", "Santo António", "Trindade", "Guadalupe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_18",
+    "question": "Qual destas atividades é importante para as comunidades costeiras?",
+    "questionLevel": "Easy",
+    "options": ["Pesca", "Esqui", "Mineração", "Extração de carvão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_19",
+    "question": "Qual destas ilhas fica próxima da linha do Equador?",
+    "questionLevel": "Easy",
+    "options": ["Ilhéu das Rolas", "Príncipe", "Madeira", "Sal"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_20",
+    "question": "Qual destes animais marinhos pode ser observado em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Tartarugas marinhas", "Pinguins", "Morsas", "Focas-do-Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_21",
+    "question": "Qual destes oceanos banha São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Atlântico", "Pacífico", "Índico", "Ártico"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_22",
+    "question": "Qual destas atividades económicas é importante em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Agricultura", "Indústria pesada", "Extração de diamantes", "Produção de automóveis"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_23",
+    "question": "Qual destes produtos agrícolas também é cultivado em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Café", "Trigo", "Maçã", "Uva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_24",
+    "question": "Qual destas ilhas é a maior do país?",
+    "questionLevel": "Easy",
+    "options": ["São Tomé", "Príncipe", "Rolas", "Cabras"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_25",
+    "question": "Qual destas cidades localiza-se na ilha do Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Santo António", "Neves", "Trindade", "Santana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_26",
+    "question": "Qual destes continentes fica mais próximo de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["África", "Europa", "Ásia", "América"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_27",
+    "question": "Qual destes países fica mais próximo de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Gabão", "Portugal", "Brasil", "Angola"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_28",
+    "question": "Qual destas organizações reúne os países africanos de língua portuguesa?",
+    "questionLevel": "Easy",
+    "options": ["PALOP", "CEDEAO", "SADC", "UEMOA"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_29",
+    "question": "Qual destas atividades atrai turistas para São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Praias e natureza", "Esqui na neve", "Desertos", "Grandes centros comerciais"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_30",
+    "question": "Qual destes aspetos caracteriza São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["É um país insular", "É um país sem acesso ao mar", "É um país desértico", "É um país montanhoso sem litoral"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_31",
+    "question": "Qual destas cidades localiza-se na ilha de São Tomé?",
+    "questionLevel": "Easy",
+    "options": ["Trindade", "Santo António", "Porto Real", "Nova Sintra"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_32",
+    "question": "Qual destas localidades pertence à ilha do Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Santo António", "Neves", "Santana", "Guadalupe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_33",
+    "question": "Qual destas ilhas é a maior de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["São Tomé", "Príncipe", "Rolas", "Cabras"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_34",
+    "question": "Qual destas ilhas é a segunda maior do país?",
+    "questionLevel": "Easy",
+    "options": ["Príncipe", "São Tomé", "Rolas", "Cabras"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_35",
+    "question": "Qual destas ilhas está situada sobre a linha do Equador?",
+    "questionLevel": "Easy",
+    "options": ["Ilhéu das Rolas", "Príncipe", "São Tomé", "Cabras"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_36",
+    "question": "Qual destas atividades é importante para a economia de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Pesca", "Produção de automóveis", "Mineração de ouro", "Extração de carvão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_37",
+    "question": "Qual destes produtos agrícolas é tradicionalmente exportado por São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Cacau", "Algodão", "Trigo", "Milho"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_38",
+    "question": "Qual destas culturas agrícolas também é importante em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Café", "Arroz", "Cevada", "Uva"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_39",
+    "question": "Qual destes setores tem crescido nos últimos anos em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Turismo", "Indústria automóvel", "Extração de diamantes", "Produção de aço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_40",
+    "question": "Qual destas praias é uma das mais conhecidas de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Praia Jalé", "Praia da Rocha", "Praia do Tofo", "Praia de Copacabana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_41",
+    "question": "Qual destas cidades é um importante centro administrativo do país?",
+    "questionLevel": "Easy",
+    "options": ["São Tomé", "Santo António", "Neves", "Trindade"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_42",
+    "question": "Qual destas localidades fica na costa norte da ilha de São Tomé?",
+    "questionLevel": "Easy",
+    "options": ["Neves", "Santo António", "Porto Alegre", "Nova Estrela"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_43",
+    "question": "Qual destas montanhas é uma das mais conhecidas de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Pico de São Tomé", "Monte Kilimanjaro", "Monte Quénia", "Serra da Leba"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_44",
+    "question": "Qual destes locais é um símbolo natural de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Pico Cão Grande", "Monte Everest", "Monte Atlas", "Monte Elgon"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_45",
+    "question": "Qual destes animais marinhos costuma desovar nas praias de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Tartarugas marinhas", "Pinguins", "Leões-marinhos", "Morsas"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_46",
+    "question": "Qual destas organizações reúne países de língua portuguesa, incluindo São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["CPLP", "CEDEAO", "SADC", "União Europeia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_47",
+    "question": "Qual destes países pertence aos PALOP juntamente com São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Angola", "Senegal", "Quénia", "Marrocos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_48",
+    "question": "Qual destas características descreve São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["É um arquipélago", "É um país sem litoral", "É um país desértico", "É uma península"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_49",
+    "question": "Qual destes recursos naturais contribui para o turismo em São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Florestas tropicais", "Grandes desertos", "Glaciares", "Campos de neve"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_50",
+    "question": "Qual destas atividades é popular entre os visitantes de São Tomé e Príncipe?",
+    "questionLevel": "Easy",
+    "options": ["Observação da natureza", "Esqui", "Patinagem no gelo", "Safari no deserto"],
+    "correctIndex": 0
+  }
+]

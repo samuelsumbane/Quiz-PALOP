@@ -21,11 +21,8 @@ class QuestionsConfigViewModel(
     val settingsManager: SettingsManager
 ) : ViewModel() {
     private val _state = MutableStateFlow(QuestionsConfigUiState())
-    private val _questionsPercentage = MutableStateFlow(UserQuestionsPercentageUiState())
-
 
     val questionsConfigUiState = _state.asStateFlow()
-    val questionsPercentage = _questionsPercentage.asStateFlow()
 
     fun updateState(block: (QuestionsConfigUiState) -> QuestionsConfigUiState) = _state.update(block)
 
@@ -55,7 +52,7 @@ class QuestionsConfigViewModel(
                         settingsManager.saveIntValues(settingsManager.lives, intValue = 10)
                     }
 
-//                    updateState { it.copy(lastCategoryWasSaved = lastCategory.isNotBlank()) }
+                    updateState { it.copy(lastCategoryWasSaved = lastCategory.isNotBlank()) }
                     Countries.entries.firstOrNull { it.countryName == lastCategory }
                         ?.let { questionsCategory ->
                             updateState { it.copy(questionsCountry = questionsCategory) }

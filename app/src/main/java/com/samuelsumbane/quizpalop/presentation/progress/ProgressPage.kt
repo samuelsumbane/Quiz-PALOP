@@ -54,9 +54,6 @@ fun ProgressPage() {
     val userQuestionsProgressViewModel = koinViewModel<UserQuestionsPercentageViewModel>()
     val userQuestionsProgressUiState by userQuestionsProgressViewModel.uiState.collectAsStateWithLifecycle()
 
-    val progressViewModel: ProgressViewModel = koinViewModel()
-    val progressUiState by progressViewModel.progressUiState.collectAsState()
-
     LaunchedEffect(Unit) {
         userQuestionsProgressViewModel.loadSavedQuestions()
     }
@@ -175,13 +172,13 @@ fun ProgressPage() {
                                 text = messageData.message,
                                 outlinedText = "Cancelar",
                                 outlinedClicked = {
-                                    progressViewModel.changeProgressContentStateTo(
+                                    userQuestionsProgressViewModel.changeProgressContentStateTo(
                                         ProgressContentState.ShowContent
                                     )
                                 },
                                 filledButtonText = "Reininciar",
                                 dangerMode = true,
-                                onClick = { progressViewModel.resetProgress() }
+                                onClick = { userQuestionsProgressViewModel.resetProgress() }
                             )
                         }
                     }

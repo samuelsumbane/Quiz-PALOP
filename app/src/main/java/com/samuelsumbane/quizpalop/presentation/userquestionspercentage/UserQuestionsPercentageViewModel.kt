@@ -3,6 +3,8 @@ package com.samuelsumbane.quizpalop.presentation.userquestionspercentage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
@@ -67,4 +69,28 @@ class UserQuestionsPercentageViewModel(
 
         }
     }
+
+    fun resetProgress() {
+        viewModelScope.launch {
+            settingsManager.saveQuestionsList(emptySet())
+            settingsManager.saveStringValues(settingsManager.lastSelectedCategory, Category.History.categoryName)
+            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, Countries.None.countryName)
+            updateState {
+                it.copy(
+                    easyAnsweredQuestionsList = emptySet(),
+                    mediumAnsweredQuestionsList = emptySet(),
+                    hardAnsweredQuestionsList = emptySet(),
+                    easyAnsweredQuestionsPercent = 0.0f,
+                    mediumAnsweredQuestionsPercent = 0.0f,
+                    hardAnsweredQuestionsPercent = 0.0f
+                )
+            }
+            changeProgressContentStateTo(ProgressContentState.ShowContent)
+        }
+    }
+
+    fun changeProgressContentStateTo(newState: ProgressContentState) {
+        updateState { it.copy(progressContentState = newState) }
+    }
+
 }

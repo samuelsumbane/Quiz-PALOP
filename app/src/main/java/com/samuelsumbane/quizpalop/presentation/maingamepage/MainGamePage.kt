@@ -34,6 +34,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
 import com.samuelsumbane.quizpalop.presentation.composables.IconData
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
@@ -43,6 +45,7 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.TextQue
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
+import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
@@ -50,7 +53,10 @@ import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
 import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
 import com.samuelsumbane.quizpalop.presentation.composables.MessageUi
+import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
+import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 
 
 class MainPageScreen(val countryId: String, val questionCategory: String) : Screen {
@@ -102,6 +108,9 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
 
     @Composable
     fun SelectedDataAlreadyAnswered() {
+        val finishedLevelIcon by rememberLottieComposition(
+            LottieCompositionSpec.Asset("lottie/allQAnswered.lottie")
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -124,20 +133,21 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
                         }
 
                         is GameTextMessage.SelectedQuestionsAnswered -> {
-//                            LoadAnimatedIcons(finishedLevelIcon)
-//                            MessageTexts(title = "", message.message)
-//                            TwoButtonsRow(gameQuizViewModel
-//                                text = message.confirmationText,
-//                                outlinedText = "Prox. Categ/Nível",
-//                                outlinedClicked = {
-////                                    gameQuizViewModel.tryToLoadNextCategoryInThisCategory()
-//                                },
-//                                filledButtonText = "Sel. Questões",
-//                                onClick = {
-//                                    gameQuizViewModel.onSelectNewQuestionsGroup()
-//                                    navigator.push(QuestionsConfigScreen(PagesName.MainPage))
-//                                }
-//                            )
+                            LoadAnimatedIcons(finishedLevelIcon)
+                            MessageTexts(title = "", message.message)
+                            TwoButtonsRow(
+//                                mainPageViewModel,
+                                text = message.confirmationText,
+                                outlinedText = "Prox. Categ/Nível",
+                                outlinedClicked = {
+//                                    gameQuizViewModel.tryToLoadNextCategoryInThisCategory()
+                                },
+                                filledButtonText = "Sel. Questões",
+                                onClick = {
+                                    mainPageViewModel.onSelectNewQuestionsGroup()
+                                    navigator.push(QuestionsConfigScreen(PagesName.MainPage))
+                                }
+                            )
                         }
 
                         else -> {}
@@ -150,15 +160,12 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
 
     @Composable
     fun pageContent() {
-        println("estado: entrei no pageContent")
         mainPageUiState.actualQuestion?.let { questionData ->
-
-            println("estado: a question é $questionData")
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(
-                        visible = true,
-//                        visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && mainPageUiState.lives > 0,
+//                        visible = true,
+                        visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && mainPageUiState.lives > 0,
                         enter = slideInHorizontally(
                             initialOffsetX = { -it }
                         ) + fadeIn(),
@@ -293,6 +300,7 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
     when (mainPageUiState.pageState) {
         MainPageState.Loading -> LoadingScreen()
         MainPageState.DisplayContent -> pageContent()
+        MainPageState.QuestionsAnswered -> SelectedDataAlreadyAnswered()
     }
 
 }

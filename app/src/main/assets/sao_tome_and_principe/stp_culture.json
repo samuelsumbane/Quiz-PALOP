@@ -1,0 +1,212 @@
+[
+  {
+    "id": "stp_cultura_01",
+    "question": "Qual é a língua oficial de São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Português", "Francês", "Inglês", "Espanhol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_02",
+    "question": "Qual destas línguas crioulas é falada em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Forro", "Crioulo cabo-verdiano", "Crioulo guineense", "Papiamento"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_03",
+    "question": "Qual destes produtos agrícolas tornou São Tomé e Príncipe conhecido mundialmente?",
+    "questionLevel": "Medium",
+    "options": ["Cacau", "Algodão", "Trigo", "Milho"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_04",
+    "question": "Qual destes produtos também é cultivado em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Café", "Azeitona", "Uva", "Cevada"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_05",
+    "question": "Qual destes setores é um dos mais importantes para a economia do país?",
+    "questionLevel": "Medium",
+    "options": ["Turismo", "Indústria automóvel", "Mineração de ouro", "Produção de aço"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_06",
+    "question": "Qual destas atividades é muito praticada pelas comunidades costeiras?",
+    "questionLevel": "Medium",
+    "options": ["Pesca", "Esqui", "Mineração", "Produção de carvão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_07",
+    "question": "Qual destes pratos é tradicional em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Calulu", "Cachupa", "Muamba", "Matapa"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_08",
+    "question": "O Calulu é preparado tradicionalmente com:",
+    "questionLevel": "Medium",
+    "options": ["Peixe ou carne e legumes", "Massa italiana", "Batatas fritas", "Queijo e pão"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_09",
+    "question": "Qual destes estilos musicais é tradicional de São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Ússua", "Semba", "Morna", "Marrabenta"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_10",
+    "question": "Qual destes ritmos também faz parte da cultura musical santomense?",
+    "questionLevel": "Medium",
+    "options": ["Socopé", "Fado", "Reggae", "Jazz"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_11",
+    "question": "Qual destes instrumentos é comum na música tradicional santomense?",
+    "questionLevel": "Medium",
+    "options": ["Tambor", "Gaita de foles", "Harpa", "Violoncelo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_12",
+    "question": "Qual destes desportos é o mais popular em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Futebol", "Críquete", "Hóquei no gelo", "Basebol"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_13",
+    "question": "Qual destas bebidas é produzida tradicionalmente em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Vinho de palma", "Saké", "Cidra", "Tequila"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_14",
+    "question": "Qual destes recursos naturais atrai turistas ao país?",
+    "questionLevel": "Medium",
+    "options": ["Praias tropicais", "Desertos", "Glaciares", "Fiordes"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_15",
+    "question": "Qual destes animais marinhos é frequentemente observado nas praias do país?",
+    "questionLevel": "Medium",
+    "options": ["Tartarugas marinhas", "Pinguins", "Morsas", "Leões-marinhos"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_16",
+    "question": "Qual destes locais é um dos maiores símbolos naturais de São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Pico Cão Grande", "Monte Everest", "Monte Kilimanjaro", "Table Mountain"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_17",
+    "question": "Qual destas atividades é muito procurada pelos turistas em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Observação da natureza", "Esqui", "Patinagem no gelo", "Safari no deserto"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_18",
+    "question": "Qual destas celebrações é comemorada em todo o país?",
+    "questionLevel": "Medium",
+    "options": ["Dia da Independência", "Thanksgiving", "Oktoberfest", "Ano Novo Chinês"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_19",
+    "question": "Qual destes países faz parte da CPLP juntamente com São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Moçambique", "Nigéria", "Gana", "Senegal"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_20",
+    "question": "Qual destes países faz parte dos PALOP juntamente com São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Angola", "Marrocos", "Tunísia", "Quénia"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_21",
+    "question": "Qual destes aspetos caracteriza a cultura santomense?",
+    "questionLevel": "Medium",
+    "options": ["Mistura de influências africanas e portuguesas", "Influência apenas asiática", "Influência apenas árabe", "Influência apenas americana"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_22",
+    "question": "Qual destes frutos é muito cultivado em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Banana", "Maçã", "Cereja", "Pêssego"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_23",
+    "question": "Qual destas árvores tem grande importância económica no país?",
+    "questionLevel": "Medium",
+    "options": ["Cacaueiro", "Pinheiro", "Oliveira", "Bordo"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_24",
+    "question": "Qual destas atividades económicas gera emprego para muitas famílias?",
+    "questionLevel": "Medium",
+    "options": ["Agricultura", "Fabricação de aviões", "Extração de carvão", "Indústria automóvel"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_25",
+    "question": "Qual destas cidades é considerada o principal centro económico do país?",
+    "questionLevel": "Medium",
+    "options": ["São Tomé", "Santo António", "Neves", "Trindade"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_26",
+    "question": "Qual destes ambientes naturais é predominante em São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Floresta tropical", "Deserto", "Tundra", "Estepe"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_27",
+    "question": "Qual destes animais é símbolo da riqueza natural do país?",
+    "questionLevel": "Medium",
+    "options": ["Tartaruga marinha", "Urso polar", "Canguru", "Alce"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_28",
+    "question": "Qual destas atividades culturais é comum durante as festas tradicionais?",
+    "questionLevel": "Medium",
+    "options": ["Música e dança", "Patinagem no gelo", "Touradas", "Esqui"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_29",
+    "question": "Qual destes elementos faz parte da identidade cultural de São Tomé e Príncipe?",
+    "questionLevel": "Medium",
+    "options": ["Diversidade cultural", "Grandes desertos", "Montanhas nevadas", "Fiordes"],
+    "correctIndex": 0
+  },
+  {
+    "id": "stp_cultura_30",
+    "question": "Qual destes aspetos torna São Tomé e Príncipe um destino turístico conhecido?",
+    "questionLevel": "Medium",
+    "options": ["Natureza preservada e praias", "Estações de esqui", "Grandes centros industriais", "Grandes desertos"],
+    "correctIndex": 0
+  }
+]

@@ -73,7 +73,6 @@ class MainGameViewModel(
 //                    allQuestions = questions,
                     questionsIdList = idList,
                     selectedQuestionsList = questions,
-                    pageState = MainPageState.DisplayContent
                 )
             }
             startLoadingNextQuestion()
@@ -93,7 +92,7 @@ class MainGameViewModel(
 
     fun loadNextQuestion() {
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
-            updateState { it.copy(pageUiState = PageUiState.DisplayContent) }
+            updateState { it.copy(pageState = MainPageState.DisplayContent) }
 
             val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
             if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {
@@ -110,8 +109,7 @@ class MainGameViewModel(
                     actualQuestion = readyQuestion,
                     actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex],
                     questionsTimer = 30,
-                    pageUiState = PageUiState.DisplayContent
-
+                    pageState = MainPageState.DisplayContent
                 )
             }
             changeTimerState(QuestionTimerState.Running)
@@ -229,4 +227,9 @@ class MainGameViewModel(
 //            println("ouvindo: after question load, sav ${mainGameUiState.value.questionsIdList} $preQuestionsIdList w s: ${savedQuestions}")
 //        }
 //    }
+
+    fun onSelectNewQuestionsGroup() {
+        updateState { it.copy(loadSavedQuestionsFineshed = false) }
+        setGameTextMessage(GameTextMessage.Empty)
+    }
 }
