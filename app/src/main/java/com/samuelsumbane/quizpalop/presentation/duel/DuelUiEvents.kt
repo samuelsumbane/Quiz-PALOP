@@ -1,8 +1,6 @@
-package com.samuelsumbane.oremosquiz.presentation.duel
-
-import com.samuelsumbane.quizpalop.presentation.duel.PlayerData
+package com.samuelsumbane.quizpalop.presentation.duel
 
 sealed interface DuelUiEvents {
-    data class OnCheckPlayerResponse(val playerData: PlayerData, val clickedOption: Int) : DuelUiEvents
+    data class OnCheckPlayerResponse(val playerData: PlayerData, val clickedOptionName: String) : DuelUiEvents
     data object OnLoadNewDuelWithSameCategoryAndLevel : DuelUiEvents
 }

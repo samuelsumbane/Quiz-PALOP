@@ -76,13 +76,10 @@ fun HomePage() {
                 Spacer(Modifier.height(140.dp))
 
                 HomePageOptionColumn() {
-                    HomeOption("Jogar") {
-                        navigator.push(GameSessionScreen())
-                    }
+                    HomeOption("Jogar") { navigator.push(GameSessionScreen()) }
+                    HomeOption("Dois jogadores") { navigator.push(GameSessionScreen())}
+                    HomeOption("Progresso") { navigator.push(ProgressPageScreen()) }
 
-                    HomeOption("Progresso") {
-                        navigator.push(ProgressPageScreen())
-                    }
 
                 }
 

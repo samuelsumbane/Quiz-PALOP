@@ -1,4 +1,4 @@
-package com.samuelsumbane.quizpalop.presentation.maingamepage.composables
+package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,7 +24,7 @@ fun TextQuestionColumn(
             .heightIn(min = 90.dp)
             .fillMaxWidth()
             .background(
-                Color.Black.copy(alpha = 0.5f),
+                Color.Black.copy(alpha = 0.2f),
                 RoundedCornerShape(14.dp)
             )
             .border(

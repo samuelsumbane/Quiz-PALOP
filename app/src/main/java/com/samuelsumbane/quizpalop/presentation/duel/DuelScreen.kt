@@ -1,7 +1,5 @@
-package com.samuelsumbane.oremosquiz.presentation.duel
+package com.samuelsumbane.quizpalop.presentation.duel
 
-import AppButton
-import ButtonOutlined
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
@@ -22,7 +20,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -34,56 +31,54 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.samuelsumbane.oremosquiz.data.responseOptions
-import com.samuelsumbane.oremosquiz.domain.model.QuestionCategory
-import com.samuelsumbane.oremosquiz.domain.model.QuestionLevel
-import com.samuelsumbane.oremosquiz.domain.model.SoundEvent
-import com.samuelsumbane.oremosquiz.domain.repository.SoundManager
-import com.samuelsumbane.oremosquiz.presentation.AppStates.DarkColor
-import com.samuelsumbane.oremosquiz.presentation.PagesName
-import com.samuelsumbane.oremosquiz.presentation.startquizgame.HomeGameScreen
-import com.samuelsumbane.oremosquiz.presentation.startquizgame.SoundState
-import com.samuelsumbane.oremosquiz.presentation.startquizgame.StartQuizGameViewModel
-import com.samuelsumbane.oremosquiz.ui.CenteredText
-import com.samuelsumbane.oremosquiz.ui.LoadAnimatedIcons
-import com.samuelsumbane.oremosquiz.ui.LoadingScreen
-import com.samuelsumbane.oremosquiz.ui.MinOptionItem
-import com.samuelsumbane.oremosquiz.ui.QuestionText
-import com.samuelsumbane.oremosquiz.ui.TextQuestionColumn
-import com.samuelsumbane.oremosquiz.ui.theme.QuestionsConfigScreen
-import com.samuelsumbane.quizpalop.presentation.duel.DuelUiState
-import com.samuelsumbane.quizpalop.presentation.duel.PageState
-import com.samuelsumbane.quizpalop.presentation.duel.PlayerData
-import com.samuelsumbane.quizpalop.presentation.duel.PlayerName
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
+import com.samuelsumbane.quizpalop.domain.model.PagesName
+import com.samuelsumbane.quizpalop.domain.model.SoundEvent
+import com.samuelsumbane.quizpalop.domain.repository.SoundManager
+import com.samuelsumbane.quizpalop.presentation.composables.AppButton
+import com.samuelsumbane.quizpalop.presentation.composables.ButtonOutlined
+import com.samuelsumbane.quizpalop.presentation.composables.CenteredText
+import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
+import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
+import com.samuelsumbane.quizpalop.presentation.configquestions.SoundState
+import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
+import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
+import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
+import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 import org.koin.androidx.compose.koinViewModel
 
 class DuelScreen(
-    val category: QuestionCategory,
-    val level: QuestionLevel
+    val country: Countries,
+    val category: Category,
 ) : Screen {
     @RequiresApi(Build.VERSION_CODES.S)
     @Composable
     override fun Content() {
-        DuelPage(category, level)
+        DuelPage(country, category)
     }
 }
 
 @RequiresApi(Build.VERSION_CODES.S)
 @Composable
 fun DuelPage(
-    category: QuestionCategory,
-    level: QuestionLevel
+    country: Countries,
+    category: Category,
 ) {
     val duelViewModel = koinViewModel<DuelViewModel>()
-    val duelUiState by duelViewModel.duelUiState.collectAsState()
-    val startGameviewModel: StartQuizGameViewModel = koinViewModel()
-    val startGameUiState by startGameviewModel.startQuizGameUiState.collectAsState()
+    val duelUiState by duelViewModel.duelUiState.collectAsStateWithLifecycle()
+    val startGameviewModel = koinViewModel<QuestionsConfigViewModel>()
+    val startGameUiState by startGameviewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
     val navigator = LocalNavigator.currentOrThrow
     val context = LocalContext.current
@@ -91,7 +86,7 @@ fun DuelPage(
 
 
     LaunchedEffect(Unit) {
-        duelViewModel.loadData(category, level)
+        duelViewModel.loadData(country, category)
         duelViewModel.loadNextQuestionForBothPlayers()
 
         duelViewModel.soundEvent.collect { event ->
@@ -143,7 +138,7 @@ fun DuelPage(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(DarkColor)
+                    .background(HomeOptionColor)
             ) {
                 val firstPlayerRightAnsweredQuestions = duelUiState.firstPlayer.rightAnsweredQuestions
                 val secondPlayerRightAnsweredQuestions = duelUiState.secondPlayer.rightAnsweredQuestions
@@ -243,7 +238,7 @@ fun LoserContainer(
         items(1) {
             LoadAnimatedIcons(loserPlayerIcon)
             DuelMessageText("Não foi vencedor desta partida", "Perdeu por $value pontos.")
-            ButtonOutlined("Fechar duelo", dangerMode = true) { navigator.push(HomeGameScreen()) }
+            ButtonOutlined("Fechar duelo", dangerMode = true) { navigator.push(HomePageScreen()) }
         }
     }
 }
@@ -298,41 +293,29 @@ fun AdversarioContent(
                     .align(Alignment.TopCenter)
             ) {
 //            QuestionText("quem é quem aqui e onde? ajsfklfdsa dsf fas gfdfs tgs ae  ydth  rgws fdg ")
-                QuestionText(text = playerData.question?.text ?: "", modifierFontSize = true)
+                QuestionText(text = playerData.question?.question ?: "", modifierFontSize = true)
             }
 
-        playerData.question?.let {
+        playerData.question?.let { question ->
             LazyColumn(
                 modifier = Modifier
                     .align(Alignment.BottomCenter),
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 items(1) {
-                    val currectQuestionOptions =
-                        if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.currentOptions
-                        else duelUiState.secondPlayer.currentOptions
+//                    val currectQuestionOptions =
+//                        if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.quest
+//                        else duelUiState.secondPlayer.currentOptions
 
-                    currectQuestionOptions
-                        .map { option -> responseOptions.first { it.id == option }.text }
-                        .forEachIndexed { index, optionText ->
-                            MinOptionItem(
-                                text = optionText,
-                                background = when (index) {
-                                    0 -> playerData.firstBtnColor
-                                    1 -> playerData.secondBtnColor
-                                    2 -> playerData.thirdBtnColor
-                                    else -> playerData.fouthBtnColor
-                                }
-                            ) {
-                                println("player é esse $playerData")
-                                duelViewModel.onEvent(
-                                    DuelUiEvents.OnCheckPlayerResponse(
-                                        playerData,
-                                        clickedOption = currectQuestionOptions[index]
-                                    )
-                                )
-                            }
-                        }
+                    question.options.forEachIndexed { index, option ->
+                        OptionItem(
+                            prefixText = 'A',
+                            text = option,
+                            backgroundColor = if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.optionsColors[index]
+                            else duelUiState.secondPlayer.optionsColors[index]
+                        ) { duelViewModel.onEvent(DuelUiEvents.OnCheckPlayerResponse(playerData, question.options[index]))}
+                    }
+
                     Spacer(Modifier.padding(0.dp, 12.dp))
                 }
             }

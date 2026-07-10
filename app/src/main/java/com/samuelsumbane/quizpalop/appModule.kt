@@ -4,6 +4,7 @@ import com.samuelsumbane.quizpalop.data.repository.QuizRepositoryImpl
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
+import com.samuelsumbane.quizpalop.presentation.duel.DuelViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import org.koin.android.ext.koin.androidContext
@@ -17,4 +18,5 @@ val appModule = module {
     viewModel { MainGameViewModel(get(), get()) }
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
+    viewModel { DuelViewModel(get()) }
 }

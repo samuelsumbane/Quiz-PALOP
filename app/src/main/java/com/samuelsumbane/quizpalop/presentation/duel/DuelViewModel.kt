@@ -1,16 +1,12 @@
-package com.samuelsumbane.oremosquiz.presentation.duel
+package com.samuelsumbane.quizpalop.presentation.duel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.samuelsumbane.oremosquiz.domain.model.QuestionCategory
-import com.samuelsumbane.oremosquiz.domain.model.QuestionLevel
-import com.samuelsumbane.oremosquiz.domain.repository.GameRepository
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
-import com.samuelsumbane.quizpalop.presentation.duel.DuelUiState
-import com.samuelsumbane.quizpalop.presentation.duel.PageState
-import com.samuelsumbane.quizpalop.presentation.duel.PlayerData
-import com.samuelsumbane.quizpalop.presentation.duel.PlayerName
+import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionsButton
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
@@ -24,7 +20,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class DuelViewModel(val repository: GameRepository) : ViewModel() {
+class DuelViewModel(val repository: QuizRepository) : ViewModel() {
     private val _state = MutableStateFlow(DuelUiState())
     val duelUiState = _state.asStateFlow()
     private var countDownJob: Job? = null
@@ -37,7 +33,7 @@ class DuelViewModel(val repository: GameRepository) : ViewModel() {
 
     fun onEvent(duelUiEvents: DuelUiEvents) {
         when (duelUiEvents) {
-            is DuelUiEvents.OnCheckPlayerResponse -> checkResponse(duelUiEvents.playerData, duelUiEvents.clickedOption)
+            is DuelUiEvents.OnCheckPlayerResponse -> checkResponse(duelUiEvents.playerData, duelUiEvents.clickedOptionName)
             DuelUiEvents.OnLoadNewDuelWithSameCategoryAndLevel -> loadNewDuelWithSavedCategoryAndLevel()
         }
     }
@@ -47,11 +43,11 @@ class DuelViewModel(val repository: GameRepository) : ViewModel() {
 
     fun updateState(block: (DuelUiState) -> DuelUiState) = _state.update(block)
 
-    fun loadData(category: QuestionCategory, level: QuestionLevel) {
+    fun loadData(country: Countries, category: Category) {
         viewModelScope.launch {
-            val allQuestions = repository.loadQuestions()
+            val allQuestions = repository.getQuestions()
             val filteredQuestions = allQuestions
-                .filter { it.category == category && it.level == level}
+                .filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
             val questionsForFirstPlayer = filteredQuestions.shuffled().take(duelQuestionsSize).toSet()
             val questionsForSecondPlayer = filteredQuestions.shuffled().take(duelQuestionsSize).toSet()
             updateState { it.copy(
@@ -64,8 +60,8 @@ class DuelViewModel(val repository: GameRepository) : ViewModel() {
                     name = PlayerName.SecondPlayer,
                     questionsList = questionsForSecondPlayer
                 ),
+                country = country,
                 category = category,
-                level = level,
                 pageState = PageState.Loading
             ) }
         }
@@ -83,11 +79,11 @@ class DuelViewModel(val repository: GameRepository) : ViewModel() {
             it.copy(
                 firstPlayer = it.firstPlayer.copy(
                     question = firstPlayerQuestion,
-                    currentOptions = firstPlayerQuestion.optionsList.shuffled()
+                    actualQuestionRightAnswer = firstPlayerQuestion.options[firstPlayerQuestion.correctIndex]
                 ),
                 secondPlayer = it.secondPlayer.copy(
                     question = secondPlayerQuestion,
-                    currentOptions = secondPlayerQuestion.optionsList.shuffled()
+                    actualQuestionRightAnswer = secondPlayerQuestion.options[secondPlayerQuestion.correctIndex]
                 ),
                 pageState = PageState.ShowContent
             )
@@ -99,95 +95,109 @@ class DuelViewModel(val repository: GameRepository) : ViewModel() {
     fun checkResponse(playerData: PlayerData, clickedOptionName: String) {
 
         fun checkingResponse (playerName: PlayerName, question: Question, clickedOptionName: String) {
-            val currectQuestionOptions = 
-                if (playerData.name == PlayerName.FirstPlayer) duelUiState.value.firstPlayer.currentOptions
-                else duelUiState.value.secondPlayer.currentOptions
-            
-            viewModelScope.launch {
-                when (clickedOptionName) {
-                    optionsList[0] -> {
-                        if (currectOption == clickedOptionName) updateButton(
-                            OptionsButton.First,
-                            OptionState.Currect
-                        )
-                        else {
-                            updateButton(OptionsButton.First, OptionState.Wrong)
-                            when (optionsList.indexOf(currectOption)) {
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+            val actualPlayerData =
+                if (playerData.name == PlayerName.FirstPlayer) duelUiState.value.firstPlayer
+                else duelUiState.value.secondPlayer
+            val optionsList = actualPlayerData.question?.options
+
+            optionsList?.let {
+                val rightOption = actualPlayerData.actualQuestionRightAnswer
+
+                viewModelScope.launch {
+                    when (clickedOptionName) {
+                        optionsList[0] -> {
+                            if (rightOption == clickedOptionName) updateButton(OptionsButton.First, actualPlayerData, OptionState.Currect)
+                            else {
+                                updateButton(OptionsButton.First, actualPlayerData, OptionState.Wrong)
+                                when (optionsList.indexOf(rightOption)) {
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData, OptionState.Currect)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData, OptionState.Currect)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                }
+                            }
+                        }
+
+                        optionsList[1] -> {
+                            if (rightOption == clickedOptionName) {
+                                updateButton(OptionsButton.Second, actualPlayerData, OptionState.Currect)
+                            } else {
+                                updateButton(OptionsButton.Second, actualPlayerData, OptionState.Wrong)
+                                when (optionsList.indexOf(rightOption)) {
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Currect)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                }
+                            }
+                        }
+
+                        optionsList[2] -> {
+                            if (rightOption == clickedOptionName) {
+                                updateButton(OptionsButton.Third, actualPlayerData, OptionState.Currect)
+                            } else {
+                                updateButton(OptionsButton.Third, actualPlayerData, OptionState.Wrong)
+                                when (optionsList.indexOf(rightOption)) {
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Currect)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                }
+                            }
+                        }
+
+                        optionsList[3] -> {
+                            if (rightOption== clickedOptionName) {
+                                updateButton(OptionsButton.Fouth, actualPlayerData,  OptionState.Currect)
+                            } else {
+                                updateButton(OptionsButton.Fouth, actualPlayerData,  OptionState.Wrong)
+                                when (optionsList.indexOf(rightOption)) {
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Currect)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Currect)
+                                }
                             }
                         }
                     }
 
-                    optionsList[1] -> {
-                        if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Second, OptionState.Currect)
+                    if (question.options[question.correctIndex] == rightOption) {
+                        if (playerName == PlayerName.FirstPlayer) {
+                            updateState {
+                                it.copy(
+                                    firstPlayer = it.firstPlayer.copy(rightAnsweredQuestions = it.firstPlayer.rightAnsweredQuestions + 1)
+                                )
+                            }
                         } else {
-                            updateButton(OptionsButton.Second, OptionState.Wrong)
-                            when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                            updateState {
+                                it.copy(
+                                    secondPlayer = it.secondPlayer.copy(rightAnsweredQuestions = it.secondPlayer.rightAnsweredQuestions + 1)
+                                )
                             }
                         }
-                    }
+                        sendSound(SoundEvent.Correct)
+                    } else sendSound(SoundEvent.Wrong)
 
-                    optionsList[2] -> {
-                        if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Third, OptionState.Currect)
-                        } else {
-                            updateButton(OptionsButton.Third, OptionState.Wrong)
-                            when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
-                            }
-                        }
-                    }
+                    delay(1200)
 
-                    optionsList[3] -> {
-                        if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Fouth, OptionState.Currect)
-                        } else {
-                            updateButton(OptionsButton.Fouth, OptionState.Wrong)
-                            when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                            }
-                        }
-                    }
-                }
-
-                if (question.options[question.correctIndex] == clickedOptionId) {
                     if (playerName == PlayerName.FirstPlayer) {
                         updateState {
                             it.copy(
-                                firstPlayer = it.firstPlayer.copy(rightAnsweredQuestions = it.firstPlayer.rightAnsweredQuestions + 1)
+                                firstPlayer = it.firstPlayer.copy(
+                                    question = null,
+                                    questionsList = it.firstPlayer.questionsList - question
+                                )
                             )
                         }
                     } else {
                         updateState {
                             it.copy(
-                                secondPlayer = it.secondPlayer.copy(rightAnsweredQuestions = it.secondPlayer.rightAnsweredQuestions + 1)
+                                secondPlayer = it.secondPlayer.copy(
+                                    question = null,
+                                    questionsList = it.secondPlayer.questionsList - question
+                                )
                             )
                         }
                     }
-                    sendSound(SoundEvent.Correct)
-                } else sendSound(SoundEvent.Wrong)
 
-                delay(1200)
-
-                if (playerName == PlayerName.FirstPlayer) {
-                    updateState { it.copy(
-                        firstPlayer = it.firstPlayer.copy(question = null, questionsList = it.firstPlayer.questionsList - question)
-                    ) }
-                } else {
-                    updateState { it.copy(secondPlayer = it.secondPlayer.copy(question = null, questionsList = it.secondPlayer.questionsList - question)) }
+                    loadNextQuestionOrShowMessage()
                 }
-
-                loadNextQuestionOrShowMessage()
             }
         }
 

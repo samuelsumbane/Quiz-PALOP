@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,12 +40,13 @@ import com.samuelsumbane.quizpalop.presentation.composables.IconData
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.TextQuestionColumn
+import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
+import com.samuelsumbane.quizpalop.domain.model.optionsLabels
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
@@ -57,6 +57,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
+import com.samuelsumbane.quizpalop.ui.theme.BlueDark
 
 
 class MainPageScreen(val countryId: String, val questionCategory: String) : Screen {
@@ -274,17 +275,18 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
                                             items(1) {
                                                 question.options.forEachIndexed { index, option ->
                                                     OptionItem(
+                                                        prefixText = optionsLabels[index],
                                                         text = option,
-                                                        background = mainPageUiState.optionsColors[index]
+                                                        backgroundColor = mainPageUiState.optionsColors[index]
                                                     ) {
                                                         mainPageViewModel.onEvent(
                                                             MainGameUiEvents.OnCheckResponse(option)
                                                         )
                                                     }
                                                 }
+                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = BlueDark)
                                             }
                                         }
-                                        Text(text = mainPageUiState.actualQuestionRightAnswer)
                                     }
                                 }
                             }

@@ -39,6 +39,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.BottomNavigation
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.composables.RadioButtonGroup
+import com.samuelsumbane.quizpalop.presentation.duel.DuelScreen
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
@@ -184,8 +185,10 @@ fun QuestionsConfigPage(destination: PagesName) {
                                         questionsConfigUiState.questionsCategory.categoryMeaning
                                     )
                                 } else {
-                                    HomePageScreen()
-//                                    DuelScreen(startQuizGameUiState.questionsCategory, startQuizGameUiState.questionsLevel)
+                                    DuelScreen(
+                                        questionsConfigUiState.questionsCountry,
+                                        questionsConfigUiState.questionsCategory,
+                                    )
                                 }
                             )
                         }
