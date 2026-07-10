@@ -1,0 +1,392 @@
+package com.samuelsumbane.oremosquiz.presentation.duel
+
+import AppButton
+import ButtonOutlined
+import android.os.Build
+import androidx.annotation.RequiresApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import cafe.adriel.voyager.core.screen.Screen
+import cafe.adriel.voyager.navigator.LocalNavigator
+import cafe.adriel.voyager.navigator.Navigator
+import cafe.adriel.voyager.navigator.currentOrThrow
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.samuelsumbane.oremosquiz.data.responseOptions
+import com.samuelsumbane.oremosquiz.domain.model.QuestionCategory
+import com.samuelsumbane.oremosquiz.domain.model.QuestionLevel
+import com.samuelsumbane.oremosquiz.domain.model.SoundEvent
+import com.samuelsumbane.oremosquiz.domain.repository.SoundManager
+import com.samuelsumbane.oremosquiz.presentation.AppStates.DarkColor
+import com.samuelsumbane.oremosquiz.presentation.PagesName
+import com.samuelsumbane.oremosquiz.presentation.startquizgame.HomeGameScreen
+import com.samuelsumbane.oremosquiz.presentation.startquizgame.SoundState
+import com.samuelsumbane.oremosquiz.presentation.startquizgame.StartQuizGameViewModel
+import com.samuelsumbane.oremosquiz.ui.CenteredText
+import com.samuelsumbane.oremosquiz.ui.LoadAnimatedIcons
+import com.samuelsumbane.oremosquiz.ui.LoadingScreen
+import com.samuelsumbane.oremosquiz.ui.MinOptionItem
+import com.samuelsumbane.oremosquiz.ui.QuestionText
+import com.samuelsumbane.oremosquiz.ui.TextQuestionColumn
+import com.samuelsumbane.oremosquiz.ui.theme.QuestionsConfigScreen
+import com.samuelsumbane.quizpalop.presentation.duel.DuelUiState
+import com.samuelsumbane.quizpalop.presentation.duel.PageState
+import com.samuelsumbane.quizpalop.presentation.duel.PlayerData
+import com.samuelsumbane.quizpalop.presentation.duel.PlayerName
+import org.koin.androidx.compose.koinViewModel
+
+class DuelScreen(
+    val category: QuestionCategory,
+    val level: QuestionLevel
+) : Screen {
+    @RequiresApi(Build.VERSION_CODES.S)
+    @Composable
+    override fun Content() {
+        DuelPage(category, level)
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.S)
+@Composable
+fun DuelPage(
+    category: QuestionCategory,
+    level: QuestionLevel
+) {
+    val duelViewModel = koinViewModel<DuelViewModel>()
+    val duelUiState by duelViewModel.duelUiState.collectAsState()
+    val startGameviewModel: StartQuizGameViewModel = koinViewModel()
+    val startGameUiState by startGameviewModel.startQuizGameUiState.collectAsState()
+
+    val navigator = LocalNavigator.currentOrThrow
+    val context = LocalContext.current
+    val soundManager = remember { SoundManager(context) }
+
+
+    LaunchedEffect(Unit) {
+        duelViewModel.loadData(category, level)
+        duelViewModel.loadNextQuestionForBothPlayers()
+
+        duelViewModel.soundEvent.collect { event ->
+            if (startGameUiState.soundState == SoundState.Playing) {
+                when (event) {
+                    SoundEvent.Correct -> soundManager.playCorrect()
+                    SoundEvent.Wrong -> soundManager.playWrong()
+                    SoundEvent.Click -> soundManager.playClick()
+                    SoundEvent.CoinEarned -> soundManager.playCoinsEarned()
+                }
+            }
+        }
+    }
+
+
+
+    @Composable
+    fun pageContent() {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            AdversarioContent(
+                duelViewModel,
+                duelUiState,
+                playerData = duelUiState.firstPlayer,
+                modifier = Modifier
+                    .fillMaxHeight(0.5f)
+                    .fillMaxWidth()
+                    .rotate(180f),
+            )
+
+            HorizontalDivider(thickness = 5.dp, color = Color.LightGray)
+
+            AdversarioContent(
+                duelViewModel,
+                duelUiState,
+                playerData = duelUiState.secondPlayer,
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxWidth()
+            )
+        }
+    }
+
+    when (duelUiState.pageState) {
+        PageState.Loading -> LoadingScreen()
+        PageState.ShowContent -> pageContent()
+        PageState.DisplayMessage -> {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(DarkColor)
+            ) {
+                val firstPlayerRightAnsweredQuestions = duelUiState.firstPlayer.rightAnsweredQuestions
+                val secondPlayerRightAnsweredQuestions = duelUiState.secondPlayer.rightAnsweredQuestions
+
+                    if (firstPlayerRightAnsweredQuestions > secondPlayerRightAnsweredQuestions) {
+                        WinnerContainer(
+                            navigator,
+                            duelViewModel,
+                            value = firstPlayerRightAnsweredQuestions - secondPlayerRightAnsweredQuestions, modifier = Modifier.asFirstPlayerModifier())
+                        DuelHorizontalDivider()
+                        LoserContainer(
+                            value = firstPlayerRightAnsweredQuestions - secondPlayerRightAnsweredQuestions,
+                        )
+                    } else if (firstPlayerRightAnsweredQuestions < secondPlayerRightAnsweredQuestions) {
+                        LoserContainer(
+                            value = secondPlayerRightAnsweredQuestions - firstPlayerRightAnsweredQuestions,
+                            modifier = Modifier.asFirstPlayerModifier()
+                        )
+                        DuelHorizontalDivider()
+                        WinnerContainer(
+                            navigator,
+                            duelViewModel,
+                            value = secondPlayerRightAnsweredQuestions - firstPlayerRightAnsweredQuestions)
+                    } else {
+                        NoWinnerNoLoser(modifier = Modifier.asFirstPlayerModifier())
+                        DuelHorizontalDivider()
+                        NoWinnerNoLoser { ContinueDuelButtons(navigator, duelViewModel) }
+                    }
+            }
+        }
+    }
+}
+
+
+@Composable
+fun Modifier.asFirstPlayerModifier(): Modifier {
+    return this
+        .fillMaxHeight(0.5f)
+        .rotate(180f)
+}
+
+@Composable
+fun WinnerContainer(
+    navigator: Navigator,
+    duelViewModel: DuelViewModel,
+    value: Int,
+    modifier: Modifier = Modifier,
+) {
+    val winnerPlayerIcon by rememberLottieComposition(
+        LottieCompositionSpec.Asset("lottie/winnerplayer.lottie")
+    )
+
+    LazyColumn(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(1) {
+
+            LoadAnimatedIcons(winnerPlayerIcon, modifier = Modifier.size(130.dp))
+
+            DuelMessageText("Parabéns", "Você foi o vencedor desta partida. Ganhou por $value pontos.")
+            ContinueDuelButtons(navigator, duelViewModel)
+        }
+    }
+}
+
+@Composable
+fun ContinueDuelButtons(
+    navigator: Navigator,
+    duelViewModel: DuelViewModel
+) {
+    Row(
+        modifier = Modifier
+            .padding(start = 20.dp, end = 20.dp, bottom = 25.dp)
+            .fillMaxWidth(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
+        AppButton(text = "Nova partida") { duelViewModel.onEvent(DuelUiEvents.OnLoadNewDuelWithSameCategoryAndLevel) }
+        AppButton("Outras questões") { navigator.push(QuestionsConfigScreen(PagesName.DuelPage)) }
+    }
+}
+
+@Composable
+fun LoserContainer(
+    value: Int,
+    modifier: Modifier = Modifier
+) {
+    val navigator = LocalNavigator.currentOrThrow
+    val loserPlayerIcon by rememberLottieComposition(
+        LottieCompositionSpec.Asset("lottie/gamer_sad.lottie")
+    )
+    LazyColumn(
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        items(1) {
+            LoadAnimatedIcons(loserPlayerIcon)
+            DuelMessageText("Não foi vencedor desta partida", "Perdeu por $value pontos.")
+            ButtonOutlined("Fechar duelo", dangerMode = true) { navigator.push(HomeGameScreen()) }
+        }
+    }
+}
+
+@Composable
+fun NoWinnerNoLoser(
+    modifier: Modifier = Modifier,
+    content: (@Composable () -> Unit)? = null
+) {
+    Column(
+        modifier = modifier
+            .padding(top = 20.dp)
+    ) {
+        DuelMessageText("Empatado!","Não houve vencedor nesta partida")
+        content?.invoke()
+    }
+}
+
+
+
+
+@Composable
+fun AdversarioContent(
+    duelViewModel: DuelViewModel,
+    duelUiState: DuelUiState,
+    playerData: PlayerData,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.background(Color(0xFF02071F)),
+    ) {
+        NumText(
+            title = "Tempo",
+            text = playerData.playerTimer.toString(),
+            Color(0xFFF19633),
+            modifier = Modifier.align(Alignment.TopStart)
+        )
+
+        NumText(
+            title = "Acertos",
+            text = playerData.rightAnsweredQuestions.toString(),
+            Color(0xFF43C148),
+            modifier = Modifier.align(Alignment.TopEnd)
+        )
+
+//        playerData.question?.let {
+            TextQuestionColumn(
+                modifier = Modifier
+                    .padding(5.dp)
+                    .fillMaxWidth(0.85f)
+                    .padding(10.dp)
+                    .align(Alignment.TopCenter)
+            ) {
+//            QuestionText("quem é quem aqui e onde? ajsfklfdsa dsf fas gfdfs tgs ae  ydth  rgws fdg ")
+                QuestionText(text = playerData.question?.text ?: "", modifierFontSize = true)
+            }
+
+        playerData.question?.let {
+            LazyColumn(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                items(1) {
+                    val currectQuestionOptions =
+                        if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.currentOptions
+                        else duelUiState.secondPlayer.currentOptions
+
+                    currectQuestionOptions
+                        .map { option -> responseOptions.first { it.id == option }.text }
+                        .forEachIndexed { index, optionText ->
+                            MinOptionItem(
+                                text = optionText,
+                                background = when (index) {
+                                    0 -> playerData.firstBtnColor
+                                    1 -> playerData.secondBtnColor
+                                    2 -> playerData.thirdBtnColor
+                                    else -> playerData.fouthBtnColor
+                                }
+                            ) {
+                                println("player é esse $playerData")
+                                duelViewModel.onEvent(
+                                    DuelUiEvents.OnCheckPlayerResponse(
+                                        playerData,
+                                        clickedOption = currectQuestionOptions[index]
+                                    )
+                                )
+                            }
+                        }
+                    Spacer(Modifier.padding(0.dp, 12.dp))
+                }
+            }
+        }
+
+    }
+}
+
+@Composable
+fun NumText(
+    title: String,
+    text: String,
+    textColor: Color,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier
+            .padding(5.dp)
+            .background(Color.Transparent, RoundedCornerShape(50)),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text(title, fontSize = 9.sp, color = Color.White)
+        Text(
+            text = text,
+            color = textColor,
+            textAlign = TextAlign.Center,
+            fontSize = 13.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun DuelHorizontalDivider() {
+    HorizontalDivider(thickness = 5.dp, color = Color.LightGray)
+}
+
+@Composable
+fun DuelMessageText(
+    title: String,
+    text: String,
+) {
+    CenteredText(
+        text = title,
+        style = MaterialTheme.typography.titleLarge,
+        modifier = Modifier.padding(10.dp),
+        color = Color.White
+    )
+    CenteredText(
+        text = text,
+        style = MaterialTheme.typography.titleMedium,
+        modifier = Modifier.padding(40.dp),
+        color = Color.White
+    )
+
+}
