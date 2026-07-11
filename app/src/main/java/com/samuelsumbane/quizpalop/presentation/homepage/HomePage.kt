@@ -15,8 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -25,13 +23,16 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.samuelsumbane.quizpalop.domain.model.PagesName
+import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
+import com.samuelsumbane.quizpalop.presentation.composables.GameIcon
 import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
 import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
+import com.samuelsumbane.quizpalop.presentation.composables.ProgressIcon
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
-import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionPage
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 
 class HomePageScreen : Screen {
@@ -76,11 +77,9 @@ fun HomePage() {
                 Spacer(Modifier.height(140.dp))
 
                 HomePageOptionColumn() {
-                    HomeOption("Jogar") { navigator.push(GameSessionScreen()) }
-                    HomeOption("Dois jogadores") { navigator.push(GameSessionScreen())}
-                    HomeOption("Progresso") { navigator.push(ProgressPageScreen()) }
-
-
+                    HomeOption(text = "Jogar", aditionalElement = { GameIcon() }) { navigator.push(GameSessionScreen()) }
+                    HomeOption("Dois jogadores", aditionalElement = { DuelIcon() }) { navigator.push(QuestionsConfigScreen(PagesName.DuelPage))}
+                    HomeOption("Progresso", aditionalElement = { ProgressIcon() }) { navigator.push(ProgressPageScreen()) }
                 }
 
             }

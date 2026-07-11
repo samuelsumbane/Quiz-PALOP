@@ -17,6 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -42,6 +43,7 @@ import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
+import com.samuelsumbane.quizpalop.domain.model.optionsLabels
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.AppButton
 import com.samuelsumbane.quizpalop.presentation.composables.ButtonOutlined
@@ -53,19 +55,21 @@ import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigV
 import com.samuelsumbane.quizpalop.presentation.configquestions.SoundState
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
+import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
+import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 import org.koin.androidx.compose.koinViewModel
 
 class DuelScreen(
     val country: Countries,
     val category: Category,
+    val duelQuestionsSize: Int
 ) : Screen {
     @RequiresApi(Build.VERSION_CODES.S)
     @Composable
     override fun Content() {
-        DuelPage(country, category)
+        DuelPage(country, category, duelQuestionsSize)
     }
 }
 
@@ -74,6 +78,7 @@ class DuelScreen(
 fun DuelPage(
     country: Countries,
     category: Category,
+    duelQuestionsSize: Int
 ) {
     val duelViewModel = koinViewModel<DuelViewModel>()
     val duelUiState by duelViewModel.duelUiState.collectAsStateWithLifecycle()
@@ -86,7 +91,7 @@ fun DuelPage(
 
 
     LaunchedEffect(Unit) {
-        duelViewModel.loadData(country, category)
+        duelViewModel.loadData(country, category, duelQuestionsSize)
         duelViewModel.loadNextQuestionForBothPlayers()
 
         duelViewModel.soundEvent.collect { event ->
@@ -105,29 +110,33 @@ fun DuelPage(
 
     @Composable
     fun pageContent() {
-        Column(
-            modifier = Modifier.fillMaxSize()
-        ) {
-            AdversarioContent(
-                duelViewModel,
-                duelUiState,
-                playerData = duelUiState.firstPlayer,
+        Scaffold {
+            Column(
                 modifier = Modifier
-                    .fillMaxHeight(0.5f)
-                    .fillMaxWidth()
-                    .rotate(180f),
-            )
+                    .padding(it)
+                    .fillMaxSize()
+            ) {
+                AdversarioContent(
+                    duelViewModel,
+                    duelUiState,
+                    playerData = duelUiState.firstPlayer,
+                    modifier = Modifier
+                        .fillMaxHeight(0.5f)
+                        .fillMaxWidth()
+                        .rotate(180f),
+                )
 
-            HorizontalDivider(thickness = 5.dp, color = Color.LightGray)
+                HorizontalDivider(thickness = 5.dp, color = Color.LightGray)
 
-            AdversarioContent(
-                duelViewModel,
-                duelUiState,
-                playerData = duelUiState.secondPlayer,
-                modifier = Modifier
-                    .weight(1f)
-                    .fillMaxWidth()
-            )
+                AdversarioContent(
+                    duelViewModel,
+                    duelUiState,
+                    playerData = duelUiState.secondPlayer,
+                    modifier = Modifier
+                        .weight(1f)
+                        .fillMaxWidth()
+                )
+            }
         }
     }
 
@@ -251,6 +260,7 @@ fun NoWinnerNoLoser(
     Column(
         modifier = modifier
             .padding(top = 20.dp)
+            .appBackground()
     ) {
         DuelMessageText("Empatado!","Não houve vencedor nesta partida")
         content?.invoke()
@@ -268,7 +278,8 @@ fun AdversarioContent(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.background(Color(0xFF02071F)),
+        modifier = modifier
+            .appBackground()
     ) {
         NumText(
             title = "Tempo",
@@ -284,18 +295,6 @@ fun AdversarioContent(
             modifier = Modifier.align(Alignment.TopEnd)
         )
 
-//        playerData.question?.let {
-            TextQuestionColumn(
-                modifier = Modifier
-                    .padding(5.dp)
-                    .fillMaxWidth(0.85f)
-                    .padding(10.dp)
-                    .align(Alignment.TopCenter)
-            ) {
-//            QuestionText("quem é quem aqui e onde? ajsfklfdsa dsf fas gfdfs tgs ae  ydth  rgws fdg ")
-                QuestionText(text = playerData.question?.question ?: "", modifierFontSize = true)
-            }
-
         playerData.question?.let { question ->
             LazyColumn(
                 modifier = Modifier
@@ -303,13 +302,23 @@ fun AdversarioContent(
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 items(1) {
+                    TextQuestionColumn(
+                        modifier = Modifier
+                            .padding(5.dp)
+                            .fillMaxWidth(0.85f)
+                            .padding(10.dp)
+                            .align(Alignment.TopCenter)
+                    ) {
+                        QuestionText(text = playerData.question.question ?: "", modifierFontSize = true)
+                    }
+
 //                    val currectQuestionOptions =
 //                        if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.quest
 //                        else duelUiState.secondPlayer.currentOptions
 
                     question.options.forEachIndexed { index, option ->
                         OptionItem(
-                            prefixText = 'A',
+                            prefixText = optionsLabels[index],
                             text = option,
                             backgroundColor = if (playerData.name == PlayerName.FirstPlayer) duelUiState.firstPlayer.optionsColors[index]
                             else duelUiState.secondPlayer.optionsColors[index]

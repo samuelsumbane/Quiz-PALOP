@@ -2,7 +2,7 @@ package com.samuelsumbane.quizpalop.presentation.configquestions
 
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
-import com.samuelsumbane.quizpalop.domain.model.Country
+import com.samuelsumbane.quizpalop.domain.model.PlayQuestionsNum
 import com.samuelsumbane.quizpalop.domain.model.Question
 
 
@@ -16,6 +16,7 @@ data class QuestionsConfigUiState(
     val questionConfig: QuestionConfig = QuestionConfig.SelectCountry,
     val soundState: SoundState = SoundState.Playing,
     val lastCategoryWasSaved: Boolean = false,
+    val questionsCount: PlayQuestionsNum = PlayQuestionsNum.Ten,
     //
     val lockLevelList: List<String> = emptyList(),
 )
@@ -31,6 +32,10 @@ enum class QuestionConfig(
     SelectCategory(
         pageTitle = "Selecione a catogoria",
         configOptionsList = Category.entries.map { it.categoryName }
+    ),
+    SelectQuestionsLength(
+        pageTitle = "Número de questões",
+        configOptionsList = PlayQuestionsNum.entries.map { it.num }
     )
 }
 

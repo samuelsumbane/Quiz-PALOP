@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.samuelsumbane.quizpalop.R
@@ -43,3 +44,16 @@ fun ForwardIcon() {
 @Composable
 fun LockIcon() = Icon(painterResource(R.drawable.volume_up_fill), "locked")
 
+@Composable
+fun GameIcon() = HomeIconContainer(painterResource(R.drawable.playgame), "play game",)
+
+@Composable
+fun DuelIcon() = HomeIconContainer(painterResource(R.drawable.duel), "duel icon")
+
+@Composable
+fun ProgressIcon() = HomeIconContainer(painterResource(R.drawable.progress), "progress icon")
+
+@Composable
+fun HomeIconContainer(painter: Painter, contentDescription: String) {
+    Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
+}

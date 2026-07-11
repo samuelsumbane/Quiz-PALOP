@@ -12,7 +12,7 @@ data class DuelUiState(
     val secondPlayer: PlayerData = PlayerData(),
     val country: Countries = Countries.None,
     val category: Category = Category.History,
-
+    val duelQuestionsSize: Int = 0,
     val pageState: PageState = PageState.Loading
 )
 

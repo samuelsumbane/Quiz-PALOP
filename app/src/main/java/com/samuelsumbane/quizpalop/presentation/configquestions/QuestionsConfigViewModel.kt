@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Country
+import com.samuelsumbane.quizpalop.domain.model.PlayQuestionsNum
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageUiState
@@ -38,6 +39,10 @@ class QuestionsConfigViewModel(
             updateState { it.copy(questionsCountry = Countries.entries.first { c -> c.countryName == country} ) }
             settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
         }
+    }
+
+    fun setGamePlayQuestionsLen(num: String) {
+        updateState { it.copy(questionsCount = PlayQuestionsNum.entries.first { l -> l.num == num }) }
     }
 
     fun setQuestionConfig(questionsConfig: QuestionConfig) {

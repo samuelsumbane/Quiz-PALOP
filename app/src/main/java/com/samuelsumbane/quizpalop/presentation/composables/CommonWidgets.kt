@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -99,7 +100,11 @@ fun HomePageOptionColumn(
 }
 
 @Composable
-fun HomeOption(text: String, onClick: () -> Unit) {
+fun HomeOption(
+    text: String,
+    aditionalElement: (@Composable () -> Unit)? = null,
+    onClick: () -> Unit
+) {
     Item(
         text = text,
         modifier = Modifier
@@ -107,6 +112,7 @@ fun HomeOption(text: String, onClick: () -> Unit) {
             .background(Color.Transparent, RoundedCornerShape(16.dp))
             .border(1.dp, HomeOptionColor, RoundedCornerShape(16.dp))
             .padding(10.dp),
+        aditionalElement = aditionalElement,
         onClick = onClick
     )
 }
@@ -115,17 +121,29 @@ fun HomeOption(text: String, onClick: () -> Unit) {
 fun Item(
     text: String,
     modifier: Modifier = Modifier,
+    aditionalElement: (@Composable () -> Unit)? = null,
     onClick: () -> Unit
 ) {
-    Row(
+    Box(
         modifier = modifier
             .fillMaxWidth(0.9f)
             .height(28.dp)
             .clickable { onClick() },
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
     ) {
-        Text(text, color = Color.White, fontWeight = FontWeight.SemiBold)
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .align(Alignment.Center),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text,
+                color = Color.White,
+                fontWeight = FontWeight.SemiBold,
+            )
+            aditionalElement?.invoke()
+        }
     }
 }
 

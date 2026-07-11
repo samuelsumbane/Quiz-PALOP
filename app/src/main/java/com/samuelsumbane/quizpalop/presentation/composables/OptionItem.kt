@@ -1,7 +1,6 @@
-package com.samuelsumbane.quizpalop.presentation.maingamepage.composables
+package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -9,8 +8,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,7 +20,6 @@ import androidx.compose.ui.unit.sp
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionWrongButtonColor
 import com.samuelsumbane.quizpalop.ui.theme.BlueDark
-import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 
 @Composable
 fun OptionItem(

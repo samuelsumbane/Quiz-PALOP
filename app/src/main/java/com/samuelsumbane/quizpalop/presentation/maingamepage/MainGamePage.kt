@@ -38,7 +38,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
 import com.samuelsumbane.quizpalop.presentation.composables.IconData
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.OptionItem
+import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import org.koin.androidx.compose.koinViewModel

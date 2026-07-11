@@ -24,7 +24,7 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
     private val _state = MutableStateFlow(DuelUiState())
     val duelUiState = _state.asStateFlow()
     private var countDownJob: Job? = null
-    private val duelQuestionsSize = 20
+//    private val duelQuestionsSize = 20
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
 
@@ -43,7 +43,7 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
 
     fun updateState(block: (DuelUiState) -> DuelUiState) = _state.update(block)
 
-    fun loadData(country: Countries, category: Category) {
+    fun loadData(country: Countries, category: Category, duelQuestionsSize: Int) {
         viewModelScope.launch {
             val allQuestions = repository.getQuestions()
             val filteredQuestions = allQuestions
@@ -62,7 +62,8 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                 ),
                 country = country,
                 category = category,
-                pageState = PageState.Loading
+                pageState = PageState.Loading,
+                duelQuestionsSize = duelQuestionsSize
             ) }
         }
     }
@@ -78,11 +79,11 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
             
             it.copy(
                 firstPlayer = it.firstPlayer.copy(
-                    question = firstPlayerQuestion,
+                    question = firstPlayerQuestion.copy(options = firstPlayerQuestion.options.shuffled()),
                     actualQuestionRightAnswer = firstPlayerQuestion.options[firstPlayerQuestion.correctIndex]
                 ),
                 secondPlayer = it.secondPlayer.copy(
-                    question = secondPlayerQuestion,
+                    question = secondPlayerQuestion.copy(options = secondPlayerQuestion.options.shuffled()),
                     actualQuestionRightAnswer = secondPlayerQuestion.options[secondPlayerQuestion.correctIndex]
                 ),
                 pageState = PageState.ShowContent
@@ -157,7 +158,7 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                         }
                     }
 
-                    if (question.options[question.correctIndex] == rightOption) {
+                    if (rightOption == clickedOptionName) {
                         if (playerName == PlayerName.FirstPlayer) {
                             updateState {
                                 it.copy(
@@ -226,11 +227,11 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
         updateState {
             it.copy(
                 firstPlayer = it.firstPlayer.copy(
-                    questionsList = questions.shuffled().take(duelQuestionsSize).toSet(),
+                    questionsList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).toSet(),
                     rightAnsweredQuestions = 0
                 ),
                 secondPlayer = it.secondPlayer.copy(
-                    questionsList = questions.shuffled().take(duelQuestionsSize).toSet(),
+                    questionsList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).toSet(),
                     rightAnsweredQuestions = 0
                 )
             )
