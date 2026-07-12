@@ -93,4 +93,15 @@ class UserQuestionsPercentageViewModel(
         updateState { it.copy(progressContentState = newState) }
     }
 
+    fun levelForLocked() {
+        val lockLevelList = when {
+            uiState.value.easyAnsweredQuestionsPercent < 1.0f -> listOf(Category.Culture.categoryName, Category.Exam.categoryName)
+
+            uiState.value.easyAnsweredQuestionsPercent >= 1.0f && uiState.value.mediumAnsweredQuestionsPercent <
+                    1.0f -> listOf(Category.Exam.categoryName)
+
+            else -> emptyList()
+        }
+        _state.update { it.copy(lockLevelList = lockLevelList) }
+    }
 }

@@ -13,5 +13,6 @@ data class UserQuestionsPercentageUiState(
     val mediumAnsweredQuestionsPercent: Float = 0.0f,
     val hardAnsweredQuestionsList: Set<String> = emptySet(),
     val hardAnsweredQuestionsPercent: Float = 0.0f,
-    val progressContentState: ProgressContentState = ProgressContentState.Loading
+    val progressContentState: ProgressContentState = ProgressContentState.Loading,
+    val lockLevelList: List<String> = emptyList(),
 )

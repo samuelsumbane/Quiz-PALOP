@@ -30,14 +30,19 @@ class MainGameViewModel(
     val soundEvent = _soundEvent.receiveAsFlow()
 
     init {
-        loadPacks()
+        viewModelScope.launch {
+            loadPacks()
 //        loadQuestions()
-        loadLivesAndCoinsInFlow()
+            loadLivesAndCoinsInFlow()
+            settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
+                val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
+                updateState { it.copy(soundState = soundState) }
+            }
+        }
     }
 
     fun updateState(block: (MainGameUiState) -> MainGameUiState) = _state.update(block)
     internal fun sendSound(sound: SoundEvent) = viewModelScope.launch { _soundEvent.send(sound) }
-
 
     fun onEvent(event: MainGameUiEvents) {
         when (event) {
@@ -67,7 +72,6 @@ class MainGameViewModel(
             val questions = repo.getQuestions()
                 .filter { it.id.startsWith(countryCode) && it.questionLevel == categoryMeaning }
             val idList = questions.map { it.id }.toSet() - savedQuestionsId
-            println("estado: eles sao : $idList")
             updateState {
                 it.copy(
 //                    allQuestions = questions,
@@ -123,10 +127,8 @@ class MainGameViewModel(
 
     fun loadLivesAndCoinsInFlow() {
         viewModelScope.launch {
-            settingsManager.readIntValues(settingsManager.lives).collect { lives ->
-                updateState {
-                    it.copy(lives = if (lives == 0) 40 else lives)
-                }
+            settingsManager.readIntValues(settingsManager.lives).collect { userLives ->
+                updateState { it.copy(lives = userLives) }
             }
         }
 

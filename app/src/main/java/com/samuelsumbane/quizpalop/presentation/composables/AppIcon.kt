@@ -42,18 +42,24 @@ fun ForwardIcon() {
     )
 }
 @Composable
-fun LockIcon() = Icon(painterResource(R.drawable.volume_up_fill), "locked")
+fun LockIcon() = NormalIconContainer(painterResource(R.drawable.lockicon), "locked")
 
 @Composable
-fun GameIcon() = HomeIconContainer(painterResource(R.drawable.playgame), "play game",)
+fun GameIcon() = IconContainer(painterResource(R.drawable.playgame), "play game",)
 
 @Composable
-fun DuelIcon() = HomeIconContainer(painterResource(R.drawable.duel), "duel icon")
+fun DuelIcon() = IconContainer(painterResource(R.drawable.duel), "duel icon")
 
 @Composable
-fun ProgressIcon() = HomeIconContainer(painterResource(R.drawable.progress), "progress icon")
+fun ProgressIcon() = IconContainer(painterResource(R.drawable.progress), "progress icon")
+
+
 
 @Composable
-fun HomeIconContainer(painter: Painter, contentDescription: String) {
+fun NormalIconContainer(painter: Painter, contentDescription: String) {
+    Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(24.dp))
+}
+@Composable
+fun IconContainer(painter: Painter, contentDescription: String) {
     Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
 }

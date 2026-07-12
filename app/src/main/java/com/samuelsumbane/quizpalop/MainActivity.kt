@@ -31,8 +31,8 @@ class MainActivity : ComponentActivity() {
         setContent {
             QuizPALOPTheme {
 //                Navigator(MainPageScreen(countryId = Countries.Mz.code, Category.History.categoryMeaning))
-//                Navigator(GameSessionScreen())
-                Navigator(HomePageScreen())
+                Navigator(GameSessionScreen())
+//                Navigator(HomePageScreen())
             }
         }
     }

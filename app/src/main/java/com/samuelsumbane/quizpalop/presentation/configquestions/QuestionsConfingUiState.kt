@@ -17,8 +17,7 @@ data class QuestionsConfigUiState(
     val soundState: SoundState = SoundState.Playing,
     val lastCategoryWasSaved: Boolean = false,
     val questionsCount: PlayQuestionsNum = PlayQuestionsNum.Ten,
-    //
-    val lockLevelList: List<String> = emptyList(),
+    val pageUiState: QuestionsConfigPageUiState = QuestionsConfigPageUiState.Loading
 )
 
 enum class QuestionConfig(

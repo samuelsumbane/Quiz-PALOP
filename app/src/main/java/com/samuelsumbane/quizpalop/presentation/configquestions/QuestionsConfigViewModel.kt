@@ -1,21 +1,18 @@
 package com.samuelsumbane.quizpalop.presentation.configquestions
 
-import androidx.datastore.preferences.protobuf.LazyStringArrayList.emptyList
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
-import com.samuelsumbane.quizpalop.domain.model.Country
 import com.samuelsumbane.quizpalop.domain.model.PlayQuestionsNum
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
-import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageUiState
+import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlin.collections.emptyList
 
 class QuestionsConfigViewModel(
     private val repo: QuizRepository,
@@ -49,6 +46,19 @@ class QuestionsConfigViewModel(
         updateState { it.copy(questionConfig = questionsConfig) }
     }
 
+    fun readSavedCountry() {
+        viewModelScope.launch {
+            settingsManager.readStringValues(settingsManager.lastSelectedCountry).collect { lastSavedCountry ->
+                Countries.entries.firstOrNull { it.countryName == lastSavedCountry }?.let { country ->
+                    updateState { it.copy(
+                        questionsCountry = country,
+                        pageUiState = QuestionsConfigPageUiState.ShowContent
+                    ) }
+                }
+            }
+        }
+    }
+
     fun readSavedCategory() {
         viewModelScope.launch {
             settingsManager.readStringValues(settingsManager.lastSelectedCategory)
@@ -78,20 +88,6 @@ class QuestionsConfigViewModel(
         }
     }
 
-
-    fun readSavedLevel() {
-        viewModelScope.launch {
-            settingsManager.readStringValues(settingsManager.lastSelectedCountry)
-                .collect { lastCategory ->
-                    Category.entries.firstOrNull { it.categoryName == lastCategory }
-                        ?.let { lastCategory ->
-                            updateState { it.copy(questionsCategory = lastCategory) }
-                        }
-                }
-        }
-    }
-
-
     fun loadSavedQuestions() {
         viewModelScope.launch {
             val questions = repo.getQuestions()
@@ -99,5 +95,6 @@ class QuestionsConfigViewModel(
             updateState { it.copy(questions = questions, savedQuestions = savedQuestions) }
         }
     }
+
 
 }

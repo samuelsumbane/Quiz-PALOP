@@ -42,7 +42,7 @@ fun OptionItem(
                 modifier = Modifier
                     .padding(5.dp)
                     .align(Alignment.CenterStart)
-                    .background(Color.White, RoundedCornerShape(50))
+                    .background(Color.White, RoundedCornerShape(25))
                     .padding(4.dp)
             ) {
                 Text(text = it, fontWeight = FontWeight.ExtraBold,

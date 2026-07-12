@@ -15,7 +15,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -34,9 +33,9 @@ import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.PlayQuestionsNum
-import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.BottomNavigation
+import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.composables.RadioButtonGroup
@@ -47,7 +46,6 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
-import kotlin.collections.emptyList
 
 
 class QuestionsConfigScreen(val destination: PagesName) : Screen {
@@ -90,9 +88,9 @@ fun QuestionsConfigPage(destination: PagesName) {
 
     LaunchedEffect(Unit) {
         questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
-//        progressViewModel.levelForLocked()
+        userQuestionsPercentage.levelForLocked()
         questionsConfigViewModel.readSavedCategory()
-        questionsConfigViewModel.readSavedLevel()
+        questionsConfigViewModel.readSavedCountry()
         questionsConfigViewModel.loadSavedQuestions()
 
 //        startQuizGameViewModel.soundEvent.collect { event ->
@@ -103,115 +101,150 @@ fun QuestionsConfigPage(destination: PagesName) {
     Scaffold { paddingValues ->
 
 //        val questionsConfig = if (destination == PagesName.MainPage) questionsConfigUiState.questionConfig.
-        PageLayout {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(paddingValues),
-                verticalArrangement = Arrangement.SpaceEvenly
-            ) {
 
-                Row(
-                    Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    PageTitleText(questionsConfigUiState.questionConfig.pageTitle)
-                }
-
+        @Composable
+        fun ShowPageContent() {
+            PageLayout {
                 Column(
                     modifier = Modifier
-                        .padding(15.dp)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
+                        .fillMaxSize()
+                        .padding(paddingValues),
+                    verticalArrangement = Arrangement.SpaceEvenly
                 ) {
-                    Text("$contentIndicator de $forMainGame", fontWeight = FontWeight.SemiBold, color = Color.LightGray)
-                    LinearProgressIndicator(
-                        progress = { progress },
-                        modifier = Modifier
-                            .padding(20.dp)
-                            .fillMaxWidth(),
-                        color = Color(0xFF179EFC),
-                    )
-                }
 
-                Column(modifier = Modifier) {
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        PageTitleText(questionsConfigUiState.questionConfig.pageTitle)
+                    }
+
                     Column(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .padding(15.dp)
+                            .fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        RadioButtonGroup(
-                            allQuestions = questionsConfigUiState.questions,
-                            optionsList = questionsConfigUiState.questionConfig.configOptionsList,
-                            lockedOptions = if (destination == PagesName.MainPage) {
+                        Text(
+                            "$contentIndicator de $forMainGame",
+                            fontWeight = FontWeight.SemiBold,
+                            color = Color.LightGray
+                        )
+                        LinearProgressIndicator(
+                            progress = { progress },
+                            modifier = Modifier
+                                .padding(20.dp)
+                                .fillMaxWidth(),
+                            color = Color(0xFF179EFC),
+                        )
+                    }
+
+                    Column(modifier = Modifier) {
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+
+                            println("estado: ${userQuestionsPercentageUiState.lockLevelList}")
+
+                            RadioButtonGroup(
+                                allQuestions = questionsConfigUiState.questions,
+                                optionsList = questionsConfigUiState.questionConfig.configOptionsList,
+                                lockedOptions = if (destination == PagesName.MainPage) {
+                                    when (questionsConfigUiState.questionConfig) {
+                                        QuestionConfig.SelectCountry, QuestionConfig.SelectQuestionsLength -> emptyList()
+                                        QuestionConfig.SelectCategory -> userQuestionsPercentageUiState.lockLevelList
+                                    }
+                                } else {
+                                    emptyList()
+                                },
+                                questionsCountry = questionsConfigUiState.questionsCountry,
+                                savedQuestionsId = if (destination == PagesName.MainPage) {
+                                    Triple(
+                                        userQuestionsPercentageUiState.easyAnsweredQuestionsList,
+                                        userQuestionsPercentageUiState.mediumAnsweredQuestionsList,
+                                        userQuestionsPercentageUiState.hardAnsweredQuestionsList
+                                    )
+                                } else Triple(
+                                    emptySet<String>(),
+                                    emptySet<String>(),
+                                    emptySet<String>()
+                                ),
+                                selectedOption =
+                                    when (questionsConfigUiState.questionConfig) {
+                                        QuestionConfig.SelectCategory -> Category.entries.first { it == questionsConfigUiState.questionsCategory }.categoryName
+                                        QuestionConfig.SelectCountry -> Countries.entries.first { it == questionsConfigUiState.questionsCountry }.countryName
+                                        QuestionConfig.SelectQuestionsLength -> PlayQuestionsNum.entries.first { it == questionsConfigUiState.questionsCount }.num
+                                    }
+                            ) { newValue ->
                                 when (questionsConfigUiState.questionConfig) {
-                                    QuestionConfig.SelectCountry,  QuestionConfig.SelectQuestionsLength -> emptyList()
-                                    QuestionConfig.SelectCategory-> questionsConfigUiState.lockLevelList
+                                    QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCountry(
+                                        newValue
+                                    )
+
+                                    QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(
+                                        newValue
+                                    )
+
+                                    QuestionConfig.SelectQuestionsLength -> questionsConfigViewModel.setGamePlayQuestionsLen(
+                                        newValue
+                                    )
                                 }
-                            } else { emptyList() },
-                            questionsCountry = questionsConfigUiState.questionsCountry,
-                            savedQuestionsId = if (destination == PagesName.MainPage) {
-                                Triple(userQuestionsPercentageUiState.easyAnsweredQuestionsList, userQuestionsPercentageUiState.mediumAnsweredQuestionsList, userQuestionsPercentageUiState.hardAnsweredQuestionsList)
-                            } else Triple(emptySet<String>(), emptySet<String>(), emptySet<String>()),
-                            selectedOption =
-                                when (questionsConfigUiState.questionConfig) {
-                                    QuestionConfig.SelectCategory -> Category.entries.first { it == questionsConfigUiState.questionsCategory }.categoryName
-                                    QuestionConfig.SelectCountry -> Countries.entries.first { it == questionsConfigUiState.questionsCountry}.countryName
-                                    QuestionConfig.SelectQuestionsLength -> PlayQuestionsNum.entries.first { it == questionsConfigUiState.questionsCount }.num
-                                }
-                        ) { newValue ->
-                            when (questionsConfigUiState.questionConfig) {
-                                QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCountry(newValue)
-                                QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(newValue)
-                                QuestionConfig.SelectQuestionsLength -> questionsConfigViewModel.setGamePlayQuestionsLen(newValue)
                             }
                         }
                     }
-                }
 
-                BottomNavigation(
-                    backButtonEnabled = contentIndicator == forMainGame,
-                    onBackButtonClicked = {
-                        if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
-                            navigator.push(if (destination == PagesName.MainPage) GameSessionScreen() else HomePageScreen())
-                        } else {
-                            if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCategory)
-                                questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
-                             else
-                                questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
-                        }
-                    },
-                    onForwardButtonClicked = {
-                        if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
-                            questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
-                            coroutine.launch {
-                                questionsConfigViewModel.saveSelectedCountry(questionsConfigUiState.questionsCountry.countryName)
-                            }
-                        } else {
-                            if (destination == PagesName.MainPage) {
-                                navigator.push(
-                                    MainPageScreen(
-                                        questionsConfigUiState.questionsCountry.code,
-                                        questionsConfigUiState.questionsCategory.categoryMeaning
-                                    )
-                                )
+                    BottomNavigation(
+                        backButtonEnabled = contentIndicator == forMainGame,
+                        onBackButtonClicked = {
+                            if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
+                                navigator.push(if (destination == PagesName.MainPage) GameSessionScreen() else HomePageScreen())
                             } else {
-                                if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCategory) {
-                                    questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectQuestionsLength)
-                                } else {
+                                if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCategory)
+                                    questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
+                                else
+                                    questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+                            }
+                        },
+                        onForwardButtonClicked = {
+                            if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
+                                questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
+                                coroutine.launch {
+                                    questionsConfigViewModel.saveSelectedCountry(
+                                        questionsConfigUiState.questionsCountry.countryName
+                                    )
+                                }
+                            } else {
+                                if (destination == PagesName.MainPage) {
                                     navigator.push(
-                                        DuelScreen(
-                                            questionsConfigUiState.questionsCountry,
-                                            questionsConfigUiState.questionsCategory,
-                                            questionsConfigUiState.questionsCount.num.toInt()
+                                        MainPageScreen(
+                                            questionsConfigUiState.questionsCountry.code,
+                                            questionsConfigUiState.questionsCategory.categoryMeaning
                                         )
                                     )
+                                } else {
+                                    if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCategory) {
+                                        questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectQuestionsLength)
+                                    } else {
+                                        navigator.push(
+                                            DuelScreen(
+                                                questionsConfigUiState.questionsCountry,
+                                                questionsConfigUiState.questionsCategory,
+                                                questionsConfigUiState.questionsCount.num.toInt()
+                                            )
+                                        )
+                                    }
                                 }
-
                             }
                         }
-                    }
-                )
+                    )
+                }
             }
+        }
+
+        when (questionsConfigUiState.pageUiState) {
+            QuestionsConfigPageUiState.Loading -> LoadingScreen()
+            QuestionsConfigPageUiState.ShowContent -> ShowPageContent()
         }
     }
 }

@@ -67,7 +67,7 @@ fun ProgressPage() {
                             .fillMaxSize(),
                     ) {
                         Row(
-                            modifier = Modifier.padding(top = 25.dp, bottom = 10.dp)
+                            modifier = Modifier.padding(start = 5.dp, top = 25.dp, bottom = 10.dp)
                         ) {
                             NavigateUpButton { navigator.pop() }
                         }

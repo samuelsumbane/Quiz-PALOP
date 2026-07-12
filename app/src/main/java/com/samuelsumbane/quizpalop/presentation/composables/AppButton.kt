@@ -39,12 +39,11 @@ fun ButtonOutlined(
 
 @Composable
 fun NavigateUpButton(
-    iconColor: Color = Color.Black,
     onClick: () -> Unit
 ) {
     IconButton(
         onClick = onClick
     ) {
-        Icon(painter = painterResource(R.drawable.clock), "Navigate up", tint = iconColor)
+        BackIcon()
     }
 }
