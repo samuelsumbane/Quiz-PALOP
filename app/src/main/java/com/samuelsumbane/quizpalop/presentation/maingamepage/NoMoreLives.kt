@@ -31,6 +31,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.RowCoinAndText
 import com.samuelsumbane.quizpalop.presentation.composables.RowHeartAndLives
 import com.samuelsumbane.quizpalop.presentation.composables.VerticallyCenteredRowAndSpacedBetween
 import com.samuelsumbane.quizpalop.presentation.composables.verticallyCenteredRowContent
+import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -175,7 +176,7 @@ fun NoMoreLivesUI(
                 onClick = {
                     gameQuizViewModel.clearAnsweredQuestionsWithoutMistake()
                     gameQuizViewModel.setGameTextMessage(GameTextMessage.Empty)
-//                    navigator.push(HomeGameScreen())
+                    navigator.push(HomePageScreen())
                 }
             ) {
                 Text("Sair do jogo")

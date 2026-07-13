@@ -29,7 +29,7 @@ private val LightColorScheme = lightColorScheme(
 @Composable
 fun QuizPALOPTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
+//    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

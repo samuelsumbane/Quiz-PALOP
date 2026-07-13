@@ -139,7 +139,7 @@ fun Item(
         ) {
             Text(
                 text,
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.SemiBold,
             )
             aditionalElement?.invoke()

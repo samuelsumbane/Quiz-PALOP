@@ -58,14 +58,14 @@ fun GameBottomButton(
             Icon(
                 painter = painterResource(icon.id),
                 icon.contentDescription,
-                tint = if (!enabled) Color.Gray else Color.Black,
+                tint = if (!enabled) Color.Gray else MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.size(25.dp)
             )
             Spacer(Modifier.height(5.dp))
             Text(
                 buttonText,
                 style = MaterialTheme.typography.bodySmall,
-                color = if (!enabled) Color.Gray else Color.Black,
+                color = if (!enabled) Color.Gray else MaterialTheme.colorScheme.onBackground,
             )
         }
     }

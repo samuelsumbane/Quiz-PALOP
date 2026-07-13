@@ -188,7 +188,10 @@ class MainGameViewModel(
             if (mainGameUiState.value.soundState == SoundState.Playing) {
                 _soundEvent.send(SoundEvent.Click)
             }
-            updateState { it.copy(soundState = if (playSound) SoundState.Playing else SoundState.Mute) }
+            updateState { it.copy(
+                soundState = if (playSound) SoundState.Playing else SoundState.Mute,
+                showGameConfings = false
+            ) }
         }
     }
 

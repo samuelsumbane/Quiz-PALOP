@@ -48,7 +48,7 @@ fun GameTopStatusBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth(0.85f)
-                .background(MaterialTheme.colorScheme.primary.copy(0.2f), RoundedCornerShape(12.dp))
+                .background(MaterialTheme.colorScheme.primary.copy(0.4f), RoundedCornerShape(12.dp))
                 .align(Alignment.TopStart)
             ,
             horizontalArrangement = Arrangement.SpaceAround,
@@ -99,7 +99,7 @@ fun RowCoinAndText(text: String) {
     Row(
         verticalAlignment = Alignment.CenterVertically) {
         NormalCoinIcon()
-        IconText(text, color = Color.White)
+        IconText(text, color = MaterialTheme.colorScheme.onPrimary)
     }
 }
 
@@ -118,17 +118,17 @@ fun RowHeartAndLives(text: String) {
     RowIconAndText(
         icon = { Icon(painter = painterResource(R.drawable.life), "", tint = Color(0xFFC6080A)) },
         text = {
-            IconText(text, color = Color.White)
+            IconText(text, color = MaterialTheme.colorScheme.onPrimary)
         }
     )
 }
 @Composable
 fun RowQuestionTimer(text: String) {
-    val onBackground = MaterialTheme.colorScheme.onBackground
+    val elementColor = MaterialTheme.colorScheme.onPrimary
     RowIconAndText(
-        icon = { Icon(painter = painterResource(R.drawable.clock), "", tint = onBackground) },
+        icon = { Icon(painter = painterResource(R.drawable.clock), "", tint = elementColor) },
         text = {
-            IconText(text, color = onBackground)
+            IconText(text, color = elementColor)
         }
     )
 }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -128,7 +129,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                         Text(
                             "$contentIndicator de $forMainGame",
                             fontWeight = FontWeight.SemiBold,
-                            color = Color.LightGray
+                            color = MaterialTheme.colorScheme.onPrimary
                         )
                         LinearProgressIndicator(
                             progress = { progress },
@@ -144,8 +145,6 @@ fun QuestionsConfigPage(destination: PagesName) {
                             modifier = Modifier.fillMaxWidth(),
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-
-                            println("estado: ${userQuestionsPercentageUiState.lockLevelList}")
 
                             RadioButtonGroup(
                                 allQuestions = questionsConfigUiState.questions,

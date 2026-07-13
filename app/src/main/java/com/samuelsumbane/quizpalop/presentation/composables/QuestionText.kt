@@ -1,6 +1,7 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,7 +19,7 @@ fun QuestionText(text: String, modifierFontSize: Boolean) {
         fontWeight = FontWeight.ExtraBold,
         fontSize = if (modifierFontSize) text.toFontSize().sp else 24.sp,
         textAlign = TextAlign.Center,
-        color = Color.White,
+        color = MaterialTheme.colorScheme.onBackground,
         lineHeight = 34.sp,
         modifier = Modifier.padding(9.dp)
     )

@@ -119,6 +119,8 @@ fun MessageUi(
     )
 
     if (mainPageUiState.gameTextMessage !is GameTextMessage.Empty) {
+        var helpOption: HelpOption? = null
+
         MessageContainer {
             when (val message = mainPageUiState.gameTextMessage) {
                 is GameTextMessage.AddedCoins -> {
@@ -136,6 +138,7 @@ fun MessageUi(
 //                    LoadAnimatedIcons(sadIcon)
                     MessageTexts(message.reasonTitle, message.reasonMessage)
                     if (message.helpOption == HelpOption.RightOption) {
+                        helpOption = HelpOption.RightOption
                         TwoButtonsRow(
                             text = "Deseja ver um anúncio para obter a resposta correcta?",
                             outlinedText = "Não, obrigado!",
@@ -152,7 +155,8 @@ fun MessageUi(
                                 }
                             }
                         )
-                    }
+                    } else helpOption = HelpOption.FiftFift
+
                 }
 
                 is GameTextMessage.QuestionNotAnswered -> {
@@ -191,7 +195,8 @@ fun MessageUi(
                 mainPageUiState.gameTextMessage !is GameTextMessage.SelectedQuestionsAnswered &&
                 mainPageUiState.gameTextMessage !is GameTextMessage.AllQuestionsAnswered &&
                 mainPageUiState.gameTextMessage !is GameTextMessage.NewLifeEarned &&
-                mainPageUiState.gameTextMessage !is GameTextMessage.AddedCoins
+                mainPageUiState.gameTextMessage !is GameTextMessage.AddedCoins &&
+                helpOption != HelpOption.RightOption
             ) {
                 ButtonOutlined(
                     text = "Fechar",

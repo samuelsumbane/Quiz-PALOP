@@ -175,7 +175,7 @@ fun MainGameViewModel.giveCoinsToUser() {
 fun MainGameViewModel.showCurrectOptionAfterViewAd() {
     mainGameUiState.value.actualQuestion?.let {
         setGameTextMessage(
-            GameTextMessage.ShowRightAnswer("""A resposta correcta é:\n\n  "${mainGameUiState.value.actualQuestionRightAnswer}" """)
+            GameTextMessage.ShowRightAnswer("""A resposta correcta é: "${mainGameUiState.value.actualQuestionRightAnswer}" """)
         )
     }
 }
