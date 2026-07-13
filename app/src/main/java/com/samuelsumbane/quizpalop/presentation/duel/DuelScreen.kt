@@ -347,7 +347,7 @@ fun NumText(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(title, fontSize = 9.sp, color = Color.White)
+        Text(title, fontSize = 9.sp, color = MaterialTheme.colorScheme.onBackground)
         Text(
             text = text,
             color = textColor,

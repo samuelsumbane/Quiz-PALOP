@@ -24,6 +24,5 @@ fun MainGameViewModel.onCloseMessageModal() {
     if (mainGameUiState.value.gameTextMessage is GameTextMessage.QuestionNotAnswered) {
         startLoadingNextQuestion()
     }
-    changeTimerState(QuestionTimerState.Running)
     clearGameTextMessage()
 }

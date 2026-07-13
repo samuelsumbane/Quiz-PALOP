@@ -2,6 +2,8 @@ package com.samuelsumbane.quizpalop.presentation.maingamepage
 
 import androidx.compose.ui.graphics.Color
 import com.samuelsumbane.quizpalop.domain.model.AdState
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Pack
 import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
@@ -25,7 +27,9 @@ data class MainGameUiState(
     val questionsIdList: Set<String> = emptySet(),
     val answeredQuestionsWithoutMistake: Int = 0,
     val lastRightOptionButtonDateTime: Long = 0L,
-
+//
+    val selectedCountry: Countries? = null,
+    val selectedCategory: Category? = null,
     //
     val questionsTimer: Int = 0,
     val timerState: QuestionTimerState = QuestionTimerState.Stop,

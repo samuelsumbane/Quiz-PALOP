@@ -149,14 +149,10 @@ fun QuestionsConfigPage(destination: PagesName) {
                             RadioButtonGroup(
                                 allQuestions = questionsConfigUiState.questions,
                                 optionsList = questionsConfigUiState.questionConfig.configOptionsList,
-                                lockedOptions = if (destination == PagesName.MainPage) {
-                                    when (questionsConfigUiState.questionConfig) {
+                                lockedOptions = when (questionsConfigUiState.questionConfig) {
                                         QuestionConfig.SelectCountry, QuestionConfig.SelectQuestionsLength -> emptyList()
                                         QuestionConfig.SelectCategory -> userQuestionsPercentageUiState.lockLevelList
-                                    }
-                                } else {
-                                    emptyList()
-                                },
+                                    },
                                 questionsCountry = questionsConfigUiState.questionsCountry,
                                 savedQuestionsId = if (destination == PagesName.MainPage) {
                                     Triple(

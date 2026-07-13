@@ -105,11 +105,11 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
         }
     }
 
-//    LaunchedEffect(mainPageUiState.timerState) {
-//        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-//            mainPageViewModel.timerCounterExec()
-//        }
-//    }
+    LaunchedEffect(mainPageUiState.timerState) {
+        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+            mainPageViewModel.timerCounterExec()
+        }
+    }
 
 
     @Composable

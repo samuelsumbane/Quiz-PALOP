@@ -49,6 +49,12 @@ class QuestionsConfigViewModel(
     fun readSavedCountry() {
         viewModelScope.launch {
             settingsManager.readStringValues(settingsManager.lastSelectedCountry).collect { lastSavedCountry ->
+                if (lastSavedCountry.isBlank()) {
+                    updateState {
+                        it.copy(questionsCountry = Countries.Angola, pageUiState = QuestionsConfigPageUiState.ShowContent                        )
+                    }
+                    return@collect
+                }
                 Countries.entries.firstOrNull { it.countryName == lastSavedCountry }?.let { country ->
                     updateState { it.copy(
                         questionsCountry = country,

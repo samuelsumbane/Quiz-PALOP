@@ -203,11 +203,7 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
         }
 
         playerData.let {
-            if (it.name == PlayerName.FirstPlayer) {
-                it.question?.let { question -> checkingResponse(it.name, question, clickedOptionName) }
-            } else {
-                it.question?.let { question -> checkingResponse(it.name, question, clickedOptionName) }
-            }
+            it.question?.let { question -> checkingResponse(it.name, question, clickedOptionName) }
         }
     }
 

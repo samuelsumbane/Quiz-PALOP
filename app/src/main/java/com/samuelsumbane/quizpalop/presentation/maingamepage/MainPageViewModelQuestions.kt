@@ -98,7 +98,6 @@ fun MainGameViewModel.checkResponse(
                 }
 
                 val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
-//                val answeredQuestions = quizGameUiState.value.answeredQuestionsList + Random.nextInt()
                 updateState { it.copy(answeredQuestionsList = answeredQuestions) }
 //                println("ouvindo: to save: ${quizGameUiState.value.answeredQuestionsList}")
                 settingsManager.saveQuestionsList(mainGameUiState.value.answeredQuestionsList)

@@ -69,12 +69,13 @@ class MainGameViewModel(
     fun loadQuestions(countryCode: String, categoryMeaning: String) {
         viewModelScope.launch {
             val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
+            println("estado: eles sao $savedQuestionsId")
             val questions = repo.getQuestions()
                 .filter { it.id.startsWith(countryCode) && it.questionLevel == categoryMeaning }
             val idList = questions.map { it.id }.toSet() - savedQuestionsId
             updateState {
                 it.copy(
-//                    allQuestions = questions,
+                    answeredQuestionsList = savedQuestionsId,
                     questionsIdList = idList,
                     selectedQuestionsList = questions,
                 )
@@ -102,22 +103,27 @@ class MainGameViewModel(
             if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {
                 setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!", "Respondeu todas as questões do jogo."))
             } else {
-//                setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas da categoria "${quizGameUiState.value.questionsCategory.value}" e nível "${mainGameUiState.value.questionsLevel.value}".""", "Deseja limpar e responder mesmas questões ou selecionar outras?"))
+                setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas do país "${mainGameUiState.value.selectedCountry?.countryName}" e categoria "${mainGameUiState.value.selectedCategory?.categoryName}".""", "Deseja limpar e responder mesmas questões ou selecionar outras?"))
             }
         } else {
             setGameTextMessage(GameTextMessage.Empty)
-            val randomedQuestion = mainGameUiState.value.selectedQuestionsList.random()
-            val readyQuestion = randomedQuestion.copy(options = randomedQuestion.options.shuffled())
-            updateState {
-                it.copy(
-                    actualQuestion = readyQuestion,
-                    actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex],
-                    questionsTimer = 30,
-                    pageState = MainPageState.DisplayContent
-                )
+            val randomedQuestionId = mainGameUiState.value.questionsIdList.random()
+            println("estado: $randomedQuestionId")
+            mainGameUiState.value.selectedQuestionsList.firstOrNull { it.id == randomedQuestionId }?.let { randomedQuestion ->
+                val readyQuestion =
+                    randomedQuestion.copy(options = randomedQuestion.options.shuffled())
+                println("estado: o actual é: $readyQuestion")
+                updateState {
+                    it.copy(
+                        actualQuestion = readyQuestion,
+                        actualQuestionRightAnswer = randomedQuestion.options[randomedQuestion.correctIndex],
+                        questionsTimer = 30,
+                        pageState = MainPageState.DisplayContent
+                    )
+                }
+                changeTimerState(QuestionTimerState.Running)
+                resetOptionsColors()
             }
-            changeTimerState(QuestionTimerState.Running)
-            resetOptionsColors()
         }
     }
 
@@ -128,7 +134,7 @@ class MainGameViewModel(
     fun loadLivesAndCoinsInFlow() {
         viewModelScope.launch {
             settingsManager.readIntValues(settingsManager.lives).collect { userLives ->
-                updateState { it.copy(lives = userLives) }
+                updateState { it.copy(lives = if (userLives == 0) 10 else userLives) }
             }
         }
 
@@ -144,17 +150,6 @@ class MainGameViewModel(
     fun loadAd(manager: RewardedAdManager) {
         manager.loadAd { setAdSate(AdState.Ready) }
     }
-
-//    fun loadLivesAndCoinsOnTime() {
-//        viewModelScope.launch {
-//            val lives = settingsManager.readIntValues(settingsManager.lives).first()
-//            val coins = settingsManager.readIntValues(settingsManager.userCoins).first()
-//            val lastDateTimeUserLostLives = settingsManager.readLongValues(settingsManager.lastDateTimeLostLives)
-//            updateState {
-//                it.copy(lives = lives, userCoins = coins, lastDateTimeLostLives = lastDateTimeUserLostLives)
-//            }
-//        }
-//    }
 
 //    fun fillSavedQuestions(questionsCategory: QuestionCategory, questionsLevel: QuestionLevel) {
 //        viewModelScope.launch {

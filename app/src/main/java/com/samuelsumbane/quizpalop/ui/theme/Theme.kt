@@ -15,21 +15,20 @@ import androidx.compose.ui.platform.LocalContext
 private val DarkColorScheme = darkColorScheme(
         primary = Color(68, 68, 68),
          onPrimary = Color.White,
-        secondary = Color.DarkGray,
+        secondary = Color(0xFF041B28),
         tertiary = Color.White
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = Color(224, 224,224),
     onPrimary = Color(18, 18, 18),
-    secondary = Color.Gray,
+    secondary = Color(0x70359FEF),
     tertiary = Color.Black
 )
 
 @Composable
 fun QuizPALOPTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-//    darkTheme: Boolean = false,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

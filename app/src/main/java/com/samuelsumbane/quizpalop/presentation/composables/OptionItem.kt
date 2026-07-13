@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,6 +30,8 @@ fun OptionItem(
     prefixText: Char? = null,
     onClick: () -> Unit
 ) {
+    val colorScheme = MaterialTheme.colorScheme
+
     Box(
         modifier = modifier
             .padding(8.dp)
@@ -42,11 +45,11 @@ fun OptionItem(
                 modifier = Modifier
                     .padding(5.dp)
                     .align(Alignment.CenterStart)
-                    .background(Color.White, RoundedCornerShape(25))
+                    .background(colorScheme.onBackground, RoundedCornerShape(25))
                     .padding(4.dp)
             ) {
                 Text(text = it, fontWeight = FontWeight.ExtraBold,
-                    color = BlueDark,
+                    color = colorScheme.background,
                     fontSize = 25.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier
