@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -22,11 +23,14 @@ import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.presentation.composables.BackIcon
 import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
 import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
+import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigPageUiState
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import org.koin.compose.viewmodel.koinViewModel
 
 class GameSessionScreen : Screen {
@@ -43,38 +47,55 @@ fun GameSessionPage() {
     val configQuestionsViewModel = koinViewModel<QuestionsConfigViewModel>()
     val configQuestionsUiState by configQuestionsViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(Unit) {
+        configQuestionsViewModel.readSavedCountry()
+    }
+
     Scaffold {
-        PageLayout(
-            modifier = Modifier
-                .padding(it)
-        ) {
-            IconButton(
-                onClick = { navigator.push(HomePageScreen()) },
-                modifier = Modifier.align(Alignment.TopStart)
-            ) { BackIcon() }
 
-            Column(
+        @Composable
+        fun ShowContent() {
+            PageLayout(
                 modifier = Modifier
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceAround
+                    .padding(it)
             ) {
-                PageTitleText("Sessão")
+                IconButton(
+                    onClick = { navigator.push(HomePageScreen()) },
+                    modifier = Modifier.align(Alignment.TopStart)
+                ) { BackIcon() }
 
-
-                HomePageOptionColumn() {
-                    if (configQuestionsUiState.lastCategoryWasSaved) {
-                        HomeOption("Continuar última sessão") {
-//                    navigator.push(PreQuestionsConfigScreen())
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceAround
+                ) {
+                    PageTitleText("Sessão")
+println("estado: ${configQuestionsUiState.lastCategoryWasSaved}")
+                    HomePageOptionColumn() {
+                        if (configQuestionsUiState.lastCategoryWasSaved) {
+                            HomeOption("Continuar última sessão") {
+                                navigator.push(
+                                    MainPageScreen(
+                                        configQuestionsUiState.questionsCountry.code,
+                                        configQuestionsUiState.questionsCategory.categoryMeaning
+                                    )
+                                )
+                            }
                         }
-                    }
 
-                    HomeOption("Escolher País e Categoria") {
-                        navigator.push(QuestionsConfigScreen(PagesName.MainPage))
-                    }
+                        HomeOption("Escolher País e Categoria") {
+                            navigator.push(QuestionsConfigScreen(PagesName.MainPage))
+                        }
 
+                    }
                 }
             }
+        }
+
+        when (configQuestionsUiState.pageUiState) {
+            QuestionsConfigPageUiState.Loading -> LoadingScreen()
+            QuestionsConfigPageUiState.ShowContent -> ShowContent()
         }
     }
 }

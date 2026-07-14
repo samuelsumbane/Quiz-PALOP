@@ -126,7 +126,6 @@ fun MessageUi(
                 is GameTextMessage.AddedCoins -> {
                     LoadAnimatedIcons(coinsIcon, Modifier.size(220.dp))
                     MessageTexts(title = "", message.message, )
-                    AppButton(text = "Tudo bem") { mainGameViewModel.startLoadingNextQuestion() }
                 }
 
                 is GameTextMessage.ShowRightAnswer -> {

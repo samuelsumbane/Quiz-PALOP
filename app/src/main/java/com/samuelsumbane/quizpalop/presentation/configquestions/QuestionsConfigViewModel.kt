@@ -33,7 +33,7 @@ class QuestionsConfigViewModel(
 
     fun setGameCountry(country: String) {
         viewModelScope.launch {
-            updateState { it.copy(questionsCountry = Countries.entries.first { c -> c.countryName == country} ) }
+            updateState { it.copy(questionsCountry = Countries.entries.first { c -> c.countryName == country } ) }
             settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
         }
     }
@@ -51,15 +51,22 @@ class QuestionsConfigViewModel(
             settingsManager.readStringValues(settingsManager.lastSelectedCountry).collect { lastSavedCountry ->
                 if (lastSavedCountry.isBlank()) {
                     updateState {
-                        it.copy(questionsCountry = Countries.Angola, pageUiState = QuestionsConfigPageUiState.ShowContent                        )
+                        it.copy(
+                            questionsCountry = Countries.Angola,
+                            pageUiState = QuestionsConfigPageUiState.ShowContent,
+                        )
                     }
-                    return@collect
-                }
-                Countries.entries.firstOrNull { it.countryName == lastSavedCountry }?.let { country ->
-                    updateState { it.copy(
-                        questionsCountry = country,
-                        pageUiState = QuestionsConfigPageUiState.ShowContent
-                    ) }
+                } else {
+                    Countries.entries.firstOrNull { it.countryName == lastSavedCountry }
+                        ?.let { country ->
+                            updateState {
+                                it.copy(
+                                    questionsCountry = country,
+                                    lastCategoryWasSaved = true,
+                                    pageUiState = QuestionsConfigPageUiState.ShowContent,
+                                )
+                            }
+                        }
                 }
             }
         }
@@ -82,17 +89,11 @@ class QuestionsConfigViewModel(
         }
     }
 
-    fun saveSelectedCategory(category: String) {
-        viewModelScope.launch {
-            settingsManager.saveStringValues(settingsManager.lastSelectedCategory, category)
-        }
-    }
-
-    fun saveSelectedCountry(country: String) {
-        viewModelScope.launch {
-            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
-        }
-    }
+//    fun saveSelectedCountry(country: String) {
+//        viewModelScope.launch {
+//            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
+//        }
+//    }
 
     fun loadSavedQuestions() {
         viewModelScope.launch {
@@ -101,6 +102,5 @@ class QuestionsConfigViewModel(
             updateState { it.copy(questions = questions, savedQuestions = savedQuestions) }
         }
     }
-
 
 }

@@ -24,9 +24,9 @@ android {
 
     buildTypes {
         release {
-            optimization {
-                enable = false
-            }
+            isMinifyEnabled = true
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
     compileOptions {
@@ -42,11 +42,13 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.runtime)
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.androidx.ui)
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
@@ -70,6 +72,6 @@ dependencies {
     implementation("io.insert-koin:koin-compose:4.0.4")
     //
     implementation("io.insert-koin:koin-compose-viewmodel:4.0.4")
-//    implementation("com.google.android.gms:play-services-ads:24.7.0")
+    implementation("com.google.android.gms:play-services-ads:24.7.0")
     implementation("com.airbnb.android:lottie-compose:6.6.7")
 }

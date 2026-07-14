@@ -54,6 +54,7 @@ import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.model.optionsLabels
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
+import com.samuelsumbane.quizpalop.presentation.composables.AppButton
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
 import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
@@ -62,13 +63,14 @@ import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
+import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.BlueDark
 
 
-class MainPageScreen(val countryId: String, val questionCategory: String) : Screen {
+class MainPageScreen(val countryCode: String, val questionsCategoryMeaning: String) : Screen {
     @Composable
     override fun Content() {
-        MainPage(countryId, questionCategory)
+        MainPage(countryCode, questionsCategoryMeaning)
     }
 }
 
@@ -114,13 +116,19 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
 
     @Composable
     fun SelectedDataAlreadyAnswered() {
+
         val finishedLevelIcon by rememberLottieComposition(
             LottieCompositionSpec.Asset("lottie/allQAnswered.lottie")
         )
+
+        val allQuestionsFineshedIcon by rememberLottieComposition(
+            LottieCompositionSpec.Asset("lottie/trophy1.lottie")
+        )
+
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color(0xFF073552))
+                .appBackground()
         ) {
             Column(
                 modifier = Modifier
@@ -133,9 +141,9 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
                 MessageContainer {
                     when (val message = mainPageUiState.gameTextMessage) {
                         is GameTextMessage.AllQuestionsAnswered -> {
-//                            LoadAnimatedIcons(allGameFinishedIcon)
+                            LoadAnimatedIcons(allQuestionsFineshedIcon)
                             MessageTexts(title = message.title, text = message.message)
-//                            AppButton("Ver progresso") { navigator.push(GameProgressScreen()) }
+                            AppButton("Ver progresso") { navigator.push(ProgressPageScreen()) }
                         }
 
                         is GameTextMessage.SelectedQuestionsAnswered -> {
@@ -146,7 +154,7 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
                                 text = message.confirmationText,
                                 outlinedText = "Prox. Categ/Nível",
                                 outlinedClicked = {
-//                                    gameQuizViewModel.tryToLoadNextCategoryInThisCategory()
+                                    mainPageViewModel.tryToLoadNextCategoryInThisCategory()
                                 },
                                 filledButtonText = "Sel. Questões",
                                 onClick = {

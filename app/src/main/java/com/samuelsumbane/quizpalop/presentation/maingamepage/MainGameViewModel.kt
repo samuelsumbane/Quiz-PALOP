@@ -97,7 +97,7 @@ class MainGameViewModel(
 
     fun loadNextQuestion() {
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
-            updateState { it.copy(pageState = MainPageState.DisplayContent) }
+            updateState { it.copy(pageState = MainPageState.QuestionsAnswered) }
 
             val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
             if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {

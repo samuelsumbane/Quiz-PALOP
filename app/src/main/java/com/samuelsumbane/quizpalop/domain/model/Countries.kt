@@ -7,8 +7,7 @@ enum class Countries(
     Angola("ao","Angola"),
     Cv("cv", "Cabo Verde"),
     Gw("gw", "Guiné-Bissau"),
-    Stp("stp", "São Tomé e Príncipe"),
-    Ge("get", "Guiné Equatorial"),
     Mz("mz", "Moçambique"),
+    Stp("stp", "São Tomé e Príncipe"),
     None("nn", "None")
 }

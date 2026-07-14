@@ -91,7 +91,7 @@ fun HomePage() {
                 fontSize = 10.sp,
                 modifier = Modifier
                     .padding(10.dp)
-                    .background(Color.Black.copy(0.1f), RoundedCornerShape(7.dp))
+                    .background(MaterialTheme.colorScheme.background, RoundedCornerShape(7.dp))
                     .padding(5.dp)
                     .align(Alignment.BottomEnd)
                 )
