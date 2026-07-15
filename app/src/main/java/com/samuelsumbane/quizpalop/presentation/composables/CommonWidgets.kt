@@ -68,8 +68,7 @@ fun TwoButtonsRow(
         Row(
             modifier = Modifier
                 .padding(0.dp, 25.dp)
-                .fillMaxWidth()
-                .padding(7.dp, 0.dp),
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             ButtonOutlined(

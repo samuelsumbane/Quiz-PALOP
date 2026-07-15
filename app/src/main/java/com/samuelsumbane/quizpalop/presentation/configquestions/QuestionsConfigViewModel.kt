@@ -49,25 +49,17 @@ class QuestionsConfigViewModel(
     fun readSavedCountry() {
         viewModelScope.launch {
             settingsManager.readStringValues(settingsManager.lastSelectedCountry).collect { lastSavedCountry ->
-                if (lastSavedCountry.isBlank()) {
-                    updateState {
-                        it.copy(
-                            questionsCountry = Countries.Angola,
-                            pageUiState = QuestionsConfigPageUiState.ShowContent,
-                        )
-                    }
-                } else {
-                    Countries.entries.firstOrNull { it.countryName == lastSavedCountry }
-                        ?.let { country ->
-                            updateState {
-                                it.copy(
-                                    questionsCountry = country,
-                                    lastCategoryWasSaved = true,
-                                    pageUiState = QuestionsConfigPageUiState.ShowContent,
-                                )
-                            }
+                Countries.entries.firstOrNull { it.countryName == lastSavedCountry }
+                    ?.let { country ->
+                        updateState {
+                            it.copy(
+                                questionsCountry = country,
+                                lastCategoryWasSaved = lastSavedCountry.isNotBlank(),
+                            )
                         }
-                }
+                    }
+
+                updateState { it.copy(pageUiState = QuestionsConfigPageUiState.ShowContent) }
             }
         }
     }
@@ -89,11 +81,11 @@ class QuestionsConfigViewModel(
         }
     }
 
-//    fun saveSelectedCountry(country: String) {
-//        viewModelScope.launch {
-//            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
-//        }
-//    }
+    fun saveSelectedCountry(country: String) {
+        viewModelScope.launch {
+            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country)
+        }
+    }
 
     fun loadSavedQuestions() {
         viewModelScope.launch {

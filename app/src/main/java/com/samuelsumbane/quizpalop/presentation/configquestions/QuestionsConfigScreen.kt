@@ -213,8 +213,8 @@ fun QuestionsConfigPage(destination: PagesName) {
                                 if (destination == PagesName.MainPage) {
                                     navigator.push(
                                         MainPageScreen(
-                                            questionsConfigUiState.questionsCountry.code,
-                                            questionsConfigUiState.questionsCategory.categoryMeaning
+                                            questionsConfigUiState.questionsCountry,
+                                            questionsConfigUiState.questionsCategory
                                         )
                                     )
                                 } else {

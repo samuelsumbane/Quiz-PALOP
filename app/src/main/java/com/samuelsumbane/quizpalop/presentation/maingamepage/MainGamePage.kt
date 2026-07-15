@@ -48,6 +48,8 @@ import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
@@ -67,15 +69,15 @@ import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.BlueDark
 
 
-class MainPageScreen(val countryCode: String, val questionsCategoryMeaning: String) : Screen {
+class MainPageScreen(val country: Countries, val category: Category) : Screen {
     @Composable
     override fun Content() {
-        MainPage(countryCode, questionsCategoryMeaning)
+        MainPage(country, category)
     }
 }
 
 @Composable
-fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
+fun MainPage(country: Countries, category: Category) {
     val mainPageViewModel = koinViewModel<MainGameViewModel>()
     val mainPageUiState by mainPageViewModel.mainGameUiState.collectAsStateWithLifecycle()
     val navigator = LocalNavigator.currentOrThrow
@@ -93,7 +95,7 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
 
     LaunchedEffect(Unit) {
 
-        mainPageViewModel.loadQuestions(countryCode, questionsCategoryMeaning)
+        mainPageViewModel.loadQuestions(country, category)
 
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {
@@ -125,49 +127,52 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
             LottieCompositionSpec.Asset("lottie/trophy1.lottie")
         )
 
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .appBackground()
-        ) {
+        Scaffold {
             Column(
                 modifier = Modifier
-                    .background(color = Color.Transparent)
-                    .fillMaxSize(),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
+                    .padding(it)
+                    .fillMaxSize()
+                    .appBackground()
             ) {
-                val navigator = LocalNavigator.currentOrThrow
-                MessageContainer {
-                    when (val message = mainPageUiState.gameTextMessage) {
-                        is GameTextMessage.AllQuestionsAnswered -> {
-                            LoadAnimatedIcons(allQuestionsFineshedIcon)
-                            MessageTexts(title = message.title, text = message.message)
-                            AppButton("Ver progresso") { navigator.push(ProgressPageScreen()) }
-                        }
+                Column(
+                    modifier = Modifier
+                        .background(color = Color.Transparent)
+                        .fillMaxSize(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    val navigator = LocalNavigator.currentOrThrow
+                    MessageContainer {
+                        when (val message = mainPageUiState.gameTextMessage) {
+                            is GameTextMessage.AllQuestionsAnswered -> {
+                                LoadAnimatedIcons(allQuestionsFineshedIcon)
+                                MessageTexts(title = message.title, text = message.message)
+                                AppButton("Ver progresso") { navigator.push(ProgressPageScreen()) }
+                            }
 
-                        is GameTextMessage.SelectedQuestionsAnswered -> {
-                            LoadAnimatedIcons(finishedLevelIcon)
-                            MessageTexts(title = "", message.message)
-                            TwoButtonsRow(
+                            is GameTextMessage.SelectedQuestionsAnswered -> {
+                                LoadAnimatedIcons(finishedLevelIcon)
+                                MessageTexts(title = "", message.message)
+                                TwoButtonsRow(
 //                                mainPageViewModel,
-                                text = message.confirmationText,
-                                outlinedText = "Prox. Categ/Nível",
-                                outlinedClicked = {
-                                    mainPageViewModel.tryToLoadNextCategoryInThisCategory()
-                                },
-                                filledButtonText = "Sel. Questões",
-                                onClick = {
-                                    mainPageViewModel.onSelectNewQuestionsGroup()
-                                    navigator.push(QuestionsConfigScreen(PagesName.MainPage))
-                                }
-                            )
+                                    text = message.confirmationText,
+                                    outlinedText = "Prox. País/Categoria",
+                                    outlinedClicked = {
+                                        mainPageViewModel.tryToLoadNextCategoryInThisCategory()
+                                    },
+                                    filledButtonText = "Sel. Questões",
+                                    onClick = {
+                                        mainPageViewModel.onSelectNewQuestionsGroup()
+                                        navigator.push(QuestionsConfigScreen(PagesName.MainPage))
+                                    }
+                                )
+                            }
+
+                            else -> {}
                         }
-
-                        else -> {}
                     }
-                }
 
+                }
             }
         }
     }
@@ -302,7 +307,7 @@ fun MainPage(countryCode: String, questionsCategoryMeaning: String) {
                                                         )
                                                     }
                                                 }
-                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = BlueDark)
+                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
                                             }
                                         }
                                     }

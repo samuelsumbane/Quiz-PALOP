@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             QuizPALOPTheme {
-//                Navigator(MainPageScreen(countryId = Countries.Mz.code, Category.History.categoryMeaning))
+//                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
                 Navigator(HomePageScreen())
             }

@@ -8,7 +8,7 @@ import com.samuelsumbane.quizpalop.domain.model.Question
 
 data class QuestionsConfigUiState(
     val questionsCategory: Category = Category.History,
-    val questionsCountry: Countries = Countries.Mz,
+    val questionsCountry: Countries = Countries.Angola,
 
     val savedQuestions: Set<String> = emptySet(),
     val questions: List<Question> = emptyList(),
@@ -26,7 +26,7 @@ enum class QuestionConfig(
 ) {
     SelectCountry(
         pageTitle = "Selecione o país",
-        configOptionsList = Countries.entries.filter { it != Countries.None }.map { it.countryName }
+        configOptionsList = Countries.entries.map { it.countryName }
     ),
     SelectCategory(
         pageTitle = "Selecione a catogoria",

@@ -1,16 +1,12 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
 import androidx.lifecycle.viewModelScope
-import com.samuelsumbane.quizpalop.data.repository.stp
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.ChangeCountValues
 import com.samuelsumbane.quizpalop.domain.model.Countries
-import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.model.UserCoins
-import com.samuelsumbane.quizpalop.presentation.maingamepage.getCountryAndCategoryQuestions
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 
@@ -126,146 +122,6 @@ fun MainGameViewModel.checkResponse(
     }
 }
 
-fun MainGameViewModel.getCountryAndCategoryQuestions(country: Countries, category: Category): Set<String> {
-   return mainGameUiState.value.allQuestions
-       .filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
-       .map { it.id }
-       .toSet()
-}
-
-fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
-    viewModelScope.launch {
-        val savedQuestions = mainGameUiState.value.answeredQuestionsList
-        when (val category = mainGameUiState.value.selectedCategory) {
-            Category.History -> {
-                when (val country = mainGameUiState.value.selectedCountry) {
-                    Countries.Angola -> {
-                        val angolaHistory = getCountryAndCategoryQuestions(country, category)
-                        updateState {
-                            it.copy(
-                                questionsIdList = angolaHistory - savedQuestions,
-                                selectedCategory = category,
-                                selectedCountry = country,
-                            )
-                        }
-
-                    }
-                    Countries.Cv -> {
-                        val capeVerdeHistory = getCountryAndCategoryQuestions(country, category)
-                        updateState {
-                            it.copy(
-                                questionsIdList = capeVerdeHistory - savedQuestions,
-                                selectedCategory = category,
-                                selectedCountry = country,
-                            )
-                        }
-                    }
-                    Countries.Gw -> {
-                        val guineBissauHistory = getCountryAndCategoryQuestions(country, category)
-                        updateState {
-                            it.copy(
-                                questionsIdList = guineBissauHistory - savedQuestions,
-                                selectedCategory = category,
-                                selectedCountry = country,
-                            )
-                        }
-                    }
-                    Countries.Mz -> {
-                        val mzHistory = getCountryAndCategoryQuestions(country, category)
-                        updateState {
-                            it.copy(
-                                questionsIdList = mzHistory - savedQuestions,
-                                selectedCategory = category,
-                                selectedCountry = country,
-                            )
-                        }
-                    }
-                    Countries.Stp -> {
-                        val stpHistory = getCountryAndCategoryQuestions(country, category)
-
-                        updateState {
-                            it.copy(
-                                questionsIdList = stpHistory - savedQuestions,
-                                selectedCategory = category,
-                                selectedCountry = country,
-                            )
-                        }
-                    }
-                }
-            }
-
-            Category.Culture -> {
-                when (mainGameUiState.value.selectedCategory) {
-                    Countries.Bible -> updateState {
-                        it.copy(
-                            questionsIdList = catholic_medium - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Catholic -> updateState {
-                        it.copy(
-                            questionsIdList = catequese_medium - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Catequese -> updateState {
-                        it.copy(
-                            questionsIdList = saints_medium - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Saints -> updateState {
-                        it.copy(
-                            questionsIdList = bible_hard - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                }
-            }
-
-            Category.Exam -> {
-                when (mainGameUiState.value.selectedCategory) {
-                    Countries.Bible -> updateState {
-                        it.copy(
-                            questionsIdList = catholic_hard - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Catholic -> updateState {
-                        it.copy(
-                            questionsIdList = catequese_hard - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Catequese -> updateState {
-                        it.copy(
-                            questionsIdList = saints_hard - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                    Countries.Saints -> updateState {
-                        it.copy(
-                            questionsIdList = bible_easy - savedQuestions,
-                            selectedCategory = category,
-                            selectedCountry = country,
-                        )
-                    }
-                }
-            }
-        }
-        loadNextQuestion()
-        settingsManager.saveStringValues(settingsManager.lastSelectedCategory, mainGameUiState.value.selectedCategory.value)
-        settingsManager.saveStringValues(settingsManager.lastLevelSelected, mainGameUiState.value.selectedCountry.value)
-    }
-}
-
 fun MainGameViewModel.setLastDateTimeUserLostLives() {
     viewModelScope.launch {
         val timeStamp = System.currentTimeMillis()
@@ -282,6 +138,74 @@ fun MainGameViewModel.clearLastDateTimeLostLives() {
         updateState { it.copy(lastDateTimeLostLives = 0L) }
     }
 }
+
+fun MainGameViewModel.getCountryAndCategoryQuestions(country: Countries, category: Category): Set<String> {
+   return mainGameUiState.value.allQuestions
+       .filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
+       .map { it.id }
+       .toSet()
+}
+
+fun MainGameViewModel.saveLoadConfigs(country: Countries, category: Category) {
+    viewModelScope.launch {
+        val savedQuestions = mainGameUiState.value.answeredQuestionsList
+        val notAnsweredQuestions =
+            getCountryAndCategoryQuestions(country, category) - savedQuestions
+        updateState {
+            it.copy(
+                questionsIdList = notAnsweredQuestions,
+                selectedCountry = country, selectedCategory = category
+            )
+        }
+        settingsManager.saveStringValues(settingsManager.lastSelectedCategory, category.categoryName)
+        settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country.countryName)
+    }
+}
+
+fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
+    viewModelScope.launch {
+        mainGameUiState.value.selectedCountry?.let { selectedCountry ->
+            mainGameUiState.value.selectedCategory?.let { selectedCategory ->
+
+                when (val category = selectedCategory) {
+                    Category.History -> {
+                        when (val countryForHistory = selectedCountry) {
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
+                            Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.Culture)
+                        }
+                    }
+
+                    Category.Culture -> {
+                        when (val countryForCulture = selectedCountry) {
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
+                            Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.Exam)
+                        }
+                    }
+
+                    Category.Exam -> {
+                        when (val countryForExame = selectedCountry) {
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
+                            Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.History)
+                        }
+                    }
+                }
+
+                loadNextQuestion()
+            }
+
+        }
+    }
+}
+
 
 fun MainGameViewModel.giveCoinsToUser() {
     when (mainGameUiState.value.answeredQuestionsWithoutMistake) {

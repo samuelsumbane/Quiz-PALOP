@@ -71,14 +71,13 @@ fun GameSessionPage() {
                     verticalArrangement = Arrangement.SpaceAround
                 ) {
                     PageTitleText("Sessão")
-println("estado: ${configQuestionsUiState.lastCategoryWasSaved}")
                     HomePageOptionColumn() {
                         if (configQuestionsUiState.lastCategoryWasSaved) {
                             HomeOption("Continuar última sessão") {
                                 navigator.push(
                                     MainPageScreen(
-                                        configQuestionsUiState.questionsCountry.code,
-                                        configQuestionsUiState.questionsCategory.categoryMeaning
+                                        configQuestionsUiState.questionsCountry,
+                                        configQuestionsUiState.questionsCategory
                                     )
                                 )
                             }

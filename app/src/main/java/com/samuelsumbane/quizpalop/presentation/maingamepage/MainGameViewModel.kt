@@ -3,13 +3,14 @@ package com.samuelsumbane.quizpalop.presentation.maingamepage
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.AdState
+import com.samuelsumbane.quizpalop.domain.model.Category
+import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
-import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -66,18 +67,20 @@ class MainGameViewModel(
     fun changeTimerState(newTimerState: QuestionTimerState) = _state.update { it.copy(timerState = newTimerState) }
 
 
-    fun loadQuestions(countryCode: String, categoryMeaning: String) {
+    fun loadQuestions(country: Countries, category: Category) {
         viewModelScope.launch {
             val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
             println("estado: eles sao $savedQuestionsId")
             val questions = repo.getQuestions()
-                .filter { it.id.startsWith(countryCode) && it.questionLevel == categoryMeaning }
-            val idList = questions.map { it.id }.toSet() - savedQuestionsId
+            val selectedQuestionsList = questions.filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
+            val idList = selectedQuestionsList.map { it.id }.toSet() - savedQuestionsId
             updateState {
                 it.copy(
+                    allQuestions = questions,
                     answeredQuestionsList = savedQuestionsId,
                     questionsIdList = idList,
-                    selectedQuestionsList = questions,
+                    selectedCountry = country,
+                    selectedCategory = category
                 )
             }
             startLoadingNextQuestion()
@@ -96,11 +99,12 @@ class MainGameViewModel(
 
 
     fun loadNextQuestion() {
+        println("questions: onLoad, cou: ${mainGameUiState.value.selectedCountry} ${mainGameUiState.value.questionsIdList}")
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
             updateState { it.copy(pageState = MainPageState.QuestionsAnswered) }
 
             val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
-            if (mainGameUiState.value.selectedQuestionsList.size == allAnsweredQuestions) {
+            if (mainGameUiState.value.questionsIdList.size == allAnsweredQuestions) {
                 setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!", "Respondeu todas as questões do jogo."))
             } else {
                 setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas do país "${mainGameUiState.value.selectedCountry?.countryName}" e categoria "${mainGameUiState.value.selectedCategory?.categoryName}".""", "Deseja limpar e responder mesmas questões ou selecionar outras?"))
@@ -108,11 +112,9 @@ class MainGameViewModel(
         } else {
             setGameTextMessage(GameTextMessage.Empty)
             val randomedQuestionId = mainGameUiState.value.questionsIdList.random()
-            println("estado: $randomedQuestionId")
-            mainGameUiState.value.selectedQuestionsList.firstOrNull { it.id == randomedQuestionId }?.let { randomedQuestion ->
+            mainGameUiState.value.allQuestions.firstOrNull { it.id == randomedQuestionId }?.let { randomedQuestion ->
                 val readyQuestion =
                     randomedQuestion.copy(options = randomedQuestion.options.shuffled())
-                println("estado: o actual é: $readyQuestion")
                 updateState {
                     it.copy(
                         actualQuestion = readyQuestion,

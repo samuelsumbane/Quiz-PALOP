@@ -9,5 +9,5 @@ enum class Countries(
     Gw("gw", "Guiné-Bissau"),
     Mz("mz", "Moçambique"),
     Stp("stp", "São Tomé e Príncipe"),
-    None("nn", "None")
+//    None("nn", "None")
 }

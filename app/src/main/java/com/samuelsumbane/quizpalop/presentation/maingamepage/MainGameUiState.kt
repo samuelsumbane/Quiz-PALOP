@@ -12,7 +12,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 data class MainGameUiState(
     val packs: List<Pack> = emptyList(),
     val allQuestions: List<Question> = emptyList(),
-    val selectedQuestionsList: List<Question> = emptyList(),
+//    val selectedQuestionsList: List<Question> = emptyList(),
     val actualQuestion: Question? = null,
     val actualQuestionRightAnswer: String = "",
     val optionsColors: List<Color> = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),

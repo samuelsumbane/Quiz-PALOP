@@ -74,7 +74,7 @@ class UserQuestionsPercentageViewModel(
         viewModelScope.launch {
             settingsManager.saveQuestionsList(emptySet())
             settingsManager.saveStringValues(settingsManager.lastSelectedCategory, Category.History.categoryName)
-            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, Countries.None.countryName)
+            settingsManager.saveStringValues(settingsManager.lastSelectedCountry, Countries.Angola.countryName)
             updateState {
                 it.copy(
                     easyAnsweredQuestionsList = emptySet(),
