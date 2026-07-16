@@ -96,8 +96,6 @@ fun ProgressPage() {
                                         val allProgressPercentage =
                                             (userQuestionsProgressUiState.easyAnsweredQuestionsList + userQuestionsProgressUiState.mediumAnsweredQuestionsList + userQuestionsProgressUiState.hardAnsweredQuestionsList).size.toFloat() / userQuestionsProgressUiState.questions.size
 
-                                        ProgressBar(actualPercentage = allProgressPercentage)
-
                                         Column(
                                             modifier = Modifier.padding(top = 30.dp)
                                         ) {

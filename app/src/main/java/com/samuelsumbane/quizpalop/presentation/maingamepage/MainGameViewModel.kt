@@ -33,6 +33,7 @@ class MainGameViewModel(
     init {
         viewModelScope.launch {
             loadPacks()
+            loadDateTimeSavedValues()
 //        loadQuestions()
             loadLivesAndCoinsInFlow()
             settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
@@ -70,7 +71,6 @@ class MainGameViewModel(
     fun loadQuestions(country: Countries, category: Category) {
         viewModelScope.launch {
             val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
-            println("estado: eles sao $savedQuestionsId")
             val questions = repo.getQuestions()
             val selectedQuestionsList = questions.filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
             val idList = selectedQuestionsList.map { it.id }.toSet() - savedQuestionsId
@@ -133,10 +133,22 @@ class MainGameViewModel(
         updateState { it.copy(optionsColors = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),) }
     }
 
+    fun loadDateTimeSavedValues() {
+        viewModelScope.launch {
+            val lastDateTimeUserLostLives = settingsManager.readLongValues(settingsManager.lastDateTimeLostLives)
+            val lastDateTimeUserAskedRightOption = settingsManager.readLongValues(settingsManager.lastRightOptionButtonDateTime)
+
+            updateState { it.copy(
+                lastDateTimeLostLives = lastDateTimeUserLostLives,
+                lastRightOptionButtonDateTime = lastDateTimeUserAskedRightOption
+            ) }
+        }
+    }
+
     fun loadLivesAndCoinsInFlow() {
         viewModelScope.launch {
             settingsManager.readIntValues(settingsManager.lives).collect { userLives ->
-                updateState { it.copy(lives = if (userLives == 0) 10 else userLives) }
+                updateState { it.copy(lives = userLives) }
             }
         }
 

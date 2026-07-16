@@ -29,7 +29,7 @@ enum class QuestionConfig(
         configOptionsList = Countries.entries.map { it.countryName }
     ),
     SelectCategory(
-        pageTitle = "Selecione a catogoria",
+        pageTitle = "Selecione a categoria",
         configOptionsList = Category.entries.map { it.categoryName }
     ),
     SelectQuestionsLength(

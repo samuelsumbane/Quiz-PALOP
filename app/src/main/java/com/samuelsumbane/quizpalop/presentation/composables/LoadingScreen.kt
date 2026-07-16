@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -19,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun LoadingScreen() {
     Column(
         Modifier
-            .background(Color(0xFF676868))
+            .background(MaterialTheme.colorScheme.tertiary)
             .fillMaxSize(),
         Arrangement.Center,
         Alignment.CenterHorizontally
@@ -30,20 +31,6 @@ fun LoadingScreen() {
             trackColor = Color.DarkGray,
         )
         Spacer(Modifier.height(20.dp))
-        Text("Carregando...")
+        Text("Carregando...", color = MaterialTheme.colorScheme.background)
     }
 }
-
-//@Composable
-//fun HomePageOptionColumn(
-//    modifier: Modifier = Modifier,
-//    content: @Composable () -> Unit
-//) {
-//    Column(
-//        modifier = modifier
-//            .padding(top = 30.dp)
-//            .background(Color(0xBC9C9C9B), RoundedCornerShape(16.dp))
-//            .padding(0.dp, 5.dp),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) { content() }
-//}

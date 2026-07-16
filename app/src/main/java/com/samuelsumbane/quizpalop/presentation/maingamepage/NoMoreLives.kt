@@ -116,14 +116,14 @@ fun NoMoreLivesUI(
                     RowHeartAndLives("1")
                     Text(" por  ", color = Color.Black)
                     verticallyCenteredRowContent {
-                        Text("1 ", style = MaterialTheme.typography.titleSmall, color = Color.White)
+                        Text("1 ", style = MaterialTheme.typography.titleMedium, color = Color.White)
                         Text("anúncio", color = Color.Black)
                     }
                 }
 
                 AppButton(
                     text = quizGameUiState.adState.stateName,
-                    modifier = Modifier.padding(10.dp),
+                    modifier = Modifier.padding(5.dp),
                     minText = true
                 ) {
                     when (quizGameUiState.adState) {

@@ -7,7 +7,6 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.PlayQuestionsNum
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
-import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
@@ -54,10 +53,11 @@ class QuestionsConfigViewModel(
                         updateState {
                             it.copy(
                                 questionsCountry = country,
-                                lastCategoryWasSaved = lastSavedCountry.isNotBlank(),
+                                lastCategoryWasSaved = true,
                             )
                         }
                     }
+                    ?: run { settingsManager.saveIntValues(settingsManager.lives, 10) }
 
                 updateState { it.copy(pageUiState = QuestionsConfigPageUiState.ShowContent) }
             }

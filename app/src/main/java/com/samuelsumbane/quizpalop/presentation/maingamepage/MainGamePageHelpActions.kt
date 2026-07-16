@@ -27,7 +27,6 @@ fun MainGameViewModel.changeUserHelpState(userGotHelp: Boolean) = updateState { 
 fun MainGameViewModel.helpWithRightOption() {
     val currentTimeMillis = System.currentTimeMillis()
     val passedHours = (currentTimeMillis - mainGameUiState.value.lastRightOptionButtonDateTime).milliseconds
-
     if (mainGameUiState.value.lastRightOptionButtonDateTime == 0L || passedHours.inWholeHours >= 24) {
         if (mainGameUiState.value.userCoins < 25) {
             setGameTextMessage(GameTextMessage.CannotGetHelp("Moedas insuficientes", "Precisa de 25 moedas para saber da resposta correcta",

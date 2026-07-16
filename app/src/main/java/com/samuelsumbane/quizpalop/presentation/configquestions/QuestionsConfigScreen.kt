@@ -101,8 +101,6 @@ fun QuestionsConfigPage(destination: PagesName) {
 
     Scaffold { paddingValues ->
 
-//        val questionsConfig = if (destination == PagesName.MainPage) questionsConfigUiState.questionConfig.
-
         @Composable
         fun ShowPageContent() {
             PageLayout {
@@ -110,19 +108,12 @@ fun QuestionsConfigPage(destination: PagesName) {
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(paddingValues),
-                    verticalArrangement = Arrangement.SpaceEvenly
+                    verticalArrangement = Arrangement.SpaceAround
                 ) {
-
-                    Row(
-                        Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        PageTitleText(questionsConfigUiState.questionConfig.pageTitle)
-                    }
 
                     Column(
                         modifier = Modifier
-                            .padding(15.dp)
+                            .padding(start = 15.dp, top = 0.dp, end = 15.dp)
                             .fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -137,7 +128,16 @@ fun QuestionsConfigPage(destination: PagesName) {
                                 .padding(20.dp)
                                 .fillMaxWidth(),
                             color = Color(0xFF179EFC),
+                            trackColor = MaterialTheme.colorScheme.background.copy(alpha = 0.9f)
                         )
+                    }
+
+
+                    Row(
+                        Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        PageTitleText(questionsConfigUiState.questionConfig.pageTitle)
                     }
 
                     Column(modifier = Modifier) {

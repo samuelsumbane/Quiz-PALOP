@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,7 +44,7 @@ fun ProgressBar(
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = level?.levelName ?: "Todo", color = Color.White, fontWeight = FontWeight.SemiBold)
+                Text(text = level?.levelName ?: "Todo", color = MaterialTheme.colorScheme.onBackground, fontWeight = FontWeight.SemiBold)
 
                 CircularProgressIndicator(
                     progress = { actualPercentage },
@@ -58,7 +59,7 @@ fun ProgressBar(
 
                 Text(
                     text = "$formattedPercentage% Completo",
-                    color = Color.LightGray,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                     fontSize = 14.sp,
                     modifier = Modifier.padding(start = 10.dp)
                 )

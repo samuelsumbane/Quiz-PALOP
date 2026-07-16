@@ -7,7 +7,6 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Pack
 import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
-import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 
 data class MainGameUiState(
     val packs: List<Pack> = emptyList(),

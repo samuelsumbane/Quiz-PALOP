@@ -159,6 +159,8 @@ fun MainGameViewModel.saveLoadConfigs(country: Countries, category: Category) {
         }
         settingsManager.saveStringValues(settingsManager.lastSelectedCategory, category.categoryName)
         settingsManager.saveStringValues(settingsManager.lastSelectedCountry, country.countryName)
+
+        loadNextQuestion()
     }
 }
 
@@ -169,17 +171,21 @@ fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
 
                 when (val category = selectedCategory) {
                     Category.History -> {
-                        when (val countryForHistory = selectedCountry) {
+                        when (selectedCountry) {
                             Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
                             Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
                             Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
                             Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
-                            Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.Culture)
+                            Countries.Stp -> {
+                                // Check if all easy level is answered
+//                                if ()
+                                saveLoadConfigs(Countries.Angola, Category.Culture)
+                            }
                         }
                     }
 
                     Category.Culture -> {
-                        when (val countryForCulture = selectedCountry) {
+                        when (selectedCountry) {
                             Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
                             Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
                             Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
@@ -199,7 +205,6 @@ fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
                     }
                 }
 
-                loadNextQuestion()
             }
 
         }

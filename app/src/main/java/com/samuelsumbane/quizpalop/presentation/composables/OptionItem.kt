@@ -54,6 +54,7 @@ fun OptionItem(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .size(30.dp)
+                        .padding(end = 10.dp)
                 )
             }
 
