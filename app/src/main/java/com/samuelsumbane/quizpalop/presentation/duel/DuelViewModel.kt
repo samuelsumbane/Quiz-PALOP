@@ -174,9 +174,8 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                         }
                         sendSound(SoundEvent.Correct)
                     } else sendSound(SoundEvent.Wrong)
-
+println("questions: $question")
                     delay(1200)
-
                     if (playerName == PlayerName.FirstPlayer) {
                         updateState {
                             it.copy(

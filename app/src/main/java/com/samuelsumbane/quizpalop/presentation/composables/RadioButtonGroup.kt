@@ -42,7 +42,6 @@ fun RadioButtonGroup(
             .fillMaxWidth(0.8f)
             .padding(20.dp)
             .background(MaterialTheme.colorScheme.tertiary, RoundedCornerShape(12.dp))
-//            .blur(5.dp)
             .padding(10.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -84,9 +83,9 @@ fun RadioButtonGroup(
                     val l3 = savedQuestionsId.third.containsAll(allQuestions.filter { it.questionLevel == "Hard" }.map { it.id })
                     val categoryAndLevelValues = listOf(l1, l2, l3, false)
 
-                    if (Category.History.categoryName !in optionsList) {
+//                    if (Category.History.categoryName !in optionsList) {
                         if (categoryAndLevelValues[index]) CheckIcon() else Text("    ")
-                    } else Text("")
+//                    } else Text("")
                 }
             }
         }
@@ -94,5 +93,3 @@ fun RadioButtonGroup(
 }
 
 
-@Composable
-fun CheckIcon() = Icon(painterResource(R.drawable.door_open_fill), "", tint = Color(0xFF09740E))

@@ -299,7 +299,7 @@ fun MainPage(country: Countries, category: Category) {
                                                 question.options.forEachIndexed { index, option ->
                                                     OptionItem(
                                                         prefixText = optionsLabels[index],
-                                                        text = option,
+                                                        text = "this is text to test option item text r",
                                                         backgroundColor = mainPageUiState.optionsColors[index]
                                                     ) {
                                                         mainPageViewModel.onEvent(

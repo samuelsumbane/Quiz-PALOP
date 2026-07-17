@@ -89,7 +89,8 @@ fun QuestionsConfigPage(destination: PagesName) {
 
     LaunchedEffect(Unit) {
         questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCountry)
-        userQuestionsPercentage.levelForLocked()
+        userQuestionsPercentage.calcLevelPercentage()
+//        userQuestionsPercentage.levelForLocked()
         questionsConfigViewModel.readSavedCategory()
         questionsConfigViewModel.readSavedCountry()
         questionsConfigViewModel.loadSavedQuestions()
@@ -203,6 +204,7 @@ fun QuestionsConfigPage(destination: PagesName) {
                         },
                         onForwardButtonClicked = {
                             if (questionsConfigUiState.questionConfig == QuestionConfig.SelectCountry) {
+                                userQuestionsPercentage.levelForLocked()
                                 questionsConfigViewModel.setQuestionConfig(QuestionConfig.SelectCategory)
                                 coroutine.launch {
                                     questionsConfigViewModel.saveSelectedCountry(

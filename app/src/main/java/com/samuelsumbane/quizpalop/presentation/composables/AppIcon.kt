@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -62,4 +64,13 @@ fun NormalIconContainer(painter: Painter, contentDescription: String) {
 @Composable
 fun IconContainer(painter: Painter, contentDescription: String) {
     Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
+}
+
+@Composable
+fun CheckIcon() {
+    Icon(painterResource(
+        R.drawable.check),
+        "", tint = Color(0xFF09740E),
+        modifier = Modifier.size(26.dp)
+    )
 }

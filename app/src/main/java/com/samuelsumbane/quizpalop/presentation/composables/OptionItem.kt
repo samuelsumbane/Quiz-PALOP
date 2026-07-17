@@ -54,7 +54,6 @@ fun OptionItem(
                     textAlign = TextAlign.Center,
                     modifier = Modifier
                         .size(30.dp)
-                        .padding(end = 10.dp)
                 )
             }
 
@@ -64,7 +63,10 @@ fun OptionItem(
             text,
             color = if (backgroundColor in listOf(quizOptionCurrectButtonColor, quizOptionWrongButtonColor)) Color.White else Color(0xFF021526),
             fontWeight = FontWeight.SemiBold,
-            modifier = Modifier.align(Alignment.Center)
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth(0.72f)
+                .align(Alignment.Center)
         )
     }
 }
