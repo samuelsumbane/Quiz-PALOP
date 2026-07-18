@@ -90,7 +90,7 @@ class QuestionsConfigViewModel(
     fun loadSavedQuestions() {
         viewModelScope.launch {
             val questions = repo.getQuestions()
-            val savedQuestions = settingsManager.readSavedQuestionsList().first()
+            val savedQuestions = settingsManager.readSavedStringsValues(settingsManager.savedQuestionsList).first()
             updateState { it.copy(questions = questions, savedQuestions = savedQuestions) }
         }
     }

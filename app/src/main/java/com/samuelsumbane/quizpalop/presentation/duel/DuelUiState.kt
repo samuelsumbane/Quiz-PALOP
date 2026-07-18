@@ -20,7 +20,7 @@ data class DuelUiState(
 data class PlayerData(
     val name: PlayerName = PlayerName.FirstPlayer,
     val question: Question? = null,
-    val questionsList: Set<Question> = emptySet(),
+    val questionsIdList: Set<String> = emptySet(),
     val actualQuestion: Question? = null,
     val actualQuestionRightAnswer: String = "",
 

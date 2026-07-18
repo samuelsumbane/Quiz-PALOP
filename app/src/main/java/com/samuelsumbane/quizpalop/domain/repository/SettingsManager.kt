@@ -26,6 +26,9 @@ class SettingsManager(val context: Context) {
 
     val lastRightOptionButtonDateTime = longPreferencesKey("last_datetime_rightOption_clicked")
     val lastDateTimeLostLives = longPreferencesKey("last_datetime_lost_lives")
+    val dailyShownQuestionsId = stringPreferencesKey("dailyShownQuestionsId")
+
+
     /**
      * Reads Int DataStore values
      */
@@ -77,17 +80,17 @@ class SettingsManager(val context: Context) {
         }
     }
 
-    fun readSavedQuestionsList(): Flow<Set<String>> {
+    fun readSavedStringsValues(dataList: Preferences.Key<String>): Flow<Set<String>> {
         return context.dataStore.data.map { prefs ->
-            val json = prefs[savedQuestionsList] ?: "[]"
+            val json = prefs[dataList] ?: "[]"
             Json.decodeFromString<Set<String>>(json)
         }
     }
 
-    suspend fun saveQuestionsList(listValue: Set<String>) {
+    suspend fun saveStringsValues(dataList: Preferences.Key<String>, listValue: Set<String>) {
         val jsonData = Json.encodeToString(listValue)
         context.dataStore.edit { pref ->
-            pref[savedQuestionsList] = jsonData
+            pref[dataList] = jsonData
         }
     }
 

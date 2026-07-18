@@ -2,7 +2,6 @@ package com.samuelsumbane.quizpalop.presentation.userquestionspercentage
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
@@ -27,7 +26,7 @@ class UserQuestionsPercentageViewModel(
 
     fun calcLevelPercentage() {
         viewModelScope.launch {
-            val savedQuestions = settingsManager.readSavedQuestionsList().first()
+            val savedQuestions = settingsManager.readSavedStringsValues(settingsManager.savedQuestionsList).first()
             val questionslist = quizRepository.getQuestions()
 
             val allEasyQuestions = questionslist.filter { it.questionLevel == "Easy" }.map { it.id }
@@ -60,7 +59,7 @@ class UserQuestionsPercentageViewModel(
 
     fun loadSavedQuestions() {
         viewModelScope.launch {
-            val savedQuestions = settingsManager.readSavedQuestionsList().first()
+            val savedQuestions = settingsManager.readSavedStringsValues(settingsManager.savedQuestionsList).first()
             calcLevelPercentage()
             updateState { it.copy(
                 savedQuestions = savedQuestions,
@@ -72,7 +71,7 @@ class UserQuestionsPercentageViewModel(
 
     fun resetProgress() {
         viewModelScope.launch {
-            settingsManager.saveQuestionsList(emptySet())
+            settingsManager.saveStringsValues(settingsManager.savedQuestionsList, emptySet())
             settingsManager.saveStringValues(settingsManager.lastSelectedCategory, Category.History.categoryName)
             settingsManager.saveStringValues(settingsManager.lastSelectedCountry, Countries.Angola.countryName)
             updateState {

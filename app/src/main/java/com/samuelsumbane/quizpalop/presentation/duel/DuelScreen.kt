@@ -144,19 +144,25 @@ fun DuelPage(
         PageState.Loading -> LoadingScreen()
         PageState.ShowContent -> pageContent()
         PageState.DisplayMessage -> {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(HomeOptionColor)
-            ) {
-                val firstPlayerRightAnsweredQuestions = duelUiState.firstPlayer.rightAnsweredQuestions
-                val secondPlayerRightAnsweredQuestions = duelUiState.secondPlayer.rightAnsweredQuestions
+            Scaffold {
+                Column(
+                    modifier = Modifier
+                        .padding(it)
+                        .fillMaxSize()
+                        .appBackground()
+                ) {
+                    val firstPlayerRightAnsweredQuestions =
+                        duelUiState.firstPlayer.rightAnsweredQuestions
+                    val secondPlayerRightAnsweredQuestions =
+                        duelUiState.secondPlayer.rightAnsweredQuestions
 
                     if (firstPlayerRightAnsweredQuestions > secondPlayerRightAnsweredQuestions) {
                         WinnerContainer(
                             navigator,
                             duelViewModel,
-                            value = firstPlayerRightAnsweredQuestions - secondPlayerRightAnsweredQuestions, modifier = Modifier.asFirstPlayerModifier())
+                            value = firstPlayerRightAnsweredQuestions - secondPlayerRightAnsweredQuestions,
+                            modifier = Modifier.asFirstPlayerModifier()
+                        )
                         DuelHorizontalDivider()
                         LoserContainer(
                             value = firstPlayerRightAnsweredQuestions - secondPlayerRightAnsweredQuestions,
@@ -170,12 +176,14 @@ fun DuelPage(
                         WinnerContainer(
                             navigator,
                             duelViewModel,
-                            value = secondPlayerRightAnsweredQuestions - firstPlayerRightAnsweredQuestions)
+                            value = secondPlayerRightAnsweredQuestions - firstPlayerRightAnsweredQuestions
+                        )
                     } else {
                         NoWinnerNoLoser(modifier = Modifier.asFirstPlayerModifier())
                         DuelHorizontalDivider()
                         NoWinnerNoLoser { ContinueDuelButtons(navigator, duelViewModel) }
                     }
+                }
             }
         }
     }
@@ -260,7 +268,7 @@ fun NoWinnerNoLoser(
     Column(
         modifier = modifier
             .padding(top = 20.dp)
-            .appBackground()
+//            .appBackground()
     ) {
         DuelMessageText("Empatado!","Não houve vencedor nesta partida")
         content?.invoke()
@@ -309,7 +317,7 @@ fun AdversarioContent(
                             .padding(10.dp)
                             .align(Alignment.TopCenter)
                     ) {
-                        QuestionText(text = playerData.question.question ?: "", modifierFontSize = true)
+                        QuestionText(text = playerData.question.question, modifierFontSize = true)
                     }
 
 //                    val currectQuestionOptions =

@@ -15,6 +15,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import com.google.android.gms.ads.MobileAds
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
+import com.samuelsumbane.quizpalop.presentation.duel.DuelScreen
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
@@ -33,6 +34,7 @@ class MainActivity : ComponentActivity() {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
                 Navigator(HomePageScreen())
+//                Navigator(DuelScreen(Countries.Mz, Category.History, 2))
             }
         }
     }

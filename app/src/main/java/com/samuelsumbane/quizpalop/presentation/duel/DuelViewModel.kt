@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class DuelViewModel(val repository: QuizRepository) : ViewModel() {
     private val _state = MutableStateFlow(DuelUiState())
@@ -54,11 +55,11 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                 allQuestions = filteredQuestions,
                 firstPlayer = PlayerData(
                     name = PlayerName.FirstPlayer,
-                    questionsList = questionsForFirstPlayer,
+                    questionsIdList = questionsForFirstPlayer.map { question -> question.id }.toSet(),
                 ),
                 secondPlayer = PlayerData(
                     name = PlayerName.SecondPlayer,
-                    questionsList = questionsForSecondPlayer
+                    questionsIdList = questionsForSecondPlayer.map { question -> question.id }.toSet()
                 ),
                 country = country,
                 category = category,
@@ -73,23 +74,38 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
     }
 
     fun loadNextQuestionForBothPlayers() {
-        updateState {
-            val firstPlayerQuestion = duelUiState.value.firstPlayer.questionsList.random()
-            val secondPlayerQuestion = duelUiState.value.secondPlayer.questionsList.random()
-            
-            it.copy(
-                firstPlayer = it.firstPlayer.copy(
-                    question = firstPlayerQuestion.copy(options = firstPlayerQuestion.options.shuffled()),
-                    actualQuestionRightAnswer = firstPlayerQuestion.options[firstPlayerQuestion.correctIndex]
-                ),
-                secondPlayer = it.secondPlayer.copy(
-                    question = secondPlayerQuestion.copy(options = secondPlayerQuestion.options.shuffled()),
-                    actualQuestionRightAnswer = secondPlayerQuestion.options[secondPlayerQuestion.correctIndex]
-                ),
-                pageState = PageState.ShowContent
-            )
+        if (duelUiState.value.firstPlayer.questionsIdList.isNotEmpty() && duelUiState.value.secondPlayer.questionsIdList.isNotEmpty()) {
+            val firstPlayerQuestionId = duelUiState.value.firstPlayer.questionsIdList.random()
+            val secondPlayerQuestionId = duelUiState.value.secondPlayer.questionsIdList.random()
+
+            duelUiState.value.allQuestions.firstOrNull { question -> question.id == firstPlayerQuestionId }
+                ?.let { foundQuestion ->
+                    updateState {
+                        it.copy(
+                            firstPlayer = it.firstPlayer.copy(
+                                question = foundQuestion.copy(options = foundQuestion.options.shuffled()),
+                                actualQuestionRightAnswer = foundQuestion.options[foundQuestion.correctIndex]
+                            )
+                        )
+                    }
+                }
+
+            duelUiState.value.allQuestions.firstOrNull { secondQuestion -> secondQuestion.id == secondPlayerQuestionId }
+                ?.let { questionForSecondPlayer ->
+                    updateState {
+                        it.copy(
+                            secondPlayer = it.secondPlayer.copy(
+                                question = questionForSecondPlayer.copy(options = questionForSecondPlayer.options.shuffled()),
+                                actualQuestionRightAnswer = questionForSecondPlayer.options[questionForSecondPlayer.correctIndex]
+                            ),
+                            pageState = PageState.ShowContent
+                        )
+                    }
+                }
+            decreaseTimer()
+        } else {
+            updateState { it.copy(pageState = PageState.DisplayMessage) }
         }
-        decreaseTimer()
     }
 
 
@@ -174,28 +190,32 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                         }
                         sendSound(SoundEvent.Correct)
                     } else sendSound(SoundEvent.Wrong)
-println("questions: $question")
-                    delay(1200)
+println("duelS: the id: ${question.id}")
+                    delay(1200.milliseconds)
                     if (playerName == PlayerName.FirstPlayer) {
+                        val firstOptionsList = duelUiState.value.firstPlayer.questionsIdList - question.id
                         updateState {
                             it.copy(
                                 firstPlayer = it.firstPlayer.copy(
                                     question = null,
-                                    questionsList = it.firstPlayer.questionsList - question
+                                    questionsIdList = firstOptionsList
                                 )
                             )
                         }
+
+                        println("duelS: 1 the list ${duelUiState.value.firstPlayer.questionsIdList} but it is: ${firstOptionsList}")
                     } else {
+                        val newSecondOptionsList = duelUiState.value.secondPlayer.questionsIdList - question.id
                         updateState {
                             it.copy(
                                 secondPlayer = it.secondPlayer.copy(
                                     question = null,
-                                    questionsList = it.secondPlayer.questionsList - question
+                                    questionsIdList = newSecondOptionsList
                                 )
                             )
                         }
+                    println("duelS: 2 the list ${duelUiState.value.secondPlayer.questionsIdList} but it is: ${newSecondOptionsList}")
                     }
-
                     loadNextQuestionOrShowMessage()
                 }
             }
@@ -209,7 +229,7 @@ println("questions: $question")
     fun loadNextQuestionOrShowMessage() {
         if (duelUiState.value.firstPlayer.question == null && duelUiState.value.secondPlayer.question == null) {
             resetButtonsColors()
-            if (duelUiState.value.firstPlayer.questionsList.isNotEmpty()) {
+            if (duelUiState.value.firstPlayer.questionsIdList.isNotEmpty()) {
                 loadNextQuestionForBothPlayers()
             } else {
                 updateState { it.copy(pageState = PageState.DisplayMessage) }
@@ -222,11 +242,11 @@ println("questions: $question")
         updateState {
             it.copy(
                 firstPlayer = it.firstPlayer.copy(
-                    questionsList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).toSet(),
+                    questionsIdList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).map { question -> question.id }.toSet(),
                     rightAnsweredQuestions = 0
                 ),
                 secondPlayer = it.secondPlayer.copy(
-                    questionsList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).toSet(),
+                    questionsIdList = questions.shuffled().take(duelUiState.value.duelQuestionsSize).map { question -> question.id }.toSet(),
                     rightAnsweredQuestions = 0
                 )
             )
@@ -265,7 +285,7 @@ println("questions: $question")
                 if (duelUiState.value.firstPlayer.question == null && duelUiState.value.secondPlayer.question == null) {
                     break
                 }
-                delay(1000)
+                delay(1000.milliseconds)
             }
             updateState { it.copy(
                 firstPlayer = it.firstPlayer.copy(question = null, playerTimer = 0),
@@ -283,7 +303,7 @@ println("questions: $question")
             PlayerName.FirstPlayer -> {
                 when (button) {
                     OptionsButton.First -> updateState {
-                        it.copy(firstPlayer = it.firstPlayer.copy(optionsColors = it.firstPlayer.optionsColors.mapIndexed { index, color -> if (index == 0) newColor else color }),)
+                        it.copy(firstPlayer = it.firstPlayer.copy(optionsColors = it.firstPlayer.optionsColors.mapIndexed { index, color -> if (index == 0) newColor else color }))
                     }
                     OptionsButton.Second -> updateState {
                         it.copy(firstPlayer = it.firstPlayer.copy(optionsColors = it.firstPlayer.optionsColors.mapIndexed { index, color -> if (index == 1) newColor else color }))

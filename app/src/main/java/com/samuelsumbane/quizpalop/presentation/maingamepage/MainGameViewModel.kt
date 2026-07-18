@@ -70,7 +70,7 @@ class MainGameViewModel(
 
     fun loadQuestions(country: Countries, category: Category) {
         viewModelScope.launch {
-            val savedQuestionsId = settingsManager.readSavedQuestionsList().first()
+            val savedQuestionsId = settingsManager.readSavedStringsValues(settingsManager.savedQuestionsList).first()
             val questions = repo.getQuestions()
             val selectedQuestionsList = questions.filter { it.id.startsWith(country.code) && it.questionLevel == category.categoryMeaning }
             val idList = selectedQuestionsList.map { it.id }.toSet() - savedQuestionsId

@@ -101,7 +101,7 @@ fun MainGameViewModel.checkResponse(
                 val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
                 updateState { it.copy(answeredQuestionsList = answeredQuestions) }
 //                println("ouvindo: to save: ${mainGameUiState.value.answeredQuestionsList}")
-                settingsManager.saveQuestionsList(mainGameUiState.value.answeredQuestionsList)
+                settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
 
                 sendSound(SoundEvent.Correct)
                 startLoadingNextQuestion()

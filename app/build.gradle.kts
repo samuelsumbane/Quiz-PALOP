@@ -74,4 +74,6 @@ dependencies {
     implementation("io.insert-koin:koin-compose-viewmodel:4.0.4")
     implementation("com.google.android.gms:play-services-ads:24.7.0")
     implementation("com.airbnb.android:lottie-compose:6.6.7")
+
+    implementation("androidx.work:work-runtime-ktx:2.9.1")
 }
