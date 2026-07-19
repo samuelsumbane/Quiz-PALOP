@@ -1,7 +1,12 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
+import android.content.Context
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.saveBitmap
+import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.AdState
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
@@ -19,6 +24,7 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.milliseconds
 
 class MainGameViewModel(
     private val repo: QuizRepository,
@@ -91,7 +97,7 @@ class MainGameViewModel(
     fun startLoadingNextQuestion() {
         viewModelScope.launch {
             if (mainGameUiState.value.lives > 0 || mainGameUiState.value.gameTextMessage == GameTextMessage.Empty) {
-                delay(1700L)
+                delay(1700.milliseconds)
                 loadNextQuestion()
             }
         }
@@ -217,7 +223,7 @@ class MainGameViewModel(
             val ft = mainGameUiState.value.questionsTimer
             for (i in ft downTo 0) {
                 changeTimerTo(i)
-                delay(1000)
+                delay(1000.milliseconds)
             }
             if (mainGameUiState.value.questionsTimer <= 1) {
                 setQuestionWrong()

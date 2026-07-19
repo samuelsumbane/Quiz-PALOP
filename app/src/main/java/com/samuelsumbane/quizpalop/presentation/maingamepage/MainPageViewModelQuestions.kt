@@ -87,37 +87,37 @@ fun MainGameViewModel.checkResponse(
                 }
             }
 
-        updateState { it.copy(timerState = QuestionTimerState.Stop) }
+            updateState { it.copy(timerState = QuestionTimerState.Stop) }
 
-        if (currectOption == clickedOptionName) {
-            viewModelScope.launch {
-                updateState { it.copy(questionsIdList = it.questionsIdList - question.id) }
+            if (currectOption == clickedOptionName) {
+                viewModelScope.launch {
+                    updateState { it.copy(questionsIdList = it.questionsIdList - question.id) }
 
-                if (!mainGameUiState.value.userGotHelp) {
-                    updateState { it.copy(answeredQuestionsWithoutMistake = it.answeredQuestionsWithoutMistake + 1) }
-                    giveCoinsToUser()
-                }
+                    if (!mainGameUiState.value.userGotHelp) {
+                        updateState { it.copy(answeredQuestionsWithoutMistake = it.answeredQuestionsWithoutMistake + 1) }
+                        giveCoinsToUser()
+                    }
 
-                val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
-                updateState { it.copy(answeredQuestionsList = answeredQuestions) }
+                    val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
+                    updateState { it.copy(answeredQuestionsList = answeredQuestions) }
 //                println("ouvindo: to save: ${mainGameUiState.value.answeredQuestionsList}")
-                settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
+                    settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
 
-                sendSound(SoundEvent.Correct)
-                startLoadingNextQuestion()
+                    sendSound(SoundEvent.Correct)
+                    startLoadingNextQuestion()
+                }
+            } else {
+                viewModelScope.launch {
+                    changeLivesCount(ChangeCountValues.DecreaseLive)
+                    clearAnsweredQuestionsWithoutMistake()
+                    setLastDateTimeUserLostLives()
+                    if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
+                    sendSound(SoundEvent.Wrong)
+                    startLoadingNextQuestion()
+                }
             }
-        } else {
-            viewModelScope.launch {
-                changeLivesCount(ChangeCountValues.DecreaseLive)
-                clearAnsweredQuestionsWithoutMistake()
-                setLastDateTimeUserLostLives()
-                if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
-                sendSound(SoundEvent.Wrong)
-                startLoadingNextQuestion()
-            }
-        }
 
-        changeUserHelpState(false)
+            changeUserHelpState(false)
         }
     }
 }

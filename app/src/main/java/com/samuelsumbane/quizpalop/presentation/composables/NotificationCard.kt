@@ -52,7 +52,7 @@ fun NotificationPermissionCard(
                 .padding(10.dp)
                 .align(Alignment.Center)
         ) {
-            val textColor = MaterialTheme.colorScheme.background
+            val textColor = Color(0xFFB4B9BD)
 
             Text("Ativa as notificações",
                 style = MaterialTheme.typography.titleMedium,
@@ -63,18 +63,14 @@ fun NotificationPermissionCard(
             Spacer(Modifier.height(18.dp))
 
             Row {
-                TextButton(onClick = onDismiss) {
-                    Text("Agora não")
-                }
+                AppTextButton { onDismiss() }
                 Spacer(Modifier.width(8.dp))
-                Button(onClick = {
+                AppButton(text = "Ativar") {
                     if (state.canAskAgain || !hasRequestedBefore(context)) {
-                        state.requestPermission()
+                        state.requestPermission
                     } else {
                         openAppSettings(context)
                     }
-                }) {
-                    Text("Ativar")
                 }
             }
         }

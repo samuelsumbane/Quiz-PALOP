@@ -1,6 +1,7 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
 import android.app.Activity
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -20,6 +21,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -28,12 +30,20 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.drawLayer
+import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -48,6 +58,8 @@ import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.core.saveBitmap
+import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
@@ -67,6 +79,9 @@ import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigS
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.ui.theme.BlueDark
+import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 
 
 class MainPageScreen(val country: Countries, val category: Category) : Screen {
@@ -84,6 +99,8 @@ fun MainPage(country: Countries, category: Category) {
     val context = LocalContext.current
     val soundManager = remember { SoundManager(context) }
     val manager = remember { RewardedAdManager(context) }
+    val coroutineScope = rememberCoroutineScope()
+
 
     val activity = context as Activity
 
@@ -109,11 +126,12 @@ fun MainPage(country: Countries, category: Category) {
         }
     }
 
-    LaunchedEffect(mainPageUiState.timerState) {
-        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-            mainPageViewModel.timerCounterExec()
-        }
-    }
+
+//    LaunchedEffect(mainPageUiState.timerState) {
+//        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+//            mainPageViewModel.timerCounterExec()
+//        }
+//    }
 
 
     @Composable
@@ -126,6 +144,7 @@ fun MainPage(country: Countries, category: Category) {
         val allQuestionsFineshedIcon by rememberLottieComposition(
             LottieCompositionSpec.Asset("lottie/trophy1.lottie")
         )
+
 
         Scaffold {
             Column(
@@ -180,6 +199,12 @@ fun MainPage(country: Countries, category: Category) {
     @Composable
     fun pageContent() {
         mainPageUiState.actualQuestion?.let { questionData ->
+
+            val graphicsLayer = rememberGraphicsLayer()
+            val context = LocalContext.current
+
+
+
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(
@@ -247,7 +272,13 @@ fun MainPage(country: Countries, category: Category) {
                         .padding(padding)
                         .fillMaxSize()
                         .appBackground()
-                        .padding(10.dp),
+                        .padding(10.dp)
+                        .drawWithContent {
+                            graphicsLayer.record {
+                                this@drawWithContent.drawContent()
+                            }
+                            drawLayer(graphicsLayer)
+                        },
                 ) {
                     AnimatedVisibility(mainPageUiState.lives < 1) {
                         MaxSizeBox {
@@ -274,7 +305,13 @@ fun MainPage(country: Countries, category: Category) {
                             }
 
                             if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-                                GameTopStatusBar(mainPageViewModel, mainPageUiState)
+                                GameTopStatusBar(
+                                    mainPageViewModel,
+                                    mainPageUiState,
+                                    modifier = Modifier
+                                        .align(Alignment.TopCenter)
+                                        .zIndex(5f)
+                                )
 
                                 Column(
                                     modifier = Modifier.fillMaxSize(),
@@ -299,7 +336,7 @@ fun MainPage(country: Countries, category: Category) {
                                                 question.options.forEachIndexed { index, option ->
                                                     OptionItem(
                                                         prefixText = optionsLabels[index],
-                                                        text = "this is text to test option item text r",
+                                                        text = option,
                                                         backgroundColor = mainPageUiState.optionsColors[index]
                                                     ) {
                                                         mainPageViewModel.onEvent(

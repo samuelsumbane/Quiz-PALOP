@@ -28,7 +28,6 @@ class SettingsManager(val context: Context) {
     val lastDateTimeLostLives = longPreferencesKey("last_datetime_lost_lives")
     val dailyShownQuestionsId = stringPreferencesKey("dailyShownQuestionsId")
 
-
     /**
      * Reads Int DataStore values
      */

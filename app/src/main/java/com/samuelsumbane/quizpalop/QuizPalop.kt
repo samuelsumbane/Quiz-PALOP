@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.samuelsumbane.quizpalop.core.agendDailyTask
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -18,6 +19,7 @@ class QuizPalop : Application() {
             modules(appModule)
         }
 
+        agendDailyTask(this@QuizPalop)
         createNotificationChannel()
     }
 

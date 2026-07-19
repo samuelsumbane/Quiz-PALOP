@@ -35,10 +35,11 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 @Composable
 fun GameTopStatusBar(
     mainGameViewModel: MainGameViewModel,
-    mainGameUiState: MainGameUiState
+    mainGameUiState: MainGameUiState,
+    modifier: Modifier,
 ) {
     Box(
-        modifier = Modifier
+        modifier = modifier
 //            .padding(10.dp)
 //            .background(Color.Red)
             .fillMaxWidth(),
@@ -72,7 +73,6 @@ fun GameTopStatusBar(
                     .padding(top = 45.dp)
                     .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(10.dp))
                     .align(Alignment.TopEnd)
-                    .zIndex(2f)
             ) {
                 val iconColor = MaterialTheme.colorScheme.onPrimary
                 IconButton(

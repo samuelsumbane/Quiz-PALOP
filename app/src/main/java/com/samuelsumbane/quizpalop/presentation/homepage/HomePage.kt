@@ -31,7 +31,6 @@ import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
-import com.samuelsumbane.quizpalop.core.scheduleRecurringReminder
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
@@ -62,9 +61,6 @@ fun HomePage() {
     val permissionState = rememberNotificationPermissionState()
     var showCard by remember { mutableStateOf(true) }
 
-    LaunchedEffect(Unit) {
-        scheduleRecurringReminder(context)
-    }
 
     Scaffold {
         Box(

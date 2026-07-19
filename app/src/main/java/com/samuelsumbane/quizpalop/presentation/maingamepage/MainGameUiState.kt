@@ -40,7 +40,7 @@ data class MainGameUiState(
     val adState: AdState = AdState.Loading,
     val soundState: SoundState = SoundState.Playing,
     //
-    val showGameConfings: Boolean = false
+    val showGameConfings: Boolean = false,
 )
 
 enum class SoundState { Mute, Playing }
