@@ -8,11 +8,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.samuelsumbane.quizpalop.presentation.home.HomeUiState
+import com.samuelsumbane.quizpalop.presentation.home.HomeViewModel
 import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 
 @Composable
 fun AvailableDailyQuestion(
-    level: String,
+    homeViewModel: HomeViewModel,
+    homeUiState: HomeUiState,
     modifier: Modifier
 ) {
    Column(

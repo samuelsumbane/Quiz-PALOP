@@ -82,7 +82,12 @@ fun HomePage() {
 
 
             homeUiState.dailyQuestionId?.let {
-                AvailableDailyQuestion()
+                AvailableDailyQuestion(
+                    homeViewModel,
+                    homeUiState,
+                    modifier = Modifier
+                        .padding(10.dp)
+                )
             }
 
             Column(

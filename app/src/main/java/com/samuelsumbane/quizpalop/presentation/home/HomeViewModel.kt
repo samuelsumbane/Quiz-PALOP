@@ -23,6 +23,24 @@ class HomeViewModel(private val settingsManager: SettingsManager) : ViewModel() 
         }
     }
 
+    fun onEvent(event: HomeUiEvents) {
+        when (event) {
+            is HomeUiEvents.OnDismiss -> onDismissDailyQuestion(event.questionId)
+            is HomeUiEvents.OnAcceptingToPlay -> onAcceptingPlayGame(event.questionId)
+        }
+    }
     fun updateState(block: (HomeUiState) -> HomeUiState) = _state.update(block)
 
+    fun onDismissDailyQuestion(questionId: String) {
+        viewModelScope.launch {
+            updateState { it.copy(dailyQuestionId = null) }
+            settingsManager.saveStringValues(settingsManager.actualDailyQuestionId, "-1")
+        }
+    }
+
+    fun onAcceptingPlayGame(questionId: String) {
+        viewModelScope.launch {
+
+        }
+    }
 }

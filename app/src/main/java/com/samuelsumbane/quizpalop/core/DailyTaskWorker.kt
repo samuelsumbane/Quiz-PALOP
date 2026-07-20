@@ -31,7 +31,7 @@ class DailyTaskWorker(
     }
 
     private fun scheduleNotificationFor9am(context: Context) {
-        val delay = calculatDelayAt(9, 56)
+        val delay = calculatDelayAt(6, 0)
 
         val notifRequest = OneTimeWorkRequestBuilder<ReminderNotificationWorker>()
             .setInitialDelay(delay, TimeUnit.MILLISECONDS)
