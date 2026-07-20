@@ -26,7 +26,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.domain.model.AdState
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
-import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.GameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
@@ -143,7 +143,7 @@ fun MessageUi(
                             outlinedText = "Não, obrigado!",
                             outlinedClicked = { mainGameViewModel.onCloseMessageModal() },
                             filledButtonText = mainPageUiState.adState.stateName,
-                            onClick = {
+                            onFilledButtonClicked = {
                                 when (mainPageUiState.adState) {
                                     AdState.Ready -> {
                                         manager.show(activity) {
@@ -171,7 +171,7 @@ fun MessageUi(
                         outlinedClicked = { mainGameViewModel.onCloseMessageModal() },
                         filledButtonText = "Sair",
                         dangerMode = true,
-                        onClick = {
+                        onFilledButtonClicked = {
                             mainGameViewModel.clearAnsweredQuestionsWithoutMistake()
                             mainGameViewModel.setGameTextMessage(GameTextMessage.Empty)
                             navigator.push(HomePageScreen())

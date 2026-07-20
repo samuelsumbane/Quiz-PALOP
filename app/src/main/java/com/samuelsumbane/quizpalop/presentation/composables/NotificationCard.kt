@@ -35,7 +35,7 @@ fun NotificationPermissionCard(
 ) {
     val context = LocalContext.current
 
-    if (state.hasPermission) return // nada a mostrar
+    if (state.hasPermission) return
 
     Box(
         modifier = Modifier

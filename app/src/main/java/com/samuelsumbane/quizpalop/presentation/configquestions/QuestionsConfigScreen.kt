@@ -42,7 +42,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.composables.RadioButtonGroup
 import com.samuelsumbane.quizpalop.presentation.duel.DuelScreen
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
-import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import kotlinx.coroutines.launch

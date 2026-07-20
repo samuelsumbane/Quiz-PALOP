@@ -7,14 +7,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
@@ -29,7 +26,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigPageUiState
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
-import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainPageScreen
 import org.koin.compose.viewmodel.koinViewModel
 

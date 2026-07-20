@@ -1,4 +1,4 @@
-package com.samuelsumbane.quizpalop.presentation.homepage
+package com.samuelsumbane.quizpalop.presentation.home
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -15,7 +15,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,10 +27,12 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.PagesName
+import com.samuelsumbane.quizpalop.presentation.composables.AvailableDailyQuestion
 import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.GameIcon
@@ -44,6 +45,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.rememberNotification
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
+import org.koin.androidx.compose.koinViewModel
 
 class HomePageScreen : Screen {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -57,6 +59,8 @@ class HomePageScreen : Screen {
 @Composable
 fun HomePage() {
     val navigator = LocalNavigator.currentOrThrow
+    val homeViewModel = koinViewModel<HomeViewModel>()
+    val homeUiState by homeViewModel.homeUiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val permissionState = rememberNotificationPermissionState()
     var showCard by remember { mutableStateOf(true) }
@@ -76,48 +80,53 @@ fun HomePage() {
                 )
             }
 
-                Column(
+
+            homeUiState.dailyQuestionId?.let {
+                AvailableDailyQuestion()
+            }
+
+            Column(
+                modifier = Modifier
+                    .padding(5.dp, 60.dp)
+                    .align(Alignment.Center)
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+
+                FlagsComponents()
+
+                Text(
+                    text = "Quiz PALOP",
+                    fontSize = 35.sp,
+                    fontWeight = FontWeight.Bold,
+                    fontStyle = FontStyle.Italic,
+                    color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
-                        .padding(5.dp, 60.dp)
-                        .align(Alignment.Center)
-                        .fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
+                        .padding(top = 30.dp)
+                )
 
-                    FlagsComponents()
+                Spacer(Modifier.height(140.dp))
 
-                    Text(
-                        text = "Quiz PALOP",
-                        fontSize = 35.sp,
-                        fontWeight = FontWeight.Bold,
-                        fontStyle = FontStyle.Italic,
-                        color = MaterialTheme.colorScheme.onPrimary,
-                        modifier = Modifier
-                            .padding(top = 30.dp)
-                    )
-
-                    Spacer(Modifier.height(140.dp))
-
-                    HomePageOptionColumn() {
-                        HomeOption(
-                            text = "Jogar",
-                            aditionalElement = { GameIcon() }) { navigator.push(GameSessionScreen()) }
-                        HomeOption(
-                            "Dois jogadores",
-                            aditionalElement = { DuelIcon() }) {
-                            navigator.push(
-                                QuestionsConfigScreen(PagesName.DuelPage)
-                            )
-                        }
-                        HomeOption(
-                            "Progresso",
-                            aditionalElement = { ProgressIcon() }) {
-                            navigator.push(
-                                ProgressPageScreen()
-                            )
-                        }
+                HomePageOptionColumn() {
+                    HomeOption(
+                        text = "Jogar",
+                        aditionalElement = { GameIcon() }) { navigator.push(GameSessionScreen()) }
+                    HomeOption(
+                        "Dois jogadores",
+                        aditionalElement = { DuelIcon() }) {
+                        navigator.push(
+                            QuestionsConfigScreen(PagesName.DuelPage)
+                        )
+                    }
+                    HomeOption(
+                        "Progresso",
+                        aditionalElement = { ProgressIcon() }) {
+                        navigator.push(
+                            ProgressPageScreen()
+                        )
                     }
                 }
+            }
 
             Text(
                 text = "Versão: 1.0.0",

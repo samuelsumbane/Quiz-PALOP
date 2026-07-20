@@ -31,7 +31,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.RowCoinAndText
 import com.samuelsumbane.quizpalop.presentation.composables.RowHeartAndLives
 import com.samuelsumbane.quizpalop.presentation.composables.VerticallyCenteredRowAndSpacedBetween
 import com.samuelsumbane.quizpalop.presentation.composables.verticallyCenteredRowContent
-import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.milliseconds
 

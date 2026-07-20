@@ -53,12 +53,11 @@ import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
 import com.samuelsumbane.quizpalop.presentation.configquestions.SoundState
-import com.samuelsumbane.quizpalop.presentation.homepage.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
-import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 import org.koin.androidx.compose.koinViewModel
 
 class DuelScreen(

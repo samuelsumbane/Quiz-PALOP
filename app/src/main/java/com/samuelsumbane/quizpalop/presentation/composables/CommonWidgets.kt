@@ -54,7 +54,7 @@ fun TwoButtonsRow(
     outlinedClicked: () -> Unit,
     filledButtonText: String,
     dangerMode: Boolean = false,
-    onClick: () -> Unit
+    onFilledButtonClicked: () -> Unit
 ) {
     Column(modifier = Modifier
         .padding(start = 8.dp, top = 55.dp, end = 8.dp)
@@ -80,7 +80,7 @@ fun TwoButtonsRow(
             AppButton(
                 text = filledButtonText,
                 dangerMode = dangerMode
-            ) { onClick() }
+            ) { onFilledButtonClicked() }
         }
     }
 }
