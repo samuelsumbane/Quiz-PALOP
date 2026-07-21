@@ -1,16 +1,21 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.samuelsumbane.quizpalop.R
 
 @Composable
@@ -55,12 +60,18 @@ fun DuelIcon() = IconContainer(painterResource(R.drawable.duel), "duel icon")
 @Composable
 fun ProgressIcon() = IconContainer(painterResource(R.drawable.progress), "progress icon")
 
+@Composable
+fun HomeIcon() = IconContainer(painterResource(R.drawable.homeicon), "home page")
+
+@Composable
+fun PrintScreenIcon() = IconContainer(painterResource(R.drawable.screenshotframe), "pirnt screen icon")
 
 
 @Composable
 fun NormalIconContainer(painter: Painter, contentDescription: String) {
     Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(24.dp))
 }
+
 @Composable
 fun IconContainer(painter: Painter, contentDescription: String) {
     Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
@@ -73,4 +84,15 @@ fun CheckIcon() {
         "", tint = Color(0xFF09740E),
         modifier = Modifier.size(26.dp)
     )
+}
+
+@Composable
+fun IconAndTextColumn(text: String, icon: @Composable () -> Unit) {
+   Column(
+       modifier = Modifier,
+       horizontalAlignment = Alignment.CenterHorizontally
+   ) {
+       icon()
+       Text(text = text, color = MaterialTheme.colorScheme.onBackground, fontSize = 12.sp)
+   }
 }

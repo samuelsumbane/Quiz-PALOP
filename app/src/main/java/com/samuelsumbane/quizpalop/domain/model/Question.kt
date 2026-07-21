@@ -10,4 +10,23 @@ data class Question(
     val questionLevel: String,
     val options: List<String>,
     val correctIndex: Int
-)
+) {
+    fun getCountry(): Countries {
+        return when (id[0]) {
+            'a' -> Countries.Angola
+            'c' -> Countries.Cv
+            'g' -> Countries.Gw
+            'm' -> Countries.Mz
+            else -> Countries.Stp
+        }
+    }
+
+    fun getCategory(): Category {
+        return when (questionLevel) {
+            "Easy" -> Category.History
+            "Medium" -> Category.Culture
+            else -> Category.Exam
+        }
+    }
+}
+

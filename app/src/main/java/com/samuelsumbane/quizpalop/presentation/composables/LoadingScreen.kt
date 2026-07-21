@@ -28,7 +28,7 @@ fun LoadingScreen() {
         CircularProgressIndicator(
             modifier = Modifier.width(54.dp),
             color = Color(0xFF03A9F4),
-            trackColor = Color.DarkGray,
+            trackColor = Color.Transparent,
         )
         Spacer(Modifier.height(20.dp))
         Text("Carregando...", color = MaterialTheme.colorScheme.background)

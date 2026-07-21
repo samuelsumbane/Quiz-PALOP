@@ -258,13 +258,7 @@ fun MainPage(country: Countries, category: Category) {
                         .padding(padding)
                         .fillMaxSize()
                         .appBackground()
-                        .padding(10.dp)
-                        .drawWithContent {
-                            graphicsLayer.record {
-                                this@drawWithContent.drawContent()
-                            }
-                            drawLayer(graphicsLayer)
-                        },
+                        .padding(10.dp),
                 ) {
                     AnimatedVisibility(mainPageUiState.lives < 1) {
                         MaxSizeBox {

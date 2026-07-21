@@ -1,20 +1,28 @@
 package com.samuelsumbane.quizpalop.presentation.dailychallenge
 
+import android.content.Context
+import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.saveBitmap
+import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
+import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionsButton
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionWrongButtonColor
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
 class DailyChallengeViewModel(
     private val settingsManager: SettingsManager,
@@ -34,6 +42,7 @@ class DailyChallengeViewModel(
     fun onEvent(event: DailyChallengeUiEvents) {
         when (event) {
             is DailyChallengeUiEvents.OnCheckResponse -> onCheckResponse(event.questionOption)
+            is DailyChallengeUiEvents.OnPrintScree -> onPrintScreen(event.context, event.graphicsLayer)
         }
     }
     
@@ -41,7 +50,13 @@ class DailyChallengeViewModel(
         viewModelScope.launch {
             val allQuestions = repo.getQuestions()
             allQuestions.firstOrNull { it.id == questionId }?.let { question ->
-                updateState { it.copy(dailyQuestion = question, dailyQuestionRightAnswer = question.options[question.correctIndex] ) }
+                updateState { it.copy(
+                    dailyQuestion = question.copy(options = question.options.shuffled()),
+                    dailyQuestionRightAnswer = question.options[question.correctIndex],
+                    questionCountry = question.getCountry(),
+                    questionCategory = question.getCategory(),
+                    pageUiState = PageUiState.DisplayContent
+                ) }
             }
         }
     }
@@ -123,6 +138,19 @@ class DailyChallengeViewModel(
                 if (currectOption == clickedOptionName) sendSound(SoundEvent.Correct) else sendSound(SoundEvent.Wrong)
 
             }
+        }
+    }
+
+    fun onPrintScreen(context: Context, graphicsLayer: GraphicsLayer) {
+        viewModelScope.launch {
+            updateState { it.copy(showBottomBar = false) }
+            val imageBitmap = graphicsLayer.toImageBitmap()
+            val bitmap = imageBitmap.asAndroidBitmap()
+            val uri = saveBitmap(context, bitmap)
+            shareImage(context, uri)
+
+            delay(5.seconds)
+            updateState { it.copy(showBottomBar = true) }
         }
     }
 }
