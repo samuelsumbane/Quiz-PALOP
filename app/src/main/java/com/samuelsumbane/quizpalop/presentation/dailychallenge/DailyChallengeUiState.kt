@@ -14,7 +14,7 @@ data class DailyChallengeUiState(
     val questionCountry: Countries = Countries.Angola,
     val questionCategory: Category = Category.History,
     val dailyQuestionRightAnswer: String = "",
-    val gameTextMessage: GameTextMessage = GameTextMessage.Empty,
+    val dailyChallengeMessage: DailyChallengeMessage = DailyChallengeMessage.Empty,
     val optionsColors: List<Color> = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),
     val pageUiState: PageUiState = PageUiState.Loading,
     val showBottomBar: Boolean = true,

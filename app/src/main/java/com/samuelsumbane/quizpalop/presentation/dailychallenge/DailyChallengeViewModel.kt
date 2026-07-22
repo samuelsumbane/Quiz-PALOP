@@ -19,6 +19,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -43,6 +44,7 @@ class DailyChallengeViewModel(
         when (event) {
             is DailyChallengeUiEvents.OnCheckResponse -> onCheckResponse(event.questionOption)
             is DailyChallengeUiEvents.OnPrintScree -> onPrintScreen(event.context, event.graphicsLayer)
+            is DailyChallengeUiEvents.OnCloseMessageContainer -> onCloseMessageContainer()
         }
     }
     
@@ -135,8 +137,32 @@ class DailyChallengeViewModel(
                     }
                 }
 
-                if (currectOption == clickedOptionName) sendSound(SoundEvent.Correct) else sendSound(SoundEvent.Wrong)
+                val coins = settingsManager.readIntValues(settingsManager.userCoins).first()
+                val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
+                val savedDailyQuestions = settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions).first()
 
+                if (currectOption == clickedOptionName) {
+                    sendSound(SoundEvent.Correct)
+                    delay(1.7.seconds)
+                    settingsManager.saveIntValues(settingsManager.userCoins, coins + 5)
+                    updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.RightAnswer(
+                        title = "Parabéns!!!",
+                        message = "Acertou correctamente o desafio de hoje",
+                        earnedCoins = "+5"
+                    )) }
+                } else {
+                    sendSound(SoundEvent.Wrong)
+                    delay(1.7.seconds)
+                    settingsManager.saveIntValues(settingsManager.userCoins, coins + 1)
+                    updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.WrongAnswer(
+                        title = "Sem sucesso",
+                        message = "Não respondeu correctamente o desafio de hoje",
+                        rightAnswerText = currectOption,
+                        earnedCoins = "+1"
+                    )) }
+                }
+
+                settingsManager.saveStringsValues(settingsManager.savedDailyQuestions, savedDailyQuestions + actualDailyQuestionId)
             }
         }
     }
@@ -153,4 +179,7 @@ class DailyChallengeViewModel(
             updateState { it.copy(showBottomBar = true) }
         }
     }
+
+    fun onCloseMessageContainer() = updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.Empty) }
+
 }

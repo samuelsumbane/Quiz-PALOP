@@ -5,7 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
-import com.samuelsumbane.quizpalop.core.agendDailyTask
+import com.samuelsumbane.quizpalop.core.agendarNotificacaoDiaria
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 
@@ -19,20 +19,6 @@ class QuizPalop : Application() {
             modules(appModule)
         }
 
-        agendDailyTask(this@QuizPalop)
-        createNotificationChannel()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createNotificationChannel() {
-        val channel = NotificationChannel(
-            "qui_palop_reminders",
-            "Lembrete",
-            NotificationManager.IMPORTANCE_DEFAULT
-        ).apply {
-            description = "Notificações do Ripe Merge"
-        }
-        val manager = getSystemService(NotificationManager::class.java)
-        manager.createNotificationChannel(channel)
+        agendarNotificacaoDiaria(this)
     }
 }
