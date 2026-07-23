@@ -1,6 +1,7 @@
 package com.samuelsumbane.quizpalop.presentation.dailychallenge
 
-import androidx.compose.foundation.background
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -10,9 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -28,6 +26,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -49,15 +48,18 @@ import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
+import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 import org.koin.compose.viewmodel.koinViewModel
 
 class DailyChallengeScreen(val questionId: String) : Screen {
+    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
     override fun Content() {
         DailyChallenge(questionId)
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DailyChallenge(questionId: String) {
     val dailyChallengeViewModel = koinViewModel<DailyChallengeViewModel>()
@@ -160,34 +162,23 @@ fun DailyChallenge(questionId: String) {
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .background(
-                                        MaterialTheme.colorScheme.background,
-                                        RoundedCornerShape(15.dp)
-                                    )
                                     .align(Alignment.BottomCenter),
                                 horizontalArrangement = Arrangement.SpaceAround
                             ) {
-                                IconAndTextColumn(text = "Casa") {
-                                    IconButton(
-                                        modifier = Modifier
-                                            .padding(0.dp),
-                                        onClick = { navigator.push(HomePageScreen()) }
-                                    ) { HomeIcon() }
-                                }
+                                IconAndTextColumn(
+                                    text = "Casa",
+                                    onClick = { navigator.push(HomePageScreen())}
+                                ) { HomeIcon(tint = HomeOptionColor) }
 
-                                IconAndTextColumn(text = "Captura de tela") {
-                                    IconButton(
-                                        enabled = quizOptionCurrectButtonColor in dailyChallengeUiState.optionsColors,
-                                        onClick = {
-                                            dailyChallengeViewModel.onEvent(
-                                                DailyChallengeUiEvents.OnPrintScree(
-                                                    context,
-                                                    graphicsLayer
-                                                )
-                                            )
-                                        }
-                                    ) { PrintScreenIcon() }
-                                }
+                                IconAndTextColumn(
+                                    text = "Captura de tela",
+                                    onClick = {
+                                       dailyChallengeViewModel.onEvent(
+                                           DailyChallengeUiEvents.OnPrintScree(context, graphicsLayer)
+                                       )
+                                    },
+                                    enabled = quizOptionCurrectButtonColor in dailyChallengeUiState.optionsColors
+                                ) { PrintScreenIcon(tint = HomeOptionColor) }
                             }
                         }
                     }
@@ -218,6 +209,7 @@ fun AwardText(
                 append(text)
             },
             color = Color.Black,
+            textAlign = TextAlign.Center
         )
     }
 }

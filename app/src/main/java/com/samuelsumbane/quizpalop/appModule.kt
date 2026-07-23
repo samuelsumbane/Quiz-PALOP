@@ -1,12 +1,13 @@
 package com.samuelsumbane.quizpalop
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import com.samuelsumbane.quizpalop.data.repository.QuizRepositoryImpl
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeViewModel
 import com.samuelsumbane.quizpalop.presentation.duel.DuelViewModel
-import com.samuelsumbane.quizpalop.presentation.home.HomeViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import org.koin.android.ext.koin.androidContext
@@ -14,6 +15,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
+@RequiresApi(Build.VERSION_CODES.O)
 val appModule = module {
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
@@ -22,5 +24,4 @@ val appModule = module {
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { DuelViewModel(get()) }
     viewModel { DailyChallengeViewModel(get(), get()) }
-    viewModel { HomeViewModel(get()) }
 }

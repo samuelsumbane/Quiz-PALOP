@@ -32,7 +32,6 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.PagesName
-import com.samuelsumbane.quizpalop.presentation.composables.AvailableDailyQuestion
 import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.GameIcon
@@ -43,6 +42,8 @@ import com.samuelsumbane.quizpalop.presentation.composables.ProgressIcon
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.composables.rememberNotificationPermissionState
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
+import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeScreen
+import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeViewModel
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import org.koin.androidx.compose.koinViewModel
@@ -59,8 +60,8 @@ class HomePageScreen : Screen {
 @Composable
 fun HomePage() {
     val navigator = LocalNavigator.currentOrThrow
-    val homeViewModel = koinViewModel<HomeViewModel>()
-    val homeUiState by homeViewModel.homeUiState.collectAsStateWithLifecycle()
+    val dailyChallengeViewModel = koinViewModel<DailyChallengeViewModel>()
+    val dailyChallengeUiState by dailyChallengeViewModel.dailychallengeUiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
     val permissionState = rememberNotificationPermissionState()
     var showCard by remember { mutableStateOf(true) }
@@ -77,16 +78,6 @@ fun HomePage() {
                 NotificationPermissionCard(
                     state = permissionState,
                     onDismiss = { showCard = false }
-                )
-            }
-
-
-            homeUiState.dailyQuestionId?.let {
-                AvailableDailyQuestion(
-                    homeViewModel,
-                    homeUiState,
-                    modifier = Modifier
-                        .padding(10.dp)
                 )
             }
 
@@ -115,7 +106,18 @@ fun HomePage() {
                 HomePageOptionColumn() {
                     HomeOption(
                         text = "Jogar",
-                        aditionalElement = { GameIcon() }) { navigator.push(GameSessionScreen()) }
+                        aditionalElement = { GameIcon() }) {
+                        navigator.push(GameSessionScreen())
+                    }
+
+//                    dailyChallengeUiState.dailyQuestionId?.let { questionId ->
+                        HomeOption(
+                            text = "Desafio diário",
+                            aditionalElement = {},
+                            onClick = { navigator.push(DailyChallengeScreen("mz_02"))}
+                        )
+//                    }
+
                     HomeOption(
                         "Dois jogadores",
                         aditionalElement = { DuelIcon() }) {

@@ -28,6 +28,7 @@ class SettingsManager(val context: Context) {
     val lastDateTimeLostLives = longPreferencesKey("last_datetime_lost_lives")
     val savedDailyQuestions = stringPreferencesKey("savedDailyQuestions")
     val actualDailyQuestionId = stringPreferencesKey("actualDailyQuestionId")
+    val answeredDailyQuestionDateTime = longPreferencesKey("answeredDailyQuestionDateTime")
     /**
      * Reads Int DataStore values
      */

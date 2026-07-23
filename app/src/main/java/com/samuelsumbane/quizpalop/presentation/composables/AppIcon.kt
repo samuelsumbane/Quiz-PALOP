@@ -1,6 +1,7 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -61,10 +62,11 @@ fun DuelIcon() = IconContainer(painterResource(R.drawable.duel), "duel icon")
 fun ProgressIcon() = IconContainer(painterResource(R.drawable.progress), "progress icon")
 
 @Composable
-fun HomeIcon() = IconContainer(painterResource(R.drawable.homeicon), "home page")
+fun HomeIcon(tint: Color = MaterialTheme.colorScheme.onBackground) = IconContainer(painterResource(R.drawable.homeicon), "home page", tint = tint)
 
 @Composable
-fun PrintScreenIcon() = IconContainer(painterResource(R.drawable.screenshotframe), "pirnt screen icon")
+fun PrintScreenIcon(tint: Color = MaterialTheme.colorScheme.onBackground) =
+    IconContainer(painterResource(R.drawable.screenshotframe), "pirnt screen icon", tint = tint)
 
 
 @Composable
@@ -73,8 +75,8 @@ fun NormalIconContainer(painter: Painter, contentDescription: String) {
 }
 
 @Composable
-fun IconContainer(painter: Painter, contentDescription: String) {
-    Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
+fun IconContainer(painter: Painter, contentDescription: String, tint: Color = MaterialTheme.colorScheme.onBackground) {
+    Icon(painter = painter, contentDescription = contentDescription, tint = tint, modifier = Modifier.size(28.dp))
 }
 
 @Composable
@@ -87,12 +89,20 @@ fun CheckIcon() {
 }
 
 @Composable
-fun IconAndTextColumn(text: String, icon: @Composable () -> Unit) {
-   Column(
-       modifier = Modifier,
-       horizontalAlignment = Alignment.CenterHorizontally
-   ) {
-       icon()
-       Text(text = text, color = MaterialTheme.colorScheme.onBackground, fontSize = 12.sp)
-   }
+fun IconAndTextColumn(
+    text: String,
+    onClick: () -> Unit,
+    enabled: Boolean = true,
+    icon: @Composable () -> Unit
+) {
+    if (enabled) {
+        Column(
+            modifier = Modifier
+                .clickable { onClick() },
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            icon()
+            Text(text = text, color = MaterialTheme.colorScheme.onBackground, fontSize = 12.sp)
+        }
+    }
 }

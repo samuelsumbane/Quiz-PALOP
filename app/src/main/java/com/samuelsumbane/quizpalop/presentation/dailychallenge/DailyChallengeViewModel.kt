@@ -1,10 +1,13 @@
 package com.samuelsumbane.quizpalop.presentation.dailychallenge
 
 import android.content.Context
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.isDifferentDay
 import com.samuelsumbane.quizpalop.core.saveBitmap
 import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
@@ -25,6 +28,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.seconds
 
+@RequiresApi(Build.VERSION_CODES.O)
 class DailyChallengeViewModel(
     private val settingsManager: SettingsManager,
     private val repo: QuizRepository
@@ -34,6 +38,73 @@ class DailyChallengeViewModel(
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
 
+    init {
+        viewModelScope.launch {
+            getAllSavedQuestions()
+        }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun getAllSavedQuestions() {
+        viewModelScope.launch {
+            val lastTimeQuestionIdAnswered = settingsManager.readLongValues(settingsManager.answeredDailyQuestionDateTime)
+            val now = System.currentTimeMillis()
+
+            if (isDifferentDay(lastTimeQuestionIdAnswered, now)) {
+                val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
+                if (actualDailyQuestionId.isBlank()) {
+                    val allQuestions = repo.getQuestions()
+                    println("estado: allQuestion $allQuestions")
+                    val savedDailyQuestions =
+                        settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions)
+                            .first()
+                    val allQuestionsId = allQuestions.map { it.id }.toSet()
+
+                    val allEasyQuestions =
+                        allQuestions.filter { it.questionLevel == "Easy" }.map { it.id }
+                    val allMediumQuestions =
+                        allQuestions.filter { it.questionLevel == "Medium" }.map { it.id }
+                    val allHardQuestions =
+                        allQuestions.filter { it.questionLevel == "Hard" }.map { it.id }
+
+                    val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
+                    val mediumSavedQuestions = allMediumQuestions intersect savedDailyQuestions
+                    val hardSavedQuestions = allHardQuestions intersect savedDailyQuestions
+
+                    val mediumQuestionsPercentage =
+                        mediumSavedQuestions.size.toFloat() / allMediumQuestions.size
+                    val hardQuestionsPercentage =
+                        hardSavedQuestions.size.toFloat() / allHardQuestions.size
+
+
+                    val allNotAnsweredQuestions = allQuestionsId subtract savedDailyQuestions
+                    if (allNotAnsweredQuestions.isEmpty()) {
+                        settingsManager.saveStringsValues(
+                            settingsManager.savedDailyQuestions,
+                            emptySet()
+                        )
+                    }
+
+                    val availablesQuestionsId = when {
+                        mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract easySavedQuestions
+                        hardQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
+                        else -> allNotAnsweredQuestions
+                    }
+
+                    val randomedQuestion = allQuestions.first { it.id == availablesQuestionsId.random() }
+                    updateState {
+                        it.copy(
+                            dailyQuestionId = randomedQuestion.id
+                        )
+                    }
+                    settingsManager.saveStringValues(
+                        settingsManager.actualDailyQuestionId,
+                        randomedQuestion.id
+                    )
+                }
+            }
+        }
+    }
 
     fun updateState(block: (DailyChallengeUiState) -> DailyChallengeUiState) = _dailyChallengeViewModel.update(block)
 
@@ -145,11 +216,14 @@ class DailyChallengeViewModel(
                     sendSound(SoundEvent.Correct)
                     delay(1.7.seconds)
                     settingsManager.saveIntValues(settingsManager.userCoins, coins + 5)
-                    updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.RightAnswer(
-                        title = "Parabéns!!!",
-                        message = "Acertou correctamente o desafio de hoje",
-                        earnedCoins = "+5"
-                    )) }
+                    updateState {
+                        it.copy(
+                            dailyChallengeMessage = DailyChallengeMessage.RightAnswer(
+                                title = "Parabéns!!!",
+                                message = "Acertou correctamente o desafio de hoje",
+                                earnedCoins = "+5"
+                            ),
+                    ) }
                 } else {
                     sendSound(SoundEvent.Wrong)
                     delay(1.7.seconds)
@@ -161,8 +235,10 @@ class DailyChallengeViewModel(
                         earnedCoins = "+1"
                     )) }
                 }
+                val timestamp = System.currentTimeMillis()
 
                 settingsManager.saveStringsValues(settingsManager.savedDailyQuestions, savedDailyQuestions + actualDailyQuestionId)
+                settingsManager.saveLongValue(settingsManager.answeredDailyQuestionDateTime, timestamp)
             }
         }
     }
@@ -181,5 +257,4 @@ class DailyChallengeViewModel(
     }
 
     fun onCloseMessageContainer() = updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.Empty) }
-
 }

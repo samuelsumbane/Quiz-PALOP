@@ -31,9 +31,9 @@ class MainActivity : ComponentActivity() {
             QuizPALOPTheme {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
-//                Navigator(HomePageScreen())
+                Navigator(HomePageScreen())
 //                Navigator(DuelScreen(Countries.Mz, Category.History, 2))
-                Navigator(DailyChallengeScreen("mz_01"))
+//                Navigator(DailyChallengeScreen("mz_01"))
             }
         }
     }
