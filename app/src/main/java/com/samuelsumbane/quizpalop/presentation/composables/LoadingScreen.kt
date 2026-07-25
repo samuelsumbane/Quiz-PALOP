@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 fun LoadingScreen() {
     Column(
         Modifier
-            .background(MaterialTheme.colorScheme.tertiary)
+            .background(MaterialTheme.colorScheme.background)
             .fillMaxSize(),
         Arrangement.Center,
         Alignment.CenterHorizontally
@@ -31,6 +31,6 @@ fun LoadingScreen() {
             trackColor = Color.Transparent,
         )
         Spacer(Modifier.height(20.dp))
-        Text("Carregando...", color = MaterialTheme.colorScheme.background)
+        Text("Carregando...", color = MaterialTheme.colorScheme.onBackground)
     }
 }

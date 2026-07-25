@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.HapticManager
 import com.samuelsumbane.quizpalop.core.saveBitmap
 import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.AdState
@@ -28,7 +29,8 @@ import kotlin.time.Duration.Companion.milliseconds
 
 class MainGameViewModel(
     private val repo: QuizRepository,
-    val settingsManager: SettingsManager
+    val settingsManager: SettingsManager,
+    val hapticManager: HapticManager
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainGameUiState())

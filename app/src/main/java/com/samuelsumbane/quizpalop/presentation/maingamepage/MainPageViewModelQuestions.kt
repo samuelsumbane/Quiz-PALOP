@@ -105,6 +105,7 @@ fun MainGameViewModel.checkResponse(
 
                     sendSound(SoundEvent.Correct)
                     startLoadingNextQuestion()
+                    hapticManager.success()
                 }
             } else {
                 viewModelScope.launch {
@@ -114,6 +115,7 @@ fun MainGameViewModel.checkResponse(
                     if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
                     sendSound(SoundEvent.Wrong)
                     startLoadingNextQuestion()
+                    hapticManager.error()
                 }
             }
 

@@ -2,6 +2,8 @@ package com.samuelsumbane.quizpalop
 
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.samuelsumbane.quizpalop.core.AndroidHapticManager
+import com.samuelsumbane.quizpalop.core.HapticManager
 import com.samuelsumbane.quizpalop.data.repository.QuizRepositoryImpl
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
@@ -19,7 +21,9 @@ import org.koin.dsl.module
 val appModule = module {
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
-    viewModel { MainGameViewModel(get(), get()) }
+    single<HapticManager> { AndroidHapticManager(androidContext()) }
+
+    viewModel { MainGameViewModel(get(), get(), get()) }
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { DuelViewModel(get()) }

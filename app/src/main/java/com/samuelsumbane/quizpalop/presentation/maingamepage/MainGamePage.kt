@@ -28,10 +28,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.layer.drawLayer
 import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
@@ -42,13 +40,6 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
-import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
-import com.samuelsumbane.quizpalop.presentation.composables.IconData
-import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
-import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
-import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
-import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
-import org.koin.androidx.compose.koinViewModel
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
@@ -59,15 +50,22 @@ import com.samuelsumbane.quizpalop.domain.model.optionsLabels
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.AppButton
+import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
+import com.samuelsumbane.quizpalop.presentation.composables.IconData
+import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
 import com.samuelsumbane.quizpalop.presentation.composables.MessageUi
+import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
+import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
+import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
+import org.koin.androidx.compose.koinViewModel
 
 
 class MainPageScreen(val country: Countries, val category: Category) : Screen {
@@ -186,15 +184,9 @@ fun MainPage(country: Countries, category: Category) {
     fun pageContent() {
         mainPageUiState.actualQuestion?.let { questionData ->
 
-            val graphicsLayer = rememberGraphicsLayer()
-            val context = LocalContext.current
-
-
-
             Scaffold(
                 bottomBar = {
                     AnimatedVisibility(
-//                        visible = true,
                         visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && mainPageUiState.lives > 0,
                         enter = slideInHorizontally(
                             initialOffsetX = { -it }
@@ -211,7 +203,6 @@ fun MainPage(country: Countries, category: Category) {
                                     colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
                                         MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
                                 ))
-//                                .background(MaterialTheme.colorScheme.primary.copy(0.5f))
                         ) {
                             Row(
                                 modifier = Modifier
