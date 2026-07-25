@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -107,10 +108,10 @@ fun HomeOption(
     Item(
         text = text,
         modifier = Modifier
-            .padding(15.dp, 12.dp)
-            .background(Color.Transparent, RoundedCornerShape(16.dp))
-            .border(1.dp, HomeOptionColor, RoundedCornerShape(16.dp))
-            .padding(10.dp),
+            .padding(10.dp, 12.dp)
+            .height(45.dp)
+            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+            .border(1.dp, HomeOptionColor.copy(alpha = 0.5f), RoundedCornerShape(16.dp)),
         aditionalElement = aditionalElement,
         onClick = onClick
     )

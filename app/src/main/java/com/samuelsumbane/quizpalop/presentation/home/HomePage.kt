@@ -1,5 +1,6 @@
 package com.samuelsumbane.quizpalop.presentation.home
 
+import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
@@ -15,10 +16,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,11 +36,12 @@ import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.GameIcon
 import com.samuelsumbane.quizpalop.presentation.composables.HomeOption
 import com.samuelsumbane.quizpalop.presentation.composables.HomePageOptionColumn
-import com.samuelsumbane.quizpalop.presentation.composables.NotificationPermissionCard
+import com.samuelsumbane.quizpalop.presentation.composables.NotificationPermissionRequester
 import com.samuelsumbane.quizpalop.presentation.composables.ProgressIcon
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
-import com.samuelsumbane.quizpalop.presentation.composables.rememberNotificationPermissionState
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
+import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeLoadQuestionState
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeScreen
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeViewModel
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
@@ -56,6 +56,7 @@ class HomePageScreen : Screen {
     }
 }
 
+@SuppressLint("CoroutineCreationDuringComposition")
 @RequiresApi(Build.VERSION_CODES.TIRAMISU)
 @Composable
 fun HomePage() {
@@ -63,9 +64,14 @@ fun HomePage() {
     val dailyChallengeViewModel = koinViewModel<DailyChallengeViewModel>()
     val dailyChallengeUiState by dailyChallengeViewModel.dailychallengeUiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val permissionState = rememberNotificationPermissionState()
-    var showCard by remember { mutableStateOf(true) }
+    val configQuestionsViewModel =
+        org.koin.compose.viewmodel.koinViewModel<QuestionsConfigViewModel>()
+    val configQuestionsUiState by configQuestionsViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
+    LaunchedEffect(Unit) {
+        dailyChallengeViewModel.resetState()
+        dailyChallengeViewModel.getAllSavedDailyQuestions()
+    }
 
     Scaffold {
         Box(
@@ -74,12 +80,7 @@ fun HomePage() {
                 .fillMaxSize()
                 .appBackground()
         ) {
-            if (showCard) {
-                NotificationPermissionCard(
-                    state = permissionState,
-                    onDismiss = { showCard = false }
-                )
-            }
+            NotificationPermissionRequester()
 
             Column(
                 modifier = Modifier
@@ -89,17 +90,17 @@ fun HomePage() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
 
-                FlagsComponents()
-
                 Text(
                     text = "Quiz PALOP",
-                    fontSize = 35.sp,
-                    fontWeight = FontWeight.Bold,
+                    fontSize = 45.sp,
+                    fontWeight = FontWeight.ExtraBold,
                     fontStyle = FontStyle.Italic,
                     color = MaterialTheme.colorScheme.onPrimary,
                     modifier = Modifier
-                        .padding(top = 30.dp)
+                        .padding(0.dp,20.dp)
                 )
+
+                FlagsComponents()
 
                 Spacer(Modifier.height(140.dp))
 
@@ -110,13 +111,18 @@ fun HomePage() {
                         navigator.push(GameSessionScreen())
                     }
 
-//                    dailyChallengeUiState.dailyQuestionId?.let { questionId ->
-                        HomeOption(
-                            text = "Desafio diário",
-                            aditionalElement = {},
-                            onClick = { navigator.push(DailyChallengeScreen("mz_02"))}
-                        )
-//                    }
+                    when (dailyChallengeUiState.dailyChallengeLoadQuestionState) {
+                        DailyChallengeLoadQuestionState.LOADING -> {}
+                        DailyChallengeLoadQuestionState.FINISHED -> {
+                            dailyChallengeUiState.dailyQuestionId?.let { questionId ->
+                                HomeOption(
+                                    text = "Desafio diário",
+                                    aditionalElement = {},
+                                    onClick = { navigator.push(DailyChallengeScreen(questionId)) }
+                                )
+                            }
+                        }
+                    }
 
                     HomeOption(
                         "Dois jogadores",

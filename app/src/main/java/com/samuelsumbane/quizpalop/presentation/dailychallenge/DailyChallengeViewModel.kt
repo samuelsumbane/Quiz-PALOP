@@ -38,70 +38,76 @@ class DailyChallengeViewModel(
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
 
-    init {
-        viewModelScope.launch {
-            getAllSavedQuestions()
-        }
+
+    fun resetState() {
+        _dailyChallengeViewModel.value = DailyChallengeUiState()
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    fun getAllSavedQuestions() {
+    fun getAllSavedDailyQuestions() {
         viewModelScope.launch {
-            val lastTimeQuestionIdAnswered = settingsManager.readLongValues(settingsManager.answeredDailyQuestionDateTime)
+//            val lastDateUserGotDailyQuestion = 1753254000000L
             val now = System.currentTimeMillis()
+            val lastDateUserGotDailyQuestion = settingsManager.readLongValues(settingsManager.lastDateTimeUserGotDailyQuestionId)
 
-            if (isDifferentDay(lastTimeQuestionIdAnswered, now)) {
+            if (isDifferentDay(lastDateUserGotDailyQuestion, now)) {
                 val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
-                if (actualDailyQuestionId.isBlank()) {
-                    val allQuestions = repo.getQuestions()
-                    println("estado: allQuestion $allQuestions")
-                    val savedDailyQuestions =
-                        settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions)
-                            .first()
-                    val allQuestionsId = allQuestions.map { it.id }.toSet()
+                println("estado: actualId is: $actualDailyQuestionId")
+                val allQuestions = repo.getQuestions()
+                println("estado: allQuestion $allQuestions")
+                val savedDailyQuestions =
+                    settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions)
+                        .first()
+                val allQuestionsId = allQuestions.map { it.id }.toSet()
 
-                    val allEasyQuestions =
-                        allQuestions.filter { it.questionLevel == "Easy" }.map { it.id }
-                    val allMediumQuestions =
-                        allQuestions.filter { it.questionLevel == "Medium" }.map { it.id }
-                    val allHardQuestions =
-                        allQuestions.filter { it.questionLevel == "Hard" }.map { it.id }
+                val allEasyQuestions =
+                    allQuestions.filter { it.questionLevel == "Easy" }.map { it.id }
+                val allMediumQuestions =
+                    allQuestions.filter { it.questionLevel == "Medium" }.map { it.id }
+                val allHardQuestions =
+                    allQuestions.filter { it.questionLevel == "Hard" }.map { it.id }
 
-                    val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
-                    val mediumSavedQuestions = allMediumQuestions intersect savedDailyQuestions
-                    val hardSavedQuestions = allHardQuestions intersect savedDailyQuestions
+                val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
+                val mediumSavedQuestions = allMediumQuestions intersect savedDailyQuestions
+                val hardSavedQuestions = allHardQuestions intersect savedDailyQuestions
 
-                    val mediumQuestionsPercentage =
-                        mediumSavedQuestions.size.toFloat() / allMediumQuestions.size
-                    val hardQuestionsPercentage =
-                        hardSavedQuestions.size.toFloat() / allHardQuestions.size
+                val mediumQuestionsPercentage =
+                    mediumSavedQuestions.size.toFloat() / allMediumQuestions.size
+                val hardQuestionsPercentage =
+                    hardSavedQuestions.size.toFloat() / allHardQuestions.size
 
 
-                    val allNotAnsweredQuestions = allQuestionsId subtract savedDailyQuestions
-                    if (allNotAnsweredQuestions.isEmpty()) {
-                        settingsManager.saveStringsValues(
-                            settingsManager.savedDailyQuestions,
-                            emptySet()
-                        )
+                val allNotAnsweredQuestions = allQuestionsId subtract savedDailyQuestions
+                if (allNotAnsweredQuestions.isEmpty()) {
+                    settingsManager.saveStringsValues(
+                        settingsManager.savedDailyQuestions,
+                        emptySet()
+                    )
+                }
+
+                val availablesQuestionsId = when {
+                    mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract mediumSavedQuestions
+                    hardQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
+                    else -> {
+                        println("estado: m $mediumQuestionsPercentage, h: $hardQuestionsPercentage")
+                        allNotAnsweredQuestions
                     }
+                }
 
-                    val availablesQuestionsId = when {
-                        mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract easySavedQuestions
-                        hardQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
-                        else -> allNotAnsweredQuestions
-                    }
-
-                    val randomedQuestion = allQuestions.first { it.id == availablesQuestionsId.random() }
+                val randomedQuestionId = availablesQuestionsId.random()
+                println("estado: randomized is: $randomedQuestionId")
+                    val randomedQuestion =
+                        allQuestions.first { it.id == randomedQuestionId }
                     updateState {
                         it.copy(
-                            dailyQuestionId = randomedQuestion.id
+                            dailyQuestionId = randomedQuestion.id,
+                            dailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.FINISHED
                         )
                     }
                     settingsManager.saveStringValues(
                         settingsManager.actualDailyQuestionId,
                         randomedQuestion.id
                     )
-                }
             }
         }
     }
@@ -238,7 +244,15 @@ class DailyChallengeViewModel(
                 val timestamp = System.currentTimeMillis()
 
                 settingsManager.saveStringsValues(settingsManager.savedDailyQuestions, savedDailyQuestions + actualDailyQuestionId)
-                settingsManager.saveLongValue(settingsManager.answeredDailyQuestionDateTime, timestamp)
+                settingsManager.saveLongValue(settingsManager.lastDateTimeUserGotDailyQuestionId, timestamp)
+                settingsManager.saveStringValues(settingsManager.actualDailyQuestionId, "")
+
+                updateState {
+                    it.copy(
+                        dailyQuestionId = null,
+                        lastDateUserGotQuestion = timestamp
+                    )
+                }
             }
         }
     }

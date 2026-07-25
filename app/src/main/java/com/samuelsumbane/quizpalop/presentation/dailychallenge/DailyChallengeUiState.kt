@@ -18,4 +18,8 @@ data class DailyChallengeUiState(
     val optionsColors: List<Color> = listOf(quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor, quizOptionDefaultColor),
     val pageUiState: PageUiState = PageUiState.Loading,
     val showBottomBar: Boolean = true,
+    val lastDateUserGotQuestion: Long = 0L,
+    val dailyChallengeLoadQuestionState: DailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.LOADING
 )
+
+enum class DailyChallengeLoadQuestionState { LOADING, FINISHED }

@@ -107,7 +107,9 @@ fun DailyChallenge(questionId: String) {
                                 DailyChallengeUiEvents.OnCloseMessageContainer) }
                         ) {
                             MessageTexts(message.title, message.message)
-                            Text("A resposta correta é: ${message.rightAnswerText}", color = Color(0xFF11EA55))
+                            RightAnswerQuestionText("A resposta correcta é: ",
+                                message.rightAnswerText
+                            )
                             AwardText(" moeda pela participação",message.earnedCoins)
                         }
                     }
@@ -212,4 +214,27 @@ fun AwardText(
             textAlign = TextAlign.Center
         )
     }
+}
+
+@Composable
+fun RightAnswerQuestionText(
+    normalText: String,
+    importantText: String
+) {
+   Row(
+       modifier = Modifier
+           .padding(0.dp, 15.dp)
+           .fillMaxWidth(),
+       horizontalArrangement = Arrangement.Center
+   ) {
+       Text(
+           buildAnnotatedString {
+               append(normalText)
+               withStyle(style = SpanStyle(fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Color(0xFF066106))) {
+                   append(importantText)
+               }
+           },
+           color = Color.Black
+       )
+   }
 }

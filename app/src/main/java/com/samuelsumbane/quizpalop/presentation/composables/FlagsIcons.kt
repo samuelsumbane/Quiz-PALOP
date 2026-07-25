@@ -33,7 +33,7 @@ fun LoadFlag(
         contentDescription = contentDescription,
         modifier = modifier
             .padding(7.dp)
-            .size(50.dp)
+            .size(40.dp)
     )
 }
 
