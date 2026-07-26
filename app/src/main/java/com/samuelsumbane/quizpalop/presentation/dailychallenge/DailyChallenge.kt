@@ -34,10 +34,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.domain.model.optionsLabels
 import com.samuelsumbane.quizpalop.presentation.composables.DailyChallengeMessageUi
 import com.samuelsumbane.quizpalop.presentation.composables.HomeIcon
 import com.samuelsumbane.quizpalop.presentation.composables.IconAndTextColumn
+import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
 import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
@@ -90,23 +93,33 @@ fun DailyChallenge(questionId: String) {
             ) {
                 when (val message = dailyChallengeUiState.dailyChallengeMessage) {
                     is DailyChallengeMessage.RightAnswer -> {
+                        val winnerIcon by rememberLottieComposition(
+                            LottieCompositionSpec.Asset("lottie/success_check.lottie")
+                        )
+
                          DailyChallengeMessageUi(
                              modifier = Modifier.align(Alignment.Center),
                              onButtonClicked = { dailyChallengeViewModel.onEvent(
                                  DailyChallengeUiEvents.OnCloseMessageContainer) }
                          ) {
-                            MessageTexts(message.title, message.message)
+                             LoadAnimatedIcons(winnerIcon)
+                            MessageTexts(title = "", message.message)
                             AwardText(" moedas ter respondido correctamete", message.earnedCoins)
                         }
                     }
 
                     is DailyChallengeMessage.WrongAnswer -> {
+                        val sadIcon by rememberLottieComposition(
+                            LottieCompositionSpec.Asset("lottie/gamer_sad.lottie")
+                        )
+
                         DailyChallengeMessageUi(
                             modifier = Modifier.align(Alignment.Center),
                             onButtonClicked = { dailyChallengeViewModel.onEvent(
                                 DailyChallengeUiEvents.OnCloseMessageContainer) }
                         ) {
-                            MessageTexts(message.title, message.message)
+                            LoadAnimatedIcons(sadIcon)
+                            MessageTexts(title = "", message.message)
                             RightAnswerQuestionText("A resposta correcta é: ",
                                 message.rightAnswerText
                             )
@@ -157,7 +170,7 @@ fun DailyChallenge(questionId: String) {
                                     }
                                 }
                             }
-                            Text("")
+                            Text(dailyChallengeUiState.dailyQuestionRightAnswer)
                         }
 
                         if (dailyChallengeUiState.showBottomBar) {

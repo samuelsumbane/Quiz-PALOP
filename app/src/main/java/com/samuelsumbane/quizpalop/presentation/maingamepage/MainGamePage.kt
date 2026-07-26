@@ -30,7 +30,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.rememberGraphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
@@ -63,7 +62,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
+import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import org.koin.androidx.compose.koinViewModel
 

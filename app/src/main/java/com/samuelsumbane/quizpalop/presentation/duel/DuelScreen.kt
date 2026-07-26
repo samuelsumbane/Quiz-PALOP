@@ -54,7 +54,7 @@ import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigS
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
 import com.samuelsumbane.quizpalop.presentation.configquestions.SoundState
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
+import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.composables.OptionItem
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground

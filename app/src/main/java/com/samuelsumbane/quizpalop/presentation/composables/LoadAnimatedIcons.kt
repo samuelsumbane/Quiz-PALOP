@@ -1,4 +1,4 @@
-package com.samuelsumbane.quizpalop.presentation.maingamepage.composables
+package com.samuelsumbane.quizpalop.presentation.composables
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable

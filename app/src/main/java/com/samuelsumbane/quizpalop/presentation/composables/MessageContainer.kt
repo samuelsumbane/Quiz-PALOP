@@ -31,7 +31,6 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.GameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.clearAnsweredQuestionsWithoutMistake
-import com.samuelsumbane.quizpalop.presentation.maingamepage.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.maingamepage.onCloseMessageModal
 import com.samuelsumbane.quizpalop.presentation.maingamepage.setGameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.showCurrectOptionAfterViewAd

@@ -58,7 +58,6 @@ fun ProgressPage() {
                 ProgressContentState.ShowContent -> {
                     Column(
                         modifier = Modifier
-//                        .background(Color.Black.copy(alpha = 0.35f))
                             .fillMaxSize(),
                     ) {
                         Row(
@@ -94,6 +93,11 @@ fun ProgressPage() {
                                         Column(
                                             modifier = Modifier.padding(top = 30.dp)
                                         ) {
+                                            ProgressBar(
+                                                actualPercentage = allProgressPercentage,
+                                                level = null
+                                            )
+
                                             ProgressBar(
                                                 actualPercentage = userQuestionsProgressUiState.easyAnsweredQuestionsPercent,
                                                 level = QuestionLevel.Easy

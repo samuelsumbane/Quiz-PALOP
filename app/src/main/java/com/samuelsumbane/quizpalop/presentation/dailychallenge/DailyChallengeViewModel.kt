@@ -50,9 +50,10 @@ class DailyChallengeViewModel(
             val now = System.currentTimeMillis()
             val lastDateUserGotDailyQuestion = settingsManager.readLongValues(settingsManager.lastDateTimeUserGotDailyQuestionId)
 
+            val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
+            println("estado: actualId is: $actualDailyQuestionId")
+
             if (isDifferentDay(lastDateUserGotDailyQuestion, now)) {
-                val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
-                println("estado: actualId is: $actualDailyQuestionId")
                 val allQuestions = repo.getQuestions()
                 println("estado: allQuestion $allQuestions")
                 val savedDailyQuestions =
@@ -67,7 +68,7 @@ class DailyChallengeViewModel(
                 val allHardQuestions =
                     allQuestions.filter { it.questionLevel == "Hard" }.map { it.id }
 
-                val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
+//                val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
                 val mediumSavedQuestions = allMediumQuestions intersect savedDailyQuestions
                 val hardSavedQuestions = allHardQuestions intersect savedDailyQuestions
 
@@ -88,26 +89,29 @@ class DailyChallengeViewModel(
                 val availablesQuestionsId = when {
                     mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract mediumSavedQuestions
                     hardQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
-                    else -> {
-                        println("estado: m $mediumQuestionsPercentage, h: $hardQuestionsPercentage")
-                        allNotAnsweredQuestions
-                    }
+                    else -> allNotAnsweredQuestions
                 }
 
                 val randomedQuestionId = availablesQuestionsId.random()
                 println("estado: randomized is: $randomedQuestionId")
-                    val randomedQuestion =
-                        allQuestions.first { it.id == randomedQuestionId }
-                    updateState {
-                        it.copy(
-                            dailyQuestionId = randomedQuestion.id,
-                            dailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.FINISHED
-                        )
-                    }
-                    settingsManager.saveStringValues(
-                        settingsManager.actualDailyQuestionId,
-                        randomedQuestion.id
+                val randomedQuestion =
+                    allQuestions.first { it.id == randomedQuestionId }
+                updateState {
+                    it.copy(
+                        dailyQuestionId = randomedQuestion.id,
+                        dailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.FINISHED
                     )
+                }
+                settingsManager.saveStringValues(
+                    settingsManager.actualDailyQuestionId,
+                    randomedQuestion.id
+                )
+                settingsManager.saveLongValue(settingsManager.lastDateTimeUserGotDailyQuestionId, now)
+            } else {
+                updateState { it.copy(
+                    dailyQuestionId = actualDailyQuestionId.ifBlank { null },
+                    dailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.FINISHED
+                ) }
             }
         }
     }
@@ -225,7 +229,6 @@ class DailyChallengeViewModel(
                     updateState {
                         it.copy(
                             dailyChallengeMessage = DailyChallengeMessage.RightAnswer(
-                                title = "Parabéns!!!",
                                 message = "Acertou correctamente o desafio de hoje",
                                 earnedCoins = "+5"
                             ),
@@ -235,7 +238,6 @@ class DailyChallengeViewModel(
                     delay(1.7.seconds)
                     settingsManager.saveIntValues(settingsManager.userCoins, coins + 1)
                     updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.WrongAnswer(
-                        title = "Sem sucesso",
                         message = "Não respondeu correctamente o desafio de hoje",
                         rightAnswerText = currectOption,
                         earnedCoins = "+1"
