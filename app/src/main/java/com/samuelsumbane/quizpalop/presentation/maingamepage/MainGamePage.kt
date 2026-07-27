@@ -82,7 +82,6 @@ fun MainPage(country: Countries, category: Category) {
     val context = LocalContext.current
     val soundManager = remember { SoundManager(context) }
     val manager = remember { RewardedAdManager(context) }
-    val coroutineScope = rememberCoroutineScope()
 
 
     val activity = context as Activity

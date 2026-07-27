@@ -19,6 +19,7 @@ class SettingsManager(val context: Context) {
     val userCoins = intPreferencesKey("user_coins")
     val lives = intPreferencesKey("user_lives")
     val playSound = booleanPreferencesKey("play_sound")
+    val vibrateOnTap = booleanPreferencesKey("vibrateontap")
 
     val savedQuestionsList = stringPreferencesKey("savedQuestions_list")
     val lastSelectedCategory = stringPreferencesKey("lastCategorySelected")
@@ -30,6 +31,7 @@ class SettingsManager(val context: Context) {
     val actualDailyQuestionId = stringPreferencesKey("actualDailyQuestionId")
 //    val answeredDailyQuestionDateTime = longPreferencesKey("answeredDailyQuestionDateTime")
     val lastDateTimeUserGotDailyQuestionId = longPreferencesKey("lastDateTimeUserGotDailyQuestionId")
+
     /**
      * Reads Int DataStore values
      */

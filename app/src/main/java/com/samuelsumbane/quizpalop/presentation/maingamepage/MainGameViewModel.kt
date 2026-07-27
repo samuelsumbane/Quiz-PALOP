@@ -1,13 +1,8 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
-import android.content.Context
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.core.HapticManager
-import com.samuelsumbane.quizpalop.core.saveBitmap
-import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.AdState
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
@@ -46,7 +41,10 @@ class MainGameViewModel(
             loadLivesAndCoinsInFlow()
             settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
                 val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
-                updateState { it.copy(soundState = soundState) }
+                updateState { it.copy(
+                    soundState = soundState,
+                    mobileVibrate = hapticManager.mobileVibrate
+                ) }
             }
         }
     }
@@ -65,6 +63,8 @@ class MainGameViewModel(
                 }
             }
             MainGameUiEvents.OnToggleShowConfig -> toogleShowConfigs()
+            is MainGameUiEvents.OnToggleSoundState -> toogleSoundState(event.playSound)
+            MainGameUiEvents.OnToggleHapticState -> toggleHapticState()
         }
     }
 
@@ -207,13 +207,25 @@ class MainGameViewModel(
             }
             updateState { it.copy(
                 soundState = if (playSound) SoundState.Playing else SoundState.Mute,
-                showGameConfings = false
+                showGameConfigs = false
             ) }
         }
     }
 
+    fun toggleHapticState() {
+        viewModelScope.launch {
+            settingsManager.saveBooleanValues(settingsManager.vibrateOnTap, !mainGameUiState.value.mobileVibrate)
+            updateState {
+               it.copy(
+                   mobileVibrate = !mainGameUiState.value.mobileVibrate,
+                   showGameConfigs = false
+               )
+            }
+        }
+    }
+
     fun toogleShowConfigs() {
-        updateState { it.copy(showGameConfings = !mainGameUiState.value.showGameConfings) }
+        updateState { it.copy(showGameConfigs = !mainGameUiState.value.showGameConfigs) }
     }
 
     fun changeTimerTo(timer: Int) = updateState { it.copy(questionsTimer = timer,) }

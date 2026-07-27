@@ -1,7 +1,5 @@
 package com.samuelsumbane.quizpalop.presentation.composables
 
-import android.graphics.drawable.Icon
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -12,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -24,10 +20,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.zIndex
-import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.R
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiEvents
+import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 
@@ -67,7 +62,7 @@ fun GameTopStatusBar(
             Icon(painterResource(R.drawable.gear), "", modifier = Modifier.size(24.dp))
         }
 
-        if (mainGameUiState.showGameConfings) {
+        if (mainGameUiState.showGameConfigs) {
             Column(
                 modifier = Modifier
                     .padding(top = 45.dp)
@@ -87,6 +82,12 @@ fun GameTopStatusBar(
                             iconColor
                         )
                     }
+                }
+
+                IconButton(
+                    onClick = { mainGameViewModel.onEvent(MainGameUiEvents.OnToggleHapticState) }
+                ) {
+                    if (mainGameUiState.mobileVibrate) VibrateIcon() else VibrationOff()
                 }
             }
         }

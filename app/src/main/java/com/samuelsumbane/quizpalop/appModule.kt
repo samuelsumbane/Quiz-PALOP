@@ -12,6 +12,9 @@ import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeVie
 import com.samuelsumbane.quizpalop.presentation.duel.DuelViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import org.koin.android.ext.koin.androidContext
 
 import org.koin.core.module.dsl.viewModel
@@ -19,9 +22,13 @@ import org.koin.dsl.module
 
 @RequiresApi(Build.VERSION_CODES.O)
 val appModule = module {
+    single {
+        CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    }
+
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
-    single<HapticManager> { AndroidHapticManager(androidContext()) }
+    single<HapticManager> { AndroidHapticManager(androidContext(), get(), get()) }
 
     viewModel { MainGameViewModel(get(), get(), get()) }
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }

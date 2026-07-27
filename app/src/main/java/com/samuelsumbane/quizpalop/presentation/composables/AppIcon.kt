@@ -106,3 +106,9 @@ fun IconAndTextColumn(
         }
     }
 }
+
+@Composable
+fun VibrateIcon() = NormalIconContainer(painterResource(R.drawable.vibrateicon), contentDescription = "Vibration active")
+
+@Composable
+fun VibrationOff() = NormalIconContainer(painterResource(R.drawable.vibrationoff), contentDescription = "Vibration off")

@@ -29,18 +29,16 @@ data class MainGameUiState(
 //
     val selectedCountry: Countries? = null,
     val selectedCategory: Category? = null,
-    //
     val questionsTimer: Int = 0,
     val timerState: QuestionTimerState = QuestionTimerState.Stop,
 //    val sessionQuestionsLevel: QuestionLevel = QuestionLevel.Easy,
-    //
 //    val pageUiState: PageUiState = PageUiState.Loading,
     val lastDateTimeLostLives: Long = 0L,
     val currentQuestion: Question? = null,
     val adState: AdState = AdState.Loading,
     val soundState: SoundState = SoundState.Playing,
-    //
-    val showGameConfings: Boolean = false,
+    val mobileVibrate: Boolean = true,
+    val showGameConfigs: Boolean = false,
 )
 
 enum class SoundState { Mute, Playing }

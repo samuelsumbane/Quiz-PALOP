@@ -229,7 +229,7 @@ class DailyChallengeViewModel(
                     updateState {
                         it.copy(
                             dailyChallengeMessage = DailyChallengeMessage.RightAnswer(
-                                message = "Acertou correctamente o desafio de hoje",
+                                message = "Respondeu correctamente o desafio de hoje",
                                 earnedCoins = "+5"
                             ),
                     ) }

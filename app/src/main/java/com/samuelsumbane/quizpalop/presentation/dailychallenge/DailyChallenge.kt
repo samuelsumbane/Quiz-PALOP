@@ -170,7 +170,7 @@ fun DailyChallenge(questionId: String) {
                                     }
                                 }
                             }
-                            Text(dailyChallengeUiState.dailyQuestionRightAnswer)
+                            Text("")
                         }
 
                         if (dailyChallengeUiState.showBottomBar) {

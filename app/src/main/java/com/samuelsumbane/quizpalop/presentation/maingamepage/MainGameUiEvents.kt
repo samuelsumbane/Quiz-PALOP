@@ -7,4 +7,6 @@ sealed interface MainGameUiEvents {
     data object OnExit : MainGameUiEvents
     data class OnHelp(val helpOption: HelpOption) : MainGameUiEvents
     data object OnToggleShowConfig : MainGameUiEvents
+    data class OnToggleSoundState(val playSound: Boolean) : MainGameUiEvents
+    data object OnToggleHapticState : MainGameUiEvents
 }
