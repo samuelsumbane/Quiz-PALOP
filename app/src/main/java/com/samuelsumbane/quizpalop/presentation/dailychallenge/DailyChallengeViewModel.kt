@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.graphics.layer.GraphicsLayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.HapticManager
 import com.samuelsumbane.quizpalop.core.isDifferentDay
 import com.samuelsumbane.quizpalop.core.saveBitmap
 import com.samuelsumbane.quizpalop.core.shareImage
@@ -31,7 +32,8 @@ import kotlin.time.Duration.Companion.seconds
 @RequiresApi(Build.VERSION_CODES.O)
 class DailyChallengeViewModel(
     private val settingsManager: SettingsManager,
-    private val repo: QuizRepository
+    private val repo: QuizRepository,
+    private val hapticManager: HapticManager
 ) : ViewModel() {
     private val _dailyChallengeViewModel = MutableStateFlow(DailyChallengeUiState())
     val dailychallengeUiState = _dailyChallengeViewModel.asStateFlow()
@@ -68,10 +70,11 @@ class DailyChallengeViewModel(
                 val allHardQuestions =
                     allQuestions.filter { it.questionLevel == "Hard" }.map { it.id }
 
-//                val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
+                val easySavedQuestions = allEasyQuestions intersect savedDailyQuestions
                 val mediumSavedQuestions = allMediumQuestions intersect savedDailyQuestions
                 val hardSavedQuestions = allHardQuestions intersect savedDailyQuestions
 
+                val easyQuestionsPercentage = easySavedQuestions.size.toFloat() / allEasyQuestions.size
                 val mediumQuestionsPercentage =
                     mediumSavedQuestions.size.toFloat() / allMediumQuestions.size
                 val hardQuestionsPercentage =
@@ -87,8 +90,8 @@ class DailyChallengeViewModel(
                 }
 
                 val availablesQuestionsId = when {
-                    mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract mediumSavedQuestions
-                    hardQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
+                    easyQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract listOf(mediumSavedQuestions, hardSavedQuestions).toSet()
+                    mediumQuestionsPercentage < 1.0f -> allNotAnsweredQuestions subtract hardSavedQuestions
                     else -> allNotAnsweredQuestions
                 }
 
@@ -145,7 +148,7 @@ class DailyChallengeViewModel(
     }
 
     fun updateButton(button: OptionsButton, state: OptionState) {
-        val newColor = if (state == OptionState.Currect) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
+        val newColor = if (state == OptionState.Correct) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
         when (button) {
             OptionsButton.First -> updateState { it.copy(optionsColors = it.optionsColors.mapIndexed { index, color -> if (index == 0) newColor else color }) }
             OptionsButton.Second -> updateState { it.copy(optionsColors = it.optionsColors.mapIndexed { index, color -> if (index == 1) newColor else color }) }
@@ -166,53 +169,53 @@ class DailyChallengeViewModel(
                     optionsList[0] -> {
                         if (currectOption == clickedOptionName) updateButton(
                             OptionsButton.First,
-                            OptionState.Currect
+                            OptionState.Correct
                         )
                         else {
                             updateButton(OptionsButton.First, OptionState.Wrong)
                             when (optionsList.indexOf(currectOption)) {
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                                1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                                2 -> updateButton(OptionsButton.Third, OptionState.Correct)
+                                3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                             }
                         }
                     }
 
                     optionsList[1] -> {
                         if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Second, OptionState.Currect)
+                            updateButton(OptionsButton.Second, OptionState.Correct)
                         } else {
                             updateButton(OptionsButton.Second, OptionState.Wrong)
                             when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                                0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                                2 -> updateButton(OptionsButton.Third, OptionState.Correct)
+                                3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                             }
                         }
                     }
 
                     optionsList[2] -> {
                         if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Third, OptionState.Currect)
+                            updateButton(OptionsButton.Third, OptionState.Correct)
                         } else {
                             updateButton(OptionsButton.Third, OptionState.Wrong)
                             when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                                0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                                1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                                3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                             }
                         }
                     }
 
                     optionsList[3] -> {
                         if (currectOption == clickedOptionName) {
-                            updateButton(OptionsButton.Fouth, OptionState.Currect)
+                            updateButton(OptionsButton.Fouth, OptionState.Correct)
                         } else {
                             updateButton(OptionsButton.Fouth, OptionState.Wrong)
                             when (optionsList.indexOf(currectOption)) {
-                                0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                                1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                                2 -> updateButton(OptionsButton.Third, OptionState.Currect)
+                                0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                                1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                                2 -> updateButton(OptionsButton.Third, OptionState.Correct)
                             }
                         }
                     }
@@ -223,7 +226,9 @@ class DailyChallengeViewModel(
                 val savedDailyQuestions = settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions).first()
 
                 if (currectOption == clickedOptionName) {
+                    hapticManager.success()
                     sendSound(SoundEvent.Correct)
+
                     delay(1.7.seconds)
                     settingsManager.saveIntValues(settingsManager.userCoins, coins + 5)
                     updateState {
@@ -234,7 +239,9 @@ class DailyChallengeViewModel(
                             ),
                     ) }
                 } else {
+                    hapticManager.error()
                     sendSound(SoundEvent.Wrong)
+
                     delay(1.7.seconds)
                     settingsManager.saveIntValues(settingsManager.userCoins, coins + 1)
                     updateState { it.copy(dailyChallengeMessage = DailyChallengeMessage.WrongAnswer(

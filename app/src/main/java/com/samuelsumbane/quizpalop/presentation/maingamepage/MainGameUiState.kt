@@ -37,7 +37,7 @@ data class MainGameUiState(
     val currentQuestion: Question? = null,
     val adState: AdState = AdState.Loading,
     val soundState: SoundState = SoundState.Playing,
-    val mobileVibrate: Boolean = true,
+    val mobileVibrate: Boolean = false,
     val showGameConfigs: Boolean = false,
 )
 

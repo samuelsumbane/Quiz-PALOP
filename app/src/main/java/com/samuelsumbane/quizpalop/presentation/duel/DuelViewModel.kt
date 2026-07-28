@@ -123,52 +123,52 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                 viewModelScope.launch {
                     when (clickedOptionName) {
                         optionsList[0] -> {
-                            if (rightOption == clickedOptionName) updateButton(OptionsButton.First, actualPlayerData, OptionState.Currect)
+                            if (rightOption == clickedOptionName) updateButton(OptionsButton.First, actualPlayerData, OptionState.Correct)
                             else {
                                 updateButton(OptionsButton.First, actualPlayerData, OptionState.Wrong)
                                 when (optionsList.indexOf(rightOption)) {
-                                    1 -> updateButton(OptionsButton.Second, actualPlayerData, OptionState.Currect)
-                                    2 -> updateButton(OptionsButton.Third, actualPlayerData, OptionState.Currect)
-                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData, OptionState.Correct)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData, OptionState.Correct)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Correct)
                                 }
                             }
                         }
 
                         optionsList[1] -> {
                             if (rightOption == clickedOptionName) {
-                                updateButton(OptionsButton.Second, actualPlayerData, OptionState.Currect)
+                                updateButton(OptionsButton.Second, actualPlayerData, OptionState.Correct)
                             } else {
                                 updateButton(OptionsButton.Second, actualPlayerData, OptionState.Wrong)
                                 when (optionsList.indexOf(rightOption)) {
-                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
-                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Currect)
-                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Correct)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Correct)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Correct)
                                 }
                             }
                         }
 
                         optionsList[2] -> {
                             if (rightOption == clickedOptionName) {
-                                updateButton(OptionsButton.Third, actualPlayerData, OptionState.Currect)
+                                updateButton(OptionsButton.Third, actualPlayerData, OptionState.Correct)
                             } else {
                                 updateButton(OptionsButton.Third, actualPlayerData, OptionState.Wrong)
                                 when (optionsList.indexOf(rightOption)) {
-                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
-                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Currect)
-                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Currect)
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Correct)
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Correct)
+                                    3 -> updateButton(OptionsButton.Fouth, actualPlayerData, OptionState.Correct)
                                 }
                             }
                         }
 
                         optionsList[3] -> {
                             if (rightOption== clickedOptionName) {
-                                updateButton(OptionsButton.Fouth, actualPlayerData,  OptionState.Currect)
+                                updateButton(OptionsButton.Fouth, actualPlayerData,  OptionState.Correct)
                             } else {
                                 updateButton(OptionsButton.Fouth, actualPlayerData,  OptionState.Wrong)
                                 when (optionsList.indexOf(rightOption)) {
-                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Currect)
-                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Currect)
-                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Currect)
+                                    0 -> updateButton(OptionsButton.First, actualPlayerData,  OptionState.Correct)
+                                    1 -> updateButton(OptionsButton.Second, actualPlayerData,  OptionState.Correct)
+                                    2 -> updateButton(OptionsButton.Third, actualPlayerData,  OptionState.Correct)
                                 }
                             }
                         }
@@ -297,7 +297,7 @@ println("duelS: the id: ${question.id}")
     }
 
     fun updateButton(button: OptionsButton, playerData: PlayerData, state: OptionState) {
-        val newColor = if (state == OptionState.Currect) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
+        val newColor = if (state == OptionState.Correct) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
 
         when (playerData.name) {
             PlayerName.FirstPlayer -> {

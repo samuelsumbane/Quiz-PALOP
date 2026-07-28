@@ -73,7 +73,7 @@ fun GameTopStatusBar(
                 IconButton(
                     onClick = { mainGameViewModel.toogleSoundState(mainGameUiState.soundState != SoundState.Playing) }
                 ) {
-                    if (mainGameUiState.soundState == SoundState.Playing) {
+                    if (mainGameUiState.soundState != SoundState.Playing) {
                         HomeIcon(painterResource(R.drawable.volume_up_fill), "Volume up", iconColor)
                     } else {
                         HomeIcon(
@@ -87,7 +87,7 @@ fun GameTopStatusBar(
                 IconButton(
                     onClick = { mainGameViewModel.onEvent(MainGameUiEvents.OnToggleHapticState) }
                 ) {
-                    if (mainGameUiState.mobileVibrate) VibrateIcon() else VibrationOff()
+                    if (mainGameUiState.mobileVibrate) VibrationOff() else VibrateIcon()
                 }
             }
         }

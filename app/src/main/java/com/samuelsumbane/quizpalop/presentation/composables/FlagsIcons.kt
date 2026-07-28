@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -39,18 +40,23 @@ fun LoadFlag(
 
 @Composable
 fun FlagsComponents() {
-    LazyRow(
+    Column(
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        items(1) {
+        Row(
+            modifier = Modifier,
+            horizontalArrangement = Arrangement.Center
+        ) {
             LoadFlag(painterId = R.drawable.minangola, "Angoloa")
             LoadFlag(painterId = R.drawable.capeverde, "Cape Verde")
             LoadFlag(painterId = R.drawable.guineabissau, "Guine Bissau")
             LoadFlag(painterId = R.drawable.minmozambique, "Mozambique")
             LoadFlag(painterId = R.drawable.saotomeandprincipe, "Sao tome And Principe")
         }
+
+        ButtonOutlined(text = "Ver país") { }
     }
 }

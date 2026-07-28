@@ -9,6 +9,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.LaunchedEffect
 import cafe.adriel.voyager.navigator.Navigator
 import com.google.android.gms.ads.MobileAds
+import com.samuelsumbane.quizpalop.domain.model.PagesName
+import com.samuelsumbane.quizpalop.presentation.aboutcountries.AboutCountriesScreen
+import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeScreen
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
@@ -31,9 +34,11 @@ class MainActivity : ComponentActivity() {
             QuizPALOPTheme {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
-                Navigator(HomePageScreen())
+//                Navigator(QuestionsConfigScreen(PagesName.MainPage))
+//                Navigator(HomePageScreen())
 //                Navigator(DuelScreen(Countries.Mz, Category.History, 2))
 //                Navigator(DailyChallengeScreen("mz_01"))
+                Navigator(AboutCountriesScreen())
             }
         }
     }

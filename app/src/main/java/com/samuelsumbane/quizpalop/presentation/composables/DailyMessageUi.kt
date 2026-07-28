@@ -14,7 +14,6 @@ fun DailyChallengeMessageUi(
 ) {
     MessageContainer(modifier = modifier) {
         content()
-
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center

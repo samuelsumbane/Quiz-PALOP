@@ -19,6 +19,7 @@ fun MainGameViewModel.saveLives(qtd: Int) {
 
 fun MainGameViewModel.changeLivesCount(liveState: ChangeCountValues) {
     val lives = mainGameUiState.value.lives
+
     when (liveState) {
         is ChangeCountValues.IncreaseLives -> saveLives(lives + liveState.plusNum)
         ChangeCountValues.DecreaseLive -> if (lives > 0) saveLives(lives - 1)

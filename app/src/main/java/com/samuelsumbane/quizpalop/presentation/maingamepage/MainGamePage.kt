@@ -5,7 +5,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -186,11 +188,11 @@ fun MainPage(country: Countries, category: Category) {
                 bottomBar = {
                     AnimatedVisibility(
                         visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && mainPageUiState.lives > 0,
-                        enter = slideInHorizontally(
-                            initialOffsetX = { -it }
+                        enter = slideInVertically(
+                            initialOffsetY = { it }
                         ) + fadeIn(),
-                        exit = slideOutHorizontally(
-                            targetOffsetX = { it }
+                        exit = slideOutVertically (
+                            targetOffsetY = { it }
                         ) + fadeOut()
                     ) {
                         Row(

@@ -2,6 +2,7 @@ package com.samuelsumbane.quizpalop.presentation.composables
 
 import android.app.Activity
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,7 +34,7 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.clearAnsweredQuestionsWithoutMistake
 import com.samuelsumbane.quizpalop.presentation.maingamepage.onCloseMessageModal
 import com.samuelsumbane.quizpalop.presentation.maingamepage.setGameTextMessage
-import com.samuelsumbane.quizpalop.presentation.maingamepage.showCurrectOptionAfterViewAd
+import com.samuelsumbane.quizpalop.presentation.maingamepage.showCorrectOptionAfterViewAd
 
 @Composable
 fun MessageContainer(
@@ -43,7 +44,8 @@ fun MessageContainer(
     Column(
         modifier = modifier
             .padding(15.dp)
-            .background(Color(0xBC9C9C9B), RoundedCornerShape(14.dp))
+            .background(Color(0xBC9C9C9B).copy(alpha = 0.4f), RoundedCornerShape(14.dp))
+            .border(1.dp, MaterialTheme.colorScheme.secondary, RoundedCornerShape(14.dp))
             .zIndex(3f)
             .padding(10.dp, 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -146,7 +148,7 @@ fun MessageUi(
                                 when (mainPageUiState.adState) {
                                     AdState.Ready -> {
                                         manager.show(activity) {
-                                            mainGameViewModel.showCurrectOptionAfterViewAd()
+                                            mainGameViewModel.showCorrectOptionAfterViewAd()
                                         }
                                     }
                                     AdState.Loading, AdState.Error  -> mainGameViewModel.loadAd(manager)

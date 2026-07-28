@@ -43,7 +43,7 @@ fun HorizontalDividerWithText(text: String) {
 fun BigExitAppIcon() {
     Icon(
         painter = painterResource(R.drawable.door_open_fill), "",
-        tint = Color(0xFFC61C1C),
+        tint = Color.Black,
         modifier = Modifier.size(80.dp, 100.dp)
     )
 }
@@ -170,4 +170,18 @@ fun ConfigsNavigationIcon(
         ),
         modifier = Modifier.size(45.dp)
     ) { icon() }
+}
+
+@Composable
+fun KeyValueRowText(key: String, value: String) {
+    Row(
+        modifier = Modifier
+            .padding(10.dp, 8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text("$key:")
+        Text(":$value")
+    }
 }

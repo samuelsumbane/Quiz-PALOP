@@ -11,10 +11,10 @@ import kotlinx.coroutines.launch
 
 
 enum class OptionsButton { First, Second, Third, Fouth }
-enum class OptionState { Currect, Wrong }
+enum class OptionState { Correct, Wrong }
 
 fun MainGameViewModel.updateButton(button: OptionsButton, state: OptionState) {
-    val newColor = if (state == OptionState.Currect) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
+    val newColor = if (state == OptionState.Correct) quizOptionCurrectButtonColor else quizOptionWrongButtonColor
     when (button) {
         OptionsButton.First -> updateState { it.copy(optionsColors = it.optionsColors.mapIndexed { index, color -> if (index == 0) newColor else color }) }
         OptionsButton.Second -> updateState { it.copy(optionsColors = it.optionsColors.mapIndexed { index, color -> if (index == 1) newColor else color }) }
@@ -23,65 +23,63 @@ fun MainGameViewModel.updateButton(button: OptionsButton, state: OptionState) {
     }
 }
 
-fun MainGameViewModel.checkResponse(
-    clickedOptionName: String,
-) {
+fun MainGameViewModel.checkResponse(clickedOptionName: String) {
     viewModelScope.launch {
         mainGameUiState.value.actualQuestion?.let { question ->
-            val currectOption = mainGameUiState.value.actualQuestionRightAnswer
+            val correctOption = mainGameUiState.value.actualQuestionRightAnswer
 
             val optionsList = question.options
             when (clickedOptionName) {
                 optionsList[0] -> {
-                    if (currectOption == clickedOptionName) updateButton(
+                    if (correctOption == clickedOptionName) updateButton(
                         OptionsButton.First,
-                        OptionState.Currect
+                        OptionState.Correct
                     )
                     else {
                         updateButton(OptionsButton.First, OptionState.Wrong)
-                        when (optionsList.indexOf(currectOption)) {
-                            1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                            2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                            3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                        when (optionsList.indexOf(correctOption)) {
+                            1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                            2 -> updateButton(OptionsButton.Third, OptionState.Correct)
+                            3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                         }
                     }
                 }
 
                 optionsList[1] -> {
-                    if (currectOption == clickedOptionName) {
-                        updateButton(OptionsButton.Second, OptionState.Currect)
+                    if (correctOption == clickedOptionName) {
+                        updateButton(OptionsButton.Second, OptionState.Correct)
                     } else {
                         updateButton(OptionsButton.Second, OptionState.Wrong)
-                        when (optionsList.indexOf(currectOption)) {
-                            0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                            2 -> updateButton(OptionsButton.Third, OptionState.Currect)
-                            3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                        when (optionsList.indexOf(correctOption)) {
+                            0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                            2 -> updateButton(OptionsButton.Third, OptionState.Correct)
+                            3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                         }
                     }
                 }
 
                 optionsList[2] -> {
-                    if (currectOption == clickedOptionName) {
-                        updateButton(OptionsButton.Third, OptionState.Currect)
+                    if (correctOption == clickedOptionName) {
+                        updateButton(OptionsButton.Third, OptionState.Correct)
                     } else {
                         updateButton(OptionsButton.Third, OptionState.Wrong)
-                        when (optionsList.indexOf(currectOption)) {
-                            0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                            1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                            3 -> updateButton(OptionsButton.Fouth, OptionState.Currect)
+                        when (optionsList.indexOf(correctOption)) {
+                            0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                            1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                            3 -> updateButton(OptionsButton.Fouth, OptionState.Correct)
                         }
                     }
                 }
 
                 optionsList[3] -> {
-                    if (currectOption == clickedOptionName) {
-                        updateButton(OptionsButton.Fouth, OptionState.Currect)
+                    if (correctOption == clickedOptionName) {
+                        updateButton(OptionsButton.Fouth, OptionState.Correct)
                     } else {
                         updateButton(OptionsButton.Fouth, OptionState.Wrong)
-                        when (optionsList.indexOf(currectOption)) {
-                            0 -> updateButton(OptionsButton.First, OptionState.Currect)
-                            1 -> updateButton(OptionsButton.Second, OptionState.Currect)
-                            2 -> updateButton(OptionsButton.Third, OptionState.Currect)
+                        when (optionsList.indexOf(correctOption)) {
+                            0 -> updateButton(OptionsButton.First, OptionState.Correct)
+                            1 -> updateButton(OptionsButton.Second, OptionState.Correct)
+                            2 -> updateButton(OptionsButton.Third, OptionState.Correct)
                         }
                     }
                 }
@@ -89,7 +87,7 @@ fun MainGameViewModel.checkResponse(
 
             updateState { it.copy(timerState = QuestionTimerState.Stop) }
 
-            if (currectOption == clickedOptionName) {
+            if (correctOption == clickedOptionName) {
                 viewModelScope.launch {
                     updateState { it.copy(questionsIdList = it.questionsIdList - question.id) }
 
@@ -103,9 +101,9 @@ fun MainGameViewModel.checkResponse(
 //                println("ouvindo: to save: ${mainGameUiState.value.answeredQuestionsList}")
                     settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
 
+                    hapticManager.success()
                     sendSound(SoundEvent.Correct)
                     startLoadingNextQuestion()
-                    hapticManager.success()
                 }
             } else {
                 viewModelScope.launch {
@@ -113,12 +111,11 @@ fun MainGameViewModel.checkResponse(
                     clearAnsweredQuestionsWithoutMistake()
                     setLastDateTimeUserLostLives()
                     if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
+                    hapticManager.error()
                     sendSound(SoundEvent.Wrong)
                     startLoadingNextQuestion()
-                    hapticManager.error()
                 }
             }
-
             changeUserHelpState(false)
         }
     }
@@ -197,7 +194,7 @@ fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
                     }
 
                     Category.Exam -> {
-                        when (val countryForExame = selectedCountry) {
+                        when (selectedCountry) {
                             Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
                             Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
                             Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
@@ -247,7 +244,7 @@ fun MainGameViewModel.giveCoinsToUser() {
     }
 }
 
-fun MainGameViewModel.showCurrectOptionAfterViewAd() {
+fun MainGameViewModel.showCorrectOptionAfterViewAd() {
     mainGameUiState.value.actualQuestion?.let {
         setGameTextMessage(
             GameTextMessage.ShowRightAnswer("""A resposta correcta é: "${mainGameUiState.value.actualQuestionRightAnswer}" """)
@@ -259,7 +256,7 @@ fun MainGameViewModel.setQuestionWrong() {
     if (mainGameUiState.value.timerState == QuestionTimerState.Stop) return
     viewModelScope.launch {
         updateState {
-            it.copy(gameTextMessage = GameTextMessage.QuestionNotAnswered("Tempo estogado", "O cronômetro venceu você dessa vez e levou uma vida\n Seja mais rápido na próxima!"))
+            it.copy(gameTextMessage = GameTextMessage.QuestionNotAnswered("Tempo esgotado", "O cronômetro venceu você dessa vez e levou uma vida\n Seja mais rápido na próxima!"))
         }
         settingsManager.saveIntValues(settingsManager.lives, mainGameUiState.value.lives - 1)
 

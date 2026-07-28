@@ -67,7 +67,7 @@ fun QuestionsConfigPage(destination: PagesName) {
 
     val userQuestionsPercentage = koinViewModel<UserQuestionsPercentageViewModel>()
     val userQuestionsPercentageUiState by userQuestionsPercentage.uiState.collectAsStateWithLifecycle()
-    //
+
     val context = LocalContext.current
     val coroutine = rememberCoroutineScope()
     val soundManager = remember { SoundManager(context) }
@@ -174,17 +174,11 @@ fun QuestionsConfigPage(destination: PagesName) {
                                     }
                             ) { newValue ->
                                 when (questionsConfigUiState.questionConfig) {
-                                    QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCountry(
-                                        newValue
-                                    )
+                                    QuestionConfig.SelectCountry -> questionsConfigViewModel.setGameCountry(newValue)
 
-                                    QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(
-                                        newValue
-                                    )
+                                    QuestionConfig.SelectCategory -> questionsConfigViewModel.setGameCategory(newValue)
 
-                                    QuestionConfig.SelectQuestionsLength -> questionsConfigViewModel.setGamePlayQuestionsLen(
-                                        newValue
-                                    )
+                                    QuestionConfig.SelectQuestionsLength -> questionsConfigViewModel.setGamePlayQuestionsLen(newValue)
                                 }
                             }
                         }

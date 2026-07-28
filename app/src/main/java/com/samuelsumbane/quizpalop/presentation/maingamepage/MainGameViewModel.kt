@@ -155,7 +155,7 @@ class MainGameViewModel(
 
     fun loadLivesAndCoinsInFlow() {
         viewModelScope.launch {
-            settingsManager.readIntValues(settingsManager.lives).collect { userLives ->
+            settingsManager.readIntValues(settingsManager.lives, 10).collect { userLives ->
                 updateState { it.copy(lives = userLives) }
             }
         }

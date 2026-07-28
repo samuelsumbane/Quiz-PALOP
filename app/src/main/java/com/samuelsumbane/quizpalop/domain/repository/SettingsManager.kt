@@ -35,11 +35,12 @@ class SettingsManager(val context: Context) {
     /**
      * Reads Int DataStore values
      */
-    fun readIntValues(value: Preferences.Key<Int>): Flow<Int> {
+    fun readIntValues(preference: Preferences.Key<Int>, defaultValue: Int = 0): Flow<Int> {
         return context.dataStore.data.map { prefs ->
-            prefs[value] ?: 0
+            prefs[preference] ?: defaultValue
         }
     }
+
 
     suspend fun saveIntValues(valueName: Preferences.Key<Int>, intValue: Int) {
         context.dataStore.edit { pref ->
