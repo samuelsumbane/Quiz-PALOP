@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -173,15 +172,15 @@ fun ConfigsNavigationIcon(
 }
 
 @Composable
-fun KeyValueRowText(key: String, value: String) {
-    Row(
-        modifier = Modifier
-            .padding(10.dp, 8.dp)
-            .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text("$key:")
-        Text(":$value")
+fun CountryInfoRows(valuesList: List<String>) {
+    val keysList = listOf("Capital", "Moeda", "Independência", "Área", "Países visinhos", "Fuso horário")
+    keysList.zip(valuesList).forEach { (key, value) ->
+        Row(
+            modifier = Modifier
+                .padding(bottom = 15.dp)
+        ) {
+            Text("$key: ", fontWeight = FontWeight.Bold)
+            Text(value)
+        }
     }
 }

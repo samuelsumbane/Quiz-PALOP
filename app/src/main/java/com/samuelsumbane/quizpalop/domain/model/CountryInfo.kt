@@ -12,5 +12,3 @@ data class CountryInfo(
     val paisesVisinhos: String,
     val fusoHorario: String
 )
-
-fun getCountryInfo(country: Countries): CountryInfo = countriesData.first { it.country == country }
