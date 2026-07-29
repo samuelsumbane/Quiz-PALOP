@@ -2,11 +2,13 @@ package com.samuelsumbane.quizpalop.presentation.duel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.HapticManager
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
+import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionsButton
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
@@ -21,16 +23,21 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-class DuelViewModel(val repository: QuizRepository) : ViewModel() {
+class DuelViewModel(
+    val repository: QuizRepository,
+    val settingsManager: SettingsManager,
+    val hapticManager: HapticManager
+) : ViewModel() {
     private val _state = MutableStateFlow(DuelUiState())
     val duelUiState = _state.asStateFlow()
     private var countDownJob: Job? = null
-//    private val duelQuestionsSize = 20
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
 
-
-    init { resetUiState() }
+    init {
+        resetUiState()
+        loadVibrateState()
+    }
 
     fun onEvent(duelUiEvents: DuelUiEvents) {
         when (duelUiEvents) {
@@ -188,8 +195,12 @@ class DuelViewModel(val repository: QuizRepository) : ViewModel() {
                                 )
                             }
                         }
+                        vibrateOnSuccess()
                         sendSound(SoundEvent.Correct)
-                    } else sendSound(SoundEvent.Wrong)
+                    } else {
+                        vibrateOnError()
+                        sendSound(SoundEvent.Wrong)
+                    }
 println("duelS: the id: ${question.id}")
                     delay(1200.milliseconds)
                     if (playerName == PlayerName.FirstPlayer) {
@@ -333,10 +344,23 @@ println("duelS: the id: ${question.id}")
                 }
             }
         }
-
-
     }
 
+    fun loadVibrateState() {
+        viewModelScope.launch {
+            settingsManager.readBooleanValue(settingsManager.vibrateOnTap).collect { savedVibrate ->
+                updateState { it.copy(mobileVibrate = savedVibrate) }
+            }
+        }
+    }
+
+    fun vibrateOnSuccess() {
+        if (duelUiState.value.mobileVibrate) hapticManager.success()
+    }
+
+    fun vibrateOnError() {
+        if (duelUiState.value.mobileVibrate) hapticManager.error()
+    }
 }
 
 

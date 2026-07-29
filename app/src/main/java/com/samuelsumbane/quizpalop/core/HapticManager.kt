@@ -10,30 +10,13 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 interface HapticManager {
-    val mobileVibrate: Boolean
     fun light()
     fun medium()
     fun success()
     fun error()
 }
 
-class AndroidHapticManager(
-    private val context: Context,
-    private val settingsManager: SettingsManager,
-    private val scope: CoroutineScope
-) : HapticManager {
-    var vibrate = true
-
-    init {
-        scope.launch {
-            settingsManager.readBooleanValue(settingsManager.vibrateOnTap).collect { savedVibrateState ->
-                vibrate = savedVibrateState
-            }
-        }
-    }
-
-    override val mobileVibrate: Boolean
-        get() = vibrate
+class AndroidHapticManager(private val context: Context) : HapticManager {
 
     private val vibrator: Vibrator by lazy {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -50,32 +33,28 @@ class AndroidHapticManager(
     override fun medium() = vibrateOneShot(50)
 
     override fun success() {
-        if (vibrate) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                val pattern = longArrayOf(0, 30, 50, 30)
-                vibrator.vibrate(VibrationEffect.createWaveform(pattern, -1))
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator.vibrate(longArrayOf(0, 30, 50, 30), -1)
-            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val pattern = longArrayOf(0, 30, 50, 30)
+            vibrator.vibrate(VibrationEffect.createWaveform(pattern, -1))
+        } else {
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(longArrayOf(0, 30, 50, 30), -1)
         }
     }
 
     override fun error() = vibrateOneShot(100)
 
     private fun vibrateOneShot(durationMs: Long) {
-        if (vibrate) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(
-                    VibrationEffect.createOneShot(
-                        durationMs,
-                        VibrationEffect.DEFAULT_AMPLITUDE
-                    )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            vibrator.vibrate(
+                VibrationEffect.createOneShot(
+                    durationMs,
+                    VibrationEffect.DEFAULT_AMPLITUDE
                 )
-            } else {
-                @Suppress("DEPRECATION")
-                vibrator.vibrate(durationMs)
-            }
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            vibrator.vibrate(durationMs)
         }
     }
 }

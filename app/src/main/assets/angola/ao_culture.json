@@ -1,9 +1,9 @@
 [
   {
     "id": "ao_cultura_01",
-    "question": "Qual é a língua oficial de Angola?",
+    "question": "',
     "questionLevel": "Medium",
-    "options": ["Português", "Inglês", "Francês", "Espanhol"],
+    "options": ,
     "correctIndex": 0
   },
   {

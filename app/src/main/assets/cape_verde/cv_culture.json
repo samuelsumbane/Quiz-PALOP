@@ -1,9 +1,14 @@
 [
   {
     "id": "cv_culture_01",
-    "question": "Qual é a língua oficial de Cabo Verde?",
+    "question": "Qual cidade de Cabo Verde é conhecida como a capital cultural do país?",
     "questionLevel": "Medium",
-    "options": ["Português", "Crioulo apenas", "Francês", "Inglês"],
+    "options": [
+      "Mindelo",
+      "Praia",
+      "Espargos",
+      "Assomada"
+    ],
     "correctIndex": 0
   },
   {

@@ -29,9 +29,14 @@
   },
   {
     "id": "cv_exam_05",
-    "question": "Qual é a moeda oficial de Cabo Verde?",
+    "question": "Qual é o ponto mais alto de Cabo Verde?",
     "questionLevel": "Hard",
-    "options": ["Escudo cabo-verdiano", "Euro", "Metical", "Rand"],
+    "options": [
+      "Pico do Fogo",
+      "Monte Verde",
+      "Monte Gordo",
+      "Pico da Antónia"
+    ],
     "correctIndex": 0
   },
   {

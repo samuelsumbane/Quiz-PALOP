@@ -98,10 +98,8 @@ fun MainGameViewModel.checkResponse(clickedOptionName: String) {
 
                     val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
                     updateState { it.copy(answeredQuestionsList = answeredQuestions) }
-//                println("ouvindo: to save: ${mainGameUiState.value.answeredQuestionsList}")
                     settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
-
-                    hapticManager.success()
+                    vibrateOnSuccess()
                     sendSound(SoundEvent.Correct)
                     startLoadingNextQuestion()
                 }
@@ -111,7 +109,7 @@ fun MainGameViewModel.checkResponse(clickedOptionName: String) {
                     clearAnsweredQuestionsWithoutMistake()
                     setLastDateTimeUserLostLives()
                     if (mainGameUiState.value.userCoins == 0) changeTimerState(QuestionTimerState.Stop)
-                    hapticManager.error()
+                    vibrateOnError()
                     sendSound(SoundEvent.Wrong)
                     startLoadingNextQuestion()
                 }

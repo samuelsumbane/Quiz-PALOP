@@ -31,6 +31,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.PagesName
+import com.samuelsumbane.quizpalop.presentation.composables.DailyChallengeIcon
 import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
 import com.samuelsumbane.quizpalop.presentation.composables.FlagsComponents
 import com.samuelsumbane.quizpalop.presentation.composables.GameIcon
@@ -117,7 +118,7 @@ fun HomePage() {
                             dailyChallengeUiState.dailyQuestionId?.let { questionId ->
                                 HomeOption(
                                     text = "Desafio diário",
-                                    aditionalElement = {},
+                                    aditionalElement = { DailyChallengeIcon() },
                                     onClick = { navigator.push(DailyChallengeScreen(questionId)) }
                                 )
                             }

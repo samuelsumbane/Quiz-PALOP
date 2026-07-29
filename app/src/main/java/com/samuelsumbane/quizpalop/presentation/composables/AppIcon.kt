@@ -56,7 +56,10 @@ fun LockIcon() = NormalIconContainer(painterResource(R.drawable.lockicon), "lock
 fun GameIcon() = IconContainer(painterResource(R.drawable.playgame), "play game",)
 
 @Composable
-fun DuelIcon() = IconContainer(painterResource(R.drawable.duel), "duel icon")
+fun DuelIcon() = NormalIconContainer(painterResource(R.drawable.person_versus), "duel icon")
+
+@Composable
+fun DailyChallengeIcon() = NormalIconContainer(painterResource(R.drawable.dailychallenge), "dailyChallenge icon")
 
 @Composable
 fun ProgressIcon() = IconContainer(painterResource(R.drawable.progress), "progress icon")
@@ -71,7 +74,7 @@ fun PrintScreenIcon(tint: Color = MaterialTheme.colorScheme.onBackground) =
 
 @Composable
 fun NormalIconContainer(painter: Painter, contentDescription: String) {
-    Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(24.dp))
+    Icon(painter = painter, contentDescription = contentDescription, modifier = Modifier.size(28.dp))
 }
 
 @Composable

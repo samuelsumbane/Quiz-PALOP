@@ -64,9 +64,14 @@
   },
   {
     "id": "mz_exam_10",
-    "question": "Qual é a moeda oficial utilizada em Moçambique?",
+    "question": "Qual é o maior rio que desagua em território moçambicano?",
     "questionLevel": "Hard",
-    "options": ["Metical", "Rand", "Kwacha", "Escudo"],
+    "options": [
+      "Rio Zambeze",
+      "Rio Limpopo",
+      "Rio Save",
+      "Rio Rovuma"
+    ],
     "correctIndex": 0
   },
   {

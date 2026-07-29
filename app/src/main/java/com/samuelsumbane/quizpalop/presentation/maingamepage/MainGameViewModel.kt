@@ -39,12 +39,10 @@ class MainGameViewModel(
             loadDateTimeSavedValues()
 //        loadQuestions()
             loadLivesAndCoinsInFlow()
+            loadSavedHaptic()
             settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
                 val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
-                updateState { it.copy(
-                    soundState = soundState,
-                    mobileVibrate = hapticManager.mobileVibrate
-                ) }
+                updateState { it.copy(soundState = soundState) }
             }
         }
     }
@@ -265,5 +263,22 @@ class MainGameViewModel(
     fun onSelectNewQuestionsGroup() {
         updateState { it.copy(loadSavedQuestionsFineshed = false) }
         setGameTextMessage(GameTextMessage.Empty)
+    }
+
+    fun loadSavedHaptic() {
+        viewModelScope.launch {
+            settingsManager.readBooleanValue(settingsManager.vibrateOnTap)
+                .collect { savedVibrateState ->
+                    updateState { it.copy(mobileVibrate = savedVibrateState) }
+                }
+        }
+    }
+
+    fun vibrateOnSuccess() {
+        if (mainGameUiState.value.mobileVibrate) hapticManager.success()
+    }
+
+    fun vibrateOnError() {
+        if (mainGameUiState.value.mobileVibrate) hapticManager.error()
     }
 }

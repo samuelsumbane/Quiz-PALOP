@@ -8,9 +8,14 @@
   },
   {
     "id": "gw_dificil_02",
-    "question": "Em que ano foi proclamada a independência da Guiné-Bissau?",
+    "question": "Em que cidade nasceu Amílcar Cabral?",
     "questionLevel": "Hard",
-    "options": ["1973", "1975", "1961", "1980"],
+    "options": [
+      "Bafatá",
+      "Bissau",
+      "Gabú",
+      "Cacheu"
+    ],
     "correctIndex": 0
   },
   {

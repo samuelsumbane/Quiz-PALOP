@@ -186,7 +186,7 @@ fun DailyChallenge(questionId: String) {
                                 ) { HomeIcon(tint = HomeOptionColor) }
 
                                 IconAndTextColumn(
-                                    text = "Captura de tela",
+                                    text = "Cap. tela\nE partilhar",
                                     onClick = {
                                        dailyChallengeViewModel.onEvent(
                                            DailyChallengeUiEvents.OnPrintScree(context, graphicsLayer)
@@ -243,7 +243,8 @@ fun RightAnswerQuestionText(
        Text(
            buildAnnotatedString {
                append(normalText)
-               withStyle(style = SpanStyle(fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Color(0xFF066106))) {
+               withStyle(style = SpanStyle(fontWeight = FontWeight.ExtraBold, fontSize = 16.sp, color = Color(0xFF009200)
+               )) {
                    append(importantText)
                }
            },

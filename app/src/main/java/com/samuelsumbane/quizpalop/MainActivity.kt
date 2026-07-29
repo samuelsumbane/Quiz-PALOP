@@ -36,7 +36,6 @@ class MainActivity : ComponentActivity() {
 //                Navigator(GameSessionScreen())
 //                Navigator(QuestionsConfigScreen(PagesName.MainPage))
                 Navigator(HomePageScreen())
-//                Navigator(DuelScreen(Countries.Mz, Category.History, 2))
 //                Navigator(DailyChallengeScreen("mz_01"))
 //                Navigator(AboutCountriesScreen())
             }

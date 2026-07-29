@@ -13,7 +13,8 @@ data class DuelUiState(
     val country: Countries = Countries.Angola,
     val category: Category = Category.History,
     val duelQuestionsSize: Int = 0,
-    val pageState: PageState = PageState.Loading
+    val pageState: PageState = PageState.Loading,
+    val mobileVibrate: Boolean = true,
 )
 
 

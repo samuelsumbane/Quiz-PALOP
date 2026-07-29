@@ -1,9 +1,14 @@
 [
   {
     "id": "gw_culture_01",
-    "question": "Qual é a língua oficial da Guiné-Bissau?",
+    "question": "Qual grupo étnico é considerado o mais numeroso da Guiné-Bissau?",
     "questionLevel": "Medium",
-    "options": ["Português", "Francês", "Inglês", "Espanhol"],
+    "options": [
+      "Balanta",
+      "Mandinga",
+      "Fula",
+      "Papel"
+    ],
     "correctIndex": 0
   },
   {

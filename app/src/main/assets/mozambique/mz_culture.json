@@ -1,9 +1,14 @@
 [
   {
     "id": "mz_culture_01",
-    "question": "Qual é a língua oficial de Moçambique?",
+    "question": "Qual parque nacional moçambicano é conhecido pela sua recuperação da vida selvagem após a guerra civil?",
     "questionLevel": "Medium",
-    "options": ["Português", "Inglês", "Suaíli", "Changana"],
+    "options": [
+      "Parque Nacional da Gorongosa",
+      "Parque Nacional do Limpopo",
+      "Parque Nacional do Zinave",
+      "Parque Nacional das Quirimbas"
+    ],
     "correctIndex": 0
   },
   {

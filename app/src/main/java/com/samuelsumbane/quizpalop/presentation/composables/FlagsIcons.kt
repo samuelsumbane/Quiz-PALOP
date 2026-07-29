@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -65,5 +67,10 @@ fun FlagsComponents() {
             LoadFlag(painterId = R.drawable.saotomeandprincipe, "Sao tome And Principe")
         }
 
-        ButtonOutlined(text = "Conheça o país") { navigator.push(AboutCountriesScreen()) }
+        TextButton(
+            onClick = { navigator.push(AboutCountriesScreen())},
+            colors = ButtonDefaults.textButtonColors(contentColor = Color.White)
+        ) {
+            Text(text = "Conheça o país", textDecoration = TextDecoration.Underline)
+        }
     } }

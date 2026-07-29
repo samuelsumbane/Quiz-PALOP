@@ -22,17 +22,13 @@ import org.koin.dsl.module
 
 @RequiresApi(Build.VERSION_CODES.O)
 val appModule = module {
-    single {
-        CoroutineScope(SupervisorJob() + Dispatchers.Default)
-    }
-
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
-    single<HapticManager> { AndroidHapticManager(androidContext(), get(), get()) }
+    single<HapticManager> { AndroidHapticManager(androidContext()) }
 
     viewModel { MainGameViewModel(get(), get(), get()) }
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
-    viewModel { DuelViewModel(get()) }
+    viewModel { DuelViewModel(get(), get(), get()) }
     viewModel { DailyChallengeViewModel(get(), get(), get()) }
 }

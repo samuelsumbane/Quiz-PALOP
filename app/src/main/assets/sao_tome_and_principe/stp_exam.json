@@ -1,9 +1,14 @@
 [
   {
     "id": "stp_dificil_01",
-    "question": "Em que ano São Tomé e Príncipe conquistou a independência?",
+    "question": "Em que ano a ilha do Príncipe passou a ter o estatuto de Região Autónoma?",
     "questionLevel": "Hard",
-    "options": ["1975", "1974", "1973", "1976"],
+    "options": [
+      "1995",
+      "1985",
+      "2005",
+      "2010"
+    ],
     "correctIndex": 0
   },
   {
@@ -29,9 +34,14 @@
   },
   {
     "id": "stp_dificil_05",
-    "question": "Qual é a moeda oficial de São Tomé e Príncipe?",
+    "question": "Qual área protegida de São Tomé e Príncipe preserva grande parte da fauna e flora endémicas do país?",
     "questionLevel": "Hard",
-    "options": ["Dobra", "Franco CFA", "Kwanza", "Metical"],
+    "options": [
+      "Parque Natural Obô",
+      "Parque Nacional da Gorongosa",
+      "Parque Nacional da Kissama",
+      "Parque Nacional do Iona"
+    ],
     "correctIndex": 0
   },
   {
