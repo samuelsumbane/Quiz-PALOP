@@ -19,6 +19,7 @@ fun MainGameViewModel.helpWithFiftFift() {
         val allWrongAnswers = actualQuestion - rightAnswer
         val newOptions = listOf(rightAnswer, allWrongAnswers[0]).shuffled()
         updateState { it.copy(actualQuestion = it.actualQuestion?.copy(options = newOptions)) }
+        changeUserCoins(UserCoins.DecreaseCoins(15))
     }
 }
 

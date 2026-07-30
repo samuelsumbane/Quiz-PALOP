@@ -30,5 +30,5 @@ val appModule = module {
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { DuelViewModel(get(), get(), get()) }
-    viewModel { DailyChallengeViewModel(get(), get(), get()) }
+    viewModel { DailyChallengeViewModel(get(), get()) }
 }

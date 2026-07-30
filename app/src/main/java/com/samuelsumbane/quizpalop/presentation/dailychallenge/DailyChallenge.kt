@@ -14,8 +14,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -36,7 +38,9 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.model.optionsLabels
+import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.DailyChallengeMessageUi
 import com.samuelsumbane.quizpalop.presentation.composables.HomeIcon
 import com.samuelsumbane.quizpalop.presentation.composables.IconAndTextColumn
@@ -50,6 +54,7 @@ import com.samuelsumbane.quizpalop.presentation.composables.QuestionText
 import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
 import com.samuelsumbane.quizpalop.ui.theme.HomeOptionColor
 import org.koin.compose.viewmodel.koinViewModel
@@ -67,10 +72,23 @@ class DailyChallengeScreen(val questionId: String) : Screen {
 fun DailyChallenge(questionId: String) {
     val dailyChallengeViewModel = koinViewModel<DailyChallengeViewModel>()
     val dailyChallengeUiState by dailyChallengeViewModel.dailychallengeUiState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     val navigator = LocalNavigator.currentOrThrow
+    val soundManager = remember { SoundManager(context) }
 
+    DisposableEffect(Unit) {
+        onDispose { soundManager.release() }
+    }
     LaunchedEffect(Unit) {
         dailyChallengeViewModel.loadQuestion(questionId)
+        dailyChallengeViewModel.soundEvent.collect { soundEvent ->
+            if (dailyChallengeUiState.soundState == SoundState.Playing) {
+                when (soundEvent) {
+                    SoundEvent.Correct -> soundManager.playCorrect()
+                    else -> soundManager.playWrong()
+                }
+            }
+        }
     }
 
     Scaffold { padding ->

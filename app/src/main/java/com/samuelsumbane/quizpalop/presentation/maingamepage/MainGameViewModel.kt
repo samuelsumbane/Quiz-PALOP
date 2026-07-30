@@ -35,6 +35,8 @@ class MainGameViewModel(
 
     init {
         viewModelScope.launch {
+            resetUiState()
+
             loadPacks()
             loadDateTimeSavedValues()
 //        loadQuestions()
@@ -45,6 +47,10 @@ class MainGameViewModel(
                 updateState { it.copy(soundState = soundState) }
             }
         }
+    }
+
+    fun resetUiState() {
+        _state.value = MainGameUiState()
     }
 
     fun updateState(block: (MainGameUiState) -> MainGameUiState) = _state.update(block)
@@ -113,7 +119,7 @@ class MainGameViewModel(
             if (mainGameUiState.value.questionsIdList.size == allAnsweredQuestions) {
                 setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!", "Respondeu todas as questões do jogo."))
             } else {
-                setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas do país "${mainGameUiState.value.selectedCountry?.countryName}" e categoria "${mainGameUiState.value.selectedCategory?.categoryName}".""", "Deseja limpar e responder mesmas questões ou selecionar outras?"))
+                setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas do país "${mainGameUiState.value.selectedCountry?.countryName}" e categoria "${mainGameUiState.value.selectedCategory?.categoryName}".""", "Carregar prox. categoria ou sel. outro país e/ou categoria"))
             }
         } else {
             setGameTextMessage(GameTextMessage.Empty)

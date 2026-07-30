@@ -6,6 +6,7 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.Question
 import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.GameTextMessage
+import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionDefaultColor
 
 data class DailyChallengeUiState(
@@ -19,7 +20,8 @@ data class DailyChallengeUiState(
     val pageUiState: PageUiState = PageUiState.Loading,
     val showBottomBar: Boolean = true,
     val lastDateUserGotQuestion: Long = 0L,
-    val dailyChallengeLoadQuestionState: DailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.LOADING
+    val dailyChallengeLoadQuestionState: DailyChallengeLoadQuestionState = DailyChallengeLoadQuestionState.LOADING,
+    val soundState: SoundState = SoundState.Mute
 )
 
 enum class DailyChallengeLoadQuestionState { LOADING, FINISHED }

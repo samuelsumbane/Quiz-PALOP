@@ -17,6 +17,7 @@ import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.OptionsButton
+import com.samuelsumbane.quizpalop.presentation.maingamepage.SoundState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionCurrectButtonColor
 import com.samuelsumbane.quizpalop.presentation.maingamepage.quizOptionWrongButtonColor
 import kotlinx.coroutines.channels.Channel
@@ -33,14 +34,20 @@ import kotlin.time.Duration.Companion.seconds
 class DailyChallengeViewModel(
     private val settingsManager: SettingsManager,
     private val repo: QuizRepository,
-    private val hapticManager: HapticManager
 ) : ViewModel() {
     private val _dailyChallengeViewModel = MutableStateFlow(DailyChallengeUiState())
     val dailychallengeUiState = _dailyChallengeViewModel.asStateFlow()
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
 
-
+    init {
+        viewModelScope.launch {
+            settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
+                val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
+                updateState { it.copy(soundState = soundState) }
+            }
+        }
+    }
     fun resetState() {
         _dailyChallengeViewModel.value = DailyChallengeUiState()
     }
@@ -53,11 +60,9 @@ class DailyChallengeViewModel(
             val lastDateUserGotDailyQuestion = settingsManager.readLongValues(settingsManager.lastDateTimeUserGotDailyQuestionId)
 
             val actualDailyQuestionId = settingsManager.readStringValues(settingsManager.actualDailyQuestionId).first()
-            println("estado: actualId is: $actualDailyQuestionId")
 
             if (isDifferentDay(lastDateUserGotDailyQuestion, now)) {
                 val allQuestions = repo.getQuestions()
-                println("estado: allQuestion $allQuestions")
                 val savedDailyQuestions =
                     settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions)
                         .first()
@@ -122,7 +127,6 @@ class DailyChallengeViewModel(
     fun updateState(block: (DailyChallengeUiState) -> DailyChallengeUiState) = _dailyChallengeViewModel.update(block)
 
     internal fun sendSound(sound: SoundEvent) = viewModelScope.launch { _soundEvent.send(sound) }
-
 
     fun onEvent(event: DailyChallengeUiEvents) {
         when (event) {
@@ -226,7 +230,6 @@ class DailyChallengeViewModel(
                 val savedDailyQuestions = settingsManager.readSavedStringsValues(settingsManager.savedDailyQuestions).first()
 
                 if (currectOption == clickedOptionName) {
-                    hapticManager.success()
                     sendSound(SoundEvent.Correct)
 
                     delay(1.7.seconds)
@@ -239,7 +242,6 @@ class DailyChallengeViewModel(
                             ),
                     ) }
                 } else {
-                    hapticManager.error()
                     sendSound(SoundEvent.Wrong)
 
                     delay(1.7.seconds)

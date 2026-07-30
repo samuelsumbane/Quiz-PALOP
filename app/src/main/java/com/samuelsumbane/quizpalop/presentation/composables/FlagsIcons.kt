@@ -69,7 +69,7 @@ fun FlagsComponents() {
 
         TextButton(
             onClick = { navigator.push(AboutCountriesScreen())},
-            colors = ButtonDefaults.textButtonColors(contentColor = Color.White)
+            colors = ButtonDefaults.textButtonColors(contentColor = MaterialTheme.colorScheme.onBackground)
         ) {
             Text(text = "Conheça o país", textDecoration = TextDecoration.Underline)
         }
