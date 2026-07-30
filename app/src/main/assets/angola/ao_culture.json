@@ -1,9 +1,14 @@
 [
   {
     "id": "ao_cultura_01",
-    "question": "',
+    "question": "Qual manifestação cultural angolana foi reconhecida como Património Cultural Imaterial da Humanidade pela UNESCO em 2014?",
     "questionLevel": "Medium",
-    "options": ,
+    "options": [
+      "Cikumbi",
+      "Semba",
+      "Morna",
+      "Marrabenta"
+    ],
     "correctIndex": 0
   },
   {
