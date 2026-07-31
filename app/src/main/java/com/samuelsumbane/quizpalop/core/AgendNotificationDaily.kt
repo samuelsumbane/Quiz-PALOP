@@ -13,8 +13,8 @@ import java.util.concurrent.TimeUnit
 fun agendarProximaNotificacao(context: Context) {
     val agora = Calendar.getInstance()
     val proximaExecucao = Calendar.getInstance().apply {
-        set(Calendar.HOUR_OF_DAY, 14)
-        set(Calendar.MINUTE, 42)
+        set(Calendar.HOUR_OF_DAY, 17)
+        set(Calendar.MINUTE, 0)
         set(Calendar.SECOND, 0)
         if (before(agora)) add(Calendar.DAY_OF_YEAR, 1)
     }
