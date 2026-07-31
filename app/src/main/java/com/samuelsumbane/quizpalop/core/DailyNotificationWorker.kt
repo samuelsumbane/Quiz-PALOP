@@ -9,6 +9,7 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import com.samuelsumbane.quizpalop.MainActivity
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.core.agendarProximaNotificacao
 
 class DailyNotificationWorker(
     context: Context,
@@ -17,6 +18,7 @@ class DailyNotificationWorker(
 
     override suspend fun doWork(): Result {
         dispararNotificacao()
+        agendarProximaNotificacao(applicationContext)
         return Result.success()
     }
 

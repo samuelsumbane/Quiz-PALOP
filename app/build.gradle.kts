@@ -76,4 +76,5 @@ dependencies {
     implementation("com.airbnb.android:lottie-compose:6.6.7")
 
     implementation("androidx.work:work-runtime-ktx:2.9.1")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 }

@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.LaunchedEffect
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import cafe.adriel.voyager.navigator.Navigator
 import com.google.android.gms.ads.MobileAds
 import com.samuelsumbane.quizpalop.domain.model.PagesName
@@ -18,6 +19,7 @@ import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
 
         val deveExecutar = intent.getBooleanExtra("executar_funcao", false)

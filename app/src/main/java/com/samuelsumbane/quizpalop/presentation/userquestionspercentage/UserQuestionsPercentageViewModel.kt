@@ -100,7 +100,6 @@ class UserQuestionsPercentageViewModel(
 
             else -> emptyList()
         }
-        println("estado: ff${uiState.value.easyAnsweredQuestionsPercent} lc $lockLevelList")
         _state.update { it.copy(lockLevelList = lockLevelList) }
     }
 }
