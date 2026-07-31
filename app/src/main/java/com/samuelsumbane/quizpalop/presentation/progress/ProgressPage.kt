@@ -27,6 +27,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.domain.model.ProgressContentState
 import com.samuelsumbane.quizpalop.domain.model.QuestionLevel
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
+import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.NavigateUpButton
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
@@ -121,12 +122,12 @@ fun ProgressPage() {
                                     ) {
                                         Button(
                                             onClick = {
-//                                            progressViewModel.changeProgressContentStateTo(
-//                                                ProgressContentState.ConfirmExit(
-//                                                    title = "Reiniciar progresso?",
-//                                                    message = "Todo o progresso, pontuação e desbloqueios serão apagados."
-//                                                )
-//                                            )
+                                                userQuestionsProgressViewModel.changeProgressContentStateTo(
+                                                    ProgressContentState.ConfirmResetProgress(
+                                                        title = "Reiniciar progresso?",
+                                                        message = "Todo o progresso, pontuação e desbloqueios serão apagados."
+                                                    )
+                                                )
                                             },
                                             colors = ButtonDefaults
                                                 .buttonColors(
@@ -143,40 +144,43 @@ fun ProgressPage() {
                     }
                 }
 
-                is ProgressContentState.ConfirmExit -> {
-                    Column(
+                is ProgressContentState.ConfirmResetProgress -> {
+                    MessageContainer(
                         modifier = Modifier
-                            .fillMaxSize(),
-                        verticalArrangement = Arrangement.Center
+                            .align(Alignment.Center)
                     ) {
                         Column(
-                            modifier = Modifier
-                                .padding(15.dp)
-//                            .background(Color(0xBC9C9C9B), RoundedCornerShape(12.dp))
-                                .padding(12.dp),
-                            horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
                         ) {
-                            Text(
-                                text = messageData.title,
-                                fontWeight = FontWeight.SemiBold,
-                                fontSize = 20.sp,
-                                color = Color.Black,
-                                modifier = Modifier.padding(top = 18.dp)
-                            )
+                            Column(
+                                modifier = Modifier
+                                    .padding(15.dp)
+//                            .background(Color(0xBC9C9C9B), RoundedCornerShape(12.dp))
+                                    .padding(12.dp),
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                verticalArrangement = Arrangement.Center
+                            ) {
+                                Text(
+                                    text = messageData.title,
+                                    fontWeight = FontWeight.SemiBold,
+                                    fontSize = 20.sp,
+                                    color = Color.Black,
+                                    modifier = Modifier.padding(top = 18.dp)
+                                )
 
-                            TwoButtonsRow(
-                                text = messageData.message,
-                                outlinedText = "Cancelar",
-                                outlinedClicked = {
-                                    userQuestionsProgressViewModel.changeProgressContentStateTo(
-                                        ProgressContentState.ShowContent
-                                    )
-                                },
-                                filledButtonText = "Reininciar",
-                                dangerMode = true,
-                                onFilledButtonClicked = { userQuestionsProgressViewModel.resetProgress() }
-                            )
+                                TwoButtonsRow(
+                                    text = messageData.message,
+                                    outlinedText = "Cancelar",
+                                    outlinedClicked = {
+                                        userQuestionsProgressViewModel.changeProgressContentStateTo(
+                                            ProgressContentState.ShowContent
+                                        )
+                                    },
+                                    filledButtonText = "Reininciar",
+                                    dangerMode = true,
+                                    onFilledButtonClicked = { userQuestionsProgressViewModel.resetProgress() }
+                                )
+                            }
                         }
                     }
                 }

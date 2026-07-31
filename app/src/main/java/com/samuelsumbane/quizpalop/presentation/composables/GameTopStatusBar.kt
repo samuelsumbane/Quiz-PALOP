@@ -51,7 +51,7 @@ fun GameTopStatusBar(
             verticalAlignment = Alignment.CenterVertically
         ) {
             RowHeartAndLives(text = "${mainGameUiState.lives}")
-            RowQuestionTimer("${mainGameUiState.questionsTimer}")
+            RowQuestionTimer(mainGameUiState.questionsTimer)
             RowCoinAndText(text = "${mainGameUiState.userCoins}",)
         }
 
@@ -124,12 +124,12 @@ fun RowHeartAndLives(text: String) {
     )
 }
 @Composable
-fun RowQuestionTimer(text: String) {
-    val elementColor = MaterialTheme.colorScheme.onPrimary
+fun RowQuestionTimer(time: Int) {
+    val elementColor = if (time > 10) MaterialTheme.colorScheme.onPrimary else Color.Red
     RowIconAndText(
         icon = { Icon(painter = painterResource(R.drawable.clock), "", tint = elementColor) },
         text = {
-            IconText(text, color = elementColor)
+            IconText("$time", color = elementColor)
         }
     )
 }

@@ -131,13 +131,12 @@ class MainGameViewModel(
 
 
     fun loadNextQuestion() {
-        println("questions: onLoad, cou: ${mainGameUiState.value.selectedCountry} ${mainGameUiState.value.questionsIdList}")
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
             updateState { it.copy(pageState = MainPageState.QuestionsAnswered) }
 
             val allAnsweredQuestions = mainGameUiState.value.answeredQuestionsList.size
-            if (mainGameUiState.value.questionsIdList.size == allAnsweredQuestions) {
-                setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!", "Respondeu todas as questões do jogo."))
+            if (mainGameUiState.value.allQuestions.size == allAnsweredQuestions) {
+                setGameTextMessage(GameTextMessage.AllQuestionsAnswered("Parabéns!!!", "Respondeu todas as questões do jogo."))
             } else {
                 setGameTextMessage(GameTextMessage.SelectedQuestionsAnswered("Parabéns!", """Respondeu todas as perguntas do país "${mainGameUiState.value.selectedCountry?.countryName}" e categoria "${mainGameUiState.value.selectedCategory?.categoryName}".""", "Carregar prox. categoria ou sel. outro país e/ou categoria"))
             }

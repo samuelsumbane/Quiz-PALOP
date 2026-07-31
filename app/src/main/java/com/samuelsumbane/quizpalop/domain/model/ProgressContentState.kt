@@ -3,7 +3,7 @@ package com.samuelsumbane.quizpalop.domain.model
 sealed class ProgressContentState {
     data object Loading : ProgressContentState()
     data object ShowContent : ProgressContentState()
-    data class ConfirmExit(
+    data class ConfirmResetProgress(
         val title: String,
         val message: String
     ) : ProgressContentState()

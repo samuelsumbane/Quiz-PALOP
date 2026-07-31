@@ -95,7 +95,6 @@ class UserQuestionsPercentageViewModel(
     fun levelForLocked() {
         val lockLevelList = when {
             uiState.value.easyAnsweredQuestionsPercent < 1.0f -> listOf(Category.Culture.categoryName, Category.Exam.categoryName)
-
             uiState.value.easyAnsweredQuestionsPercent >= 1.0f && uiState.value.mediumAnsweredQuestionsPercent <
                     1.0f -> listOf(Category.Exam.categoryName)
 
