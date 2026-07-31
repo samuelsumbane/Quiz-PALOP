@@ -102,7 +102,6 @@ fun MessageUi(
     mainGameViewModel: MainGameViewModel,
     mainPageUiState: MainGameUiState,
     activity: Activity,
-    manager: RewardedAdManager,
 ) {
     val coinsIcon by rememberLottieComposition(
         LottieCompositionSpec.Asset("lottie/coins_ani.lottie")
@@ -147,11 +146,9 @@ fun MessageUi(
                             onFilledButtonClicked = {
                                 when (mainPageUiState.adState) {
                                     AdState.Ready -> {
-                                        manager.show(activity) {
-                                            mainGameViewModel.showCorrectOptionAfterViewAd()
-                                        }
+                                        mainGameViewModel.rewardedAdManager.show(activity) { mainGameViewModel.showCorrectOptionAfterViewAd() }
                                     }
-                                    AdState.Loading, AdState.Error  -> mainGameViewModel.loadAd(manager)
+                                    AdState.Loading, AdState.Error  -> mainGameViewModel.loadAd()
                                 }
                             }
                         )

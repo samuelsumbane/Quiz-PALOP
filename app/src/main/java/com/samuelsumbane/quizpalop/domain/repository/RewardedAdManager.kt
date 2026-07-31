@@ -6,13 +6,21 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.seconds
 
-class RewardedAdManager(private val context: Context) {
+class RewardedAdManager(
+    private val context: Context,
+    private val scope: CoroutineScope
+) {
 
     private var rewardedAd: RewardedAd? = null
 
     fun loadAd(
-        onLoaded: (() -> Unit)? = null
+        onLoaded: (() -> Unit)? = null,
+        onFailed: (LoadAdError) -> Unit
     ) {
         RewardedAd.load(
             context,
@@ -25,11 +33,9 @@ class RewardedAdManager(private val context: Context) {
                     onLoaded?.invoke()
                 }
 
-                override fun onAdFailedToLoad(
-                    error: LoadAdError
-                ) {
+                override fun onAdFailedToLoad(error: LoadAdError) {
                     rewardedAd = null
-                    println("ads: Code: ${error.code} Message: ${error.message} Domain: ${error.domain} Response: ${error.responseInfo}")
+                    onFailed(error)
                 }
             }
         )
@@ -48,7 +54,7 @@ class RewardedAdManager(private val context: Context) {
             onReward()
 
             rewardedAd = null
-            loadAd()
+            loadAd(onFailed = {})
         }
     }
 }

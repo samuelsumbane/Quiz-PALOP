@@ -1,6 +1,6 @@
 [
   {
-    "id": "stp_dificil_01",
+    "id": "stp_exam_01",
     "question": "Em que ano a ilha do Príncipe passou a ter o estatuto de Região Autónoma?",
     "questionLevel": "Hard",
     "options": [
@@ -12,28 +12,28 @@
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_02",
+    "id": "stp_exam_02",
     "question": "Qual movimento liderou a luta pela independência de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["MLSTP", "PAIGC", "FRELIMO", "MPLA"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_03",
+    "id": "stp_exam_03",
     "question": "Quem foi o primeiro Presidente de São Tomé e Príncipe após a independência?",
     "questionLevel": "Hard",
     "options": ["Manuel Pinto da Costa", "Miguel Trovoada", "Fradique de Menezes", "Evaristo Carvalho"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_04",
+    "id": "stp_exam_04",
     "question": "Qual é a capital da Região Autónoma do Príncipe?",
     "questionLevel": "Hard",
     "options": ["Santo António", "São Tomé", "Neves", "Trindade"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_05",
+    "id": "stp_exam_05",
     "question": "Qual área protegida de São Tomé e Príncipe preserva grande parte da fauna e flora endémicas do país?",
     "questionLevel": "Hard",
     "options": [
@@ -45,175 +45,175 @@
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_06",
+    "id": "stp_exam_06",
     "question": "Qual oceano banha São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Atlântico", "Índico", "Pacífico", "Ártico"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_07",
+    "id": "stp_exam_07",
     "question": "Qual é a principal ilha do país?",
     "questionLevel": "Hard",
     "options": ["São Tomé", "Príncipe", "Rolas", "Cabras"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_08",
+    "id": "stp_exam_08",
     "question": "Qual é a segunda maior ilha de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Príncipe", "Rolas", "Santana", "Cabras"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_09",
+    "id": "stp_exam_09",
     "question": "Qual ilhéu de São Tomé e Príncipe é atravessado pela linha do Equador?",
     "questionLevel": "Hard",
     "options": ["Ilhéu das Rolas", "Ilhéu das Cabras", "Boné de Jóquei", "Pedras Tinhosas"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_10",
+    "id": "stp_exam_10",
     "question": "Qual destes produtos foi a principal riqueza agrícola de São Tomé e Príncipe durante muitos anos?",
     "questionLevel": "Hard",
     "options": ["Cacau", "Algodão", "Café", "Milho"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_11",
+    "id": "stp_exam_11",
     "question": "São Tomé e Príncipe pertence a que organização dos países de língua portuguesa?",
     "questionLevel": "Hard",
     "options": ["CPLP", "SADC", "CEDEAO", "UEMOA"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_12",
+    "id": "stp_exam_12",
     "question": "Qual destes países faz parte dos PALOP juntamente com São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Angola", "Senegal", "Nigéria", "Camarões"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_13",
+    "id": "stp_exam_13",
     "question": "Qual destas formações rochosas é um dos principais símbolos naturais do país?",
     "questionLevel": "Hard",
     "options": ["Pico Cão Grande", "Monte Kilimanjaro", "Table Mountain", "Monte Atlas"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_14",
+    "id": "stp_exam_14",
     "question": "Qual é o ponto mais alto de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Pico de São Tomé", "Pico Cão Grande", "Pico do Príncipe", "Pico Santana"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_15",
+    "id": "stp_exam_15",
     "question": "Qual destas atividades económicas tem ganho importância nos últimos anos?",
     "questionLevel": "Hard",
     "options": ["Turismo", "Indústria automóvel", "Extração de carvão", "Produção de aço"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_16",
+    "id": "stp_exam_16",
     "question": "Qual destes produtos agrícolas também é exportado por São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Café", "Trigo", "Arroz", "Algodão"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_17",
+    "id": "stp_exam_17",
     "question": "Qual destes parques protege grande parte da floresta tropical do país?",
     "questionLevel": "Hard",
     "options": ["Parque Natural Obô", "Parque Kruger", "Parque Gorongosa", "Serengeti"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_18",
+    "id": "stp_exam_18",
     "question": "Qual destas cidades localiza-se na ilha do Príncipe?",
     "questionLevel": "Hard",
     "options": ["Santo António", "Trindade", "Neves", "Santana"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_19",
+    "id": "stp_exam_19",
     "question": "Qual destas atividades é importante para a economia costeira do país?",
     "questionLevel": "Hard",
     "options": ["Pesca", "Extração de ouro", "Produção de automóveis", "Mineração"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_20",
+    "id": "stp_exam_20",
     "question": "Qual destes animais marinhos utiliza as praias de São Tomé e Príncipe para desova?",
     "questionLevel": "Hard",
     "options": ["Tartarugas marinhas", "Pinguins", "Morsas", "Leões-marinhos"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_21",
+    "id": "stp_exam_21",
     "question": "Qual destas ilhas possui estatuto de Região Autónoma?",
     "questionLevel": "Hard",
     "options": ["Príncipe", "São Tomé", "Rolas", "Cabras"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_22",
+    "id": "stp_exam_22",
     "question": "Qual destas características descreve melhor São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["É um Estado insular africano", "É um país sem litoral", "É um arquipélago asiático", "É uma península europeia"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_23",
+    "id": "stp_exam_23",
     "question": "Qual destes continentes está mais próximo de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["África", "Europa", "América", "Ásia"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_24",
+    "id": "stp_exam_24",
     "question": "Qual destes países fica mais próximo de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Gabão", "Brasil", "Portugal", "Moçambique"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_25",
+    "id": "stp_exam_25",
     "question": "Qual destas línguas crioulas é tradicional de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Forro", "Crioulo cabo-verdiano", "Crioulo guineense", "Papiamento"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_26",
+    "id": "stp_exam_26",
     "question": "Qual destes ritmos musicais é típico de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Ússua", "Semba", "Morna", "Marrabenta"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_27",
+    "id": "stp_exam_27",
     "question": "Qual destas atividades turísticas é bastante procurada no país?",
     "questionLevel": "Hard",
     "options": ["Ecoturismo", "Esqui", "Patinagem no gelo", "Safari no deserto"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_28",
+    "id": "stp_exam_28",
     "question": "Qual destes recursos naturais contribui para a biodiversidade de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Florestas tropicais", "Desertos", "Glaciares", "Estepes"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_29",
+    "id": "stp_exam_29",
     "question": "Qual destes produtos é considerado um dos principais produtos de exportação de São Tomé e Príncipe?",
     "questionLevel": "Hard",
     "options": ["Cacau", "Diamantes", "Petróleo", "Carvão"],
     "correctIndex": 0
   },
   {
-    "id": "stp_dificil_30",
+    "id": "stp_exam_30",
     "question": "Qual destes fatores torna São Tomé e Príncipe um destino turístico reconhecido?",
     "questionLevel": "Hard",
     "options": ["Natureza preservada e elevada biodiversidade", "Grandes desertos", "Estâncias de esqui", "Grandes reservas de carvão"],

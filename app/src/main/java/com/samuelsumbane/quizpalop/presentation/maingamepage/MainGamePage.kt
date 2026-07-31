@@ -83,21 +83,19 @@ fun MainPage(country: Countries, category: Category) {
     val navigator = LocalNavigator.currentOrThrow
     val context = LocalContext.current
     val soundManager = remember { SoundManager(context) }
-    val manager = remember { RewardedAdManager(context) }
+//    val manager = remember { RewardedAdManager(context) }
 
 
     val activity = context as Activity
 
     DisposableEffect(Unit) {
-        onDispose {
-            soundManager.release()
-        }
+        onDispose { soundManager.release() }
     }
 
     LaunchedEffect(Unit) {
-
+        mainPageViewModel.resetUiState()
         mainPageViewModel.loadQuestions(country, category)
-
+        mainPageViewModel.initializeAds(context)
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {
                 when (event) {
@@ -111,12 +109,11 @@ fun MainPage(country: Countries, category: Category) {
     }
 
 
-//    LaunchedEffect(mainPageUiState.timerState) {
-//        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-//            mainPageViewModel.timerCounterExec()
-//        }
-//    }
-
+    LaunchedEffect(mainPageUiState.timerState) {
+        if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+            mainPageViewModel.timerCounterExec()
+        }
+    }
 
     @Composable
     fun SelectedDataAlreadyAnswered() {
@@ -257,7 +254,6 @@ fun MainPage(country: Countries, category: Category) {
                                 navigator,
                                 mainPageViewModel,
                                 mainPageUiState,
-                                manager,
                                 activity,
                             )
                         }
@@ -271,7 +267,6 @@ fun MainPage(country: Countries, category: Category) {
                                     mainPageViewModel,
                                     mainPageUiState,
                                     activity,
-                                    manager,
                                 )
                             }
 

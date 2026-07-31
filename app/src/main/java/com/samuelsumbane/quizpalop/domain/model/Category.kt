@@ -4,7 +4,7 @@ enum class Category(
     val categoryName: String,
     val categoryMeaning: String,
 ) {
-    History("História Básica", "Easy"),
-    Culture("Cultura Geral", "Medium"),
-    Exam("Exame/Entrevista", "Hard")
+    History("História Básica(fácil)", "Easy"),
+    Culture("Cultura Geral(médio)", "Medium"),
+    Exam("Exame/Entrevista(difícil)", "Hard")
 }

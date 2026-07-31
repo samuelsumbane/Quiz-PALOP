@@ -45,8 +45,15 @@ class QuestionsConfigViewModel(
         updateState { it.copy(questionConfig = questionsConfig) }
     }
 
-    fun readSavedCountry() {
+    fun readSavedCountryAndCategory(loadCategory: Boolean = false) {
         viewModelScope.launch {
+            if (loadCategory) {
+                val lastCategory = settingsManager.readStringValues(settingsManager.lastSelectedCategory).first()
+                Category.entries.firstOrNull { it.categoryName == lastCategory }?.let { category ->
+                    updateState { it.copy(questionsCategory = category) }
+                }
+            }
+
             settingsManager.readStringValues(settingsManager.lastSelectedCountry).collect { lastSavedCountry ->
                 Countries.entries.firstOrNull { it.countryName == lastSavedCountry }
                     ?.let { country ->

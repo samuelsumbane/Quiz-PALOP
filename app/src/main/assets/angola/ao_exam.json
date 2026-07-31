@@ -1,209 +1,209 @@
 [
   {
-    "id": "ao_dificil_01",
+    "id": "ao_exam_01",
     "question": "Quantas províncias tem Angola?",
     "questionLevel": "Hard",
     "options": ["18", "16", "20", "15"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_02",
+    "id": "ao_exam_02",
     "question": "Qual é a maior província de Angola em área?",
     "questionLevel": "Hard",
     "options": ["Cuando Cubango", "Luanda", "Benguela", "Uíge"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_03",
+    "id": "ao_exam_03",
     "question": "Qual é a província mais populosa de Angola?",
     "questionLevel": "Hard",
     "options": ["Luanda", "Huambo", "Benguela", "Malanje"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_04",
+    "id": "ao_exam_04",
     "question": "Qual rio é o mais importante de Angola em termos hidrográficos?",
     "questionLevel": "Hard",
     "options": ["Kwanza", "Zambeze", "Nilo", "Limpopo"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_05",
+    "id": "ao_exam_05",
     "question": "Qual destes países faz fronteira com Angola?",
     "questionLevel": "Hard",
     "options": ["Zâmbia", "Senegal", "Gana", "Tunísia"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_06",
+    "id": "ao_exam_06",
     "question": "Qual destas províncias não tem litoral?",
     "questionLevel": "Hard",
     "options": ["Huambo", "Benguela", "Namibe", "Luanda"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_07",
+    "id": "ao_exam_07",
     "question": "Qual destas províncias faz fronteira com a Namíbia?",
     "questionLevel": "Hard",
     "options": ["Cunene", "Uíge", "Zaire", "Malanje"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_08",
+    "id": "ao_exam_08",
     "question": "Qual destas cidades é um importante centro petrolífero em Angola?",
     "questionLevel": "Hard",
     "options": ["Cabinda", "Huambo", "Malanje", "Lubango"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_09",
+    "id": "ao_exam_09",
     "question": "Qual destas províncias é conhecida pela produção de diamantes?",
     "questionLevel": "Hard",
     "options": ["Lunda Norte", "Huambo", "Benguela", "Namibe"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_10",
+    "id": "ao_exam_10",
     "question": "Qual destas barragens é uma das mais importantes de Angola?",
     "questionLevel": "Hard",
     "options": ["Capanda", "Kariba", "Cahora Bassa", "Aswan"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_11",
+    "id": "ao_exam_11",
     "question": "Em que província se localiza a barragem de Capanda?",
     "questionLevel": "Hard",
     "options": ["Malanje", "Luanda", "Huambo", "Benguela"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_12",
+    "id": "ao_exam_12",
     "question": "Qual é a capital da província de Cuando Cubango?",
     "questionLevel": "Hard",
     "options": ["Menongue", "Lubango", "Huambo", "Uíge"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_13",
+    "id": "ao_exam_13",
     "question": "Qual destas cidades é capital da província da Lunda Sul?",
     "questionLevel": "Hard",
     "options": ["Saurimo", "Dundo", "Luanda", "Malanje"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_14",
+    "id": "ao_exam_14",
     "question": "Qual destas cidades é capital da província da Lunda Norte?",
     "questionLevel": "Hard",
     "options": ["Dundo", "Saurimo", "Luena", "Benguela"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_15",
+    "id": "ao_exam_15",
     "question": "Qual destas províncias faz fronteira com a República Democrática do Congo?",
     "questionLevel": "Hard",
     "options": ["Zaire", "Huíla", "Namibe", "Benguela"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_16",
+    "id": "ao_exam_16",
     "question": "Qual destas províncias faz fronteira com o Oceano Atlântico?",
     "questionLevel": "Hard",
     "options": ["Benguela", "Huambo", "Malanje", "Uíge"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_17",
+    "id": "ao_exam_17",
     "question": "Qual destas cidades é um dos principais portos de Angola?",
     "questionLevel": "Hard",
     "options": ["Luanda", "Huambo", "Malanje", "Uíge"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_18",
+    "id": "ao_exam_18",
     "question": "Qual destes parques nacionais está localizado no sul de Angola?",
     "questionLevel": "Hard",
     "options": ["Parque Nacional do Iona", "Gorongosa", "Kruger", "Serengeti"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_19",
+    "id": "ao_exam_19",
     "question": "Qual destas cidades é conhecida pela exploração de ferro em Angola?",
     "questionLevel": "Hard",
     "options": ["Cassinga", "Luanda", "Benguela", "Huambo"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_20",
+    "id": "ao_exam_20",
     "question": "Qual destas províncias tem forte atividade agrícola?",
     "questionLevel": "Hard",
     "options": ["Huambo", "Cabinda", "Luanda", "Zaire"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_21",
+    "id": "ao_exam_21",
     "question": "Qual destes rios atravessa o centro de Angola?",
     "questionLevel": "Hard",
     "options": ["Kwanza", "Zambeze", "Nilo", "Rovuma"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_22",
+    "id": "ao_exam_22",
     "question": "Qual destas cidades é capital da província do Uíge?",
     "questionLevel": "Hard",
     "options": ["Uíge", "Cabinda", "Benguela", "Huambo"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_23",
+    "id": "ao_exam_23",
     "question": "Qual destas cidades é capital da província do Namibe?",
     "questionLevel": "Hard",
     "options": ["Moçâmedes", "Lubango", "Huambo", "Luanda"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_24",
+    "id": "ao_exam_24",
     "question": "Qual destas regiões é conhecida pela produção de café em Angola?",
     "questionLevel": "Hard",
     "options": ["Uíge", "Namibe", "Benguela", "Luanda"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_25",
+    "id": "ao_exam_25",
     "question": "Qual destes países não faz fronteira com Angola?",
     "questionLevel": "Hard",
     "options": ["Moçambique", "Zâmbia", "Namíbia", "República do Congo"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_26",
+    "id": "ao_exam_26",
     "question": "Qual destas províncias é um enclave separado do resto do território angolano?",
     "questionLevel": "Hard",
     "options": ["Cabinda", "Zaire", "Benguela", "Huambo"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_27",
+    "id": "ao_exam_27",
     "question": "Qual destas cidades é conhecida pela mineração de diamantes em Angola?",
     "questionLevel": "Hard",
     "options": ["Saurimo", "Luanda", "Huambo", "Benguela"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_28",
+    "id": "ao_exam_28",
     "question": "Qual destas províncias tem maior produção de petróleo em Angola?",
     "questionLevel": "Hard",
     "options": ["Cabinda", "Huambo", "Malanje", "Huíla"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_29",
+    "id": "ao_exam_29",
     "question": "Qual destas cidades é importante para o comércio marítimo em Angola?",
     "questionLevel": "Hard",
     "options": ["Luanda", "Huambo", "Malanje", "Uíge"],
     "correctIndex": 0
   },
   {
-    "id": "ao_dificil_30",
+    "id": "ao_exam_30",
     "question": "Qual destas províncias está localizada no extremo sul de Angola?",
     "questionLevel": "Hard",
     "options": ["Namibe", "Luanda", "Uíge", "Malanje"],

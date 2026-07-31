@@ -166,37 +166,33 @@ fun MainGameViewModel.tryToLoadNextCategoryInThisCategory() {
         mainGameUiState.value.selectedCountry?.let { selectedCountry ->
             mainGameUiState.value.selectedCategory?.let { selectedCategory ->
 
-                when (val category = selectedCategory) {
+                when (selectedCategory) {
                     Category.History -> {
                         when (selectedCountry) {
-                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
-                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
-                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
-                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
-                            Countries.Stp -> {
-                                // Check if all easy level is answered
-//                                if ()
-                                saveLoadConfigs(Countries.Angola, Category.Culture)
-                            }
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, Category.History)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, Category.History)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, Category.History)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, Category.History)
+                            Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.Culture)
                         }
                     }
 
                     Category.Culture -> {
                         when (selectedCountry) {
-                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
-                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
-                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
-                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, Category.Culture)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, Category.Culture)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, Category.Culture)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, Category.Culture)
                             Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.Exam)
                         }
                     }
 
                     Category.Exam -> {
                         when (selectedCountry) {
-                            Countries.Angola -> saveLoadConfigs(Countries.Cv, category)
-                            Countries.Cv -> saveLoadConfigs(Countries.Gw, category)
-                            Countries.Gw -> saveLoadConfigs(Countries.Mz, category)
-                            Countries.Mz -> saveLoadConfigs(Countries.Stp, category)
+                            Countries.Angola -> saveLoadConfigs(Countries.Cv, Category.Exam)
+                            Countries.Cv -> saveLoadConfigs(Countries.Gw, Category.Exam)
+                            Countries.Gw -> saveLoadConfigs(Countries.Mz, Category.Exam)
+                            Countries.Mz -> saveLoadConfigs(Countries.Stp, Category.Exam)
                             Countries.Stp -> saveLoadConfigs(Countries.Angola, Category.History)
                         }
                     }

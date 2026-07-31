@@ -92,7 +92,7 @@ fun QuestionsConfigPage(destination: PagesName) {
         userQuestionsPercentage.calcLevelPercentage()
 //        userQuestionsPercentage.levelForLocked()
         questionsConfigViewModel.readSavedCategory()
-        questionsConfigViewModel.readSavedCountry()
+        questionsConfigViewModel.readSavedCountryAndCategory()
         questionsConfigViewModel.loadSavedQuestions()
 
 //        startQuizGameViewModel.soundEvent.collect { event ->

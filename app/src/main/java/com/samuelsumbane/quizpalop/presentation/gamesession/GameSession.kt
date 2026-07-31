@@ -45,7 +45,7 @@ fun GameSessionPage() {
     val configQuestionsUiState by configQuestionsViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        configQuestionsViewModel.readSavedCountry()
+        configQuestionsViewModel.readSavedCountryAndCategory(loadCategory = true)
     }
 
     Scaffold {

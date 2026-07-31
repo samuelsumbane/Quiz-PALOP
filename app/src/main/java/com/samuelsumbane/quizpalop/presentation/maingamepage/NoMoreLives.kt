@@ -40,7 +40,6 @@ fun NoMoreLivesUI(
     navigator: Navigator,
     gameQuizViewModel: MainGameViewModel,
     quizGameUiState: MainGameUiState,
-    manager: RewardedAdManager,
     activity: Activity,
 ) {
     Column(
@@ -128,12 +127,12 @@ fun NoMoreLivesUI(
                 ) {
                     when (quizGameUiState.adState) {
                         AdState.Ready -> {
-                            manager.show(activity) {
+                            gameQuizViewModel.rewardedAdManager.show(activity) {
                                 gameQuizViewModel.changeLivesCount(ChangeCountValues.IncreaseLives(1))
                                 gameQuizViewModel.setGameTextMessage(GameTextMessage.NewLifeEarned("Parabéns, ganhou +1 vida."))
                             }
                         }
-                        AdState.Loading, AdState.Error  -> gameQuizViewModel.loadAd(manager)
+                        AdState.Loading, AdState.Error  -> gameQuizViewModel.loadAd()
                     }
                 }
             }

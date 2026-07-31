@@ -1,5 +1,6 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.core.HapticManager
@@ -17,29 +18,48 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 class MainGameViewModel(
     private val repo: QuizRepository,
     val settingsManager: SettingsManager,
-    val hapticManager: HapticManager
+    val hapticManager: HapticManager,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainGameUiState())
     val mainGameUiState = _state.asStateFlow()
     private val _soundEvent = Channel<SoundEvent>()
     val soundEvent = _soundEvent.receiveAsFlow()
+    private val _adState = MutableStateFlow(AdState.Loading)
+    val appAdState = _adState.asStateFlow()
+
+     /*val rewardedAdManager =
+        RewardedAdManager(
+            context = context,
+            scope = viewModelScope
+        )*/
+    lateinit var rewardedAdManager: RewardedAdManager
+
+    fun initializeAds(context: Context) {
+        if (::rewardedAdManager.isInitialized) return
+
+        rewardedAdManager = RewardedAdManager(
+            context = context.applicationContext,
+            scope = viewModelScope
+        )
+
+        loadRewardAd()
+    }
 
     init {
         viewModelScope.launch {
-            resetUiState()
-
             loadPacks()
             loadDateTimeSavedValues()
-//        loadQuestions()
             loadLivesAndCoinsInFlow()
             loadSavedHaptic()
             settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
@@ -173,8 +193,8 @@ class MainGameViewModel(
 
     fun setAdSate(adState: AdState) = updateState { it.copy(adState = adState) }
 
-    fun loadAd(manager: RewardedAdManager) {
-        manager.loadAd { setAdSate(AdState.Ready) }
+    fun loadAd() {
+        rewardedAdManager.loadAd { setAdSate(AdState.Ready) }
     }
 
 //    fun fillSavedQuestions(questionsCategory: QuestionCategory, questionsLevel: QuestionLevel) {
@@ -265,6 +285,26 @@ class MainGameViewModel(
 //            println("ouvindo: after question load, sav ${mainGameUiState.value.questionsIdList} $preQuestionsIdList w s: ${savedQuestions}")
 //        }
 //    }
+
+    private fun loadRewardAd() {
+
+        rewardedAdManager.loadAd(
+
+            onLoaded = {
+                _adState.value = AdState.Ready
+                updateState { it.copy(adState = appAdState.value) }
+            },
+
+            onFailed = { error ->
+                _adState.value = AdState.Error
+                updateState { it.copy(adState = appAdState.value) }
+                viewModelScope.launch {
+                    delay(3.seconds)
+                    loadRewardAd()
+                }
+            }
+        )
+    }
 
     fun onSelectNewQuestionsGroup() {
         updateState { it.copy(loadSavedQuestionsFineshed = false) }
