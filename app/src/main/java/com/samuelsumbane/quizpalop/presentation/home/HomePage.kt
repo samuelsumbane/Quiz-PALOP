@@ -1,5 +1,6 @@
 package com.samuelsumbane.quizpalop.presentation.home
 
+import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -65,13 +66,13 @@ fun HomePage() {
     val dailyChallengeViewModel = koinViewModel<DailyChallengeViewModel>()
     val dailyChallengeUiState by dailyChallengeViewModel.dailychallengeUiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val configQuestionsViewModel =
-        org.koin.compose.viewmodel.koinViewModel<QuestionsConfigViewModel>()
+    val configQuestionsViewModel = koinViewModel<QuestionsConfigViewModel>()
     val configQuestionsUiState by configQuestionsViewModel.questionsConfigUiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         dailyChallengeViewModel.resetState()
         dailyChallengeViewModel.getAllSavedDailyQuestions()
+        NotificationScheduler.scheduleDailyChallenge(context)
     }
 
     Scaffold {
@@ -115,12 +116,15 @@ fun HomePage() {
                     when (dailyChallengeUiState.dailyChallengeLoadQuestionState) {
                         DailyChallengeLoadQuestionState.LOADING -> {}
                         DailyChallengeLoadQuestionState.FINISHED -> {
-                            dailyChallengeUiState.dailyQuestionId?.let { questionId ->
-                                HomeOption(
-                                    text = "Desafio diário",
-                                    aditionalElement = { DailyChallengeIcon() },
-                                    onClick = { navigator.push(DailyChallengeScreen(questionId)) }
-                                )
+                            configQuestionsViewModel.readSavedCountryAndCategory(false)
+                            if (configQuestionsUiState.lastCategoryWasSaved) {
+                                dailyChallengeUiState.dailyQuestionId?.let { questionId ->
+                                    HomeOption(
+                                        text = "Desafio diário",
+                                        aditionalElement = { DailyChallengeIcon() },
+                                        onClick = { navigator.push(DailyChallengeScreen(questionId)) }
+                                    )
+                                }
                             }
                         }
                     }

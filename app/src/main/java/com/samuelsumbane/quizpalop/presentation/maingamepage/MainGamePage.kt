@@ -310,7 +310,7 @@ fun MainPage(country: Countries, category: Category) {
                                                         )
                                                     }
                                                 }
-                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
+//                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
                                             }
                                         }
                                     }

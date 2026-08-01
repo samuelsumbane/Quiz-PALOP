@@ -72,9 +72,9 @@ class SettingsManager(val context: Context) {
     }
 
     //
-    fun readBooleanValue(value: Preferences.Key<Boolean>): Flow<Boolean> {
+    fun readBooleanValue(value: Preferences.Key<Boolean>, defaultValue: Boolean = true ): Flow<Boolean> {
         return context.dataStore.data.map { prefs ->
-            prefs[value] ?: (value == playSound)
+            prefs[value] ?: defaultValue
         }
     }
 
