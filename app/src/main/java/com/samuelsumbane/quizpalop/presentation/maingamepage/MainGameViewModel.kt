@@ -10,6 +10,7 @@ import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.QuestionTimerState
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
+import com.samuelsumbane.quizpalop.domain.repository.LifeNotificationScheduler
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
@@ -29,6 +30,7 @@ class MainGameViewModel(
     private val repo: QuizRepository,
     val settingsManager: SettingsManager,
     val hapticManager: HapticManager,
+    val lifeNotificationScheduler: LifeNotificationScheduler
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(MainGameUiState())
@@ -38,11 +40,6 @@ class MainGameViewModel(
     private val _adState = MutableStateFlow(AdState.Loading)
     val appAdState = _adState.asStateFlow()
 
-     /*val rewardedAdManager =
-        RewardedAdManager(
-            context = context,
-            scope = viewModelScope
-        )*/
     lateinit var rewardedAdManager: RewardedAdManager
 
     fun initializeAds(context: Context) {

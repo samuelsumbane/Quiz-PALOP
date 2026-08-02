@@ -39,8 +39,7 @@ fun RadioButtonGroup(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth(0.8f)
-            .padding(20.dp)
+            .fillMaxWidth(0.9f)
             .background(MaterialTheme.colorScheme.tertiary, RoundedCornerShape(12.dp))
             .padding(10.dp),
         verticalArrangement = Arrangement.Center,

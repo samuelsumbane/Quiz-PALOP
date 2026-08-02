@@ -42,6 +42,7 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
@@ -67,6 +68,7 @@ import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigS
 import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import org.koin.androidx.compose.koinViewModel
+import kotlin.time.Duration.Companion.minutes
 
 
 class MainPageScreen(val country: Countries, val category: Category) : Screen {
@@ -84,6 +86,7 @@ fun MainPage(country: Countries, category: Category) {
     val context = LocalContext.current
     val soundManager = remember { SoundManager(context) }
 
+
     val activity = context as Activity
 
     DisposableEffect(Unit) {
@@ -94,6 +97,12 @@ fun MainPage(country: Countries, category: Category) {
         mainPageViewModel.resetUiState()
         mainPageViewModel.loadQuestions(country, category)
         mainPageViewModel.initializeAds(context)
+//        NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeMinutes)
+//        if (mainPageUiState.lastDateTimeLostLives == 0L && mainPageUiState.lives == 0) {
+            println("estado: Chegou de acontecer. ")
+//            NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeSeconds)
+//        }
+
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {
                 when (event) {

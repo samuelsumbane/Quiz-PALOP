@@ -1,22 +1,20 @@
 package com.samuelsumbane.quizpalop.presentation.settings
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cafe.adriel.voyager.core.screen.Screen
@@ -27,7 +25,6 @@ import com.samuelsumbane.quizpalop.presentation.composables.BackIcon
 import com.samuelsumbane.quizpalop.presentation.composables.ConfigItem
 import com.samuelsumbane.quizpalop.presentation.composables.PageLayout
 import com.samuelsumbane.quizpalop.presentation.composables.PageTitleText
-import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
 import org.koin.compose.viewmodel.koinViewModel
 
@@ -63,12 +60,16 @@ fun SettingsPage() {
             )
 
            LazyColumn(
-              modifier = Modifier.align(Alignment.Center)
+              modifier = Modifier
+                  .fillMaxWidth(0.9f)
+                  .background(MaterialTheme.colorScheme.background.copy(0.5f), RoundedCornerShape(16.dp))
+                  .border(2.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                  .align(Alignment.Center)
            ) {
                items(1) {
                    ConfigItem(
                        title = "Som",
-                       description = "Emitir som ao clicar numa das opções",
+                       description = "Emitir som quando estiver jogando",
                    ) {
                        AppCheckBox(
                            checked = settingsUiState.playSoundOnTap,
@@ -77,14 +78,18 @@ fun SettingsPage() {
                        }
                    }
 
+                   AppHorizontalDivider()
+
                    ConfigItem(
                        title = "Vibração",
-                       description = "Vibrar ao clicar numa das opções",
+                       description = "Vibrar quando estiver jogando",
                    ) {
                        AppCheckBox(checked = settingsUiState.vibrateOnTap) {
                            settingViewModel.onEvent(SettingsPageUiEvents.OnToggleVibrateState)
                        }
                    }
+
+                   AppHorizontalDivider()
 
                    ConfigItem(
                        title = "Notificações",
@@ -98,4 +103,13 @@ fun SettingsPage() {
            }
        }
     }
+}
+
+@Composable
+fun AppHorizontalDivider() {
+    HorizontalDivider(
+        modifier = Modifier.fillMaxWidth(),
+        thickness = 1.dp,
+        color = MaterialTheme.colorScheme.background
+    )
 }

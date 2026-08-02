@@ -51,4 +51,42 @@ class NotificationHelper(
         NotificationManagerCompat.from(context)
             .notify(1, notification)
     }
+
+    @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
+    fun showLifeRecovered() {
+
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            context,
+            101,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or
+                    PendingIntent.FLAG_IMMUTABLE
+        )
+
+        val messages = listOf(
+            "❤️ Já tem uma vida disponível!",
+            "🎮 Pode voltar a jogar!",
+            "💚 Recuperou uma vida. Continue o desafio!",
+            "⭐ A sua próxima vida já está pronta!"
+        )
+
+        val notification = NotificationCompat.Builder(
+            context,
+            NotificationChannels.DAILY_CHALLENGE
+        )
+            .setSmallIcon(R.drawable.ic_launcher_monochrome)
+            .setContentTitle("Quiz PALOP")
+            .setContentText(messages.random())
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+
+        NotificationManagerCompat.from(context)
+            .notify(2, notification)
+    }
 }

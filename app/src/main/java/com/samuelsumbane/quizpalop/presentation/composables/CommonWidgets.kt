@@ -109,8 +109,8 @@ fun HomeOption(
         modifier = Modifier
             .padding(10.dp, 12.dp)
             .height(45.dp)
-            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(13.dp))
-            .border(1.dp, HomeOptionColor.copy(alpha = 0.5f), RoundedCornerShape(16.dp)),
+            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
+            .border(1.dp, HomeOptionColor.copy(alpha = 0.5f), RoundedCornerShape(12.dp)),
         aditionalElement = aditionalElement,
         onClick = onClick
     )

@@ -178,7 +178,6 @@ fun MessageUi(
                 }
 
                 is GameTextMessage.NewLifeEarned -> {
-//                    HeartIcon(modifier = Modifier.size(80.dp, 100.dp))
                     LoadAnimatedIcons(heartIcon)
                     MessageTexts(title = "", message.message)
                     AppButton(text = "Continuar com o jogo") { mainGameViewModel.startLoadingNextQuestion() }

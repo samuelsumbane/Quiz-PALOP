@@ -8,7 +8,10 @@ fun MainGameViewModel.setAddCoinsMessage(message: String) {
     setGameTextMessage(GameTextMessage.AddedCoins(message))
 }
 fun MainGameViewModel.clearGameTextMessage() {
-    updateState { it.copy(gameTextMessage = GameTextMessage.Empty) }
+    updateState { it.copy(
+        gameTextMessage = GameTextMessage.Empty,
+        timerState = QuestionTimerState.Running
+    ) }
 }
 
 fun MainGameViewModel.setGameTextMessage(gameMessage: GameTextMessage) {

@@ -38,15 +38,14 @@ class MainActivity : ComponentActivity() {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
 //                Navigator(QuestionsConfigScreen(PagesName.MainPage))
-//                Navigator(HomePageScreen())
-                Navigator(SettingsScreen())
+                Navigator(HomePageScreen())
+//                Navigator(SettingsScreen())
 //                Navigator(DailyChallengeScreen("mz_01"))
 //                Navigator(AboutCountriesScreen())
             }
         }
     }
 
-    // Certo
     override fun onNewIntent(intent: Intent, caller: ComponentCaller) {
         super.onNewIntent(intent, caller)
         setIntent(intent)

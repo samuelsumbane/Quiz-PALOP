@@ -1,9 +1,12 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import com.samuelsumbane.quizpalop.domain.model.ChangeCountValues
 import com.samuelsumbane.quizpalop.domain.model.UserCoins
 import kotlinx.coroutines.launch
+import kotlin.time.Duration.Companion.hours
+import kotlin.time.Duration.Companion.minutes
 
 
 fun MainGameViewModel.buyLifeWithCoins(requiredCoins: Int, respectiveLives: Int) {
@@ -22,6 +25,16 @@ fun MainGameViewModel.changeLivesCount(liveState: ChangeCountValues) {
 
     when (liveState) {
         is ChangeCountValues.IncreaseLives -> saveLives(lives + liveState.plusNum)
-        ChangeCountValues.DecreaseLive -> if (lives > 0) saveLives(lives - 1)
+        ChangeCountValues.DecreaseLive -> {
+            if (lives > 0) {
+                if (lives == 1) {
+                    lifeNotificationScheduler.scheduleNotification(5.minutes.inWholeMilliseconds)
+                } else {
+                    lifeNotificationScheduler.cancelNotification()
+                }
+                saveLives(lives - 1)
+            }
+        }
     }
+
 }

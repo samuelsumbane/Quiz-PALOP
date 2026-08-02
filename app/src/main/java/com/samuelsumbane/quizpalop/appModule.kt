@@ -4,7 +4,9 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import com.samuelsumbane.quizpalop.core.AndroidHapticManager
 import com.samuelsumbane.quizpalop.core.HapticManager
+import com.samuelsumbane.quizpalop.data.repository.LifeNotificationSchedulerImpl
 import com.samuelsumbane.quizpalop.data.repository.QuizRepositoryImpl
+import com.samuelsumbane.quizpalop.domain.repository.LifeNotificationScheduler
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigViewModel
@@ -26,8 +28,9 @@ val appModule = module {
     single<QuizRepository> { QuizRepositoryImpl(androidContext()) }
     single { SettingsManager(androidContext()) }
     single<HapticManager> { AndroidHapticManager(androidContext()) }
+    single<LifeNotificationScheduler> { LifeNotificationSchedulerImpl(androidContext()) }
 
-    viewModel { MainGameViewModel(get(), get(), get()) }
+    viewModel { MainGameViewModel(get(), get(), get(), get()) }
     viewModel { UserQuestionsPercentageViewModel(get(), get()) }
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { DuelViewModel(get(), get(), get()) }

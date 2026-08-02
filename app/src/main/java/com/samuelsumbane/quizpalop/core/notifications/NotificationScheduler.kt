@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit
 object NotificationScheduler {
 
     private const val WORK_NAME = "daily_challenge"
+    private const val LIFE_WORK = "life_notification"
 
     fun scheduleDailyChallenge(
         context: Context,
@@ -56,5 +57,29 @@ object NotificationScheduler {
         }
 
         return next.timeInMillis - now.timeInMillis
+    }
+
+
+    fun scheduleLifeNotification(
+        context: Context,
+        delayMillis: Long
+    ) {
+
+        val request =
+            OneTimeWorkRequestBuilder<LifeNotificationWorker>()
+                .setInitialDelay(delayMillis, TimeUnit.MILLISECONDS)
+                .build()
+
+        WorkManager.getInstance(context)
+            .enqueueUniqueWork(
+                LIFE_WORK,
+                ExistingWorkPolicy.REPLACE,
+                request
+            )
+    }
+
+    fun cancelLifeNotification(context: Context) {
+        WorkManager.getInstance(context)
+            .cancelUniqueWork(LIFE_WORK)
     }
 }

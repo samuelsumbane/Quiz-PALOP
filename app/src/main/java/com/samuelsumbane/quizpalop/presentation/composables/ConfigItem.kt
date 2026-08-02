@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -25,10 +26,9 @@ fun ConfigItem(
 ) {
     Column(
         modifier = Modifier
-            .padding(15.dp, 5.dp)
+            .padding(5.dp, 10.dp)
             .fillMaxWidth()
-            .background(MaterialTheme.colorScheme.background.copy(0.3f), RoundedCornerShape(12.dp))
-            .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(12.dp))
+            .background(Color.Transparent, RoundedCornerShape(12.dp))
             .padding(10.dp)
     ) {
         Text(text = title, fontSize = 18.sp, fontWeight = FontWeight.ExtraBold)
@@ -39,7 +39,12 @@ fun ConfigItem(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Text(text = description)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(0.7f)
+            ) {
+                Text(text = description)
+            }
             content()
         }
     }
