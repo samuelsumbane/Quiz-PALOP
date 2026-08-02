@@ -83,8 +83,6 @@ fun MainPage(country: Countries, category: Category) {
     val navigator = LocalNavigator.currentOrThrow
     val context = LocalContext.current
     val soundManager = remember { SoundManager(context) }
-//    val manager = remember { RewardedAdManager(context) }
-
 
     val activity = context as Activity
 

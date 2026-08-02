@@ -15,6 +15,7 @@ import com.samuelsumbane.quizpalop.presentation.aboutcountries.AboutCountriesScr
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeScreen
 import com.samuelsumbane.quizpalop.presentation.home.HomePageScreen
+import com.samuelsumbane.quizpalop.presentation.settings.SettingsScreen
 import com.samuelsumbane.quizpalop.ui.theme.QuizPALOPTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,7 +38,8 @@ class MainActivity : ComponentActivity() {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())
 //                Navigator(QuestionsConfigScreen(PagesName.MainPage))
-                Navigator(HomePageScreen())
+//                Navigator(HomePageScreen())
+                Navigator(SettingsScreen())
 //                Navigator(DailyChallengeScreen("mz_01"))
 //                Navigator(AboutCountriesScreen())
             }

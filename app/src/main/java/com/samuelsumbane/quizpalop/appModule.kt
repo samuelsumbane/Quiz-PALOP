@@ -11,6 +11,7 @@ import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigV
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeViewModel
 import com.samuelsumbane.quizpalop.presentation.duel.DuelViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
+import com.samuelsumbane.quizpalop.presentation.settings.SettingsPageViewModel
 import com.samuelsumbane.quizpalop.presentation.userquestionspercentage.UserQuestionsPercentageViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -31,4 +32,5 @@ val appModule = module {
     viewModel { QuestionsConfigViewModel(get(), get()) }
     viewModel { DuelViewModel(get(), get(), get()) }
     viewModel { DailyChallengeViewModel(get(), get()) }
+    viewModel { SettingsPageViewModel(get()) }
 }

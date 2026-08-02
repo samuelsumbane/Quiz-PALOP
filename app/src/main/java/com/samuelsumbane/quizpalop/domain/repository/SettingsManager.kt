@@ -21,6 +21,7 @@ class SettingsManager(val context: Context) {
     val playSound = booleanPreferencesKey("play_sound")
     val vibrateOnTap = booleanPreferencesKey("vibrateontap")
 
+    val postNotifications = booleanPreferencesKey("post_notifications")
     val savedQuestionsList = stringPreferencesKey("savedQuestions_list")
     val lastSelectedCategory = stringPreferencesKey("lastCategorySelected")
     val lastSelectedCountry = stringPreferencesKey("lastCountrySelected")

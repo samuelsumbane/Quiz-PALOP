@@ -109,7 +109,7 @@ fun HomeOption(
         modifier = Modifier
             .padding(10.dp, 12.dp)
             .height(45.dp)
-            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+            .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(13.dp))
             .border(1.dp, HomeOptionColor.copy(alpha = 0.5f), RoundedCornerShape(16.dp)),
         aditionalElement = aditionalElement,
         onClick = onClick
@@ -147,12 +147,16 @@ fun Item(
 }
 
 @Composable
-fun PageTitleText(text: String) {
+fun PageTitleText(
+    text: String,
+    modifier: Modifier = Modifier
+) {
     Text(
         text = text,
         fontSize = 30.sp,
         fontWeight = FontWeight.ExtraBold,
-        color = MaterialTheme.colorScheme.onPrimary
+        color = MaterialTheme.colorScheme.onPrimary,
+        modifier = modifier
     )
 }
 
