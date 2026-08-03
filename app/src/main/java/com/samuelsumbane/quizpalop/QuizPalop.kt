@@ -3,6 +3,7 @@ package com.samuelsumbane.quizpalop
 import android.app.Application
 import android.os.Build
 import androidx.annotation.RequiresApi
+import com.samuelsumbane.quizpalop.core.notifications.AlarmScheduler
 import com.samuelsumbane.quizpalop.core.notifications.NotificationChannels
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
@@ -18,5 +19,6 @@ class QuizPalop : Application() {
         }
 
         NotificationChannels.create(this)
+        AlarmScheduler.scheduleDailyNotification(this)
     }
 }

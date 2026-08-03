@@ -1,18 +1,15 @@
 package com.samuelsumbane.quizpalop.presentation.home
 
-import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import android.annotation.SuppressLint
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -38,6 +35,7 @@ import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import com.samuelsumbane.quizpalop.R
+import com.samuelsumbane.quizpalop.core.notifications.AlarmScheduler
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.presentation.composables.DailyChallengeIcon
 import com.samuelsumbane.quizpalop.presentation.composables.DuelIcon
@@ -54,10 +52,10 @@ import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeLoa
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeScreen
 import com.samuelsumbane.quizpalop.presentation.dailychallenge.DailyChallengeViewModel
 import com.samuelsumbane.quizpalop.presentation.gamesession.GameSessionScreen
-import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiEvents
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.presentation.settings.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
+import kotlin.time.Duration.Companion.minutes
 
 class HomePageScreen : Screen {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -81,7 +79,7 @@ fun HomePage() {
     LaunchedEffect(Unit) {
         dailyChallengeViewModel.resetState()
         dailyChallengeViewModel.getAllSavedDailyQuestions()
-        NotificationScheduler.scheduleDailyChallenge(context)
+
     }
 
     Scaffold {

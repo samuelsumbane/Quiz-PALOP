@@ -34,6 +34,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
 
+
             QuizPALOPTheme {
 //                Navigator(MainPageScreen(Countries.Mz, Category.History))
 //                Navigator(GameSessionScreen())

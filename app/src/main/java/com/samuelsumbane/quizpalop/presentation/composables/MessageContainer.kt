@@ -32,6 +32,7 @@ import com.samuelsumbane.quizpalop.presentation.maingamepage.GameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameUiState
 import com.samuelsumbane.quizpalop.presentation.maingamepage.MainGameViewModel
 import com.samuelsumbane.quizpalop.presentation.maingamepage.clearAnsweredQuestionsWithoutMistake
+import com.samuelsumbane.quizpalop.presentation.maingamepage.clearGameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.onCloseMessageModal
 import com.samuelsumbane.quizpalop.presentation.maingamepage.setGameTextMessage
 import com.samuelsumbane.quizpalop.presentation.maingamepage.showCorrectOptionAfterViewAd
@@ -180,7 +181,10 @@ fun MessageUi(
                 is GameTextMessage.NewLifeEarned -> {
                     LoadAnimatedIcons(heartIcon)
                     MessageTexts(title = "", message.message)
-                    AppButton(text = "Continuar com o jogo") { mainGameViewModel.startLoadingNextQuestion() }
+                    AppButton(text = "Continuar com o jogo") {
+                        mainGameViewModel.clearGameTextMessage()
+                        mainGameViewModel.startLoadingNextQuestion()
+                    }
                 }
 
 

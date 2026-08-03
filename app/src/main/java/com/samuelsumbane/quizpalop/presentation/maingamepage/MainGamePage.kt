@@ -4,9 +4,7 @@ import android.app.Activity
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -21,13 +19,11 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -42,19 +38,18 @@ import cafe.adriel.voyager.navigator.currentOrThrow
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.samuelsumbane.quizpalop.R
-import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import com.samuelsumbane.quizpalop.domain.model.Category
 import com.samuelsumbane.quizpalop.domain.model.Countries
 import com.samuelsumbane.quizpalop.domain.model.HelpOption
 import com.samuelsumbane.quizpalop.domain.model.PagesName
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
 import com.samuelsumbane.quizpalop.domain.model.optionsLabels
-import com.samuelsumbane.quizpalop.domain.repository.RewardedAdManager
 import com.samuelsumbane.quizpalop.domain.repository.SoundManager
 import com.samuelsumbane.quizpalop.presentation.composables.AppButton
 import com.samuelsumbane.quizpalop.presentation.composables.GameBottomButton
 import com.samuelsumbane.quizpalop.presentation.composables.GameTopStatusBar
 import com.samuelsumbane.quizpalop.presentation.composables.IconData
+import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.composables.LoadingScreen
 import com.samuelsumbane.quizpalop.presentation.composables.MessageContainer
 import com.samuelsumbane.quizpalop.presentation.composables.MessageTexts
@@ -65,10 +60,8 @@ import com.samuelsumbane.quizpalop.presentation.composables.TextQuestionColumn
 import com.samuelsumbane.quizpalop.presentation.composables.TwoButtonsRow
 import com.samuelsumbane.quizpalop.presentation.composables.appBackground
 import com.samuelsumbane.quizpalop.presentation.configquestions.QuestionsConfigScreen
-import com.samuelsumbane.quizpalop.presentation.composables.LoadAnimatedIcons
 import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import org.koin.androidx.compose.koinViewModel
-import kotlin.time.Duration.Companion.minutes
 
 
 class MainPageScreen(val country: Countries, val category: Category) : Screen {

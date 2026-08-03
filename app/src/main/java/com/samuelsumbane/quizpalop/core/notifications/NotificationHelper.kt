@@ -41,7 +41,7 @@ class NotificationHelper(
             context,
             NotificationChannels.DAILY_CHALLENGE
         )
-            .setSmallIcon(R.drawable.ic_launcher_monochrome)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Quiz PALOP")
             .setContentText(messages.random())
             .setContentIntent(pendingIntent)
@@ -79,7 +79,7 @@ class NotificationHelper(
             context,
             NotificationChannels.DAILY_CHALLENGE
         )
-            .setSmallIcon(R.drawable.ic_launcher_monochrome)
+            .setSmallIcon(R.mipmap.ic_launcher)
             .setContentTitle("Quiz PALOP")
             .setContentText(messages.random())
             .setContentIntent(pendingIntent)

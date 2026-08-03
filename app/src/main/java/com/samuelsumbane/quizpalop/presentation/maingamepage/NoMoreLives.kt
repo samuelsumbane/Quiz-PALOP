@@ -127,10 +127,7 @@ fun NoMoreLivesUI(
                 ) {
                     when (quizGameUiState.adState) {
                         AdState.Ready -> {
-                            gameQuizViewModel.rewardedAdManager.show(activity) {
-                                gameQuizViewModel.changeLivesCount(ChangeCountValues.IncreaseLives(1))
-                                gameQuizViewModel.setGameTextMessage(GameTextMessage.NewLifeEarned("Parabéns, ganhou +1 vida."))
-                            }
+                            gameQuizViewModel.rewardedAdManager.show(activity) { gameQuizViewModel.watchAdsAndLoadnextQuestion() }
                         }
                         AdState.Loading, AdState.Error  -> gameQuizViewModel.loadAd()
                     }

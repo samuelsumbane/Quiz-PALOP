@@ -59,7 +59,7 @@ fun GameTopStatusBar(
             onClick = { mainGameViewModel.onEvent(MainGameUiEvents.OnToggleShowConfig) },
             modifier = Modifier.align(Alignment.TopEnd)
         ) {
-            Icon(painterResource(R.drawable.gear), "", modifier = Modifier.size(24.dp))
+            Icon(painterResource(R.drawable.more), "", modifier = Modifier.size(24.dp))
         }
 
         if (mainGameUiState.showGameConfigs) {

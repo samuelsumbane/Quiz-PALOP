@@ -1,12 +1,10 @@
 package com.samuelsumbane.quizpalop.presentation.maingamepage
 
 import androidx.lifecycle.viewModelScope
-import com.samuelsumbane.quizpalop.core.notifications.NotificationScheduler
 import com.samuelsumbane.quizpalop.domain.model.ChangeCountValues
 import com.samuelsumbane.quizpalop.domain.model.UserCoins
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.hours
-import kotlin.time.Duration.Companion.minutes
 
 
 fun MainGameViewModel.buyLifeWithCoins(requiredCoins: Int, respectiveLives: Int) {
@@ -14,6 +12,7 @@ fun MainGameViewModel.buyLifeWithCoins(requiredCoins: Int, respectiveLives: Int)
         changeUserCoins(UserCoins.DecreaseCoins(requiredCoins))
         changeLivesCount(ChangeCountValues.IncreaseLives(respectiveLives))
 //        changeTimerState(QuestionTimerState.Running)
+        clearLastDateTimeUserLostLives()
     }
 }
 fun MainGameViewModel.saveLives(qtd: Int) {
@@ -28,7 +27,8 @@ fun MainGameViewModel.changeLivesCount(liveState: ChangeCountValues) {
         ChangeCountValues.DecreaseLive -> {
             if (lives > 0) {
                 if (lives == 1) {
-                    lifeNotificationScheduler.scheduleNotification(5.minutes.inWholeMilliseconds)
+                    val triggerTime = System.currentTimeMillis() + 2.hours.inWholeMilliseconds
+                    lifeNotificationScheduler.scheduleNotification(triggerTime)
                 } else {
                     lifeNotificationScheduler.cancelNotification()
                 }
@@ -36,5 +36,16 @@ fun MainGameViewModel.changeLivesCount(liveState: ChangeCountValues) {
             }
         }
     }
+}
 
+fun MainGameViewModel.clearLastDateTimeUserLostLives() {
+    viewModelScope.launch {
+        updateState { it.copy(lastDateTimeLostLives = 0L) }
+        settingsManager.saveLongValue(settingsManager.lastDateTimeLostLives, 0L)
+    }
+}
+
+fun MainGameViewModel.watchAdsAndLoadnextQuestion() {
+    changeLivesCount(ChangeCountValues.IncreaseLives(1))
+    setGameTextMessage(GameTextMessage.NewLifeEarned("Parabéns, ganhou +1 vida."))
 }
