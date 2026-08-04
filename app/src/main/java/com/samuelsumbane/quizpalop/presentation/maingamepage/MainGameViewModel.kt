@@ -47,7 +47,6 @@ class MainGameViewModel(
 
         rewardedAdManager = RewardedAdManager(
             context = context.applicationContext,
-            scope = viewModelScope
         )
 
         loadRewardAd()

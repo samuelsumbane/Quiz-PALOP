@@ -39,7 +39,7 @@ fun RadioButtonGroup(
 
     Column(
         modifier = Modifier
-            .fillMaxWidth(0.9f)
+            .fillMaxWidth(0.85f)
             .background(MaterialTheme.colorScheme.tertiary, RoundedCornerShape(12.dp))
             .padding(10.dp),
         verticalArrangement = Arrangement.Center,
@@ -68,7 +68,7 @@ fun RadioButtonGroup(
                         selected = option == selectedOption,
                         onClick = { if (option !in lockedOptions) onSelect(option) },
                         colors = RadioButtonDefaults.colors(
-                            unselectedColor = Color.Black.copy(alpha = 0.5f),
+                            unselectedColor = Color.Black,
                             selectedColor = Color(0xFF0B3052)
                         ),
                         enabled = option !in lockedOptions

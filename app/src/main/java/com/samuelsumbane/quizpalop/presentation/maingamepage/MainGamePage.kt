@@ -92,7 +92,7 @@ fun MainPage(country: Countries, category: Category) {
         mainPageViewModel.initializeAds(context)
 //        NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeMinutes)
 //        if (mainPageUiState.lastDateTimeLostLives == 0L && mainPageUiState.lives == 0) {
-            println("estado: Chegou de acontecer. ")
+//            println("estado: Chegou de acontecer. ")
 //            NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeSeconds)
 //        }
 

@@ -13,7 +13,6 @@ import kotlin.time.Duration.Companion.seconds
 
 class RewardedAdManager(
     private val context: Context,
-    private val scope: CoroutineScope
 ) {
 
     private var rewardedAd: RewardedAd? = null
