@@ -3,6 +3,7 @@ package com.samuelsumbane.quizpalop.presentation.maingamepage
 import androidx.lifecycle.viewModelScope
 import com.samuelsumbane.quizpalop.domain.model.ChangeCountValues
 import com.samuelsumbane.quizpalop.domain.model.UserCoins
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.hours
 
@@ -25,14 +26,17 @@ fun MainGameViewModel.changeLivesCount(liveState: ChangeCountValues) {
     when (liveState) {
         is ChangeCountValues.IncreaseLives -> saveLives(lives + liveState.plusNum)
         ChangeCountValues.DecreaseLive -> {
-            if (lives > 0) {
-                if (lives == 1) {
-                    val triggerTime = System.currentTimeMillis() + 2.hours.inWholeMilliseconds
-                    lifeNotificationScheduler.scheduleNotification(triggerTime)
-                } else {
-                    lifeNotificationScheduler.cancelNotification()
+            viewModelScope.launch {
+                if (lives > 0) {
+                    if (lives == 1) {
+                        val triggerTime = System.currentTimeMillis() + 2.hours.inWholeMilliseconds
+                        val postNotification = settingsManager.readBooleanValue(settingsManager.postNotifications).first()
+                        if (postNotification) lifeNotificationScheduler.scheduleNotification(triggerTime)
+                    } else {
+                        lifeNotificationScheduler.cancelNotification()
+                    }
+                    saveLives(lives - 1)
                 }
-                saveLives(lives - 1)
             }
         }
     }
@@ -42,10 +46,12 @@ fun MainGameViewModel.clearLastDateTimeUserLostLives() {
     viewModelScope.launch {
         updateState { it.copy(lastDateTimeLostLives = 0L) }
         settingsManager.saveLongValue(settingsManager.lastDateTimeLostLives, 0L)
+        lifeNotificationScheduler.cancelNotification()
     }
 }
 
 fun MainGameViewModel.watchAdsAndLoadnextQuestion() {
     changeLivesCount(ChangeCountValues.IncreaseLives(1))
     setGameTextMessage(GameTextMessage.NewLifeEarned("Parabéns, ganhou +1 vida."))
+    clearLastDateTimeUserLostLives()
 }

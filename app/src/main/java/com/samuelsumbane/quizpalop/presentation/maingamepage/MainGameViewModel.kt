@@ -19,7 +19,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -44,11 +43,7 @@ class MainGameViewModel(
 
     fun initializeAds(context: Context) {
         if (::rewardedAdManager.isInitialized) return
-
-        rewardedAdManager = RewardedAdManager(
-            context = context.applicationContext,
-        )
-
+        rewardedAdManager = RewardedAdManager(context = context.applicationContext)
         loadRewardAd()
     }
 
@@ -57,7 +52,7 @@ class MainGameViewModel(
             loadPacks()
             loadDateTimeSavedValues()
             loadLivesAndCoinsInFlow()
-            loadSavedHaptic()
+            loadSavedHapticAndPlaySound()
             settingsManager.readBooleanValue(settingsManager.playSound).collect { savedValue ->
                 val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
                 updateState { it.copy(soundState = soundState) }
@@ -125,7 +120,6 @@ class MainGameViewModel(
         }
     }
 
-
     fun loadNextQuestion() {
         if (mainGameUiState.value.questionsIdList.isEmpty()) {
             updateState { it.copy(pageState = MainPageState.QuestionsAnswered) }
@@ -192,28 +186,6 @@ class MainGameViewModel(
         rewardedAdManager.loadAd { setAdSate(AdState.Ready) }
     }
 
-//    fun fillSavedQuestions(questionsCategory: QuestionCategory, questionsLevel: QuestionLevel) {
-//        viewModelScope.launch {
-//            val preQuestionsIdList = getCategoryAndLevelIds(questionsCategory, questionsLevel)
-//            val savedQuestions = settingsManager.readSavedQuestionsList().first()
-//            println("ouvindo: pre ${preQuestionsIdList.sorted()}")
-//            println("ouvindo: saved ${savedQuestions.sorted()}")
-//            updateState { it.copy(
-//                questionsIdList = preQuestionsIdList - savedQuestions,
-//                answeredQuestionsList = savedQuestions,
-//                loadSavedQuestionsFineshed = true)
-//            }
-//            println("ouvindo: after question load, sav ${quizGameUiState.value.questionsIdList} $preQuestionsIdList w s: ${savedQuestions}")
-//        }
-//    }
-
-//    fun loadRightAnswerButtonLastClicked() {
-//        viewModelScope.launch {
-//            val lastRightOptionButtonDateTime = settingsManager.readLongValues(settingsManager.lastRightOptionButtonDateTime)
-//            updateState { it.copy(lastRightOptionButtonDateTime = lastRightOptionButtonDateTime) }
-//        }
-//    }
-
     private fun MainGameViewModel.exitGame() {
         setGameTextMessage(GameTextMessage.ExitGame("Tem certeza que deseja sair?"))
     }
@@ -256,7 +228,7 @@ class MainGameViewModel(
             val ft = mainGameUiState.value.questionsTimer
             for (i in ft downTo 0) {
                 changeTimerTo(i)
-                delay(1000.milliseconds)
+                delay(1.seconds)
             }
             if (mainGameUiState.value.questionsTimer <= 1) {
                 setQuestionWrong()
@@ -306,12 +278,11 @@ class MainGameViewModel(
         setGameTextMessage(GameTextMessage.Empty)
     }
 
-    fun loadSavedHaptic() {
+    fun loadSavedHapticAndPlaySound() {
         viewModelScope.launch {
-            settingsManager.readBooleanValue(settingsManager.vibrateOnTap)
-                .collect { savedVibrateState ->
-                    updateState { it.copy(mobileVibrate = savedVibrateState) }
-                }
+            val mobileVibrate = settingsManager.readBooleanValue(settingsManager.vibrateOnTap).first()
+            val playSound = settingsManager.readBooleanValue(settingsManager.playSound).first()
+            updateState { it.copy(mobileVibrate = mobileVibrate, soundState = if (playSound) SoundState.Playing else SoundState.Mute) }
         }
     }
 

@@ -91,17 +91,17 @@ fun MainGameViewModel.checkResponse(clickedOptionName: String) {
                 viewModelScope.launch {
                     updateState { it.copy(questionsIdList = it.questionsIdList - question.id) }
 
-                    if (!mainGameUiState.value.userGotHelp) {
-                        updateState { it.copy(answeredQuestionsWithoutMistake = it.answeredQuestionsWithoutMistake + 1) }
-                        giveCoinsToUser()
-                    }
 
                     val answeredQuestions = mainGameUiState.value.answeredQuestionsList + question.id
                     updateState { it.copy(answeredQuestionsList = answeredQuestions) }
                     settingsManager.saveStringsValues(settingsManager.savedQuestionsList,mainGameUiState.value.answeredQuestionsList)
                     vibrateOnSuccess()
                     sendSound(SoundEvent.Correct)
-                    startLoadingNextQuestion()
+//                    startLoadingNextQuestion()
+                    if (!mainGameUiState.value.userGotHelp) {
+                        updateState { it.copy(answeredQuestionsWithoutMistake = it.answeredQuestionsWithoutMistake + 1) }
+                        giveCoinsToUser()
+                    }
                 }
             } else {
                 viewModelScope.launch {
@@ -235,6 +235,7 @@ fun MainGameViewModel.giveCoinsToUser() {
             changeUserCoins(UserCoins.IncreaseCoins(35))
             setAddCoinsMessage("Sequência lendária! +35 moedas")
         }
+        else -> startLoadingNextQuestion()
     }
 }
 

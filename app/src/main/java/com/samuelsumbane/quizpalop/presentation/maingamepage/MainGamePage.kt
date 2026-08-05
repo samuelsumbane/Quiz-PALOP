@@ -90,11 +90,6 @@ fun MainPage(country: Countries, category: Category) {
         mainPageViewModel.resetUiState()
         mainPageViewModel.loadQuestions(country, category)
         mainPageViewModel.initializeAds(context)
-//        NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeMinutes)
-//        if (mainPageUiState.lastDateTimeLostLives == 0L && mainPageUiState.lives == 0) {
-//            println("estado: Chegou de acontecer. ")
-//            NotificationScheduler.scheduleLifeNotification(context, delayMillis = 3.minutes.inWholeSeconds)
-//        }
 
         mainPageViewModel.soundEvent.collect { event ->
             if (mainPageUiState.soundState == SoundState.Playing) {

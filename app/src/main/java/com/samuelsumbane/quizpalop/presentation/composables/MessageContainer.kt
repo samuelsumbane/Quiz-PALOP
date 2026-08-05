@@ -126,7 +126,8 @@ fun MessageUi(
             when (val message = mainPageUiState.gameTextMessage) {
                 is GameTextMessage.AddedCoins -> {
                     LoadAnimatedIcons(coinsIcon, Modifier.size(220.dp))
-                    MessageTexts(title = "", message.message, )
+                    MessageTexts(title = "", message.message)
+                    AppButton(text = "Perfeito") { mainGameViewModel.loadNextQuestion() }
                 }
 
                 is GameTextMessage.ShowRightAnswer -> {

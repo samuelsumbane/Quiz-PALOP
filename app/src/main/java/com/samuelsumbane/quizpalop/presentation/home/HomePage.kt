@@ -56,6 +56,7 @@ import com.samuelsumbane.quizpalop.presentation.progress.ProgressPageScreen
 import com.samuelsumbane.quizpalop.presentation.settings.SettingsScreen
 import org.koin.androidx.compose.koinViewModel
 import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 class HomePageScreen : Screen {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -79,7 +80,6 @@ fun HomePage() {
     LaunchedEffect(Unit) {
         dailyChallengeViewModel.resetState()
         dailyChallengeViewModel.getAllSavedDailyQuestions()
-
     }
 
     Scaffold {

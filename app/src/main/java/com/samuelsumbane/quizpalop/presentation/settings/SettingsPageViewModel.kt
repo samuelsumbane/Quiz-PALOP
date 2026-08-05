@@ -2,6 +2,9 @@ package com.samuelsumbane.quizpalop.presentation.settings
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.samuelsumbane.quizpalop.core.notifications.AlarmScheduler
+import com.samuelsumbane.quizpalop.domain.repository.DailyNotificationScheduler
+import com.samuelsumbane.quizpalop.domain.repository.LifeNotificationScheduler
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -9,7 +12,11 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class SettingsPageViewModel(val settingsManager: SettingsManager) : ViewModel() {
+class SettingsPageViewModel(
+    val settingsManager: SettingsManager,
+    val dailyNotificationScheduler: DailyNotificationScheduler,
+    val lifeNotificationScheduler: LifeNotificationScheduler
+) : ViewModel() {
     private val _state = MutableStateFlow(SettingsPageUiState())
     val settingsUiState = _state.asStateFlow()
 
@@ -58,8 +65,13 @@ class SettingsPageViewModel(val settingsManager: SettingsManager) : ViewModel() 
     fun togglePostNotifications() {
         viewModelScope.launch {
             updateState { it.copy(postNotifications = !settingsUiState.value.postNotifications) }
-
             settingsManager.saveBooleanValues(settingsManager.postNotifications, settingsUiState.value.postNotifications)
+            if (!settingsUiState.value.postNotifications) {
+                dailyNotificationScheduler.cancelDailyNotification()
+                lifeNotificationScheduler.cancelNotification()
+            } else {
+                dailyNotificationScheduler.postDailyNotification()
+            }
         }
     }
 }
