@@ -12,6 +12,7 @@ import com.samuelsumbane.quizpalop.core.isDifferentDay
 import com.samuelsumbane.quizpalop.core.saveBitmap
 import com.samuelsumbane.quizpalop.core.shareImage
 import com.samuelsumbane.quizpalop.domain.model.SoundEvent
+import com.samuelsumbane.quizpalop.domain.repository.DailyNotificationScheduler
 import com.samuelsumbane.quizpalop.domain.repository.QuizRepository
 import com.samuelsumbane.quizpalop.domain.repository.SettingsManager
 import com.samuelsumbane.quizpalop.presentation.composables.PageUiState
@@ -34,6 +35,7 @@ import kotlin.time.Duration.Companion.seconds
 class DailyChallengeViewModel(
     private val settingsManager: SettingsManager,
     private val repo: QuizRepository,
+    private val dailyNotificationScheduler: DailyNotificationScheduler
 ) : ViewModel() {
     private val _dailyChallengeViewModel = MutableStateFlow(DailyChallengeUiState())
     val dailychallengeUiState = _dailyChallengeViewModel.asStateFlow()
@@ -264,6 +266,8 @@ class DailyChallengeViewModel(
                         lastDateUserGotQuestion = timestamp
                     )
                 }
+                // Once daily challenge done, user does not need daily notification
+                dailyNotificationScheduler.cancelDailyNotification()
             }
         }
     }

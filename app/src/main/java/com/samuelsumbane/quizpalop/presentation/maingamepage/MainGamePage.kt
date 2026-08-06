@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -305,7 +306,7 @@ fun MainPage(country: Countries, category: Category) {
                                                         )
                                                     }
                                                 }
-//                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
+                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
                                             }
                                         }
                                     }
