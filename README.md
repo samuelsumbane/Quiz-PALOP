@@ -1,6 +1,6 @@
-<div align="center">
 
-# 🌍 Quiz PALOP
+# Quiz PALOP
+
 
 **Um jogo de quiz gratuito e open-source sobre os Países Africanos de Língua Oficial Portuguesa**
 
@@ -8,14 +8,10 @@
 
 [![Kotlin](https://img.shields.io/badge/Kotlin-100%25-7F52FF?logo=kotlin)](https://kotlinlang.org)
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 [![Status](https://img.shields.io/badge/status-em%20testes%20na%20Play%20Store-orange)]()
 
-<!-- TODO: substituir por um GIF ou screenshots reais assim que estiverem prontos -->
-<!-- <img src="docs/screenshot_home.png" width="250"/> <img src="docs/screenshot_game.png" width="250"/> <img src="docs/screenshot_duel.png" width="250"/> -->
-
-</div>
-
+![Homepage](docs/webassets/homepage.jpg)
+![Playing game](docs/webassets/gamepage.jpg)
 ---
 
 ## 🇵🇹 Português
