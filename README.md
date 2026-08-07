@@ -11,9 +11,8 @@
 [![Status](https://img.shields.io/badge/status-em%20testes%20na%20Play%20Store-orange)]()
 
 <p align="center">
-<img src="docs/webassets/homepage.jpg" alt="Homepage" width="350">
-<img src="docs/webassets/gamepage.jpg" alt="play game" width="350">
-<img src="docs/webassets/duelpage.jpg" alt="duel" width="350">
+<img src="docs/webassets/homepage.jpg" alt="Homepage" width="250">
+<img src="docs/webassets/gamepage.jpg" alt="play game" width="250">
 </p>
 ---
 
