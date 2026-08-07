@@ -10,8 +10,11 @@
 [![Jetpack Compose](https://img.shields.io/badge/UI-Jetpack%20Compose-4285F4?logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
 [![Status](https://img.shields.io/badge/status-em%20testes%20na%20Play%20Store-orange)]()
 
-![Homepage](docs/webassets/homepage.jpg)
-![Playing game](docs/webassets/gamepage.jpg)
+<p align="center">
+<img src="docs/webassets/homepage.jpg" alt="Homepage" width="350">
+<img src="docs/webassets/gamepage.jpg" alt="play game" width="350">
+<img src="docs/webassets/duelpage.jpg" alt="duel" width="350">
+</p>
 ---
 
 ## 🇵🇹 Português
