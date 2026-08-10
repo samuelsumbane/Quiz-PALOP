@@ -111,7 +111,7 @@
   },
   {
     "id": "gw_exam_16",
-    "question": "Qual destas línguas é mais utilizada no quotidiano da população?",
+    "question": "Qual é a principal língua franca de Guiné-Bissau?",
     "questionLevel": "Hard",
     "options": ["Crioulo guineense", "Português", "Francês", "Inglês"],
     "correctIndex": 0

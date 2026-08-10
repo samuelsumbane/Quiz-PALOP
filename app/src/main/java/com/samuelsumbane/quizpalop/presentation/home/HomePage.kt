@@ -163,7 +163,7 @@ fun HomePage() {
             }
 
             Text(
-                text = "Versão: 1.0.0",
+                text = "Versão: 1.0.1",
                 color = Color.Gray,
                 fontSize = 10.sp,
                 modifier = Modifier
