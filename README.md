@@ -40,7 +40,7 @@ O projecto está actualmente em **testes fechados/abertos na Google Play Store**
 O projecto segue os princípios de **Clean Architecture**, separado em três camadas:
 
 ```
-com.samuelsumbane.quizpalop
+org.quizpalop.app
 ├── domain/          # Regras de negócio — não depende de nenhuma outra camada
 │   ├── model/        # Entidades: Question, Country, Pack, Category...
 │   └── repository/   # Interfaces (contratos): QuizRepository, SettingsManager...
@@ -117,7 +117,7 @@ The project is currently in **closed/open testing on the Google Play Store**.
 The project follows **Clean Architecture**, split into three layers:
 
 ```
-com.samuelsumbane.quizpalop
+org.quizpalop.app
 ├── domain/          # Business rules — has no dependency on other layers
 │   ├── model/        # Entities: Question, Country, Pack, Category...
 │   └── repository/   # Contracts (interfaces): QuizRepository, SettingsManager...

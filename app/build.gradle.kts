@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.samuelsumbane.quizpalop"
+    namespace = "org.quizpalop.app"
     compileSdk {
         version = release(36) {
             minorApiLevel = 1
