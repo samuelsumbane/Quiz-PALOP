@@ -17,18 +17,56 @@ class SettingsPageViewModel(
 ) : ViewModel() {
     private val _state = MutableStateFlow(SettingsPageUiState())
     val settingsUiState = _state.asStateFlow()
-
     init {
         viewModelScope.launch {
             val playSoundOnTap = userPreferencesRepository.loadPlayOnTap()
             val vibrateOnTap = userPreferencesRepository.loadVibrateOnTap()
             val postNotifications = userPreferencesRepository.loadPostNotifications()
+            val dailyHour = userPreferencesRepository.loadDailyNotificationHour()
+            val dailyMinute = userPreferencesRepository.loadDailyNotificationMinute()
 
             updateState {
                 it.copy(
                     playSoundOnTap = playSoundOnTap,
                     vibrateOnTap = vibrateOnTap,
-                    postNotifications = postNotifications
+                    postNotifications = postNotifications,
+                    dailyNotificationHour = dailyHour,
+                    dailyNotificationMinute = dailyMinute
+                )
+            }
+        }
+    }
+
+    fun onEvent(event: SettingsPageUiEvents) {
+        when (event) {
+            SettingsPageUiEvents.OnToggleSoundState -> toggleSoundState()
+            SettingsPageUiEvents.OnToggleVibrateState -> toggleVibrateState()
+            SettingsPageUiEvents.OnTogglePostNotifications -> togglePostNotifications()
+            is SettingsPageUiEvents.OnChangeDailyNotificationTime -> changeDailyNotificationTime(event.hour, event.minute)
+        }
+    }
+
+    fun changeDailyNotificationTime(hour: Int, minute: Int) {
+        viewModelScope.launch {
+            userPreferencesRepository.updateDailyNotificationTime(hour, minute)
+            updateState { it.copy(dailyNotificationHour = hour, dailyNotificationMinute = minute) }
+            if (settingsUiState.value.postNotifications) {
+                dailyNotificationScheduler.postDailyNotification(hour, minute)
+            }
+        }
+    }
+
+    fun togglePostNotifications() {
+        viewModelScope.launch {
+            updateState { it.copy(postNotifications = !settingsUiState.value.postNotifications) }
+            userPreferencesRepository.updatePostNotifications(settingsUiState.value.postNotifications)
+            if (!settingsUiState.value.postNotifications) {
+                dailyNotificationScheduler.cancelDailyNotification()
+                lifeNotificationScheduler.cancelNotification()
+            } else {
+                dailyNotificationScheduler.postDailyNotification(
+                    settingsUiState.value.dailyNotificationHour,
+                    settingsUiState.value.dailyNotificationMinute
                 )
             }
         }
@@ -36,13 +74,6 @@ class SettingsPageViewModel(
 
     fun updateState(block: (SettingsPageUiState) -> SettingsPageUiState) = _state.update(block)
 
-    fun onEvent(event: SettingsPageUiEvents) {
-        when (event) {
-            SettingsPageUiEvents.OnToggleSoundState -> toggleSoundState()
-            SettingsPageUiEvents.OnToggleVibrateState -> toggleVibrateState()
-            SettingsPageUiEvents.OnTogglePostNotifications -> togglePostNotifications()
-        }
-    }
 
     fun toggleSoundState() {
         viewModelScope.launch {
@@ -58,16 +89,4 @@ class SettingsPageViewModel(
         }
     }
 
-    fun togglePostNotifications() {
-        viewModelScope.launch {
-            updateState { it.copy(postNotifications = !settingsUiState.value.postNotifications) }
-            userPreferencesRepository.updatePostNotifications(settingsUiState.value.postNotifications)
-            if (!settingsUiState.value.postNotifications) {
-                dailyNotificationScheduler.cancelDailyNotification()
-                lifeNotificationScheduler.cancelNotification()
-            } else {
-                dailyNotificationScheduler.postDailyNotification()
-            }
-        }
-    }
 }

@@ -35,4 +35,17 @@ class UserPreferencesRepositoryImpl(
     override suspend fun updatePostNotifications(postNotifications: Boolean) {
         settingsManager.saveBooleanValues(settingsManager.postNotifications, postNotifications)
     }
+
+    override suspend fun loadDailyNotificationHour(): Int {
+        return settingsManager.readIntValues(settingsManager.dailyNotificationHour, defaultValue = 9).first()
+    }
+
+    override suspend fun loadDailyNotificationMinute(): Int {
+        return settingsManager.readIntValues(settingsManager.dailyNotificationMinute, defaultValue = 0).first()
+    }
+
+    override suspend fun updateDailyNotificationTime(hour: Int, minute: Int) {
+        settingsManager.saveIntValues(settingsManager.dailyNotificationHour, hour)
+        settingsManager.saveIntValues(settingsManager.dailyNotificationMinute, minute)
+    }
 }

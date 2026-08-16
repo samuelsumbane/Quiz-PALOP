@@ -12,4 +12,7 @@ interface UserPreferencesRepository {
 
     suspend fun loadPostNotifications(): Boolean
     suspend fun updatePostNotifications(postNotifications: Boolean)
+    suspend fun loadDailyNotificationHour(): Int
+    suspend fun loadDailyNotificationMinute(): Int
+    suspend fun updateDailyNotificationTime(hour: Int, minute: Int)
 }
