@@ -1,0 +1,189 @@
+package org.quizpalop.app.presentation.composables
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import org.quizpalop.app.R
+
+@Composable
+fun HorizontalDividerWithText(text: String) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text("$text ", color = Color.Black, fontWeight = FontWeight.SemiBold)
+        HorizontalDivider(Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+fun BigExitAppIcon() {
+    Icon(
+        painter = painterResource(R.drawable.door_open_fill), "",
+        tint = Color.Black,
+        modifier = Modifier.size(80.dp, 100.dp)
+    )
+}
+
+@Composable
+fun TwoButtonsRow(
+    text: String,
+    outlinedText: String,
+    outlinedClicked: () -> Unit,
+    filledButtonText: String,
+    dangerMode: Boolean = false,
+    onFilledButtonClicked: () -> Unit
+) {
+    Column(modifier = Modifier
+        .padding(start = 8.dp, top = 55.dp, end = 8.dp)
+        .fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) { Text(text, fontSize = 15.sp, textAlign = TextAlign.Center, color = Color.Black, fontWeight = FontWeight.SemiBold) }
+
+        Row(
+            modifier = Modifier
+                .padding(0.dp, 25.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween
+        ) {
+            ButtonOutlined(
+                text = outlinedText,
+                dangerMode = dangerMode,
+                onClick = outlinedClicked,
+            )
+
+            AppButton(
+                text = filledButtonText,
+                dangerMode = dangerMode
+            ) { onFilledButtonClicked() }
+        }
+    }
+}
+
+@Composable
+fun HomePageOptionColumn(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit
+) {
+    Column(
+        modifier = modifier
+            .padding(top = 30.dp)
+            .padding(0.dp, 5.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) { content() }
+}
+
+@Composable
+fun HomeOption(
+    text: String,
+    aditionalElement: (@Composable () -> Unit)? = null,
+    onClick: () -> Unit
+) {
+    Item(
+        text = text,
+        modifier = Modifier
+            .padding(10.dp, 12.dp)
+            .height(50.dp)
+            .background(Color(0xFF041B28).copy(0.4f), RoundedCornerShape(12.dp))
+            .border(0.5.dp, MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), RoundedCornerShape(12.dp)),
+        aditionalElement = aditionalElement,
+        onClick = onClick
+    )
+}
+
+@Composable
+fun Item(
+    text: String,
+    modifier: Modifier = Modifier,
+    aditionalElement: (@Composable () -> Unit)? = null,
+    onClick: () -> Unit
+) {
+    Box(
+        modifier = modifier
+            .fillMaxWidth(0.9f)
+            .height(28.dp)
+            .clickable { onClick() },
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(0.7f)
+                .align(Alignment.Center),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                text,
+                color = MaterialTheme.colorScheme.onBackground,
+                fontWeight = FontWeight.SemiBold,
+            )
+            aditionalElement?.invoke()
+        }
+    }
+}
+
+@Composable
+fun PageTitleText(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = text,
+        fontSize = 30.sp,
+        fontWeight = FontWeight.ExtraBold,
+        color = MaterialTheme.colorScheme.onPrimary,
+        modifier = modifier
+    )
+}
+
+@Composable
+fun ConfigsNavigationIcon(
+    icon: @Composable () -> Unit,
+    onClick: () -> Unit
+) {
+    IconButton(
+        onClick = onClick,
+        colors = IconButtonDefaults.iconButtonColors(
+            containerColor = Color.LightGray,
+            contentColor = Color.Black
+        ),
+        modifier = Modifier.size(45.dp)
+    ) { icon() }
+}
+
+@Composable
+fun CountryInfoRows(valuesList: List<String>) {
+    val keysList = listOf("Capital", "Moeda", "Independência", "Área", "Países visinhos", "Fuso horário")
+    keysList.zip(valuesList).forEach { (key, value) ->
+        Row(
+            modifier = Modifier
+                .padding(bottom = 15.dp)
+        ) {
+            Text("$key: ", fontWeight = FontWeight.Bold)
+            Text(value)
+        }
+    }
+}
