@@ -1,5 +1,6 @@
 package org.quizpalop.app.presentation.settings
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.fillMaxSize
@@ -7,12 +8,21 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TimePicker
+import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,6 +37,7 @@ import org.quizpalop.app.presentation.composables.PageLayout
 import org.quizpalop.app.presentation.composables.PageTitleText
 import org.quizpalop.app.presentation.home.HomePageScreen
 import org.koin.compose.viewmodel.koinViewModel
+import org.quizpalop.app.ui.theme.HomeOptionColor
 
 class SettingsScreen : Screen {
     @Composable
@@ -35,12 +46,15 @@ class SettingsScreen : Screen {
     }
 }
 
+@SuppressLint("DefaultLocale")
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsPage() {
     val settingViewModel = koinViewModel<SettingsPageViewModel>()
     val settingsUiState by settingViewModel.settingsUiState.collectAsStateWithLifecycle()
 
     val navigator = LocalNavigator.currentOrThrow
+    var showTimePicker by remember { mutableStateOf(false) }
 
     Scaffold { paddingValues ->
         PageLayout(
@@ -98,6 +112,36 @@ fun SettingsPage() {
                        AppCheckBox(checked = settingsUiState.postNotifications) {
                            settingViewModel.onEvent(SettingsPageUiEvents.OnTogglePostNotifications)
                        }
+                   }
+
+                   ConfigItem(
+                       title = "Horário do desafio",
+                       description = "Hora em que a notificação diária é enviada"
+                   ) {
+                       TextButton(onClick = { showTimePicker = true }) {
+                           Text(String.format("%02d:%02d", settingsUiState.dailyNotificationHour, settingsUiState.dailyNotificationMinute), color = HomeOptionColor)
+                       }
+                   }
+
+                   if (showTimePicker) {
+                       val timePickerState = rememberTimePickerState(
+                           initialHour = settingsUiState.dailyNotificationHour,
+                           initialMinute = settingsUiState.dailyNotificationMinute,
+                           is24Hour = true
+                       )
+                       AlertDialog(
+                           onDismissRequest = { showTimePicker = false },
+                           confirmButton = {
+                               TextButton(onClick = {
+                                   settingViewModel.onEvent(
+                                       SettingsPageUiEvents.OnChangeDailyNotificationTime(timePickerState.hour, timePickerState.minute)
+                                   )
+                                   showTimePicker = false
+                               }) { Text("OK", color = HomeOptionColor) }
+                           },
+                           dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text("Cancelar") } },
+                           text = { TimePicker(state = timePickerState) }
+                       )
                    }
                }
            }

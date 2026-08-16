@@ -13,9 +13,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
+private val Context.dataStore by preferencesDataStore(name = "settings")
+
 class SettingsManager(val context: Context) {
 
-    val Context.dataStore by preferencesDataStore(name = "settings")
+//    val Context.dataStore by preferencesDataStore(name = "settings")
     val userCoins = intPreferencesKey("user_coins")
     val lives = intPreferencesKey("user_lives")
     val playSound = booleanPreferencesKey("play_sound")
@@ -32,7 +34,8 @@ class SettingsManager(val context: Context) {
     val actualDailyQuestionId = stringPreferencesKey("actualDailyQuestionId")
 //    val answeredDailyQuestionDateTime = longPreferencesKey("answeredDailyQuestionDateTime")
     val lastDateTimeUserGotDailyQuestionId = longPreferencesKey("lastDateTimeUserGotDailyQuestionId")
-
+    val dailyNotificationHour = intPreferencesKey("daily_notification_hour")
+    val dailyNotificationMinute = intPreferencesKey("daily_notification_minute")
     /**
      * Reads Int DataStore values
      */
