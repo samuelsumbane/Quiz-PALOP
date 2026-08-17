@@ -28,6 +28,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import org.quizpalop.app.R
+import org.quizpalop.app.ui.theme.HomeOptionColor
 
 @Composable
 fun HorizontalDividerWithText(text: String) {
@@ -108,8 +109,8 @@ fun HomeOption(
         modifier = Modifier
             .padding(10.dp, 12.dp)
             .height(50.dp)
-            .background(Color(0xFF041B28).copy(0.4f), RoundedCornerShape(12.dp))
-            .border(0.5.dp, MaterialTheme.colorScheme.onBackground.copy(alpha = 0.3f), RoundedCornerShape(12.dp)),
+            .background(MaterialTheme.colorScheme.primary.copy(0.4f), RoundedCornerShape(12.dp))
+            .border(0.2.dp, HomeOptionColor, RoundedCornerShape(12.dp)),
         aditionalElement = aditionalElement,
         onClick = onClick
     )

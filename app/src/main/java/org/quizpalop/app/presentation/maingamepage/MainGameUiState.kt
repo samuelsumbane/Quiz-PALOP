@@ -21,7 +21,7 @@ data class MainGameUiState(
         quizOptionDefaultColor
     ),
     val gameTextMessage: GameTextMessage = GameTextMessage.Empty,
-    val lives: Int = 10,
+    val lives: Int? = null,
     val userCoins: Int = 0,
     val pageState: MainPageState = MainPageState.Loading,
 

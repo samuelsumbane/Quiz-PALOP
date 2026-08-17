@@ -203,7 +203,6 @@ class DuelViewModel(
                         vibrateOnError()
                         sendSound(SoundEvent.Wrong)
                     }
-println("duelS: the id: ${question.id}")
                     delay(1200.milliseconds)
                     if (playerName == PlayerName.FirstPlayer) {
                         val firstOptionsList = duelUiState.value.firstPlayer.questionsIdList - question.id
@@ -226,7 +225,6 @@ println("duelS: the id: ${question.id}")
                                 )
                             )
                         }
-                    println("duelS: 2 the list ${duelUiState.value.secondPlayer.questionsIdList} but it is: ${newSecondOptionsList}")
                     }
                     loadNextQuestionOrShowMessage()
                 }

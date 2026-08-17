@@ -17,9 +17,13 @@ class RewardedAdManager(
         onLoaded: (() -> Unit)? = null,
         onFailed: (LoadAdError) -> Unit
     ) {
+        /**
+         * In development always use adUnitId for test
+         * it is: "ca-app-pub-3940256099942544/5224354917"
+         */
         RewardedAd.load(
             context,
-            "ca-app-pub-3940256099942544/5224354917",
+            "ca-app-pub-5681392628142531/1128212974",
             AdRequest.Builder().build(),
 
             object : RewardedAdLoadCallback() {

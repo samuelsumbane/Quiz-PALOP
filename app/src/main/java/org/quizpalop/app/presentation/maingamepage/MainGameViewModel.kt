@@ -52,10 +52,6 @@ class MainGameViewModel(
 
     init {
         viewModelScope.launch {
-            loadPacks()
-            loadDateTimeSavedValues()
-            loadLivesAndCoinsInFlow()
-            loadSavedHapticAndPlaySound()
             userPreferencesRepository.flowLoadPlayOnTap().collect { savedValue ->
                 val soundState = if (savedValue) SoundState.Playing else SoundState.Mute
                 updateState { it.copy(soundState = soundState) }
@@ -117,9 +113,11 @@ class MainGameViewModel(
 
     fun startLoadingNextQuestion() {
         viewModelScope.launch {
-            if (mainGameUiState.value.lives > 0 || mainGameUiState.value.gameTextMessage == GameTextMessage.Empty) {
-                delay(1700.milliseconds)
-                loadNextQuestion()
+            mainGameUiState.value.lives?.let { userLives ->
+                if (userLives > 0 || mainGameUiState.value.gameTextMessage == GameTextMessage.Empty) {
+                    delay(1700.milliseconds)
+                    loadNextQuestion()
+                }
             }
         }
     }
@@ -229,18 +227,20 @@ class MainGameViewModel(
 
 
     suspend fun timerCounterExec() {
-        if (mainGameUiState.value.timerState == QuestionTimerState.Running && mainGameUiState.value.lives > 0) {
+        mainGameUiState.value.lives?.let { userLives ->
+            if (mainGameUiState.value.timerState == QuestionTimerState.Running && userLives > 0) {
 //            viewModelScope.launch {
-            val ft = mainGameUiState.value.questionsTimer
-            for (i in ft downTo 0) {
-                changeTimerTo(i)
-                delay(1.seconds)
-            }
-            if (mainGameUiState.value.questionsTimer <= 1) {
-                setQuestionWrong()
-                changeTimerState(QuestionTimerState.Stop)
-            }
+                val ft = mainGameUiState.value.questionsTimer
+                for (i in ft downTo 0) {
+                    changeTimerTo(i)
+                    delay(1.seconds)
+                }
+                if (mainGameUiState.value.questionsTimer <= 1) {
+                    setQuestionWrong()
+                    changeTimerState(QuestionTimerState.Stop)
+                }
 //            }
+            }
         }
     }
 

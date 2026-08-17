@@ -15,6 +15,6 @@ class DecreaseLifeUseCase(
         } else {
             lifeNotificationScheduler.cancelNotification()
         }
-        quizRepository.saveUserLives(userLives)
+        quizRepository.saveUserLives(userLives - 1)
     }
 }

@@ -16,14 +16,14 @@ fun MainGameViewModel.buyLifeWithCoins(requiredCoins: Int, respectiveLives: Int)
 }
 
 fun MainGameViewModel.changeLivesCount(lifeState: ChangeLifeCountValues) {
-    val lives = mainGameUiState.value.lives
+    val lives = mainGameUiState.value.lives ?: return
 
     when (lifeState) {
         is ChangeLifeCountValues.IncreaseLives -> viewModelScope.launch { repo.saveUserLives(lives + lifeState.plusNum) }
         ChangeLifeCountValues.DecreaseLife -> {
             viewModelScope.launch {
                 val postNotification = userPreferencesRepository.loadPostNotifications()
-                if (lives > 0) decreaseLifeUseCase(lives - 1, postNotification = postNotification)
+                if (lives > 0) decreaseLifeUseCase(lives, postNotification = postNotification)
             }
         }
     }

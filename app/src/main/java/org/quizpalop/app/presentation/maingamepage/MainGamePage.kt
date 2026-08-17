@@ -87,6 +87,11 @@ fun MainPage(country: Countries, category: Category) {
 
     LaunchedEffect(Unit) {
         mainPageViewModel.resetUiState()
+        mainPageViewModel.loadPacks()
+        mainPageViewModel.loadDateTimeSavedValues()
+        mainPageViewModel.loadLivesAndCoinsInFlow()
+        mainPageViewModel.loadSavedHapticAndPlaySound()
+
         mainPageViewModel.loadQuestions(country, category)
         mainPageViewModel.initializeAds(context)
 
@@ -173,137 +178,142 @@ fun MainPage(country: Countries, category: Category) {
 
     @Composable
     fun pageContent() {
-        mainPageUiState.actualQuestion?.let { questionData ->
-
-            Scaffold(
-                bottomBar = {
-                    AnimatedVisibility(
-                        visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && mainPageUiState.lives > 0,
-                        enter = slideInVertically(
-                            initialOffsetY = { it }
-                        ) + fadeIn(),
-                        exit = slideOutVertically (
-                            targetOffsetY = { it }
-                        ) + fadeOut()
-                    ) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .navigationBarsPadding()
-                                .background(brush = Brush.linearGradient(
-                                    colors = listOf(MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
-                                        MaterialTheme.colorScheme.background.copy(alpha = 0.5f))
-                                ))
+        mainPageUiState.lives?.let { userLives ->
+            mainPageUiState.actualQuestion?.let {
+                Scaffold(
+                    bottomBar = {
+                        AnimatedVisibility(
+                            visible = mainPageUiState.gameTextMessage is GameTextMessage.Empty && userLives > 0,
+                            enter = slideInVertically(
+                                initialOffsetY = { it }
+                            ) + fadeIn(),
+                            exit = slideOutVertically(
+                                targetOffsetY = { it }
+                            ) + fadeOut()
                         ) {
                             Row(
                                 modifier = Modifier
-//                                    .background(Color.Red)
-                                    .fillMaxWidth(),
-                                horizontalArrangement = Arrangement.SpaceAround
+                                    .fillMaxWidth()
+                                    .navigationBarsPadding()
+                                    .background(
+                                        brush = Brush.linearGradient(
+                                            colors = listOf(
+                                                MaterialTheme.colorScheme.primary.copy(alpha = 0.4f),
+                                                MaterialTheme.colorScheme.background.copy(alpha = 0.5f)
+                                            )
+                                        )
+                                    )
                             ) {
-                                GameBottomButton(
-                                    icon = IconData(R.drawable.fift_fift_icon, "fift fift"),
-                                    buttonText = "50 50",
-                                    requiredCoins = 15,
-                                ) {
-                                    mainPageViewModel.onEvent(MainGameUiEvents.OnHelp(HelpOption.FiftFift))
-                                }
-
-                                GameBottomButton(
-                                    icon = IconData(R.drawable.outline_check_24, "correct answer"),
-                                    buttonText = "R. correcta",
-                                    requiredCoins = 25,
-                                ) {
-                                    mainPageViewModel.onEvent(MainGameUiEvents.OnHelp(HelpOption.RightOption))
-                                }
-
-
                                 Row(
-                                    modifier = Modifier.width(45.dp),
-                                    horizontalArrangement = Arrangement.End
+                                    modifier = Modifier
+//                                    .background(Color.Red)
+                                        .fillMaxWidth(),
+                                    horizontalArrangement = Arrangement.SpaceAround
                                 ) {
                                     GameBottomButton(
-                                        icon = IconData(R.drawable.door_open_fill, "Exit"),
-                                        requiredCoins = 0,
-                                        buttonText = "Sair",
+                                        icon = IconData(R.drawable.fift_fift_icon, "fift fift"),
+                                        buttonText = "50 50",
+                                        requiredCoins = 15,
                                     ) {
-                                        mainPageViewModel.onEvent(MainGameUiEvents.OnExit)
+                                        mainPageViewModel.onEvent(MainGameUiEvents.OnHelp(HelpOption.FiftFift))
+                                    }
+
+                                    GameBottomButton(
+                                        icon = IconData(R.drawable.outline_check_24, "correct answer"),
+                                        buttonText = "R. correcta",
+                                        requiredCoins = 25,
+                                    ) {
+                                        mainPageViewModel.onEvent(MainGameUiEvents.OnHelp(HelpOption.RightOption))
+                                    }
+
+
+                                    Row(
+                                        modifier = Modifier.width(45.dp),
+                                        horizontalArrangement = Arrangement.End
+                                    ) {
+                                        GameBottomButton(
+                                            icon = IconData(R.drawable.door_open_fill, "Exit"),
+                                            requiredCoins = 0,
+                                            buttonText = "Sair",
+                                        ) {
+                                            mainPageViewModel.onEvent(MainGameUiEvents.OnExit)
+                                        }
                                     }
                                 }
                             }
                         }
-                    }
-                },
-            ) { padding ->
-                Column(
-                    modifier = Modifier
-                        .padding(padding)
-                        .fillMaxSize()
-                        .appBackground()
-                        .padding(10.dp),
-                ) {
-                    AnimatedVisibility(mainPageUiState.lives < 1) {
-                        MaxSizeBox {
-                            NoMoreLivesUI(
-                                navigator,
-                                mainPageViewModel,
-                                mainPageUiState,
-                                activity,
-                            )
-                        }
-                    }
-
-                    AnimatedVisibility(mainPageUiState.lives >= 1) {
-                        Box(modifier = Modifier) {
+                    },
+                ) { padding ->
+                    Column(
+                        modifier = Modifier
+                            .padding(padding)
+                            .fillMaxSize()
+                            .appBackground()
+                            .padding(10.dp),
+                    ) {
+                        AnimatedVisibility(userLives < 1) {
                             MaxSizeBox {
-                                MessageUi(
+                                NoMoreLivesUI(
                                     navigator,
                                     mainPageViewModel,
                                     mainPageUiState,
                                     activity,
                                 )
                             }
+                        }
 
-                            if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
-                                GameTopStatusBar(
-                                    mainPageViewModel,
-                                    mainPageUiState,
-                                    modifier = Modifier
-                                        .align(Alignment.TopCenter)
-                                        .zIndex(5f)
-                                )
+                        AnimatedVisibility(userLives >= 1) {
+                            Box(modifier = Modifier) {
+                                MaxSizeBox {
+                                    MessageUi(
+                                        navigator,
+                                        mainPageViewModel,
+                                        mainPageUiState,
+                                        activity,
+                                    )
+                                }
 
-                                Column(
-                                    modifier = Modifier.fillMaxSize(),
-                                    verticalArrangement = Arrangement.SpaceEvenly
-                                ) {
+                                if (mainPageUiState.gameTextMessage is GameTextMessage.Empty) {
+                                    GameTopStatusBar(
+                                        mainPageViewModel,
+                                        mainPageUiState,
+                                        modifier = Modifier
+                                            .align(Alignment.TopCenter)
+                                            .zIndex(5f)
+                                    )
 
-                                    TextQuestionColumn(
-                                        modifier = Modifier.padding(10.dp)
+                                    Column(
+                                        modifier = Modifier.fillMaxSize(),
+                                        verticalArrangement = Arrangement.SpaceEvenly
                                     ) {
-                                        mainPageUiState.actualQuestion?.let { question ->
-                                            QuestionText(
-                                                question.question,
-                                                modifierFontSize = false
-                                            )
-                                        }
-                                    }
 
-                                    mainPageUiState.actualQuestion?.let { question ->
-                                        LazyColumn {
-                                            items(1) {
-                                                question.options.forEachIndexed { index, option ->
-                                                    OptionItem(
-                                                        prefixText = optionsLabels[index],
-                                                        text = option,
-                                                        backgroundColor = mainPageUiState.optionsColors[index]
-                                                    ) {
-                                                        mainPageViewModel.onEvent(
-                                                            MainGameUiEvents.OnCheckResponse(option)
-                                                        )
+                                        TextQuestionColumn(
+                                            modifier = Modifier.padding(10.dp)
+                                        ) {
+                                            mainPageUiState.actualQuestion?.let { question ->
+                                                QuestionText(
+                                                    question.question,
+                                                    modifierFontSize = false
+                                                )
+                                            }
+                                        }
+
+                                        mainPageUiState.actualQuestion?.let { question ->
+                                            LazyColumn {
+                                                items(1) {
+                                                    question.options.forEachIndexed { index, option ->
+                                                        OptionItem(
+                                                            prefixText = optionsLabels[index],
+                                                            text = option,
+                                                            backgroundColor = mainPageUiState.optionsColors[index]
+                                                        ) {
+                                                            mainPageViewModel.onEvent(
+                                                                MainGameUiEvents.OnCheckResponse(option)
+                                                            )
+                                                        }
                                                     }
-                                                }
 //                                        Text(text = mainPageUiState.actualQuestionRightAnswer, color = MaterialTheme.colorScheme.onBackground)
+                                                }
                                             }
                                         }
                                     }
@@ -313,7 +323,7 @@ fun MainPage(country: Countries, category: Category) {
                     }
                 }
             }
-        }
+        } ?: run { LoadingScreen() }
 
     }
 

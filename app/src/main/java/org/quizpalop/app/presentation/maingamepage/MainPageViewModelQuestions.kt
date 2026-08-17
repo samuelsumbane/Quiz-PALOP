@@ -248,17 +248,24 @@ fun MainGameViewModel.showCorrectOptionAfterViewAd() {
 }
 
 fun MainGameViewModel.setQuestionWrong() {
-    if (mainGameUiState.value.timerState == QuestionTimerState.Stop) return
-    viewModelScope.launch {
-        updateState {
-            it.copy(gameTextMessage = GameTextMessage.QuestionNotAnswered("Tempo esgotado", "O cronômetro venceu você dessa vez e levou uma vida\n Seja mais rápido na próxima!"))
-        }
-        val postNotification = userPreferencesRepository.loadPostNotifications()
-        if (mainGameUiState.value.lives > 0) decreaseLifeUseCase(mainGameUiState.value.lives, postNotification)
+    mainGameUiState.value.lives?.let { userLives ->
+        if (mainGameUiState.value.timerState == QuestionTimerState.Stop) return
+        viewModelScope.launch {
+            updateState {
+                it.copy(
+                    gameTextMessage = GameTextMessage.QuestionNotAnswered(
+                        "Tempo esgotado",
+                        "O cronômetro venceu você dessa vez e levou uma vida\n Seja mais rápido na próxima!"
+                    )
+                )
+            }
+            val postNotification = userPreferencesRepository.loadPostNotifications()
+            if (userLives > 0) decreaseLifeUseCase(userLives, postNotification)
 
-        if (mainGameUiState.value.lives == 0) {
-            setLastDateTimeUserLostLives()
-            setGameTextMessage(GameTextMessage.Empty)
+            if (mainGameUiState.value.lives == 0) {
+                setLastDateTimeUserLostLives()
+                setGameTextMessage(GameTextMessage.Empty)
+            }
         }
     }
 }
